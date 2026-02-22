@@ -33,9 +33,10 @@ const ParticleField = () => {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      // Read from <html> element which has the theme class
       const style = getComputedStyle(document.documentElement);
       const primaryHsl = style.getPropertyValue("--primary").trim();
-      
+
       particles.forEach((p, i) => {
         p.x += p.vx;
         p.y += p.vy;
@@ -47,7 +48,6 @@ const ParticleField = () => {
         ctx.fillStyle = `hsla(${primaryHsl} / ${p.opacity})`;
         ctx.fill();
 
-        // Draw connections
         for (let j = i + 1; j < particles.length; j++) {
           const dx = p.x - particles[j].x;
           const dy = p.y - particles[j].y;
