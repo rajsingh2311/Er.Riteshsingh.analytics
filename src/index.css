@@ -1,96 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+  /* Theme 1: Cyber Neon */
+  :root, .theme-cyber {
+    --background: 220 20% 4%;
+    --foreground: 180 100% 95%;
+    --card: 220 20% 7%;
+    --card-foreground: 180 100% 95%;
+    --popover: 220 20% 7%;
+    --popover-foreground: 180 100% 95%;
+    --primary: 174 100% 50%;
+    --primary-foreground: 220 20% 4%;
+    --secondary: 220 20% 12%;
+    --secondary-foreground: 174 80% 70%;
+    --muted: 220 15% 12%;
+    --muted-foreground: 220 10% 55%;
+    --accent: 280 100% 65%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 20% 14%;
+    --input: 220 20% 14%;
+    --ring: 174 100% 50%;
+    --radius: 0.75rem;
+    --glow: 174 100% 50%;
+    --gradient-from: 174 100% 50%;
+    --gradient-to: 280 100% 65%;
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --sidebar-background: 220 20% 6%;
+    --sidebar-foreground: 180 100% 95%;
+    --sidebar-primary: 174 100% 50%;
+    --sidebar-primary-foreground: 220 20% 4%;
+    --sidebar-accent: 220 20% 12%;
+    --sidebar-accent-foreground: 174 80% 70%;
+    --sidebar-border: 220 20% 14%;
+    --sidebar-ring: 174 100% 50%;
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+  /* Theme 2: Ocean Depth */
+  .theme-ocean {
+    --background: 222 47% 5%;
+    --foreground: 210 40% 95%;
+    --card: 222 47% 8%;
+    --card-foreground: 210 40% 95%;
+    --popover: 222 47% 8%;
+    --popover-foreground: 210 40% 95%;
+    --primary: 210 100% 56%;
+    --primary-foreground: 222 47% 5%;
+    --secondary: 222 30% 14%;
+    --secondary-foreground: 210 80% 70%;
+    --muted: 222 25% 12%;
+    --muted-foreground: 222 15% 50%;
+    --accent: 160 80% 45%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 222 30% 16%;
+    --input: 222 30% 16%;
+    --ring: 210 100% 56%;
+    --glow: 210 100% 56%;
+    --gradient-from: 210 100% 56%;
+    --gradient-to: 160 80% 45%;
+  }
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+  /* Theme 3: Ember Glow */
+  .theme-ember {
+    --background: 20 15% 5%;
+    --foreground: 30 50% 95%;
+    --card: 20 15% 8%;
+    --card-foreground: 30 50% 95%;
+    --popover: 20 15% 8%;
+    --popover-foreground: 30 50% 95%;
+    --primary: 25 100% 55%;
+    --primary-foreground: 20 15% 5%;
+    --secondary: 20 15% 14%;
+    --secondary-foreground: 25 80% 70%;
+    --muted: 20 10% 12%;
+    --muted-foreground: 20 10% 50%;
+    --accent: 45 100% 55%;
+    --accent-foreground: 20 15% 5%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 20 15% 16%;
+    --input: 20 15% 16%;
+    --ring: 25 100% 55%;
+    --glow: 25 100% 55%;
+    --gradient-from: 25 100% 55%;
+    --gradient-to: 45 100% 55%;
   }
 }
 
@@ -98,8 +99,40 @@ All colors MUST be HSL.
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-heading);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--gradient-from)), hsl(var(--gradient-to)));
+  }
+  .bg-gradient-brand {
+    background-image: linear-gradient(135deg, hsl(var(--gradient-from)), hsl(var(--gradient-to)));
+  }
+  .glow-primary {
+    box-shadow: 0 0 20px hsl(var(--glow) / 0.3), 0 0 60px hsl(var(--glow) / 0.1);
+  }
+  .glow-text {
+    text-shadow: 0 0 20px hsl(var(--glow) / 0.5), 0 0 40px hsl(var(--glow) / 0.2);
+  }
+  .glass {
+    @apply backdrop-blur-xl border;
+    background: hsl(var(--card) / 0.6);
+  }
+  .grid-bg {
+    background-image: 
+      linear-gradient(hsl(var(--border) / 0.3) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.3) 1px, transparent 1px);
+    background-size: 60px 60px;
   }
 }
