@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 type Theme = "cyber" | "ocean" | "ember";
 
@@ -14,11 +14,15 @@ export const useTheme = () => useContext(ThemeContext);
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<Theme>("cyber");
 
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.remove("theme-cyber", "theme-ocean", "theme-ember");
+    root.classList.add(`theme-${theme}`);
+  }, [theme]);
+
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <div className={`theme-${theme}`}>
-        {children}
-      </div>
+      {children}
     </ThemeContext.Provider>
   );
 };

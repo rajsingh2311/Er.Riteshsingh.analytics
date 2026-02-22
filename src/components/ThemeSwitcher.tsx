@@ -1,34 +1,46 @@
 import { useTheme } from "@/contexts/ThemeContext";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const themes = [
-  { id: "cyber" as const, label: "Cyber", colors: ["#00ffcc", "#aa55ff"] },
-  { id: "ocean" as const, label: "Ocean", colors: ["#3b82f6", "#22c55e"] },
-  { id: "ember" as const, label: "Ember", colors: ["#f97316", "#eab308"] },
+  { id: "cyber" as const, label: "Cyber Neon", colors: ["#00ffcc", "#aa55ff"] },
+  { id: "ocean" as const, label: "Ocean Depth", colors: ["#3b82f6", "#22c55e"] },
+  { id: "ember" as const, label: "Ember Glow", colors: ["#f97316", "#eab308"] },
 ];
 
 const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-3">
       {themes.map((t) => (
         <motion.button
           key={t.id}
           onClick={() => setTheme(t.id)}
-          className={`relative w-8 h-8 rounded-full overflow-hidden border-2 transition-all ${
-            theme === t.id ? "border-primary glow-primary scale-110" : "border-border opacity-60 hover:opacity-100"
-          }`}
-          whileHover={{ scale: 1.15 }}
+          className="relative flex items-center gap-2"
+          whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
           aria-label={`Switch to ${t.label} theme`}
         >
           <div
-            className="w-full h-full"
+            className={`w-7 h-7 rounded-full transition-all duration-300 ${
+              theme === t.id ? "ring-2 ring-primary ring-offset-2 ring-offset-background scale-110" : "opacity-50 hover:opacity-80"
+            }`}
             style={{
               background: `linear-gradient(135deg, ${t.colors[0]}, ${t.colors[1]})`,
             }}
           />
+          <AnimatePresence>
+            {theme === t.id && (
+              <motion.span
+                initial={{ opacity: 0, width: 0 }}
+                animate={{ opacity: 1, width: "auto" }}
+                exit={{ opacity: 0, width: 0 }}
+                className="text-xs font-mono text-primary hidden sm:block overflow-hidden whitespace-nowrap"
+              >
+                {t.label}
+              </motion.span>
+            )}
+          </AnimatePresence>
         </motion.button>
       ))}
     </div>
