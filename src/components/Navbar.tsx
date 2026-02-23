@@ -1,12 +1,46 @@
 import { motion } from "framer-motion";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { BarChart3, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const navItems = ["About", "Skills", "Projects", "Experience", "Contact"];
+const navItems = [
+  { id: "about", label: "About" },
+  { id: "skills", label: "Skills" },
+  { id: "projects", label: "Projects" },
+  { id: "experience", label: "Experience" },
+  { id: "education", label: "Education" },
+  { id: "contact", label: "Contact" },
+];
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [active, setActive] = useState<string>("about");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = navItems
+        .map((item) => document.getElementById(item.id))
+        .filter((el): el is HTMLElement => !!el);
+
+      let current = active;
+      let minOffset = Number.POSITIVE_INFINITY;
+
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        const offset = Math.abs(rect.top - 80); // account for navbar height
+        if (rect.top <= window.innerHeight - 100 && offset < minOffset) {
+          minOffset = offset;
+          current = section.id;
+        }
+      });
+
+      setActive(current);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <motion.nav
@@ -18,18 +52,25 @@ const Navbar = () => {
       <div className="container mx-auto px-6 h-16 flex items-center justify-between">
         <motion.div className="flex items-center gap-2" whileHover={{ scale: 1.05 }}>
           <BarChart3 className="w-6 h-6 text-primary" />
-          <span className="text-lg font-bold text-gradient">Alex.Data</span>
+          <span className="text-lg font-bold text-gradient">Ritesh.Analytics</span>
         </motion.div>
 
         <div className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
             <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300 relative group"
+              key={item.id}
+              href={`#${item.id}`}
+              onClick={() => setActive(item.id)}
+              className={`text-sm transition-colors duration-300 relative group ${
+                active === item.id ? "text-primary" : "text-muted-foreground hover:text-primary"
+              }`}
             >
-              {item}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+              {item.label}
+              <span
+                className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${
+                  active === item.id ? "w-full" : "w-0 group-hover:w-full"
+                }`}
+              />
             </a>
           ))}
         </div>
@@ -56,12 +97,17 @@ const Navbar = () => {
           <div className="container mx-auto px-6 py-4 flex flex-col gap-3">
             {navItems.map((item) => (
               <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                onClick={() => setMobileOpen(false)}
-                className="text-sm text-muted-foreground hover:text-primary transition-colors py-2"
+                key={item.id}
+                href={`#${item.id}`}
+                onClick={() => {
+                  setActive(item.id);
+                  setMobileOpen(false);
+                }}
+                className={`text-sm transition-colors py-2 ${
+                  active === item.id ? "text-primary" : "text-muted-foreground hover:text-primary"
+                }`}
               >
-                {item}
+                {item.label}
               </a>
             ))}
           </div>

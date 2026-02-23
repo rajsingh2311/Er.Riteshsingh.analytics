@@ -5,6 +5,7 @@ import ProfileTabs from "@/components/ProfileTabs";
 import SkillsSection from "@/components/SkillsSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import ExperienceSection from "@/components/ExperienceSection";
+import EducationSection from "@/components/EducationSection";
 import ContactSection from "@/components/ContactSection";
 
 const Index = () => {
@@ -17,6 +18,7 @@ const Index = () => {
       <SkillsSection />
       <ProjectsSection />
       <ExperienceSection />
+      <EducationSection />
       <ContactSection />
     </div>
   );

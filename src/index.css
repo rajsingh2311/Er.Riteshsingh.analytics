@@ -112,6 +112,14 @@
   code, pre, .font-mono {
     font-family: var(--font-mono);
   }
+  section[id] {
+    scroll-margin-top: 5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  section[id]:target {
+    transform: scale(1.03);
+    box-shadow: 0 0 40px hsl(var(--glow) / 0.2);
+  }
 }
 
 @layer utilities {

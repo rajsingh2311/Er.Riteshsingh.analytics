@@ -2,12 +2,12 @@ import { motion } from "framer-motion";
 import { BarChart3, PieChart, LineChart, Table2, Code2, Layers } from "lucide-react";
 
 const skills = [
-  { icon: Code2, name: "Python & R", level: 95, desc: "Statistical computing & automation" },
-  { icon: Table2, name: "SQL", level: 92, desc: "Complex queries & optimization" },
-  { icon: BarChart3, name: "Tableau", level: 90, desc: "Interactive dashboards" },
-  { icon: LineChart, name: "Power BI", level: 88, desc: "Business intelligence reporting" },
-  { icon: PieChart, name: "Excel / Sheets", level: 93, desc: "Advanced analytics & macros" },
-  { icon: Layers, name: "Machine Learning", level: 82, desc: "Scikit-learn, TensorFlow" },
+  { icon: LineChart, name: "Power BI (DAX)", level: 90, desc: "Dashboards & BI reporting" },
+  { icon: PieChart, name: "MS Excel (Advanced)", level: 92, desc: "PivotTables, slicers, automation" },
+  { icon: Table2, name: "SQL", level: 85, desc: "Queries, joins, data prep" },
+  { icon: Code2, name: "Python", level: 80, desc: "Analysis, automation, visualization" },
+  { icon: Layers, name: "SPSS", level: 78, desc: "Chi-Square, T-Test, ANOVA" },
+  { icon: BarChart3, name: "SAP / ERP", level: 70, desc: "Ops reporting & workflow exposure" },
 ];
 
 const SkillsSection = () => {

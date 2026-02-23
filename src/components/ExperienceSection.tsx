@@ -1,38 +1,41 @@
 import { motion } from "framer-motion";
-import { Briefcase, GraduationCap, Award } from "lucide-react";
+import { Briefcase } from "lucide-react";
 
 const timeline = [
   {
-    type: "work",
-    icon: Briefcase,
-    title: "Senior Data Analyst",
-    company: "TechCorp Inc.",
-    period: "2022 — Present",
-    desc: "Leading data analytics initiatives, building ML models for revenue forecasting, and managing a team of 3 junior analysts.",
-  },
-  {
-    type: "work",
     icon: Briefcase,
     title: "Data Analyst",
-    company: "DataDriven Co.",
-    period: "2019 — 2022",
-    desc: "Developed interactive dashboards, automated reporting pipelines, and conducted A/B testing for product teams.",
+    company: "Seth Anandram Jaipuria Group of Educational Institutions · Ghaziabad · Full-time",
+    period: "Dec 2025 — Present",
+    desc: "Working with SQL, predictive analytics, and reporting to support data‑driven decisions across educational operations.",
   },
   {
-    type: "education",
-    icon: GraduationCap,
-    title: "M.S. Data Science",
-    company: "Stanford University",
-    period: "2017 — 2019",
-    desc: "Focused on statistical learning, NLP, and big data systems. Thesis on anomaly detection in financial datasets.",
+    icon: Briefcase,
+    title: "Data Analyst Intern",
+    company: "WTF Gyms · Noida, Uttar Pradesh · Internship",
+    period: "May 2025 — Jul 2025",
+    desc: "Automated lead capture & routing from Meta Ads → Google Sheets → WhatsApp (WATI), reducing first‑response time from 30 mins to under 10 mins. Built a single‑click acknowledgment & offer‑letter generation system using Google Docs + Make.com. Developed a real‑time interview tracking system integrated with WATI and ERP workflows. Created Power BI dashboards for lead funnel tracking, agent productivity, and gym‑wise performance. Implemented conditional routing logic and a daily manager reporting system saving 12+ hours/week of manual reporting.",
   },
   {
-    type: "cert",
-    icon: Award,
-    title: "Google Data Analytics Professional",
-    company: "Google",
-    period: "2021",
-    desc: "Certified in data cleaning, analysis, visualization, and R programming.",
+    icon: Briefcase,
+    title: "Student Co‑ordinator — Business Analytics Club",
+    company: "Jaipuria School of Business, Ghaziabad · Full-time",
+    period: "Sep 2024 — Present",
+    desc: "Co‑ordinating club initiatives focused on data analysis and Microsoft Power BI, organizing events and supporting peers in analytics projects.",
+  },
+  {
+    icon: Briefcase,
+    title: "Team Leader",
+    company: "Stagnet Research · Noida, Uttar Pradesh · Full-time",
+    period: "Jul 2023 — Jul 2024",
+    desc: "Led a team of ~20 researchers on market and qualitative research projects. Developed Excel‑based trackers and data cleaning processes, analyzed survey data, and created client‑ready reports and visualizations, reducing project turnaround time by about 25%.",
+  },
+  {
+    icon: Briefcase,
+    title: "Chemical Engineer",
+    company: "Reliance Industries Limited · Jamnagar, Gujarat · Full-time",
+    period: "Jan 2023 — Jul 2023",
+    desc: "Collected and analyzed process performance data using Excel and statistical methods, built Pareto and trend charts to identify bottlenecks, and supported process improvement initiatives to enhance operational efficiency.",
   },
 ];
 
@@ -48,7 +51,7 @@ const ExperienceSection = () => {
         >
           <span className="text-primary font-mono text-sm tracking-wider uppercase">Journey</span>
           <h2 className="text-4xl md:text-5xl font-bold mt-3">
-            Experience & <span className="text-gradient">Education</span>
+            Professional <span className="text-gradient">Experience</span>
           </h2>
         </motion.div>
 

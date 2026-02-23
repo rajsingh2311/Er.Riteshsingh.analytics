@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, MapPin, Send, Linkedin, Github } from "lucide-react";
+import { Mail, Send, Linkedin, Github } from "lucide-react";
 import { useState } from "react";
 
 const ContactSection = () => {
@@ -29,9 +29,9 @@ const ContactSection = () => {
           >
             <div className="flex justify-center gap-4 mb-8">
               {[
-                { icon: Mail, label: "Email", href: "mailto:hello@dataviz.com" },
-                { icon: Linkedin, label: "LinkedIn", href: "#" },
-                { icon: Github, label: "GitHub", href: "#" },
+                { icon: Mail, label: "Email", href: "mailto:riteshsingh.jsb2426@jaipuria.edu.in" },
+                { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/riteshsingh-analytics" },
+                { icon: Github, label: "GitHub", href: "https://github.com/rajsingh2311" },
               ].map((social) => (
                 <motion.a
                   key={social.label}
@@ -43,6 +43,11 @@ const ContactSection = () => {
                   <social.icon className="w-5 h-5" />
                 </motion.a>
               ))}
+            </div>
+
+            <div className="text-center text-sm text-muted-foreground mb-8 space-y-1">
+              <p>📞 +91 8318174679</p>
+              <p>📍 Sector 62, Noida, UP, India</p>
             </div>
 
             <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
@@ -87,7 +92,7 @@ const ContactSection = () => {
       {/* Footer */}
       <div className="container mx-auto px-6 mt-20">
         <div className="text-center text-sm text-muted-foreground border-t border-border pt-8">
-          <p>© 2026 DataViz — Crafted with data & passion</p>
+          <p>© 2026 Ritesh Singh — Data & analytics portfolio</p>
         </div>
       </div>
     </section>

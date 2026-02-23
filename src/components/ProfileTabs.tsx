@@ -16,8 +16,8 @@ const tabs = [
     preview: {
       type: "image",
       image: featuredDashboard,
-      title: "Revenue Analytics Dashboard",
-      subtitle: "Featured project — 2M+ data points visualized",
+      title: "RFM Segmentation Dashboard",
+      subtitle: "Featured project — 100K+ transactions analyzed",
     },
   },
   {
@@ -27,8 +27,8 @@ const tabs = [
     preview: {
       type: "timeline",
       items: [
-        { title: "Senior Data Analyst", sub: "TechCorp Inc.", year: "2022–Present" },
-        { title: "Data Analyst", sub: "DataDriven Co.", year: "2019–2022" },
+        { title: "Business Analyst", sub: "Stagnate Research", year: "2023–2024" },
+        { title: "Data Analyst Intern", sub: "WTF Gyms", year: "2025" },
       ],
     },
   },
@@ -39,8 +39,8 @@ const tabs = [
     preview: {
       type: "timeline",
       items: [
-        { title: "M.S. Data Science", sub: "Stanford University", year: "2017–2019" },
-        { title: "B.S. Statistics", sub: "UC Berkeley", year: "2013–2017" },
+        { title: "PGDM (Business Analytics)", sub: "Jaipuria School of Business", year: "2024–2026" },
+        { title: "B.Tech (Chemical Engineering)", sub: "SCRIET, CCSU Meerut", year: "2019–2023" },
       ],
     },
   },
@@ -60,21 +60,21 @@ const tabs = [
     preview: {
       type: "stats",
       items: [
-        { label: "Revenue Forecasting", metric: "+35% accuracy" },
-        { label: "Customer Segmentation", metric: "2M+ records" },
-        { label: "Anomaly Detection", metric: "99.2% precision" },
+        { label: "RFM Segmentation", metric: "100K+ txns" },
+        { label: "E‑Banking Study", metric: "226 responses" },
+        { label: "Reporting Automation", metric: "12+ hrs/week" },
       ],
     },
   },
   {
     id: "volunteering",
-    label: "Volunteering",
+    label: "Workshops",
     icon: Heart,
     preview: {
       type: "image",
       image: volunteering,
-      title: "Data Literacy Workshop",
-      subtitle: "Teaching data skills to underserved communities",
+      title: "Workshops & Training",
+      subtitle: "Theatre, Design Thinking, Cyber Security, International Business",
     },
   },
   {
@@ -84,32 +84,32 @@ const tabs = [
     preview: {
       type: "skills",
       items: [
-        { name: "Python", level: 95 },
-        { name: "SQL", level: 92 },
-        { name: "Tableau", level: 90 },
-        { name: "Machine Learning", level: 82 },
+        { name: "Power BI (DAX)", level: 90 },
+        { name: "Excel (Advanced)", level: 92 },
+        { name: "SQL", level: 85 },
+        { name: "Python", level: 80 },
       ],
     },
   },
   {
     id: "recommendations",
-    label: "Recommendations",
+    label: "Highlights",
     icon: MessageSquare,
     preview: {
       type: "quote",
-      text: "Alex's analytical thinking transformed our entire data strategy...",
-      author: "Sarah Chen, VP of Analytics",
+      text: "High-dimensional data analysis · CRISP‑DM · BI dashboards · GDPR‑compliant workflows",
+      author: "Ritesh Singh",
     },
   },
   {
     id: "honors",
-    label: "Honors & Awards",
+    label: "Achievements",
     icon: Trophy,
     preview: {
       type: "image",
       image: awardInnovation,
-      title: "Best Data Innovation 2024",
-      subtitle: "DataCon International Award",
+      title: "Achievements & Awards",
+      subtitle: "Poetry, competitions, and seminar coordination",
     },
   },
 ];

@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Star, Briefcase, GraduationCap, Award, FolderOpen, Heart, Zap, MessageSquare, Trophy, ExternalLink, MapPin, Calendar } from "lucide-react";
+import { ArrowLeft, Star, Briefcase, GraduationCap, Award, FolderOpen, Heart, Zap, MessageSquare, Trophy, MapPin, Calendar } from "lucide-react";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import ParticleField from "@/components/ParticleField";
 
@@ -17,10 +17,10 @@ const sectionMeta: Record<string, { label: string; icon: any }> = {
   education: { label: "Education", icon: GraduationCap },
   certifications: { label: "Licenses & Certifications", icon: Award },
   projects: { label: "Projects", icon: FolderOpen },
-  volunteering: { label: "Volunteering", icon: Heart },
+  volunteering: { label: "Workshops", icon: Heart },
   skills: { label: "Skills", icon: Zap },
-  recommendations: { label: "Recommendations", icon: MessageSquare },
-  honors: { label: "Honors & Awards", icon: Trophy },
+  recommendations: { label: "Highlights", icon: MessageSquare },
+  honors: { label: "Achievements", icon: Trophy },
 };
 
 const SectionPage = () => {
@@ -101,7 +101,12 @@ const SectionContent = ({ sectionId }: { sectionId: string }) => {
 const FeaturedContent = () => (
   <div className="max-w-4xl mx-auto space-y-8">
     {[
-      { image: featuredDashboard, title: "Revenue Analytics Dashboard", desc: "An interactive dashboard processing 2M+ data points to visualize revenue trends, customer lifetime value, and predictive forecasts. Built with Tableau and custom Python backend.", tags: ["Tableau", "Python", "AWS"] },
+      {
+        image: featuredDashboard,
+        title: "Customer Segmentation & Marketing Analytics Dashboard (RFM)",
+        desc: "Processed 100,000+ customer transactions using the RFM model and built an Excel dashboard with slicers and dynamic visuals. Identified top 3 segments contributing ~82% revenue (Pareto 80/20) and proposed actionable strategies for retention, conversion, and monetization.",
+        tags: ["Excel", "RFM", "Segmentation", "Dashboarding"],
+      },
     ].map((item, i) => (
       <motion.div key={i} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.2 }} className="glass rounded-2xl overflow-hidden">
         <img src={item.image} alt={item.title} className="w-full h-64 md:h-80 object-cover" />
@@ -119,9 +124,30 @@ const FeaturedContent = () => (
 
 const ExperienceContent = () => {
   const experiences = [
-    { title: "Senior Data Analyst", company: "TechCorp Inc.", location: "San Francisco, CA", period: "Jan 2022 — Present", desc: "Leading data analytics initiatives, building ML models for revenue forecasting, and managing a team of 3 junior analysts. Increased forecast accuracy by 35%.", skills: ["Python", "SQL", "Tableau", "TensorFlow"] },
-    { title: "Data Analyst", company: "DataDriven Co.", location: "New York, NY", period: "Jun 2019 — Dec 2021", desc: "Developed interactive dashboards, automated reporting pipelines, and conducted A/B testing for product teams. Reduced report generation time by 60%.", skills: ["Power BI", "R", "PostgreSQL", "Airflow"] },
-    { title: "Junior Data Analyst", company: "AnalyticsFirst", location: "Boston, MA", period: "Aug 2017 — May 2019", desc: "Built ETL pipelines, created weekly KPI reports, and assisted in customer segmentation analysis.", skills: ["Excel", "SQL", "Python", "SPSS"] },
+    {
+      title: "Business Analyst (Team Leader – Market Research)",
+      company: "Stagnate Research Pvt. Ltd",
+      location: "India",
+      period: "Jul 2023 — Jul 2024",
+      desc: "Built and optimized Power BI dashboards (DAX) for high-dimensional data visualization and operational reporting (sales funnels, agent performance). Designed and tested survey frameworks using statistical analysis (Chi‑Square, T‑Test, ANOVA) and supervised structured/unstructured data collection with quality and compliance.",
+      skills: ["Power BI (DAX)", "Statistics", "Survey design", "Data quality"],
+    },
+    {
+      title: "Data Analyst Intern",
+      company: "WTF Gyms",
+      location: "Noida, UP",
+      period: "May 2025 — Jul 2025",
+      desc: "Automated lead capture/routing pipelines (Meta Ads → Google Sheets → WhatsApp/WATI). Built real-time interview tracking integrated with WATI and ERP HR workflows. Created Power BI dashboards for lead funnel tracking and agent productivity; designed GDPR‑compliant automated reporting saving 12+ hours/week.",
+      skills: ["Workflow automation", "Power BI", "Excel/Sheets", "GDPR"],
+    },
+    {
+      title: "Intern Engineer",
+      company: "Kribhco Fertilizers Ltd",
+      location: "Shahjahanpur, UP",
+      period: "Jun 2022 — Jul 2022",
+      desc: "Gained exposure to SAP ERP systems for workforce operations and reporting; supported process data collection and learning within industrial teams.",
+      skills: ["SAP ERP", "Operations reporting", "Process data"],
+    },
   ];
   return (
     <div className="max-w-3xl mx-auto space-y-6">
@@ -150,8 +176,34 @@ const ExperienceContent = () => {
 
 const EducationContent = () => {
   const edu = [
-    { degree: "M.S. Data Science", school: "Stanford University", period: "2017 — 2019", desc: "Focused on statistical learning, NLP, and big data systems. Thesis on anomaly detection in financial datasets. GPA: 3.9/4.0", activities: ["Research Assistant", "Data Science Club President", "Teaching Assistant for Statistics 101"] },
-    { degree: "B.S. Statistics", school: "UC Berkeley", period: "2013 — 2017", desc: "Strong foundation in probability, mathematical statistics, and applied data analysis. Minor in Computer Science.", activities: ["Dean's List", "Undergraduate Research", "Statistics Tutoring Center"] },
+    {
+      degree: "PGDM (Business Analytics) — Pursuing",
+      school: "Jaipuria School of Business",
+      period: "2024 — 2026 · CGPA: 6.85",
+      desc: "Focus: Business Analytics, CRISP‑DM methodology, high-dimensional data visualization, predictive analytics.",
+      activities: ["Business analytics coursework", "Dashboarding & reporting", "Statistics for decision making"],
+    },
+    {
+      degree: "B.Tech (Chemical Engineering)",
+      school: "SCRIET, CCSU Meerut",
+      period: "2019 — 2023 · CGPA: 6.74",
+      desc: "Exposure to SAP ERP systems, data processing (structured & semi‑structured), and applied research.",
+      activities: ["Applied research projects", "Data processing & reporting"],
+    },
+    {
+      degree: "12th (Physics, Chemistry, Math)",
+      school: "S Devi Inter College, Madhuban, Mau (UP Board)",
+      period: "2019 · 61%",
+      desc: "PCM curriculum with quantitative foundation.",
+      activities: ["Academic coursework"],
+    },
+    {
+      degree: "10th (Science)",
+      school: "S Devi Inter College, Madhuban, Mau (UP Board)",
+      period: "2019 · 81.33%",
+      desc: "Science curriculum.",
+      activities: ["Academic coursework"],
+    },
   ];
   return (
     <div className="max-w-3xl mx-auto space-y-6">
@@ -180,9 +232,12 @@ const EducationContent = () => {
 
 const CertificationsContent = () => {
   const certs = [
-    { image: certGoogle, title: "Google Data Analytics Professional Certificate", issuer: "Google", date: "Issued Mar 2021", id: "CERT-GA-2021-0847" },
-    { image: certAws, title: "AWS Certified Data Analytics – Specialty", issuer: "Amazon Web Services", date: "Issued Nov 2022", id: "AWS-DAT-2022-1293" },
-    { image: certPowerbi, title: "Microsoft Power BI Data Analyst Associate", issuer: "Microsoft", date: "Issued Jun 2023", id: "MS-PBI-2023-5621" },
+    { image: certGoogle, title: "Google AI Essentials", issuer: "Coursera", date: "Completed", id: "—" },
+    { image: certPowerbi, title: "Microsoft Office Specialist — Excel Associate", issuer: "Microsoft", date: "2019", id: "—" },
+    { image: certAws, title: "Data Analytics", issuer: "PW Skills", date: "Pursuing", id: "—" },
+    { image: certAws, title: "Strategic Management", issuer: "Swayam — IIM Bangalore", date: "Pursuing", id: "—" },
+    { image: certGoogle, title: "AI Chat Prompts for Business Analysis", issuer: "LinkedIn Learning", date: "Completed", id: "—" },
+    { image: certGoogle, title: "What Is Generative AI?", issuer: "Online course", date: "Completed", id: "—" },
   ];
   return (
     <div className="max-w-4xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -206,10 +261,42 @@ const CertificationsContent = () => {
 
 const ProjectsContent = () => {
   const projects = [
-    { title: "Revenue Forecasting Engine", desc: "Built a predictive model that increased forecast accuracy by 35% using time-series analysis and ensemble methods.", tags: ["Python", "Prophet", "Pandas"], metric: "+35% accuracy" },
-    { title: "Customer Segmentation Dashboard", desc: "Interactive Tableau dashboard processing 2M+ customer records with K-means clustering for targeted marketing.", tags: ["Tableau", "SQL", "K-Means"], metric: "2M+ records" },
-    { title: "Supply Chain Optimization", desc: "Reduced inventory costs by 22% through demand pattern analysis and automated reorder point calculations.", tags: ["Power BI", "R", "DAX"], metric: "-22% costs" },
-    { title: "Real-time Anomaly Detection", desc: "Streaming pipeline detecting fraud patterns with 99.2% precision across financial transaction data.", tags: ["Python", "Kafka", "TensorFlow"], metric: "99.2% precision" },
+    {
+      title: "Customer Segmentation & Marketing Analytics Dashboard (RFM)",
+      desc: "Processed 100,000+ transactions using the RFM framework; built an Excel dashboard with slicers and dynamic visuals; identified top 3 segments contributing ~82% revenue and proposed retention/conversion strategies.",
+      tags: ["Excel", "RFM", "Dashboard"],
+      metric: "100K+ txns",
+    },
+    {
+      title: "Attrition & Retention Analysis",
+      desc: "Analyzed semi‑structured HR datasets (attrition, retention, exit interviews) using Excel/PivotTables and Python; applied CRISP‑DM to build an attrition dashboard and deliver retention strategies.",
+      tags: ["Python", "Excel", "CRISP‑DM"],
+      metric: "HR analytics",
+    },
+    {
+      title: "Customer Satisfaction in E‑Banking — Demographic Impact",
+      desc: "Collected 226 responses and analyzed using SPSS (Chi‑Square, T‑Test, ANOVA). Found gender significantly impacted satisfaction (p = 0.0085) and recommended GDPR‑compliant UX improvements and digital literacy initiatives.",
+      tags: ["SPSS", "Statistics", "GDPR"],
+      metric: "226 responses",
+    },
+    {
+      title: "Challenges & Future Prospect of National Logistics Policy",
+      desc: "Researched logistics sector challenges (infrastructure, costs, digital gaps) and evaluated NLP’s impact with policy analysis and forecasting; proposed ERP‑integrated, data‑driven recommendations.",
+      tags: ["Policy analysis", "Forecasting", "ERP"],
+      metric: "Research",
+    },
+    {
+      title: "Treatment of Waste Water Through Electrocoagulation",
+      desc: "Conducted electrocoagulation experiments and processed semi‑structured lab data using Excel & Python for visualization; authored report on industrial applications.",
+      tags: ["Python", "Excel", "Research"],
+      metric: "Lab study",
+    },
+    {
+      title: "Pyrolysis of Plastic",
+      desc: "Conducted experiments and processed lab data in Excel & Python for visualization; authored report on industrial applications.",
+      tags: ["Excel", "Python", "Research"],
+      metric: "Lab study",
+    },
   ];
   return (
     <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
@@ -231,8 +318,37 @@ const ProjectsContent = () => {
 
 const VolunteeringContent = () => {
   const items = [
-    { image: volunteering, title: "Data Literacy Workshop Instructor", org: "Code for Good Foundation", period: "2021 — Present", desc: "Teaching data analysis fundamentals to underserved communities. Organized 12+ workshops reaching 300+ participants." },
-    { title: "Open Source Data Tools Contributor", org: "DataForAll Initiative", period: "2020 — Present", desc: "Contributing to open-source data visualization libraries and creating free educational resources for aspiring data analysts." },
+    {
+      image: volunteering,
+      title: "MDIS International Business Workshop",
+      org: "MDIS Singapore (Prof. Philip Yu)",
+      period: "Mar 2025",
+      desc: "7‑day program on development and implementation of international business. Focused on ERP‑driven analytics, high‑dimensional global datasets, forecasting, and GDPR‑compliant cross‑border data flows.",
+    },
+    {
+      title: "Design Thinking Workshop",
+      org: "Jaipuria School of Business",
+      period: "Oct 16–17, 2024",
+      desc: "Applied Design Thinking and CRISP‑DM frameworks to analytics‑driven product ideation and problem solving.",
+    },
+    {
+      title: "Cyber Security Workshop",
+      org: "Jaipuria School of Business",
+      period: "Dec 19, 2024",
+      desc: "Covered structured & unstructured data security, GDPR, and analytics risk management.",
+    },
+    {
+      title: "The Spotlight Within: Creative Theatre Workshop",
+      org: "Jaipuria School of Business",
+      period: "Apr 26, 2025",
+      desc: "Enhanced storytelling, presentation, and communication skills useful for analytics reporting.",
+    },
+    {
+      title: "Indian Values & Ethos Workshop",
+      org: "Jaipuria School of Business",
+      period: "Jan 28, 2025",
+      desc: "Focused on ethics and practical decision‑making.",
+    },
   ];
   return (
     <div className="max-w-3xl mx-auto space-y-6">
@@ -253,9 +369,11 @@ const VolunteeringContent = () => {
 
 const SkillsContent = () => {
   const categories = [
-    { category: "Programming", skills: [{ name: "Python", level: 95 }, { name: "R", level: 88 }, { name: "SQL", level: 92 }, { name: "JavaScript", level: 75 }] },
-    { category: "Visualization", skills: [{ name: "Tableau", level: 90 }, { name: "Power BI", level: 88 }, { name: "D3.js", level: 72 }, { name: "Matplotlib", level: 85 }] },
-    { category: "Machine Learning", skills: [{ name: "Scikit-learn", level: 85 }, { name: "TensorFlow", level: 78 }, { name: "NLP", level: 74 }, { name: "Deep Learning", level: 70 }] },
+    { category: "Data Analytics & BI Tools", skills: [{ name: "Power BI (DAX)", level: 90 }, { name: "MS Excel (Advanced)", level: 92 }, { name: "SPSS", level: 78 }, { name: "Python", level: 80 }] },
+    { category: "Data Handling", skills: [{ name: "Structured / Semi‑Structured / Unstructured Data", level: 85 }, { name: "High‑Dimensional Data Analysis", level: 82 }, { name: "GDPR‑Compliant Processing", level: 80 }, { name: "Data Cleaning", level: 85 }] },
+    { category: "Business Applications", skills: [{ name: "SAP ERP Systems", level: 70 }, { name: "Workflow Automation", level: 78 }, { name: "CRISP‑DM", level: 82 }, { name: "Statistical Analysis", level: 80 }] },
+    { category: "Visualization & Reporting", skills: [{ name: "Dashboards", level: 88 }, { name: "Forecasting Models", level: 76 }, { name: "Process Optimization", level: 78 }, { name: "Presentation & Storytelling", level: 80 }] },
+    { category: "Soft Skills", skills: [{ name: "Problem Solving", level: 85 }, { name: "Critical Thinking", level: 85 }, { name: "Leadership", level: 80 }, { name: "Communication", level: 82 }] },
   ];
   return (
     <div className="max-w-4xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -283,9 +401,9 @@ const SkillsContent = () => {
 
 const RecommendationsContent = () => {
   const recs = [
-    { text: "Alex's analytical thinking transformed our entire data strategy. Their ability to turn complex datasets into clear, actionable insights is unmatched. A true data wizard.", author: "Sarah Chen", role: "VP of Analytics, TechCorp Inc." },
-    { text: "Working with Alex on the customer segmentation project was a game-changer. The dashboard they built became the single source of truth for our marketing team.", author: "Michael Torres", role: "Head of Marketing, DataDriven Co." },
-    { text: "Alex has an exceptional talent for making data accessible. Their presentations to leadership always hit the mark, combining technical depth with business relevance.", author: "Dr. Emily Nakamura", role: "Professor, Stanford University" },
+    { text: "Designed GDPR‑compliant automated reporting systems, reducing manual effort by 12+ hours/week.", author: "Impact", role: "Automation & reporting" },
+    { text: "Processed 100,000+ customer transactions using RFM; identified top segments contributing ~82% revenue (Pareto 80/20).", author: "Impact", role: "Segmentation & analytics" },
+    { text: "Analyzed 226 survey responses in SPSS; found gender significantly impacted satisfaction (p = 0.0085) and proposed UX improvements.", author: "Impact", role: "Statistics & insights" },
   ];
   return (
     <div className="max-w-3xl mx-auto space-y-6">
@@ -310,9 +428,12 @@ const RecommendationsContent = () => {
 
 const HonorsContent = () => {
   const awards = [
-    { image: awardInnovation, title: "Best Data Innovation Award", org: "DataCon International", year: "2024", desc: "Recognized for the Revenue Forecasting Engine that achieved 35% improvement in prediction accuracy." },
-    { title: "Top 10 Data Analysts Under 35", org: "Analytics Magazine", year: "2023", desc: "Featured in the annual list of rising data analytics professionals making industry impact." },
-    { title: "Dean's Award for Research Excellence", org: "Stanford University", year: "2019", desc: "Awarded for outstanding M.S. thesis on anomaly detection in financial datasets." },
+    { image: awardInnovation, title: "Talent Hunt — 1st Prize (Poetry)", org: "Jaipuria School of Business", year: "Aug 2024", desc: "Recognized for public speaking, creative expression, and presentation skills." },
+    { title: "Trading Simulation Challenge — Finalist", org: "Jaipuria School of Business", year: "Nov 2024", desc: "Applied statistical modeling and market analytics to simulate investment strategies." },
+    { title: "Melange — Poetry Competition Participant", org: "IMS Ghaziabad", year: "Mar 2025", desc: "Showcased communication, presentation, and creative expression." },
+    { title: "National Seminar Organizer — Environment Day", org: "College event", year: "Jun 2023", desc: "Coordinated event on Beat Plastic Pollution, managing participant engagement and event data." },
+    { title: "National Seminar Organizer — World Water Day", org: "College event", year: "Mar 2023", desc: "Organized session on “Accelerating Change: through Participation & Cooperation” as student coordinator." },
+    { title: "Agriculture Seminar Organizer", org: "College event", year: "Dec 2022", desc: "Coordinated seminar on 21st Century Agriculture: Advancement & Future Prospects." },
   ];
   return (
     <div className="max-w-3xl mx-auto space-y-6">

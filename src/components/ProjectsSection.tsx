@@ -1,34 +1,34 @@
 import { motion } from "framer-motion";
-import { ExternalLink, GitBranch, TrendingUp, BarChart3, PieChart, Activity } from "lucide-react";
+import { TrendingUp, BarChart3, PieChart, Activity } from "lucide-react";
 
 const projects = [
   {
-    title: "Revenue Forecasting Engine",
-    desc: "Built a predictive model that increased forecast accuracy by 35% using time-series analysis and ensemble methods.",
-    tags: ["Python", "Prophet", "Pandas"],
+    title: "Customer Segmentation & Marketing Analytics (RFM)",
+    desc: "Processed 100,000+ customer transactions using the RFM model and built an Excel dashboard with slicers and dynamic visuals. Identified top 3 segments contributing ~82% revenue (Pareto 80/20).",
+    tags: ["Excel", "RFM", "Segmentation"],
     icon: TrendingUp,
-    metric: "+35% accuracy",
+    metric: "100K+ txns",
   },
   {
-    title: "Customer Segmentation Dashboard",
-    desc: "Interactive Tableau dashboard processing 2M+ customer records with K-means clustering for targeted marketing.",
-    tags: ["Tableau", "SQL", "K-Means"],
+    title: "Attrition & Retention Analysis Dashboard",
+    desc: "Analyzed HR attrition/retention data using Excel (PivotTables) and Python; applied CRISP-DM and delivered role/location-based retention strategies to HR leadership.",
+    tags: ["Python", "Excel", "CRISP-DM"],
     icon: PieChart,
-    metric: "2M+ records",
+    metric: "HR insights",
   },
   {
-    title: "Supply Chain Optimization",
-    desc: "Reduced inventory costs by 22% through demand pattern analysis and automated reorder point calculations.",
-    tags: ["Power BI", "R", "DAX"],
+    title: "E‑Banking Customer Satisfaction (SPSS)",
+    desc: "Collected 226 responses and analyzed demographic impact using SPSS (Chi‑Square, T‑Test, ANOVA). Found gender significantly impacted satisfaction (p = 0.0085) and recommended GDPR‑compliant UX improvements.",
+    tags: ["SPSS", "Statistics", "GDPR"],
     icon: BarChart3,
-    metric: "-22% costs",
+    metric: "226 responses",
   },
   {
-    title: "Real-time Anomaly Detection",
-    desc: "Streaming pipeline detecting fraud patterns with 99.2% precision across financial transaction data.",
-    tags: ["Python", "Kafka", "TensorFlow"],
+    title: "National Logistics Policy (Research)",
+    desc: "Researched India’s logistics sector challenges and evaluated NLP’s impact. Proposed ERP‑integrated, data‑driven recommendations to improve efficiency and supply chain competitiveness.",
+    tags: ["Policy analysis", "ERP", "Forecasting"],
     icon: Activity,
-    metric: "99.2% precision",
+    metric: "Research",
   },
 ];
 
