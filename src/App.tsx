@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Index from "./pages/Index";
 import SectionPage from "./pages/SectionPage";
+import PGDMPage from "./pages/PGDMPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -19,6 +20,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/pgdm" element={<PGDMPage />} />
             <Route path="/section/:sectionId" element={<SectionPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

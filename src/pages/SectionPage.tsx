@@ -1,8 +1,10 @@
 import { useParams, useNavigate } from "react-router-dom";
+import React from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, Star, Briefcase, GraduationCap, Award, FolderOpen, Heart, Zap, MessageSquare, Trophy, MapPin, Calendar } from "lucide-react";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import ParticleField from "@/components/ParticleField";
+import LinkPreview from "@/components/ui/link-preview";
 
 import certGoogle from "@/assets/cert-google.jpg";
 import certAws from "@/assets/cert-aws.jpg";
@@ -29,40 +31,60 @@ const SectionPage = () => {
   const meta = sectionMeta[sectionId || ""] || { label: "Section", icon: Star };
   const Icon = meta.icon;
 
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [sectionId]);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <ParticleField />
       
       {/* Top bar */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass border-b">
-        <div className="container mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => navigate("/")}
             className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
           >
-            <ArrowLeft className="w-5 h-5" />
-            <span className="text-sm font-medium">Back to Portfolio</span>
+            <ArrowLeft className="w-4 md:w-5 h-4 md:h-5" />
+            <span className="hidden sm:inline text-xs md:text-sm font-medium">Back to Portfolio</span>
           </motion.button>
-          <div className="flex items-center gap-3">
-            <Icon className="w-5 h-5 text-primary" />
-            <span className="font-bold text-gradient">{meta.label}</span>
+          <div className="flex items-center gap-2 md:gap-3">
+            <Icon className="w-4 md:w-5 h-4 md:h-5 text-primary" />
+            <span className="font-bold text-gradient text-sm md:text-base">{meta.label}</span>
           </div>
           <ThemeSwitcher />
         </div>
       </nav>
 
-      <div className="pt-24 pb-16 container mx-auto px-6">
+      {/* Breadcrumb Navigation */}
+      <div className="fixed top-16 left-0 right-0 z-40 glass border-b">
+        <div className="container mx-auto px-4 md:px-6 py-2 md:py-3 flex items-center overflow-x-auto">
+          <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            onClick={() => navigate("/")}
+            className="text-xs md:text-sm text-muted-foreground hover:text-primary transition-colors font-mono whitespace-nowrap"
+          >
+            Portfolio
+          </motion.button>
+          <span className="mx-1 md:mx-2 text-muted-foreground text-xs md:text-sm">/</span>
+          <span className="text-xs md:text-sm text-primary font-mono font-semibold whitespace-nowrap">{meta.label}</span>
+        </div>
+      </div>
+
+      <div className="pt-36 md:pt-40 pb-8 md:pb-16 container mx-auto px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
-          <div className="w-16 h-16 mx-auto rounded-xl bg-gradient-brand flex items-center justify-center mb-4 glow-primary">
-            <Icon className="w-8 h-8 text-primary-foreground" />
+          <div className="w-12 md:w-16 h-12 md:h-16 mx-auto rounded-xl bg-gradient-brand flex items-center justify-center mb-3 md:mb-4 glow-primary">
+            <Icon className="w-6 md:w-8 h-6 md:h-8 text-primary-foreground" />
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold">
+          <h1 className="text-2xl md:text-4xl lg:text-6xl font-bold">
             <span className="text-gradient">{meta.label}</span>
           </h1>
         </motion.div>
@@ -175,6 +197,8 @@ const ExperienceContent = () => {
 };
 
 const EducationContent = () => {
+  const navigate = useNavigate();
+
   const edu = [
     {
       degree: "PGDM (Business Analytics) — Pursuing",
@@ -205,17 +229,43 @@ const EducationContent = () => {
       activities: ["Academic coursework"],
     },
   ];
+
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
-      {edu.map((e, i) => (
-        <motion.div key={i} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.2 }} className="glass rounded-xl p-6">
+    <div className="max-w-4xl mx-auto space-y-8">
+      {/* Education Cards */}
+      <div className="space-y-6">
+        {edu.map((e, i) => (
+        <motion.div 
+          key={i} 
+          initial={{ opacity: 0, y: 30 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ delay: i * 0.2 }} 
+          onClick={() => {
+            if (e.school === "Jaipuria School of Business") {
+              navigate("/pgdm");
+            }
+          }}
+          className={`glass rounded-xl p-6 ${e.school === "Jaipuria School of Business" ? "cursor-pointer hover:shadow-lg hover:shadow-primary/20 transition-all" : ""}`}
+          whileHover={e.school === "Jaipuria School of Business" ? { y: -4 } : {}}
+        >
           <div className="flex items-start gap-4 mb-4">
             <div className="w-12 h-12 rounded-lg bg-gradient-brand flex items-center justify-center flex-shrink-0">
               <GraduationCap className="w-6 h-6 text-primary-foreground" />
             </div>
             <div>
               <h3 className="text-xl font-bold">{e.degree}</h3>
-              <p className="text-secondary-foreground">{e.school}</p>
+              <p className="text-secondary-foreground">
+                {e.school === "Jaipuria School of Business" ? (
+                  <LinkPreview
+                    href="https://jsb.jaipuria.edu.in/overview-jsbpgdm/"
+                    imgSrc="/images/JSB.png"
+                    label="Jaipuria School of Business"
+                    sizeClass="w-52"
+                  />
+                ) : (
+                  e.school
+                )}
+              </p>
               <p className="text-xs font-mono text-primary">{e.period}</p>
             </div>
           </div>
@@ -226,6 +276,7 @@ const EducationContent = () => {
           </div>
         </motion.div>
       ))}
+      </div>
     </div>
   );
 };

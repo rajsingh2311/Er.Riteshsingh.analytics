@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { TrendingUp, BarChart3, PieChart, Activity } from "lucide-react";
+import LinkPreview from "./ui/link-preview";
 
 const projects = [
   {
@@ -88,6 +89,16 @@ const ProjectsSection = () => {
                       {tag}
                     </span>
                   ))}
+                </div>
+
+                <div className="mt-4 flex justify-end">
+                  {/* Demo preview: replace imgSrc with real screenshot path per project */}
+                  <LinkPreview
+                    href={"https://example.com"}
+                    imgSrc={"https://via.placeholder.com/600.png?text=Preview"}
+                    label={"View"}
+                    sizeClass={"w-48"}
+                  />
                 </div>
               </div>
             </motion.div>

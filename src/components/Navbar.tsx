@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { BarChart3, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const navItems = [
   { id: "about", label: "About" },
@@ -13,6 +14,8 @@ const navItems = [
 ];
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [active, setActive] = useState<string>("about");
 
@@ -42,6 +45,26 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleNavClick = (item: { id: string; label: string }) => {
+    setActive(item.id);
+    
+    const sectionRoutes: Record<string, string> = {
+      education: "/section/education",
+      skills: "/section/skills",
+      projects: "/section/projects",
+      experience: "/section/experience",
+    };
+
+    if (sectionRoutes[item.id]) {
+      navigate(sectionRoutes[item.id]);
+    } else {
+      const element = document.getElementById(item.id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
   return (
     <motion.nav
       initial={{ y: -80 }}
@@ -57,10 +80,9 @@ const Navbar = () => {
 
         <div className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
-            <a
+            <button
               key={item.id}
-              href={`#${item.id}`}
-              onClick={() => setActive(item.id)}
+              onClick={() => handleNavClick(item)}
               className={`text-sm transition-colors duration-300 relative group ${
                 active === item.id ? "text-primary" : "text-muted-foreground hover:text-primary"
               }`}
@@ -71,7 +93,7 @@ const Navbar = () => {
                   active === item.id ? "w-full" : "w-0 group-hover:w-full"
                 }`}
               />
-            </a>
+            </button>
           ))}
         </div>
 
@@ -96,19 +118,18 @@ const Navbar = () => {
         >
           <div className="container mx-auto px-6 py-4 flex flex-col gap-3">
             {navItems.map((item) => (
-              <a
+              <button
                 key={item.id}
-                href={`#${item.id}`}
                 onClick={() => {
-                  setActive(item.id);
+                  handleNavClick(item);
                   setMobileOpen(false);
                 }}
-                className={`text-sm transition-colors py-2 ${
+                className={`text-sm transition-colors py-2 text-left ${
                   active === item.id ? "text-primary" : "text-muted-foreground hover:text-primary"
                 }`}
               >
                 {item.label}
-              </a>
+              </button>
             ))}
           </div>
         </motion.div>
