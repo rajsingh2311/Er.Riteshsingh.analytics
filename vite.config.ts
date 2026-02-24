@@ -5,7 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: mode === "production" ? "/dataverse-studio/" : "/",
+  base: mode === "production" ? "/Er.Riteshsingh.analytics/" : "/",
   server: {
     host: "::",
     port: 8080,
