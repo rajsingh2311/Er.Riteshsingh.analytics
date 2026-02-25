@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const navItems = [
-  { id: "about", label: "About" },
+  { id: "about-detailed", label: "About" },
   { id: "skills", label: "Skills" },
   { id: "projects", label: "Projects" },
   { id: "experience", label: "Experience" },
@@ -17,7 +17,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [active, setActive] = useState<string>("about");
+  const [active, setActive] = useState<string>("about-detailed");
 
   useEffect(() => {
     const handleScroll = () => {
