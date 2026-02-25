@@ -57,21 +57,21 @@ const HeroSection = () => {
             Business/Data Analyst{" "}
             <LinkPreview
               href={"https://jaipuria.edu.in/"}
-              imgSrc={"/images/jaipuria.png"}
+              imgSrc={`${import.meta.env.BASE_URL}images/jaipuria.png`}
               label={"@Jaipuria_Group"}
               sizeClass={"w-44"}
             />{" "}
             |{" "}
             <LinkPreview
               href={"https://leansixsigma.gtbharat.in/verify/8cc214ce5219?s=true"}
-              imgSrc={"/images/Six_sigma.png"}
+              imgSrc={`${import.meta.env.BASE_URL}images/Six_sigma.png`}
               label={"Six Sigma Green Belt Certified"}
               sizeClass={"w-56"}
             />{" "}
             | Ex Data Analyst{' '}
             <LinkPreview
               href={"https://www.wtfgyms.com/about"}
-              imgSrc={"/images/wtfgyms.png"}
+              imgSrc={`${import.meta.env.BASE_URL}images/wtfgyms.png`}
               label={'@WTF_Gyms'}
               sizeClass={"w-44"}
             />{' '}
