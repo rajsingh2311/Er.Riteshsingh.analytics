@@ -115,7 +115,7 @@ const HeroSection = () => {
           </motion.div>
 
           <motion.a
-            href="#skills"
+            href="#about-detailed"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2 }}
