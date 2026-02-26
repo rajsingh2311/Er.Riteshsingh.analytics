@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { GraduationCap } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const education = [
   {
@@ -29,8 +30,22 @@ const education = [
 ];
 
 const EducationSection = () => {
+  const navigate = useNavigate();
+  
+  const handleEducationClick = (degree: string) => {
+    if (degree.includes("PGDM")) {
+      navigate("/pgdm");
+    } else if (degree.includes("B.Tech")) {
+      navigate("/btech");
+    } else if (degree.includes("12th")) {
+      navigate("/twelfth");
+    } else if (degree.includes("10th")) {
+      navigate("/tenth");
+    }
+  };
+
   return (
-    <section id="education" className="py-24 relative">
+    <section id="education" className="py-24 pt-28 md:pt-32 relative">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -52,7 +67,10 @@ const EducationSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="glass rounded-xl p-6 flex gap-4"
+              className="glass rounded-xl p-6 flex gap-4 cursor-pointer hover:border-primary/50 transition-all duration-300 hover:shadow-lg"
+              onClick={() => handleEducationClick(item.degree)}
+              role="button"
+              tabIndex={0}
             >
               <div className="w-12 h-12 rounded-lg bg-gradient-brand flex items-center justify-center flex-shrink-0">
                 <GraduationCap className="w-6 h-6 text-primary-foreground" />

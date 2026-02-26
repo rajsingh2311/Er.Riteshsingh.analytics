@@ -1,8 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, Star, Briefcase, GraduationCap, Award, FolderOpen, Heart, Zap, MessageSquare, Trophy, MapPin, Calendar } from "lucide-react";
-import ThemeSwitcher from "@/components/ThemeSwitcher";
+import { Star, Briefcase, GraduationCap, Award, FolderOpen, Heart, Zap, MessageSquare, Trophy, MapPin, Calendar, User, ChevronRight } from "lucide-react";
+import Navbar from "@/components/Navbar";
 import ParticleField from "@/components/ParticleField";
 import LinkPreview from "@/components/ui/link-preview";
 
@@ -14,6 +14,7 @@ import volunteering from "@/assets/volunteering.jpg";
 import featuredDashboard from "@/assets/featured-dashboard.jpg";
 
 const sectionMeta: Record<string, { label: string; icon: any }> = {
+  about: { label: "About", icon: User },
   featured: { label: "Featured", icon: Star },
   experience: { label: "Experience", icon: Briefcase },
   education: { label: "Education", icon: GraduationCap },
@@ -39,43 +40,26 @@ const SectionPage = () => {
     <div className="min-h-screen bg-background text-foreground">
       <ParticleField />
       
-      {/* Top bar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 glass border-b">
-        <div className="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => navigate("/")}
-            className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
-          >
-            <ArrowLeft className="w-4 md:w-5 h-4 md:h-5" />
-            <span className="hidden sm:inline text-xs md:text-sm font-medium">Back to Portfolio</span>
-          </motion.button>
-          <div className="flex items-center gap-2 md:gap-3">
-            <Icon className="w-4 md:w-5 h-4 md:h-5 text-primary" />
-            <span className="font-bold text-gradient text-sm md:text-base">{meta.label}</span>
-          </div>
-          <ThemeSwitcher />
-        </div>
-      </nav>
+      {/* Use main Navbar component */}
+      <Navbar />
 
       {/* Breadcrumb Navigation */}
       <div className="fixed top-16 left-0 right-0 z-40 glass border-b">
-        <div className="container mx-auto px-4 md:px-6 py-2 md:py-3 flex items-center overflow-x-auto">
+        <div className="container mx-auto px-4 md:px-6 py-3 flex items-center">
           <motion.button
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             onClick={() => navigate("/")}
-            className="text-xs md:text-sm text-muted-foreground hover:text-primary transition-colors font-mono whitespace-nowrap"
+            className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors font-medium"
           >
-            Portfolio
+            Home
           </motion.button>
-          <span className="mx-1 md:mx-2 text-muted-foreground text-xs md:text-sm">/</span>
-          <span className="text-xs md:text-sm text-primary font-mono font-semibold whitespace-nowrap">{meta.label}</span>
+          <ChevronRight className="w-4 h-4 md:w-5 md:h-5 mx-2 text-muted-foreground" />
+          <span className="text-sm md:text-base text-primary font-semibold">{meta.label}</span>
         </div>
       </div>
 
-      <div className="pt-36 md:pt-40 pb-8 md:pb-16 container mx-auto px-4 md:px-6">
+      <div className="pt-32 md:pt-36 pb-8 md:pb-16 container mx-auto px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -97,6 +81,8 @@ const SectionPage = () => {
 
 const SectionContent = ({ sectionId }: { sectionId: string }) => {
   switch (sectionId) {
+    case "about":
+      return <AboutContent />;
     case "featured":
       return <FeaturedContent />;
     case "experience":
@@ -119,6 +105,145 @@ const SectionContent = ({ sectionId }: { sectionId: string }) => {
       return <p className="text-center text-muted-foreground">Section not found.</p>;
   }
 };
+
+const AboutContent = () => (
+  <div className="max-w-4xl mx-auto">
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="relative"
+    >
+      {/* Gradient Border Background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-teal-400 to-cyan-300 rounded-2xl p-[2px]">
+        <div className="absolute inset-0 bg-background/95 rounded-2xl" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 rounded-2xl p-6 md:p-12 bg-background/50 backdrop-blur-sm">
+        {/* Title */}
+        <h3 className="text-xl md:text-3xl font-bold text-gradient mb-6 md:mb-8">
+          Data Analyst | Business Intelligence Specialist
+        </h3>
+
+        {/* Main Content - Justified Text */}
+        <div className="space-y-4 md:space-y-6 mb-6 md:mb-8">
+          <p className="text-sm md:text-base lg:text-lg text-foreground leading-relaxed text-justify">
+            I am a Data Analyst at Seth Anandram Jaipuria Group of Educational Institutions, where I leverage SQL, 
+            Predictive Analytics, and Power BI to transform raw institutional data into strategic insights. My focus is on 
+            driving operational efficiency and supporting evidence-based decision-making within the education sector.
+          </p>
+
+          <p className="text-sm md:text-base lg:text-lg text-foreground leading-relaxed text-justify">
+            Previously, I honed my ability to merge technical analysis with business impact at WTF Gyms. There, I engineered 
+            automation workflows (Make.com & WATI) that reduced lead response times by 65% and developed comprehensive Power BI 
+            dashboards to track agent performance and funnel conversion.
+          </p>
+
+          <p className="text-sm md:text-base lg:text-lg text-foreground leading-relaxed text-justify">
+            I am passionate about #BuildingInPublic and sharing workflows that help businesses make smarter, faster decisions. 
+            Let's connect to discuss data strategy and automation.
+          </p>
+        </div>
+
+        {/* Core Competencies */}
+        <div className="border-t border-white/20 pt-6 md:pt-8">
+          <h4 className="text-lg md:text-xl font-bold text-gradient mb-4 md:mb-6">Core Competencies</h4>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+            {/* Analytics */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="p-4 rounded-lg bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20"
+            >
+              <h5 className="font-semibold text-primary mb-3">Analytics</h5>
+              <ul className="space-y-2 text-sm text-foreground">
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>SQL</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>Excel (MOS Expert)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>Power BI (DAX)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>Python</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>SPSS</span>
+                </li>
+              </ul>
+            </motion.div>
+
+            {/* Business Tools */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="p-4 rounded-lg bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20"
+            >
+              <h5 className="font-semibold text-primary mb-3">Business Tools</h5>
+              <ul className="space-y-2 text-sm text-foreground">
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>SAP ERP</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>Make.com</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>WATI</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>N8N</span>
+                </li>
+              </ul>
+            </motion.div>
+
+            {/* Methodologies */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="p-4 rounded-lg bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20"
+            >
+              <h5 className="font-semibold text-primary mb-3">Methodologies</h5>
+              <ul className="space-y-2 text-sm text-foreground">
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>CRISP-DM</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>Six Sigma</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>Statistical Analysis</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>GDPR Compliance</span>
+                </li>
+              </ul>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  </div>
+);
+
 
 const FeaturedContent = () => (
   <div className="max-w-4xl mx-auto space-y-8">

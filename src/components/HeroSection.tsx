@@ -5,7 +5,7 @@ import { ArrowDown, Download, MapPin } from "lucide-react";
 
 const HeroSection = () => {
   return (
-    <section id="about" className="relative min-h-screen flex items-center justify-center overflow-hidden grid-bg pt-20">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden grid-bg pt-20">
       <ParticleField />
 
       {/* Floating orbs */}
@@ -32,10 +32,12 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="mb-4 md:mb-6"
           >
-            <div className="w-20 md:w-28 h-20 md:h-28 mx-auto rounded-full bg-gradient-brand p-[3px] glow-primary">
-              <div className="w-full h-full rounded-full bg-background flex items-center justify-center text-xl md:text-3xl font-bold text-gradient">
-                RS
-              </div>
+            <div className="w-[12.5rem] md:w-[17.5rem] h-[12.5rem] md:h-[17.5rem] mx-auto rounded-full bg-gradient-brand p-[3px] glow-primary">
+              <img
+                src={`${import.meta.env.BASE_URL}images/Ritesh%20image.JPG`}
+                alt="Ritesh Singh"
+                className="w-full h-full rounded-full object-cover bg-background"
+              />
             </div>
           </motion.div>
 

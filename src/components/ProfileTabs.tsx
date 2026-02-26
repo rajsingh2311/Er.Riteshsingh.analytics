@@ -8,7 +8,55 @@ import featuredDashboard from "@/assets/featured-dashboard.jpg";
 import awardInnovation from "@/assets/award-innovation.jpg";
 import volunteering from "@/assets/volunteering.jpg";
 
-const tabs = [
+type ImagePreview = {
+  type: "image";
+  image: string;
+  title: string;
+  subtitle: string;
+};
+
+type TimelinePreview = {
+  type: "timeline";
+  items: Array<{ title: string; sub: string; year: string }>;
+};
+
+type CertsPreview = {
+  type: "certs";
+  images: string[];
+};
+
+type StatsPreview = {
+  type: "stats";
+  items: Array<{ label: string; metric: string }>;
+};
+
+type SkillsPreview = {
+  type: "skills";
+  items: Array<{ name: string; level: number }>;
+};
+
+type QuotePreview = {
+  type: "quote";
+  text: string;
+  author: string;
+};
+
+type Preview =
+  | ImagePreview
+  | TimelinePreview
+  | CertsPreview
+  | StatsPreview
+  | SkillsPreview
+  | QuotePreview;
+
+type TabItem = {
+  id: string;
+  label: string;
+  icon: typeof Star;
+  preview: Preview;
+};
+
+const tabs: TabItem[] = [
   {
     id: "featured",
     label: "Featured",
@@ -196,7 +244,7 @@ const ProfileTabs = () => {
   );
 };
 
-const PreviewContent = ({ preview }: { preview: any }) => {
+const PreviewContent = ({ preview }: { preview: Preview }) => {
   if (preview.type === "image") {
     return (
       <div className="relative rounded-lg overflow-hidden">
@@ -212,7 +260,7 @@ const PreviewContent = ({ preview }: { preview: any }) => {
   if (preview.type === "timeline") {
     return (
       <div className="space-y-3">
-        {preview.items.map((item: any) => (
+        {preview.items.map((item) => (
           <div key={item.title} className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-1.5 glow-primary" />
             <div>
@@ -244,7 +292,7 @@ const PreviewContent = ({ preview }: { preview: any }) => {
   if (preview.type === "stats") {
     return (
       <div className="space-y-2">
-        {preview.items.map((item: any) => (
+        {preview.items.map((item) => (
           <div key={item.label} className="flex justify-between items-center">
             <span className="text-xs text-muted-foreground">{item.label}</span>
             <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-primary/10 text-primary">{item.metric}</span>
@@ -257,7 +305,7 @@ const PreviewContent = ({ preview }: { preview: any }) => {
   if (preview.type === "skills") {
     return (
       <div className="space-y-2">
-        {preview.items.map((skill: any) => (
+        {preview.items.map((skill) => (
           <div key={skill.name}>
             <div className="flex justify-between text-xs mb-1">
               <span>{skill.name}</span>

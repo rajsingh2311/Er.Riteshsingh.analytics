@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const AboutSection = () => {
   return (
-    <section id="about-detailed" className="relative py-16 md:py-24 overflow-hidden">
+    <section id="about-detailed" className="relative pt-8 pb-16 md:pt-12 md:pb-20 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="max-w-4xl mx-auto">
           {/* Section Title */}
@@ -10,7 +10,7 @@ const AboutSection = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-8 md:mb-12"
+            className="text-center mb-2 md:mb-3"
           >
             <h2 className="text-3xl md:text-5xl font-bold text-gradient mb-2">About</h2>
             <div className="h-1 w-24 bg-gradient-brand mx-auto rounded-full" />

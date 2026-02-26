@@ -41,7 +41,7 @@ const timeline = [
 
 const ExperienceSection = () => {
   return (
-    <section id="experience" className="py-24 relative">
+    <section id="experience" className="py-24 pt-28 md:pt-32 relative">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
