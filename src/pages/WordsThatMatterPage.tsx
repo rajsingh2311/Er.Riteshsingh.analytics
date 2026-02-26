@@ -100,35 +100,35 @@ const WordsThatMatterPage = () => {
               <div className="pointer-events-none absolute -left-20 -bottom-16 w-64 h-64 rounded-full bg-gradient-brand opacity-15 blur-3xl" />
 
               <div className="relative z-10 grid lg:grid-cols-[260px_1fr] gap-4 md:gap-6">
-                  <div className="rounded-xl border border-primary/20 bg-background/40 p-3">
-                    <img src={activeItem.image} alt={activeItem.name} className="w-full h-44 md:h-48 object-contain bg-background/60 rounded-lg" />
-                    <div className="mt-3">
-                      <p className="font-semibold text-foreground">{activeItem.name}</p>
-                      <p className="text-xs md:text-sm text-muted-foreground">{activeItem.designation}</p>
-                    </div>
+                <div className="rounded-xl border border-primary/20 bg-background/40 p-3">
+                  <img src={activeItem.image} alt={activeItem.name} className="w-full h-44 md:h-48 object-contain bg-background/60 rounded-lg" />
+                  <div className="mt-3">
+                    <p className="font-semibold text-foreground">{activeItem.name}</p>
+                    <p className="text-xs md:text-sm text-muted-foreground">{activeItem.designation}</p>
                   </div>
+                </div>
 
-                  <div className="rounded-xl border border-primary/20 bg-gradient-to-r from-primary/10 to-transparent p-4 md:p-5 flex">
-                    <div className="my-auto w-full">
-                      <div className="inline-flex items-center gap-2 text-xs font-mono px-2.5 py-1 rounded-full bg-primary/15 text-primary mb-3">
-                        <Quote className="w-3.5 h-3.5" />
-                        Spotlight Feedback
-                      </div>
-                      <p className="text-base md:text-xl leading-relaxed text-foreground/95">“{activeItem.quote}”</p>
+                <div className="rounded-xl border border-primary/20 bg-gradient-to-r from-primary/10 to-transparent p-4 md:p-5 flex">
+                  <div className="my-auto w-full">
+                    <div className="inline-flex items-center gap-2 text-xs font-mono px-2.5 py-1 rounded-full bg-primary/15 text-primary mb-3">
+                      <Quote className="w-3.5 h-3.5" />
+                      Spotlight Feedback
+                    </div>
+                    <p className="text-base md:text-xl leading-relaxed text-foreground/95">"{activeItem.quote}"</p>
 
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {activeItem.focus.map((topic) => (
-                          <span
-                            key={topic}
-                            className="text-[11px] md:text-xs font-mono px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground"
-                          >
-                            {topic}
-                          </span>
-                        ))}
-                      </div>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {activeItem.focus.map((topic) => (
+                        <span
+                          key={topic}
+                          className="text-[11px] md:text-xs font-mono px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground"
+                        >
+                          {topic}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </div>
+              </div>
 
               <div className="relative z-10 mt-4 md:mt-5 flex flex-wrap items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
@@ -174,6 +174,7 @@ const WordsThatMatterPage = () => {
             </div>
           </div>
 
+          {/* All Testimonials Section */}
           <div className="max-w-6xl mx-auto mt-8 md:mt-10">
             <div className="text-center mb-5 md:mb-6">
               <h2 className="text-xl md:text-3xl font-bold">
@@ -184,47 +185,64 @@ const WordsThatMatterPage = () => {
               </p>
             </div>
 
-            <div className="space-y-4 md:space-y-5">
-              {testimonials.map((item, index) => (
-                <article
-                  key={`${item.name}-manual-${index}`}
-                  className="glass rounded-2xl border border-primary/20 p-4 md:p-5"
-                >
-                  <div
-                    className={`grid md:grid-cols-[220px_1fr] gap-4 md:gap-6 items-stretch ${
-                      index % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""
-                    }`}
+            <div className="space-y-5 md:space-y-6">
+              {testimonials.map((item, index) => {
+                const isReversed = index % 2 === 1;
+                return (
+                  <article
+                    key={`${item.name}-manual-${index}`}
+                    className="glass rounded-2xl border border-primary/20 overflow-hidden"
                   >
-                    <div className="rounded-xl border border-primary/20 bg-background/40 p-3">
-                      <img src={item.image} alt={item.name} className="w-full h-40 object-contain bg-background/60 rounded-lg" />
-                      <div className="mt-2.5">
-                        <p className="font-semibold text-foreground">{item.name}</p>
-                        <p className="text-xs md:text-sm text-muted-foreground">{item.designation}</p>
+                    <div className={`grid md:grid-cols-[280px_1fr] ${isReversed ? "md:grid-cols-[1fr_280px]" : ""}`}>
+                      {/* Photo Section */}
+                      <div
+                        className={`bg-background/40 border-primary/20 p-4 ${
+                          isReversed ? "md:order-2 md:border-l" : "md:border-r"
+                        } border-b md:border-b-0`}
+                      >
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="w-44 h-44 mx-auto object-contain bg-background/60 rounded-lg"
+                        />
+                        <div className="mt-3 text-center md:text-left">
+                          <p className="font-semibold text-foreground">{item.name}</p>
+                          <p className="text-sm text-muted-foreground">{item.designation}</p>
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="rounded-xl border border-primary/20 bg-gradient-to-r from-primary/10 to-transparent p-4 md:p-5 flex">
-                      <div className="my-auto">
-                        <div className="inline-flex items-center gap-2 text-xs font-mono px-2.5 py-1 rounded-full bg-primary/15 text-primary mb-3">
-                          <Quote className="w-3.5 h-3.5" />
-                          Testimonial
-                        </div>
-                        <p className="text-base md:text-lg leading-relaxed text-foreground/95">“{item.quote}”</p>
-                        <div className="mt-3 flex flex-wrap gap-2">
-                          {item.focus.map((topic) => (
-                            <span
-                              key={`${item.name}-${topic}`}
-                              className="text-[11px] md:text-xs font-mono px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground"
-                            >
-                              {topic}
-                            </span>
-                          ))}
+                      {/* Testimonial Section */}
+                      <div
+                        className={`bg-gradient-to-r ${
+                          isReversed ? "md:bg-gradient-to-l" : ""
+                        } from-primary/10 to-transparent p-5 md:p-6 flex ${
+                          isReversed ? "md:order-1" : ""
+                        }`}
+                      >
+                        <div className="my-auto">
+                          <div className="inline-flex items-center gap-2 text-xs font-mono px-3 py-1.5 rounded-full bg-primary/20 text-primary mb-4">
+                            <Quote className="w-3.5 h-3.5" />
+                            Testimonial
+                          </div>
+                          <p className="text-base md:text-xl leading-relaxed text-foreground/95 italic">
+                            "{item.quote}"
+                          </p>
+                          <div className="mt-4 flex flex-wrap gap-2">
+                            {item.focus.map((topic) => (
+                              <span
+                                key={`${item.name}-${topic}`}
+                                className="text-xs font-mono px-3 py-1 rounded-full border border-primary/30 text-muted-foreground"
+                              >
+                                {topic}
+                              </span>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </article>
-              ))}
+                  </article>
+                );
+              })}
             </div>
           </div>
         </div>
