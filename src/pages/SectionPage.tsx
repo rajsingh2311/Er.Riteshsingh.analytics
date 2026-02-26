@@ -18,7 +18,7 @@ const sectionMeta: Record<string, { label: string; icon: any }> = {
   featured: { label: "Featured", icon: Star },
   experience: { label: "Experience", icon: Briefcase },
   education: { label: "Education", icon: GraduationCap },
-  certifications: { label: "Licenses & Certifications", icon: Award },
+  certifications: { label: "Certifications", icon: Award },
   projects: { label: "Projects", icon: FolderOpen },
   volunteering: { label: "Workshops", icon: Heart },
   skills: { label: "Skills", icon: Zap },

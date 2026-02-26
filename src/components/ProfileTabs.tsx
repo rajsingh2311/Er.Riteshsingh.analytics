@@ -94,7 +94,7 @@ const tabs: TabItem[] = [
   },
   {
     id: "certifications",
-    label: "Licenses & Certifications",
+    label: "Certifications",
     icon: Award,
     preview: {
       type: "certs",
@@ -146,7 +146,7 @@ const tabs: TabItem[] = [
     preview: {
       type: "quote",
       text: "High-dimensional data analysis · CRISP‑DM · BI dashboards · GDPR‑compliant workflows",
-      author: "Ritesh Singh",
+      author: "Er Ritesh Singh",
     },
   },
   {

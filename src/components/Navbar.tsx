@@ -9,7 +9,7 @@ const navItems = [
   { id: "about", label: "About", targetId: "about-detailed" },
   { id: "experience", label: "Experience", targetId: "experience" },
   { id: "education", label: "Education", targetId: "education" },
-  { id: "certifications", label: "Licenses", targetId: "certifications" },
+  { id: "certifications", label: "Certifications", targetId: "certifications" },
   { id: "projects", label: "Projects", targetId: "projects" },
   { id: "skills", label: "Skills", targetId: "skills" },
   { id: "contact", label: "Contact", targetId: "contact" },

@@ -25,7 +25,7 @@ const certifications = [
 
 const CertificationsSection = () => {
   return (
-    <section id="certifications" className="py-24 pt-28 md:pt-32 relative">
+    <section id="certifications" className="pt-12 pb-10 md:pt-14 md:pb-12 relative">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -35,7 +35,7 @@ const CertificationsSection = () => {
         >
           <span className="text-primary font-mono text-sm tracking-wider uppercase">Credentials</span>
           <h2 className="text-4xl md:text-5xl font-bold mt-3">
-            Licenses <span className="text-gradient">& Certifications</span>
+            <span className="text-gradient">Certifications</span>
           </h2>
         </motion.div>
 

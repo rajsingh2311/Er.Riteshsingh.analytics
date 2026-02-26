@@ -22,7 +22,7 @@ const HeroSection = () => {
           >
             <span className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full glass text-xs md:text-sm text-primary font-mono">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse-glow" />
-              Open to opportunities
+              Open to collabrate
             </span>
           </motion.div>
 
@@ -47,7 +47,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-3 md:mb-4 leading-tight"
           >
-            Ritesh <span className="text-gradient glow-text">Singh</span>
+            Er. Ritesh <span className="text-gradient glow-text">Singh</span>
           </motion.h1>
 
           <motion.h2

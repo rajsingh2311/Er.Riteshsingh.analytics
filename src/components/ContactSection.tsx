@@ -6,7 +6,7 @@ const ContactSection = () => {
   const [focused, setFocused] = useState("");
 
   return (
-    <section id="contact" className="py-24 relative">
+    <section id="contact" className="pt-12 pb-20 md:pt-14 md:pb-24 relative">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -92,7 +92,7 @@ const ContactSection = () => {
       {/* Footer */}
       <div className="container mx-auto px-6 mt-20">
         <div className="text-center text-sm text-muted-foreground border-t border-border pt-8">
-          <p>© 2026 Ritesh Singh — Data & analytics portfolio</p>
+          <p>© 2026 Er Ritesh Singh — Data & analytics portfolio</p>
         </div>
       </div>
     </section>

@@ -1,6 +1,6 @@
 # Ritesh Analytics Portfolio
 
-Personal portfolio website for Ritesh Singh, built with React + TypeScript and styled with Tailwind + shadcn/ui.
+Personal portfolio website for Er Ritesh Singh, built with React + TypeScript and styled with Tailwind + shadcn/ui.
 
 ## Features
 

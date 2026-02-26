@@ -35,7 +35,7 @@ const projects = [
 
 const ProjectsSection = () => {
   return (
-    <section id="projects" className="py-24 pt-28 md:pt-32 relative">
+    <section id="projects" className="pt-12 pb-10 md:pt-14 md:pb-12 relative">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

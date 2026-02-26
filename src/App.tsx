@@ -10,6 +10,8 @@ import PGDMPage from "./pages/PGDMPage";
 import BTechPage from "./pages/BTechPage";
 import TwelfthPage from "./pages/TwelfthPage";
 import TenthPage from "./pages/TenthPage";
+import WordsThatMatterPage from "./pages/WordsThatMatterPage";
+import MyMentorsPage from "./pages/MyMentorsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +29,8 @@ const App = () => (
             <Route path="/btech" element={<BTechPage />} />
             <Route path="/twelfth" element={<TwelfthPage />} />
             <Route path="/tenth" element={<TenthPage />} />
+            <Route path="/words-that-matter" element={<WordsThatMatterPage />} />
+            <Route path="/my-mentors" element={<MyMentorsPage />} />
             <Route path="/section/:sectionId" element={<SectionPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
