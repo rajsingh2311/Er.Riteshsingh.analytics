@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, ChevronRight, Quote } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronRight, Linkedin, Quote } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -162,9 +162,14 @@ const WordsThatMatterPage = () => {
                   href={activeItem.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`rounded-xl border border-primary/20 bg-background/40 p-3 block ${activeItem.linkedin ? 'cursor-pointer hover:border-primary/50 transition-colors' : 'pointer-events-none'}`}
+                  className="rounded-xl border border-primary/20 bg-background/40 p-3 block group"
                 >
-                  <img src={activeItem.image} alt={activeItem.name} className="w-full h-44 md:h-48 object-contain bg-background/60 rounded-lg" />
+                  <div className="relative overflow-hidden rounded-lg">
+                    <img src={activeItem.image} alt={activeItem.name} className="w-full h-44 md:h-48 object-contain bg-background/60 rounded-lg transition-transform duration-300 group-hover:scale-110" />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                      <Linkedin className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                  </div>
                   <div className="mt-3">
                     <p className="font-semibold text-foreground">{activeItem.name}</p>
                     <p className="text-xs md:text-sm text-muted-foreground">{activeItem.designation}</p>
@@ -260,13 +265,18 @@ const WordsThatMatterPage = () => {
                       href={item.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`bg-background/40 border-primary/20 p-4 md:border-r border-b md:border-b-0 block ${item.linkedin ? 'cursor-pointer hover:bg-background/60 transition-colors' : 'pointer-events-none'}`}
+                      className="bg-background/40 border-primary/20 p-4 md:border-r border-b md:border-b-0 block group"
                     >
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="w-44 h-44 mx-auto object-contain bg-background/60 rounded-lg"
-                      />
+                      <div className="relative overflow-hidden rounded-lg w-44 h-44 mx-auto">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="w-full h-full object-contain bg-background/60 rounded-lg transition-transform duration-300 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                          <Linkedin className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </div>
+                      </div>
                       <div className="mt-3 text-center md:text-left">
                         <p className="font-semibold text-foreground">{item.name}</p>
                         <p className="text-sm text-muted-foreground">{item.designation}</p>
