@@ -1,21 +1,25 @@
 import { motion } from "framer-motion";
-import { Handshake, Sparkles } from "lucide-react";
 
 const mentors = [
   {
-    name: "Mentor Name",
-    role: "Business Analytics Mentor",
-    guidance: "Helped me sharpen problem framing and connect analytics outputs to business impact.",
+    name: "Anita Nigam",
+    role: "Co-founder at WTF Gyms and Fitness",
+    image: `${import.meta.env.BASE_URL}images/Anita%20nigam.png`,
   },
   {
-    name: "Mentor Name",
-    role: "Industry Mentor",
-    guidance: "Guided me on real-world KPI selection, stakeholder communication, and delivery quality.",
+    name: "Ashu Arora Jha",
+    role: "HR Manager | People Strategy | Ex HR Head Yes Madam, WTF GYMs",
+    image: `${import.meta.env.BASE_URL}images/Aashu%20Arora.png`,
   },
   {
-    name: "Mentor Name",
-    role: "Technical Mentor",
-    guidance: "Supported my growth in dashboard storytelling, automation workflows, and data thinking.",
+    name: "Pawan Kumar Singh",
+    role: "Co-Founder at Cuatro Labs | Ex Operation Manager WTF Gyms, Yes Madam",
+    image: `${import.meta.env.BASE_URL}images/Pawan%20Sir.png`,
+  },
+  {
+    name: "Dheeraj",
+    role: "System Engineer at TCS",
+    image: `${import.meta.env.BASE_URL}images/Dheeraj.png`,
   },
 ];
 
@@ -35,7 +39,7 @@ const MentorsSection = () => {
           </h2>
         </motion.div>
 
-        <div className="space-y-5 max-w-5xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {mentors.map((mentor, index) => (
             <motion.article
               key={`${mentor.name}-${index}`}
@@ -44,26 +48,19 @@ const MentorsSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -4 }}
-              className="glass rounded-xl p-5 md:p-6"
+              className="glass rounded-xl overflow-hidden"
             >
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                <div className="flex items-start gap-4">
-                  <div className="w-11 h-11 rounded-lg bg-gradient-brand flex items-center justify-center flex-shrink-0">
-                    <Handshake className="w-5 h-5 text-primary-foreground" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold">{mentor.name}</h3>
-                    <p className="text-sm text-secondary-foreground">{mentor.role}</p>
-                  </div>
-                </div>
-
-                <div className="inline-flex items-center gap-2 text-xs font-mono px-3 py-1 rounded-full bg-primary/10 text-primary w-fit">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  Mentorship Impact
-                </div>
+              <div className="aspect-square overflow-hidden">
+                <img
+                  src={mentor.image}
+                  alt={mentor.name}
+                  className="w-full h-full object-cover"
+                />
               </div>
-
-              <p className="text-sm text-muted-foreground leading-relaxed mt-4">{mentor.guidance}</p>
+              <div className="p-4 border-l-4 border-primary">
+                <h3 className="text-lg font-bold text-foreground">{mentor.name}</h3>
+                <p className="text-sm text-muted-foreground mt-1">{mentor.role}</p>
+              </div>
             </motion.article>
           ))}
         </div>

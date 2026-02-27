@@ -6,28 +6,76 @@ import ParticleField from "@/components/ParticleField";
 
 const testimonials = [
   {
-    name: "Mentor Name",
-    designation: "Business Analytics Mentor",
-    focus: ["Business Clarity", "Decision Support", "Ownership"],
-    quote:
-      "Ritesh consistently converts complex datasets into clear business narratives and actionable decisions.",
-    image: `${import.meta.env.BASE_URL}images/Ritesh%20image.JPG`,
-  },
-  {
     name: "Anita Nigam",
     designation: "Co-founder at WTF Gyms and Fitness",
     focus: ["Reporting Quality", "Turnaround", "Stakeholder Trust"],
     quote:
       "Ritesh handled multiple HR data projects, maintained accuracy in reporting, and supported operational processes with a high level of dedication. His ability to adapt quickly, take ownership, and deliver work on time made him a valuable part of the team.",
     image: `${import.meta.env.BASE_URL}images/Anita%20nigam.png`,
+    linkedin: "https://www.linkedin.com/in/anita-nigam-b686944b/",
   },
   {
-    name: "Manager Name",
-    designation: "Project Manager",
-    focus: ["Insight Storytelling", "Empathy", "Actionable Outputs"],
+    name: "Ashu Arora Jha",
+    designation: "HR Manager | People Strategy | Ex HR Head Yes Madam, WTF GYMs",
+    focus: ["Responsibility", "Dedication", "Hard Work"],
     quote:
-      "Ritesh communicates insights with precision and empathy, making analytics outcomes easy to act upon.",
-    image: `${import.meta.env.BASE_URL}images/Ritesh%20image.JPG`,
+      "Ritesh was a responsible, dedicated & hard-working guy.",
+    image: `${import.meta.env.BASE_URL}images/Aashu%20Arora.png`,
+    linkedin: "https://www.linkedin.com/in/ashu-arora-jha-106832106/",
+  },
+  {
+    name: "Aditya Ranjan Jha",
+    designation: "HR Recruiter | Talent Acquisition Specialist",
+    focus: ["Analytical Skills", "Attention to Detail", "Actionable Insights"],
+    quote:
+      "I had the opportunity to work with Ritesh Singh during his internship as a Business Analyst at WTF Gyms. He quickly impressed us with his analytical skills, attention to detail, and ability to turn data into clear, actionable insights. His work on member engagement analysis and reporting added real value to our decision-making. Ritesh is proactive, professional, and a quick learner — a strong asset to any team. I highly recommend him.",
+    image: `${import.meta.env.BASE_URL}images/Aditya.png`,
+    linkedin: "https://www.linkedin.com/in/aditya-ranjan-jha-38b764232/",
+  },
+  {
+    name: "Pawan Kumar Singh",
+    designation: "Co-Founder at Cuatro Labs | Ex Operation Manager WTF Gyms, Yes Madam",
+    focus: ["Problem-Solving", "Leadership", "Communication"],
+    quote:
+      "I wholeheartedly recommend Ritesh for any future opportunities. I have had the pleasure of working with Ritesh, and I can confidently attest to his exceptional skills, work ethic, and dedication. Ritesh possesses a unique combination of technical expertise, creativity, and interpersonal skills that make him an invaluable asset to any team. His ability to get the task done has been impressive, and his passion for the company is evident in everything he does. One of Ritesh's greatest strengths is his problem-solving, leadership, communication. He consistently demonstrates a willingness to learn, adapt, and grow, and his positive attitude makes him a joy to work with. I highly recommend Ritesh for any opportunity.",
+    image: `${import.meta.env.BASE_URL}images/Pawan%20Sir.png`,
+    linkedin: "https://www.linkedin.com/in/pawan-kumar-singh-4437a0112/",
+  },
+  {
+    name: "Dheeraj",
+    designation: "System Engineer at TCS",
+    focus: ["Problem-Solving", "Leadership", "Collaboration"],
+    quote:
+      "I have had the pleasure of knowing Er. Ritesh Singh, a highly dedicated and skilled professional. His problem-solving ability, leadership qualities, and collaborative nature make him stand out. He is committed to excellence, continuously learning, and always supporting his team. Truly an asset to any organization.",
+    image: `${import.meta.env.BASE_URL}images/Dheeraj.png`,
+    linkedin: "https://www.linkedin.com/in/draj1002/",
+  },
+  {
+    name: "Rohit Kumar Rai",
+    designation: "AI/LLM Analyst at Innodata",
+    focus: ["Dedication", "Technical Expertise", "Innovation"],
+    quote:
+      "I had the opportunity to work closely with Er. Ritesh Singh, and I was truly impressed by his dedication, technical expertise, and leadership qualities. He has a remarkable ability to approach complex problems with clarity and provide effective solutions. What I admire the most is his collaborative nature and positive attitude, which not only make him a reliable professional but also an inspiring team player. I highly recommend Er. Ritesh Singh to any organization or project that values excellence, innovation, and commitment. He will undoubtedly be a great asset wherever he contributes.",
+    image: `${import.meta.env.BASE_URL}images/Rohit%20Rai.png`,
+    linkedin: "https://www.linkedin.com/in/rohitrai13/",
+  },
+  {
+    name: "Shivam Singh",
+    designation: "Business Development Management Trainee at Asian Paints",
+    focus: ["Excel", "Power BI", "SQL"],
+    quote:
+      "Ritesh is a highly skilled Business Analyst with strong expertise in Excel, Power BI, SQL, and automation tools. His analytical mindset and ability to turn data into actionable insights make him an asset to any organization. A dedicated and collaborative professional.",
+    image: `${import.meta.env.BASE_URL}images/Shivam%20Singh.png`,
+    linkedin: "https://www.linkedin.com/in/shivam-singh-4935a8245/",
+  },
+  {
+    name: "Kaushal Garud",
+    designation: "Senior HR Executive | Talent Acquisition & HR Operations @ Anytime Fitness | Ex. WTF Gyms",
+    focus: ["Analytical Skills", "Data Reporting", "Dashboard Creation"],
+    quote:
+      "It gives me great pleasure to recommend Ritesh Singh, who recently completed his internship as a Data Analyst at WTF Gyms. During his tenure, Ritesh demonstrated exceptional analytical skills, a strong grasp of data tools, and an eagerness to learn and contribute beyond expectations. Ritesh played a vital role in helping us streamline our data reporting processes, visualize key business metrics, and generate actionable insights that supported decision-making across departments. His ability to handle large datasets, create impactful dashboards, and communicate findings clearly made a notable impact on our operations. He consistently showcased professionalism, a problem-solving mindset, and a positive attitude—making him an asset to any team. I am confident that Ritesh will continue to excel in any data-driven role he pursues. I highly recommend him for future opportunities and wish him all the best in his career journey.",
+    image: `${import.meta.env.BASE_URL}images/Kausal%20Garud.png`,
+    linkedin: "https://www.linkedin.com/in/kaushal-garud-768742186/",
   },
 ];
 
@@ -35,6 +83,16 @@ const WordsThatMatterPage = () => {
   const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(0);
   const activeItem = testimonials[activeIndex];
+
+  // Shuffle testimonials once on mount for the "All Testimonials" section
+  const [shuffledTestimonials] = useState(() => {
+    const arr = [...testimonials];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -100,13 +158,18 @@ const WordsThatMatterPage = () => {
               <div className="pointer-events-none absolute -left-20 -bottom-16 w-64 h-64 rounded-full bg-gradient-brand opacity-15 blur-3xl" />
 
               <div className="relative z-10 grid lg:grid-cols-[260px_1fr] gap-4 md:gap-6">
-                <div className="rounded-xl border border-primary/20 bg-background/40 p-3">
+                <a
+                  href={activeItem.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`rounded-xl border border-primary/20 bg-background/40 p-3 block ${activeItem.linkedin ? 'cursor-pointer hover:border-primary/50 transition-colors' : 'pointer-events-none'}`}
+                >
                   <img src={activeItem.image} alt={activeItem.name} className="w-full h-44 md:h-48 object-contain bg-background/60 rounded-lg" />
                   <div className="mt-3">
                     <p className="font-semibold text-foreground">{activeItem.name}</p>
                     <p className="text-xs md:text-sm text-muted-foreground">{activeItem.designation}</p>
                   </div>
-                </div>
+                </a>
 
                 <div className="rounded-xl border border-primary/20 bg-gradient-to-r from-primary/10 to-transparent p-4 md:p-5 flex">
                   <div className="my-auto w-full">
@@ -114,7 +177,7 @@ const WordsThatMatterPage = () => {
                       <Quote className="w-3.5 h-3.5" />
                       Spotlight Feedback
                     </div>
-                    <p className="text-base md:text-xl leading-relaxed text-foreground/95">"{activeItem.quote}"</p>
+                    <p className="text-base md:text-xl leading-relaxed text-foreground/95 text-justify">"{activeItem.quote}"</p>
 
                     <div className="mt-4 flex flex-wrap gap-2">
                       {activeItem.focus.map((topic) => (
@@ -186,63 +249,55 @@ const WordsThatMatterPage = () => {
             </div>
 
             <div className="space-y-5 md:space-y-6">
-              {testimonials.map((item, index) => {
-                const isReversed = index % 2 === 1;
-                return (
-                  <article
-                    key={`${item.name}-manual-${index}`}
-                    className="glass rounded-2xl border border-primary/20 overflow-hidden"
-                  >
-                    <div className={`grid md:grid-cols-[280px_1fr] ${isReversed ? "md:grid-cols-[1fr_280px]" : ""}`}>
-                      {/* Photo Section */}
-                      <div
-                        className={`bg-background/40 border-primary/20 p-4 ${
-                          isReversed ? "md:order-2 md:border-l" : "md:border-r"
-                        } border-b md:border-b-0`}
-                      >
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="w-44 h-44 mx-auto object-contain bg-background/60 rounded-lg"
-                        />
-                        <div className="mt-3 text-center md:text-left">
-                          <p className="font-semibold text-foreground">{item.name}</p>
-                          <p className="text-sm text-muted-foreground">{item.designation}</p>
-                        </div>
+              {shuffledTestimonials.map((item, index) => (
+                <article
+                  key={`${item.name}-manual-${index}`}
+                  className="glass rounded-2xl border border-primary/20 overflow-hidden"
+                >
+                  <div className="grid md:grid-cols-[280px_1fr]">
+                    {/* Photo Section */}
+                    <a
+                      href={item.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`bg-background/40 border-primary/20 p-4 md:border-r border-b md:border-b-0 block ${item.linkedin ? 'cursor-pointer hover:bg-background/60 transition-colors' : 'pointer-events-none'}`}
+                    >
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-44 h-44 mx-auto object-contain bg-background/60 rounded-lg"
+                      />
+                      <div className="mt-3 text-center md:text-left">
+                        <p className="font-semibold text-foreground">{item.name}</p>
+                        <p className="text-sm text-muted-foreground">{item.designation}</p>
                       </div>
+                    </a>
 
-                      {/* Testimonial Section */}
-                      <div
-                        className={`bg-gradient-to-r ${
-                          isReversed ? "md:bg-gradient-to-l" : ""
-                        } from-primary/10 to-transparent p-5 md:p-6 flex ${
-                          isReversed ? "md:order-1" : ""
-                        }`}
-                      >
-                        <div className="my-auto">
-                          <div className="inline-flex items-center gap-2 text-xs font-mono px-3 py-1.5 rounded-full bg-primary/20 text-primary mb-4">
-                            <Quote className="w-3.5 h-3.5" />
-                            Testimonial
-                          </div>
-                          <p className="text-base md:text-xl leading-relaxed text-foreground/95 italic">
-                            "{item.quote}"
-                          </p>
-                          <div className="mt-4 flex flex-wrap gap-2">
-                            {item.focus.map((topic) => (
-                              <span
-                                key={`${item.name}-${topic}`}
-                                className="text-xs font-mono px-3 py-1 rounded-full border border-primary/30 text-muted-foreground"
-                              >
-                                {topic}
-                              </span>
-                            ))}
-                          </div>
+                    {/* Testimonial Section */}
+                    <div className="bg-gradient-to-r from-primary/10 to-transparent p-5 md:p-6 flex">
+                      <div className="my-auto">
+                        <div className="inline-flex items-center gap-2 text-xs font-mono px-3 py-1.5 rounded-full bg-primary/20 text-primary mb-4">
+                          <Quote className="w-3.5 h-3.5" />
+                          Testimonial
+                        </div>
+                        <p className="text-base md:text-xl leading-relaxed text-foreground/95 italic text-justify">
+                          "{item.quote}"
+                        </p>
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {item.focus.map((topic) => (
+                            <span
+                              key={`${item.name}-${topic}`}
+                              className="text-xs font-mono px-3 py-1 rounded-full border border-primary/30 text-muted-foreground"
+                            >
+                              {topic}
+                            </span>
+                          ))}
                         </div>
                       </div>
                     </div>
-                  </article>
-                );
-              })}
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
         </div>
