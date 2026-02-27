@@ -25,8 +25,18 @@ const certifications = [
 
 const CertificationsSection = () => {
   return (
-    <section id="certifications" className="pt-12 pb-10 md:pt-14 md:pb-12 relative">
-      <div className="container mx-auto px-6">
+    <section id="certifications" className="pt-12 pb-10 md:pt-14 md:pb-12 relative overflow-hidden">
+      {/* Floating atoms background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/6 w-2 h-2 rounded-full bg-primary/60 animate-float-slow" style={{ animationDelay: '0s' }} />
+        <div className="absolute top-1/3 right-1/4 w-3 h-3 rounded-full bg-primary/40 animate-float-slower" style={{ animationDelay: '1s' }} />
+        <div className="absolute bottom-1/4 left-1/3 w-2 h-2 rounded-full bg-accent/50 animate-float-slow" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-2/3 right-1/6 w-1.5 h-1.5 rounded-full bg-primary/70 animate-float-slower" style={{ animationDelay: '3s' }} />
+        <div className="absolute bottom-1/3 right-1/3 w-2.5 h-2.5 rounded-full bg-accent/40 animate-float-slow" style={{ animationDelay: '1.5s' }} />
+        <div className="absolute top-1/2 left-1/5 w-1.5 h-1.5 rounded-full bg-primary/50 animate-float-slower" style={{ animationDelay: '2.5s' }} />
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -48,7 +58,8 @@ const CertificationsSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.12 }}
               whileHover={{ y: -6 }}
-              className="glass rounded-xl overflow-hidden"
+              className="glass rounded-xl overflow-hidden animate-float-card"
+              style={{ animationDelay: `${index * 0.5}s` }}
             >
               <img
                 src={cert.image}
