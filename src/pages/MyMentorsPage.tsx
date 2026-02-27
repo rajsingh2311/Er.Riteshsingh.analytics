@@ -1,51 +1,38 @@
-import { ArrowLeft, ArrowRight, ChevronRight, Handshake, Sparkles, Star } from "lucide-react";
-import { useState } from "react";
+import { ArrowLeft, ChevronRight, Linkedin } from "lucide-react";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import ParticleField from "@/components/ParticleField";
 
 const mentors = [
   {
-    name: "Mentor Name",
-    designation: "Business Analytics Mentor",
-    area: "Problem Framing",
-    guidance:
-      "Helped me shape raw business questions into measurable analytics goals and outcome-focused dashboards.",
-    strengths: ["Structured Thinking", "Business Context", "Decision Mapping"],
-    image: `${import.meta.env.BASE_URL}images/Ritesh%20image.JPG`,
+    name: "Anita Nigam",
+    designation: "Co-founder at WTF Gyms and Fitness",
+    image: `${import.meta.env.BASE_URL}images/Anita%20nigam.png`,
+    linkedin: "https://www.linkedin.com/in/anita-nigam/",
   },
   {
-    name: "Mentor Name",
-    designation: "Industry Mentor",
-    area: "Execution Strategy",
-    guidance:
-      "Guided me on execution discipline, stakeholder communication, and translating analytics into action plans.",
-    strengths: ["Execution", "Communication", "Stakeholder Alignment"],
-    image: `${import.meta.env.BASE_URL}images/Ritesh%20image.JPG`,
+    name: "Ashu Arora Jha",
+    designation: "HR Manager | People Strategy | Ex HR Head Yes Madam, WTF GYMs",
+    image: `${import.meta.env.BASE_URL}images/Aashu%20Arora.png`,
+    linkedin: "https://www.linkedin.com/in/ashu-arora-jha/",
   },
   {
-    name: "Mentor Name",
-    designation: "Technical Mentor",
-    area: "Data Craft",
-    guidance:
-      "Improved my storytelling in dashboards, query thinking, and practical automation for business workflows.",
-    strengths: ["Dashboard Storytelling", "SQL Thinking", "Automation"],
-    image: `${import.meta.env.BASE_URL}images/Ritesh%20image.JPG`,
+    name: "Pawan Kumar Singh",
+    designation: "Co-Founder at Cuatro Labs | Ex Operation Manager WTF Gyms, Yes Madam",
+    image: `${import.meta.env.BASE_URL}images/Pawan%20Sir.png`,
+    linkedin: "https://www.linkedin.com/in/pawan-kumar-singh/",
+  },
+  {
+    name: "Dheeraj",
+    designation: "System Engineer at TCS",
+    image: `${import.meta.env.BASE_URL}images/Dheeraj.png`,
+    linkedin: "https://www.linkedin.com/in/dheeraj/",
   },
 ];
 
 const MyMentorsPage = () => {
   const navigate = useNavigate();
-  const [activeIndex, setActiveIndex] = useState(0);
-  const activeMentor = mentors[activeIndex];
-
-  const goNext = () => {
-    setActiveIndex((current) => (current + 1) % mentors.length);
-  };
-
-  const goPrev = () => {
-    setActiveIndex((current) => (current - 1 + mentors.length) % mentors.length);
-  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -83,103 +70,48 @@ const MyMentorsPage = () => {
           </button>
 
           <div className="text-center mb-10 md:mb-12">
-            <span className="text-primary font-mono text-sm tracking-wider uppercase">Guidance</span>
+            <span className="text-primary font-mono text-sm tracking-wider uppercase">Gratitude</span>
             <h1 className="text-3xl md:text-5xl font-bold mt-3">
               My <span className="text-gradient">Mentors</span>
             </h1>
             <p className="text-sm md:text-base text-muted-foreground mt-3 max-w-2xl mx-auto">
               People who shaped my approach to analytics, delivery, and professional growth.
             </p>
-
-            <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
-              {["Mentorship Impact", "Career Guidance", "Execution Discipline"].map((item) => (
-                <span
-                  key={item}
-                  className="inline-flex items-center gap-1.5 text-xs font-mono px-3 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/20"
-                >
-                  <Star className="w-3.5 h-3.5" />
-                  {item}
-                </span>
-              ))}
-            </div>
           </div>
 
-          <div className="max-w-6xl mx-auto">
-            <div className="glass rounded-2xl border border-primary/20 p-4 md:p-5 relative overflow-hidden">
-              <div className="pointer-events-none absolute -right-16 -top-16 w-64 h-64 rounded-full bg-gradient-brand opacity-20 blur-3xl" />
-
-              <div className="relative z-10 grid lg:grid-cols-[260px_1fr] gap-4 md:gap-6">
-                  <div className="rounded-xl border border-primary/20 bg-background/40 p-3">
-                    <img src={activeMentor.image} alt={activeMentor.name} className="w-full h-56 object-cover rounded-lg" />
-                    <div className="mt-3">
-                      <p className="font-semibold text-foreground">{activeMentor.name}</p>
-                      <p className="text-xs md:text-sm text-muted-foreground">{activeMentor.designation}</p>
-                      <span className="inline-flex items-center gap-1.5 mt-2 text-[11px] font-mono px-2 py-1 rounded-full bg-primary/10 text-primary">
-                        <Sparkles className="w-3 h-3" />
-                        {activeMentor.area}
-                      </span>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 max-w-4xl mx-auto">
+            {mentors.map((mentor, index) => (
+              <motion.div
+                key={mentor.name}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -8, scale: 1.02 }}
+                className="glass rounded-xl overflow-hidden group"
+              >
+                <a
+                  href={mentor.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  <div className="aspect-square overflow-hidden relative">
+                    <img
+                      src={mentor.image}
+                      alt={mentor.name}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                      <Linkedin className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
                   </div>
-
-                  <div className="rounded-xl border border-primary/20 bg-gradient-to-r from-primary/10 to-transparent p-5 md:p-7 flex">
-                    <div className="my-auto w-full">
-                      <div className="inline-flex items-center gap-2 text-xs font-mono px-2.5 py-1 rounded-full bg-primary/15 text-primary mb-3">
-                        <Handshake className="w-3.5 h-3.5" />
-                        Mentor Guidance
-                      </div>
-                      <p className="text-lg md:text-2xl leading-relaxed text-foreground/95">{activeMentor.guidance}</p>
-
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {activeMentor.strengths.map((topic) => (
-                          <span
-                            key={topic}
-                            className="text-[11px] md:text-xs font-mono px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground"
-                          >
-                            {topic}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+                  <div className="p-4 text-center border-t border-primary/20">
+                    <h3 className="text-base md:text-lg font-semibold text-foreground">{mentor.name}</h3>
+                    <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{mentor.designation}</p>
                   </div>
-                </div>
-
-              <div className="relative z-10 mt-4 md:mt-5 flex flex-wrap items-center justify-between gap-3">
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={goPrev}
-                    className="w-9 h-9 rounded-full border border-primary/30 bg-background/60 flex items-center justify-center text-primary"
-                  >
-                    <ArrowLeft className="w-4 h-4" />
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={goNext}
-                    className="w-9 h-9 rounded-full border border-primary/30 bg-background/60 flex items-center justify-center text-primary"
-                  >
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
-
-                <div className="flex items-center gap-2 overflow-x-auto max-w-full">
-                  {mentors.map((mentor, index) => (
-                    <button
-                      key={`${mentor.name}-thumb-${index}`}
-                      onClick={() => setActiveIndex(index)}
-                      className={`flex items-center gap-2 rounded-full px-2.5 py-1.5 border transition-all whitespace-nowrap ${
-                        activeIndex === index
-                          ? "border-primary bg-primary/10"
-                          : "border-border bg-background/40 hover:border-primary/40"
-                      }`}
-                    >
-                      <img src={mentor.image} alt={mentor.name} className="w-6 h-6 rounded-full object-cover" />
-                      <span className="text-xs font-mono text-foreground/90">{mentor.designation}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
+                </a>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

@@ -1,10 +1,7 @@
 import { motion } from "framer-motion";
 import { Mail, Send, Linkedin, Github } from "lucide-react";
-import { useState } from "react";
 
 const ContactSection = () => {
-  const [focused, setFocused] = useState("");
-
   return (
     <section id="contact" className="pt-12 pb-20 md:pt-14 md:pb-24 relative">
       <div className="container mx-auto px-6">
@@ -29,7 +26,7 @@ const ContactSection = () => {
           >
             <div className="flex justify-center gap-4 mb-8">
               {[
-                { icon: Mail, label: "Email", href: "mailto:riteshsingh.jsb2426@jaipuria.edu.in" },
+                { icon: Mail, label: "Email", href: "mailto:riteshsingh.analytics@gmail.com?subject=Hello%20from%20your%20Portfolio" },
                 { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/riteshsingh-analytics" },
                 { icon: Github, label: "GitHub", href: "https://github.com/rajsingh2311" },
               ].map((social) => (
@@ -50,41 +47,22 @@ const ContactSection = () => {
               <p>📍 Sector 62, Noida, UP, India</p>
             </div>
 
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-              {[
-                { name: "name", label: "Name", type: "text" },
-                { name: "email", label: "Email", type: "email" },
-              ].map((field) => (
-                <div key={field.name} className="relative">
-                  <input
-                    type={field.type}
-                    placeholder={field.label}
-                    onFocus={() => setFocused(field.name)}
-                    onBlur={() => setFocused("")}
-                    className={`w-full px-4 py-3 rounded-lg bg-secondary border-2 transition-all duration-300 text-foreground placeholder:text-muted-foreground outline-none ${
-                      focused === field.name ? "border-primary glow-primary" : "border-transparent"
-                    }`}
-                  />
-                </div>
-              ))}
-              <textarea
-                placeholder="Your message..."
-                rows={4}
-                onFocus={() => setFocused("message")}
-                onBlur={() => setFocused("")}
-                className={`w-full px-4 py-3 rounded-lg bg-secondary border-2 transition-all duration-300 text-foreground placeholder:text-muted-foreground outline-none resize-none ${
-                  focused === "message" ? "border-primary glow-primary" : "border-transparent"
-                }`}
-              />
-              <motion.button
+            <div className="text-center">
+              <p className="text-muted-foreground mb-6">
+                Have a question or want to work together? Fill out the form below!
+              </p>
+              <motion.a
+                href="https://forms.gle/syRejRzWydawhLbs9"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full py-3 rounded-lg bg-gradient-brand text-primary-foreground font-semibold flex items-center justify-center gap-2 glow-primary"
+                className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-lg bg-gradient-brand text-primary-foreground font-semibold glow-primary"
               >
                 <Send className="w-4 h-4" />
                 Send Message
-              </motion.button>
-            </form>
+              </motion.a>
+            </div>
           </motion.div>
         </div>
       </div>
