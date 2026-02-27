@@ -122,6 +122,10 @@ const HeroSection = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2 }}
             className="inline-block animate-float"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('about-detailed')?.scrollIntoView({ behavior: 'smooth' });
+            }}
           >
             <ArrowDown className="w-6 h-6 text-muted-foreground" />
           </motion.a>
