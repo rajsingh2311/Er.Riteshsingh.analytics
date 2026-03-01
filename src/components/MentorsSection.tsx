@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Linkedin } from "lucide-react";
+import { useState } from "react";
 
-const mentors = [
+const mentorsData = [
   {
     name: "Anita Nigam",
     designation: "Co-founder at WTF Gyms and Fitness",
@@ -27,10 +28,32 @@ const mentors = [
     image: `${import.meta.env.BASE_URL}images/Dheeraj.png`,
     linkedin: "https://www.linkedin.com/in/dheeraj/",
   },
+  {
+    name: "Kaushal Garud",
+    designation: "Senior HR Executive | Talent Acquisition & HR Operations @ Anytime Fitness | Ex. WTF Gyms",
+    image: `${import.meta.env.BASE_URL}images/Kausal%20Garud.png`,
+    linkedin: "https://www.linkedin.com/in/kaushal-garud-768742186/",
+  },
+  {
+    name: "Robin Kumar",
+    designation: "Senior Manager Operations at Seth Anandram Jaipuria Group of Schools",
+    image: `${import.meta.env.BASE_URL}images/Robin%20Sir.png`,
+    linkedin: "https://www.linkedin.com/in/robin-kumar-67b2a4162/",
+  },
 ];
 
 const MentorsSection = () => {
   const navigate = useNavigate();
+
+  // Shuffle mentors once on mount
+  const [mentors] = useState(() => {
+    const arr = [...mentorsData];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  });
 
   return (
     <section id="mentors" className="py-24 pt-20 md:pt-24 relative overflow-hidden">

@@ -1,38 +1,60 @@
-import { ArrowLeft, ChevronRight, Linkedin } from "lucide-react";
+import { ArrowLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import ParticleField from "@/components/ParticleField";
 
-const mentors = [
+const mentorsData = [
   {
     name: "Anita Nigam",
     designation: "Co-founder at WTF Gyms and Fitness",
     image: `${import.meta.env.BASE_URL}images/Anita%20nigam.png`,
-    linkedin: "https://www.linkedin.com/in/anita-nigam/",
   },
   {
     name: "Ashu Arora Jha",
     designation: "HR Manager | People Strategy | Ex HR Head Yes Madam, WTF GYMs",
     image: `${import.meta.env.BASE_URL}images/Aashu%20Arora.png`,
-    linkedin: "https://www.linkedin.com/in/ashu-arora-jha/",
   },
   {
     name: "Pawan Kumar Singh",
     designation: "Co-Founder at Cuatro Labs | Ex Operation Manager WTF Gyms, Yes Madam",
     image: `${import.meta.env.BASE_URL}images/Pawan%20Sir.png`,
-    linkedin: "https://www.linkedin.com/in/pawan-kumar-singh/",
   },
   {
     name: "Dheeraj",
     designation: "System Engineer at TCS",
     image: `${import.meta.env.BASE_URL}images/Dheeraj.png`,
-    linkedin: "https://www.linkedin.com/in/dheeraj/",
+  },
+  {
+    name: "Kaushal Garud",
+    designation: "Senior HR Executive | Talent Acquisition & HR Operations @ Anytime Fitness | Ex. WTF Gyms",
+    image: `${import.meta.env.BASE_URL}images/Kausal%20Garud.png`,
+  },
+  {
+    name: "Robin Kumar",
+    designation: "Senior Manager Operations at Seth Anandram Jaipuria Group of Schools",
+    image: `${import.meta.env.BASE_URL}images/Robin%20Sir.png`,
   },
 ];
 
 const MyMentorsPage = () => {
   const navigate = useNavigate();
+
+  // Shuffle mentors once on mount
+  const [mentors] = useState(() => {
+    const arr = [...mentorsData];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  });
+
+  // Scroll to top when page loads
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -59,7 +81,7 @@ const MyMentorsPage = () => {
         </div>
       </div>
 
-      <section className="relative pt-32 md:pt-36 pb-12 md:pb-16">
+      <section className="relative pt-24 md:pt-28 pb-12 md:pb-16">
         <div className="container mx-auto px-4 md:px-6">
           <button
             onClick={() => navigate("/", { state: { scrollTo: "about-detailed" } })}
@@ -79,7 +101,7 @@ const MyMentorsPage = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-4xl mx-auto">
             {mentors.map((mentor, index) => (
               <motion.div
                 key={mentor.name}
@@ -89,27 +111,17 @@ const MyMentorsPage = () => {
                 whileHover={{ y: -8, scale: 1.02 }}
                 className="glass rounded-xl overflow-hidden group"
               >
-                <a
-                  href={mentor.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block"
-                >
-                  <div className="aspect-square overflow-hidden relative">
-                    <img
-                      src={mentor.image}
-                      alt={mentor.name}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
-                      <Linkedin className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </div>
-                  </div>
-                  <div className="p-4 text-center border-t border-primary/20">
-                    <h3 className="text-base md:text-lg font-semibold text-foreground">{mentor.name}</h3>
-                    <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{mentor.designation}</p>
-                  </div>
-                </a>
+                <div className="aspect-square overflow-hidden">
+                  <img
+                    src={mentor.image}
+                    alt={mentor.name}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                </div>
+                <div className="p-3 text-center border-t border-primary/20">
+                  <h3 className="text-sm md:text-base font-semibold text-foreground">{mentor.name}</h3>
+                  <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{mentor.designation}</p>
+                </div>
               </motion.div>
             ))}
           </div>

@@ -24,7 +24,7 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({ href, imgSrc, label = "View",
     );
 
   return (
-    <div className="relative inline-block group">
+    <span className="relative inline-block group">
       <a
         href={href}
         target="_blank"
@@ -35,7 +35,7 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({ href, imgSrc, label = "View",
         {label}
       </a>
 
-      <div
+      <span
         className={`preview pointer-events-none group-hover:pointer-events-auto group-focus-within:pointer-events-auto absolute bottom-full left-1/2 -translate-x-1/2 mb-3 ${sizeClass} max-h-64 rounded-xl overflow-visible opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:translate-y-0 transition-all duration-300 ease-out z-50`}
         aria-hidden="true"
       >
@@ -46,8 +46,8 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({ href, imgSrc, label = "View",
           className="inline-block cursor-pointer"
           aria-label={`Open ${href} in new tab`}
         >
-          <div className="inline-block p-1 rounded-xl bg-gradient-to-r from-indigo-500 via-teal-400 to-cyan-300">
-            <div className="inline-block max-w-full max-h-64 bg-gradient-to-b from-white/3 to-black/10 border border-white/5 glass rounded-lg overflow-hidden">
+          <span className="inline-block p-1 rounded-xl bg-gradient-to-r from-indigo-500 via-teal-400 to-cyan-300">
+            <span className="inline-block max-w-full max-h-64 bg-gradient-to-b from-white/3 to-black/10 border border-white/5 glass rounded-lg overflow-hidden">
               <img
                 src={imgSrc}
                 alt={`Preview of ${href}`}
@@ -59,11 +59,11 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({ href, imgSrc, label = "View",
                   img.src = fallbackSvg;
                 }}
               />
-            </div>
-          </div>
+            </span>
+          </span>
         </a>
-      </div>
-    </div>
+      </span>
+    </span>
   );
 };
 

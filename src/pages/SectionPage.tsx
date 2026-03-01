@@ -379,7 +379,7 @@ const EducationContent = () => {
             </div>
             <div>
               <h3 className="text-xl font-bold">{e.degree}</h3>
-              <p className="text-secondary-foreground">
+              <span className="text-secondary-foreground block">
                 {e.school === "Jaipuria School of Business" ? (
                   <LinkPreview
                     href="https://jsb.jaipuria.edu.in/overview-jsbpgdm/"
@@ -390,7 +390,7 @@ const EducationContent = () => {
                 ) : (
                   e.school
                 )}
-              </p>
+              </span>
               <p className="text-xs font-mono text-primary">{e.period}</p>
             </div>
           </div>

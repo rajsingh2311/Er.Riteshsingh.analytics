@@ -77,6 +77,15 @@ const testimonials = [
     image: `${import.meta.env.BASE_URL}images/Kausal%20Garud.png`,
     linkedin: "https://www.linkedin.com/in/kaushal-garud-768742186/",
   },
+  {
+    name: "Robin Kumar",
+    designation: "Senior Manager Operations at Seth Anandram Jaipuria Group of Schools",
+    focus: ["Analytical Skills", "Data Management", "Decision Support"],
+    quote:
+      "I have worked alongside Er. Ritesh Singh at Seth Anandram Jaipuria Group of Educational Institutions. Although I have not directly managed him, I have observed his strong analytical skills and structured approach to data management and reporting. Ritesh is detail-oriented, reliable, and capable of converting complex data into meaningful insights that support informed decision-making. He is professional, supportive, and committed to delivering quality work. I wish him continued success in his career.",
+    image: `${import.meta.env.BASE_URL}images/Robin%20Sir.png`,
+    linkedin: "https://www.linkedin.com/in/robin-kumar-67b2a4162/",
+  },
 ];
 
 const WordsThatMatterPage = () => {
@@ -93,6 +102,11 @@ const WordsThatMatterPage = () => {
     }
     return arr;
   });
+
+  // Scroll to top when page loads
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
