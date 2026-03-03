@@ -36,6 +36,16 @@ const mentorsData = [
     designation: "Senior Manager Operations at Seth Anandram Jaipuria Group of Schools",
     image: `${import.meta.env.BASE_URL}images/Robin%20Sir.png`,
   },
+  {
+    name: "Dr. Aman Kumar",
+    designation: "Associate Professor, Department Of Chemical Engineering, Chaudhary Charan Singh University Meerut",
+    image: `${import.meta.env.BASE_URL}images/Aman%20Sir.jpeg`,
+  },
+  {
+    name: "Dr. Gaurav Singh Pundir",
+    designation: "Head of Department, Department of Chemical Engineering, Chaudhary Charan Singh University Meerut",
+    image: `${import.meta.env.BASE_URL}images/Gaurav%20Sir.jpeg`,
+  },
 ];
 
 const MyMentorsPage = () => {
@@ -109,7 +119,7 @@ const MyMentorsPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -8, scale: 1.02 }}
-                className="glass rounded-xl overflow-hidden group"
+                className="glass rounded-xl overflow-hidden group border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.8)] hover:border-white hover:bg-primary/10 hover:scale-[1.5] hover:z-50 transition-all duration-300"
               >
                 <div className="aspect-square overflow-hidden">
                   <img
@@ -120,7 +130,7 @@ const MyMentorsPage = () => {
                 </div>
                 <div className="p-3 text-center border-t border-primary/20">
                   <h3 className="text-sm md:text-base font-semibold text-foreground">{mentor.name}</h3>
-                  <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{mentor.designation}</p>
+                  <p className="text-xs text-muted-foreground mt-1">{mentor.designation}</p>
                 </div>
               </motion.div>
             ))}

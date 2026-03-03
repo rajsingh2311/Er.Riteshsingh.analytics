@@ -87,7 +87,7 @@ const tabs: TabItem[] = [
     preview: {
       type: "timeline",
       items: [
-        { title: "PGDM (Business Analytics)", sub: "Jaipuria School of Business", year: "2024–2026" },
+        { title: "PGDM (Business Analytics & Operation)", sub: "Jaipuria School of Business", year: "2024–2026" },
         { title: "B.Tech (Chemical Engineering)", sub: "SCRIET, CCSU Meerut", year: "2019–2023" },
       ],
     },
@@ -216,7 +216,7 @@ const ProfileTabs = () => {
               transition={{ duration: 0.5, delay: i * 0.08 }}
               whileHover={{ y: -8, scale: 1.02 }}
               onClick={() => navigate(`/section/${tab.id}`)}
-              className="glass rounded-xl overflow-hidden cursor-pointer group"
+              className="glass rounded-xl overflow-hidden cursor-pointer group border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.8)] hover:border-white hover:bg-primary/10 hover:scale-[1.15] hover:z-50 transition-all duration-300"
             >
               {/* Card header */}
               <div className="px-5 pt-5 pb-3 flex items-center gap-3">

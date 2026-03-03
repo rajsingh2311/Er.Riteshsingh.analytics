@@ -22,7 +22,7 @@ const ContactSection = () => {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="glass rounded-2xl p-8"
+            className="glass rounded-2xl p-8 border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.8)] hover:border-white hover:bg-primary/10 hover:scale-[1.05] hover:z-50 transition-all duration-300"
           >
             <div className="flex justify-center gap-4 mb-8">
               {[

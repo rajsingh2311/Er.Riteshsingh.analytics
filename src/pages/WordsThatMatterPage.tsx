@@ -167,7 +167,7 @@ const WordsThatMatterPage = () => {
           </div>
 
           <div className="max-w-6xl mx-auto">
-            <div className="glass rounded-2xl border border-primary/20 p-3 md:p-4 relative overflow-hidden">
+            <div className="glass rounded-2xl border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.8)] hover:border-white hover:bg-primary/10 hover:scale-[1.05] hover:z-50 p-3 md:p-4 relative overflow-hidden transition-all duration-300">
               <div className="pointer-events-none absolute -right-16 -top-16 w-64 h-64 rounded-full bg-gradient-brand opacity-20 blur-3xl" />
               <div className="pointer-events-none absolute -left-20 -bottom-16 w-64 h-64 rounded-full bg-gradient-brand opacity-15 blur-3xl" />
 
@@ -271,7 +271,7 @@ const WordsThatMatterPage = () => {
               {shuffledTestimonials.map((item, index) => (
                 <article
                   key={`${item.name}-manual-${index}`}
-                  className="glass rounded-2xl border border-primary/20 overflow-hidden"
+                  className="glass rounded-2xl border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.8)] hover:border-white hover:bg-primary/10 hover:scale-[1.15] hover:z-50 overflow-hidden transition-all duration-300"
                 >
                   <div className="grid md:grid-cols-[280px_1fr]">
                     {/* Photo Section */}

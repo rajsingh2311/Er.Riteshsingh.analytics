@@ -27,14 +27,14 @@ const AboutSection = () => {
             transition={{ delay: 0.05 }}
             className="mb-4 md:mb-6"
           >
-            <div className="glass rounded-xl p-3 md:p-4 border border-primary/20">
+            <div className="glass rounded-xl p-3 md:p-4 border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.8)] hover:border-white hover:bg-primary/10 hover:scale-[1.05] hover:z-50 transition-all duration-300">
               <div className="grid sm:grid-cols-2 gap-3">
                 <motion.button
                   type="button"
                   onClick={() => navigate("/words-that-matter")}
                   whileHover={{ y: -2, scale: 1.01 }}
                   whileTap={{ scale: 0.98 }}
-                  className="group rounded-lg border border-primary/30 bg-gradient-to-r from-primary/10 to-transparent px-4 py-3 flex items-center justify-between"
+                  className="group rounded-lg border border-primary/30 bg-gradient-to-r from-primary/10 to-transparent px-4 py-3 flex items-center justify-between hover:shadow-[0_0_40px_rgba(139,92,246,0.8)] hover:border-white hover:bg-primary/10 hover:scale-[1.05] hover:z-50 transition-all duration-300"
                 >
                   <span className="flex items-center gap-2 text-sm font-semibold text-primary">
                     <Quote className="w-4 h-4" />
@@ -48,7 +48,7 @@ const AboutSection = () => {
                   onClick={() => navigate("/my-mentors")}
                   whileHover={{ y: -2, scale: 1.01 }}
                   whileTap={{ scale: 0.98 }}
-                  className="group rounded-lg border border-primary/30 bg-gradient-to-r from-primary/10 to-transparent px-4 py-3 flex items-center justify-between"
+                  className="group rounded-lg border border-primary/30 bg-gradient-to-r from-primary/10 to-transparent px-4 py-3 flex items-center justify-between hover:shadow-[0_0_40px_rgba(139,92,246,0.8)] hover:border-white hover:bg-primary/10 hover:scale-[1.05] hover:z-50 transition-all duration-300"
                 >
                   <span className="flex items-center gap-2 text-sm font-semibold text-primary">
                     <Handshake className="w-4 h-4" />

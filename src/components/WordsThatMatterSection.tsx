@@ -65,9 +65,9 @@ const WordsThatMatterSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="glass rounded-xl overflow-hidden group animate-float-card"
-              style={{ animationDelay: `${index * 0.5}s` }}
+              whileHover={item.linkedin && item.linkedin !== '#' ? { y: -8, scale: 1.02 } : {}}
+              className={`glass rounded-xl overflow-hidden group animate-float-card border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.3)]${item.linkedin && item.linkedin !== '#' ? ' hover:shadow-[0_0_40px_rgba(139,92,246,0.8)] hover:border-white hover:bg-primary/10 hover:scale-[1.5] hover:z-50' : ''} transition-all duration-300`}
+              {...(item.linkedin && item.linkedin !== '#' ? { onClick: () => window.open(item.linkedin, '_blank'), role: 'button', tabIndex: 0 } : {})}
             >
               <a
                 href={item.linkedin}

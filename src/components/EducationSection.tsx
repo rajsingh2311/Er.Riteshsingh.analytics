@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 const education = [
   {
-    degree: "PGDM (Business Analytics) — Pursuing",
-    school: "Jaipuria School of Business · CGPA: 6.85",
+    degree: "PGDM (Business Analytics & Operation) — Pursuing",
+    school: "Jaipuria School of Business · CGPA: 7.03",
     period: "2024 — 2026",
     desc: "Focus on Business Analytics, CRISP‑DM methodology, high-dimensional data visualization, and predictive analytics.",
   },
@@ -67,7 +67,8 @@ const EducationSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="glass rounded-xl p-6 flex gap-4 cursor-pointer hover:border-primary/50 transition-all duration-300 hover:shadow-lg"
+              whileHover={typeof handleEducationClick === 'function' ? { y: -4 } : {}}
+              className={`glass rounded-xl p-6 flex gap-4${typeof handleEducationClick === 'function' ? ' cursor-pointer border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.8)] hover:border-white hover:bg-primary/10 hover:scale-[1.15] hover:z-50' : ''} transition-all duration-300`}
               onClick={() => handleEducationClick(item.degree)}
               role="button"
               tabIndex={0}

@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Briefcase, ChevronRight, Camera, Trophy, Heart, X, Sparkles, Calendar, MapPin } from "lucide-react";
+import { Briefcase, ChevronRight, ChevronUp, ChevronDown, Camera, Trophy, Heart, X, Sparkles, Calendar, MapPin } from "lucide-react";
 import { useState } from "react";
 
 const timeline = [
@@ -77,8 +77,8 @@ const timeline = [
     memories: {
       highlights: [
         "Founded and grew a thriving analytics community",
-        "Organized 10+ hands-on Power BI workshops",
-        "Mentored 50+ students on data projects",
+        "Organized 4-5 hands-on Power BI workshops",
+        "Mentored 20+ students on data projects",
         "Conducted industry case study sessions",
         "Built peer-to-peer learning culture",
       ],
@@ -154,6 +154,18 @@ const timeline = [
 const ExperienceSection = () => {
   const [selectedJob, setSelectedJob] = useState<number | null>(null);
 
+  const scrollToExperience = (index: number) => {
+    const element = document.getElementById(`experience-${index}`);
+    if (element) {
+      const rect = element.getBoundingClientRect();
+      const scrollTop = window.scrollY + rect.top - (window.innerHeight - rect.height) / 2;
+      window.scrollTo({ 
+        top: Math.max(0, scrollTop), 
+        behavior: 'smooth' 
+      });
+    }
+  };
+
   const openMemories = (index: number) => {
     setSelectedJob(index);
     document.body.style.overflow = 'hidden';
@@ -181,7 +193,7 @@ const ExperienceSection = () => {
 
         <div className="max-w-3xl mx-auto relative">
           {/* Timeline line */}
-          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-border md:-translate-x-px" />
+          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-primary/60 md:-translate-x-px" />
 
           {timeline.map((item, i) => (
             <motion.div
@@ -199,9 +211,22 @@ const ExperienceSection = () => {
 
               {/* Card */}
               <div className={`ml-14 md:ml-0 md:w-[calc(50%-2rem)] ${i % 2 === 0 ? "md:pr-8" : "md:pl-8"}`}>
+                {/* Up Arrow - only if previous experience exists */}
+                {i > 0 && (
+                  <div className="flex justify-center mb-3">
+                    <button
+                      onClick={(e) => { e.stopPropagation(); scrollToExperience(i - 1); }}
+                      className="p-2 rounded-full bg-primary/20 hover:bg-primary/40 text-primary/60 hover:text-primary transition-all duration-300 group"
+                      aria-label="Previous experience"
+                    >
+                      <ChevronUp className="w-5 h-5 group-hover:-translate-y-0.5 transition-transform" />
+                    </button>
+                  </div>
+                )}
                 <motion.div
-                  whileHover={{ y: -4 }}
-                  className="glass rounded-2xl p-8 relative overflow-hidden cursor-pointer group"
+                  id={`experience-${i}`}
+                  whileHover={typeof openMemories === 'function' ? { y: -4 } : {}}
+                  className={`glass rounded-2xl p-8 relative overflow-hidden${typeof openMemories === 'function' ? ' cursor-pointer group border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.8)] hover:border-white hover:bg-primary/10 hover:scale-[1.1] hover:z-50' : ''} transition-all duration-300`}
                   onClick={() => openMemories(i)}
                 >
                   <div className="flex items-center gap-2 mb-4">
@@ -245,6 +270,18 @@ const ExperienceSection = () => {
                     <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform ml-auto" />
                   </div>
                 </motion.div>
+                {/* Down Arrow - only if next experience exists */}
+                {i < timeline.length - 1 && (
+                  <div className="flex justify-center mt-3">
+                    <button
+                      onClick={(e) => { e.stopPropagation(); scrollToExperience(i + 1); }}
+                      className="p-2 rounded-full bg-primary/20 hover:bg-primary/40 text-primary/60 hover:text-primary transition-all duration-300 group"
+                      aria-label="Next experience"
+                    >
+                      <ChevronDown className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" />
+                    </button>
+                  </div>
+                )}
               </div>
             </motion.div>
           ))}

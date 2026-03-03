@@ -1,10 +1,11 @@
 import { useParams, useNavigate } from "react-router-dom";
 import React from "react";
 import { motion } from "framer-motion";
-import { Star, Briefcase, GraduationCap, Award, FolderOpen, Heart, Zap, MessageSquare, Trophy, MapPin, Calendar, User, ChevronRight } from "lucide-react";
+import { Star, Briefcase, GraduationCap, Award, FolderOpen, Heart, Zap, MessageSquare, Trophy, MapPin, Calendar, User, ChevronRight, X } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import ParticleField from "@/components/ParticleField";
 import LinkPreview from "@/components/ui/link-preview";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 
 import certGoogle from "@/assets/cert-google.jpg";
 import certAws from "@/assets/cert-aws.jpg";
@@ -255,7 +256,7 @@ const FeaturedContent = () => (
         tags: ["Excel", "RFM", "Segmentation", "Dashboarding"],
       },
     ].map((item, i) => (
-      <motion.div key={i} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.2 }} className="glass rounded-2xl overflow-hidden">
+      <motion.div key={i} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.2 }} className="glass rounded-2xl overflow-hidden border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.8)] hover:border-white hover:bg-primary/10 hover:scale-[1.1] hover:z-50 transition-all duration-300">
         <img src={item.image} alt={item.title} className="w-full h-64 md:h-80 object-cover" />
         <div className="p-6">
           <h3 className="text-2xl font-bold mb-2">{item.title}</h3>
@@ -299,7 +300,7 @@ const ExperienceContent = () => {
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       {experiences.map((exp, i) => (
-        <motion.div key={i} initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.15 }} className="glass rounded-xl p-6 relative overflow-hidden group">
+        <motion.div key={i} initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.15 }} className="glass rounded-xl p-6 relative overflow-hidden group border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.8)] hover:border-white hover:bg-primary/10 hover:scale-[1.1] hover:z-50 transition-all duration-300">
           <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-brand" />
           <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-3">
             <div>
@@ -326,18 +327,18 @@ const EducationContent = () => {
 
   const edu = [
     {
-      degree: "PGDM (Business Analytics) — Pursuing",
+      degree: "PGDM (Business Analytics & Operation) — Pursuing",
       school: "Jaipuria School of Business",
-      period: "2024 — 2026 · CGPA: 6.85",
+      period: "2024 — 2026 · CGPA: 7.03",
       desc: "Focus: Business Analytics, CRISP‑DM methodology, high-dimensional data visualization, predictive analytics.",
-      activities: ["Business analytics coursework", "Dashboarding & reporting", "Statistics for decision making"],
+      activities: ["Student Co-Ordinator Business Analytics Club", "Organized Power BI workshops & hackathons", "Mentored students on analytics projects & dashboard design", "Winner Talent Hunt 2024 (Poetry Competition)"],
     },
     {
       degree: "B.Tech (Chemical Engineering)",
       school: "SCRIET, CCSU Meerut",
       period: "2019 — 2023 · CGPA: 6.74",
       desc: "Exposure to SAP ERP systems, data processing (structured & semi‑structured), and applied research.",
-      activities: ["Applied research projects", "Data processing & reporting"],
+      activities: ["Student Coordinator — IWRS (Organized seminars & awareness activities)", "Student Coordinator — Unnat Bharat Abhiyan (Organized awareness programs)"],
     },
     {
       degree: "12th (Physics, Chemistry, Math)",
@@ -370,7 +371,7 @@ const EducationContent = () => {
               navigate("/pgdm");
             }
           }}
-          className={`glass rounded-xl p-6 ${e.school === "Jaipuria School of Business" ? "cursor-pointer hover:shadow-lg hover:shadow-primary/20 transition-all" : ""}`}
+          className={`glass rounded-xl p-6${e.school === "Jaipuria School of Business" ? ' border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.8)] hover:border-white hover:bg-primary/10 hover:scale-[1.1] hover:z-50 cursor-pointer' : ''} transition-all duration-300`}
           whileHover={e.school === "Jaipuria School of Business" ? { y: -4 } : {}}
         >
           <div className="flex items-start gap-4 mb-4">
@@ -407,31 +408,92 @@ const EducationContent = () => {
 };
 
 const CertificationsContent = () => {
+  const [selectedImage, setSelectedImage] = React.useState<string | null>(null);
   const certs = [
-    { image: certGoogle, title: "Google AI Essentials", issuer: "Coursera", date: "Completed", id: "—" },
-    { image: certPowerbi, title: "Microsoft Office Specialist — Excel Associate", issuer: "Microsoft", date: "2019", id: "—" },
-    { image: certAws, title: "Data Analytics", issuer: "PW Skills", date: "Pursuing", id: "—" },
-    { image: certAws, title: "Strategic Management", issuer: "Swayam — IIM Bangalore", date: "Pursuing", id: "—" },
-    { image: certGoogle, title: "AI Chat Prompts for Business Analysis", issuer: "LinkedIn Learning", date: "Completed", id: "—" },
-    { image: certGoogle, title: "What Is Generative AI?", issuer: "Online course", date: "Completed", id: "—" },
+    { title: "Strategic Management", issuer: "Indian Institute of Management Bangalore", date: "Jan 2026", id: "—", link: "", image: `${import.meta.env.BASE_URL}images/certification/Strategic%20Management.png` },
+    { title: "Lean Six Sigma Green Belt Certification", issuer: "Grant Thornton Bharat LLP", date: "Nov 2025", id: "8cc214ce5219", link: "https://leansixsigma.gtbharat.in/verify/8cc214ce5219?s=true", image: `${import.meta.env.BASE_URL}images/certification/Six%20Sigma.png` },
+    { title: "AI Chat Prompts for Business Analysis", issuer: "LinkedIn Learning", date: "Oct 2025", id: "—", link: "https://www.linkedin.com/learning/certificates/051d700d947fe8919ecc5113dbecd87181a45c457649bb434000d8d10b7aac40?u=295910228", image: `${import.meta.env.BASE_URL}images/certification/AI%20Chat%20Prompt%20For%20Business%20Analysis.png` },
+    { title: "What Is Generative AI?", issuer: "LinkedIn Learning", date: "Sep 2025", id: "28d95f99605f52e45b24279b802dbcaca2b14cee367f841c242de288f00ef29a", link: "https://www.linkedin.com/learning/certificates/28d95f99605f52e45b24279b802dbcaca2b14cee367f841c242de288f00ef29a?u=295910228", image: `${import.meta.env.BASE_URL}images/certification/What%20Is%20Generative%20AI.png` },
+    { title: "The Development and Implementation of International Business", issuer: "Management Development Institute of Singapore", date: "Mar 2025", id: "—", link: "", image: `${import.meta.env.BASE_URL}images/certification/MDIS%20Singapur.png` },
+    { title: "Microsoft Office Specialist: Microsoft Excel Expert", issuer: "Microsoft", date: "Mar 2025", id: "UcLk-sFpA", link: "", image: `${import.meta.env.BASE_URL}images/certification/Excel%202019%20Associate.png` },
+    { title: "Google AI Essentials", issuer: "Google", date: "Jan 2025", id: "B0SW463I0XDY", link: "https://www.linkedin.com/in/riteshsingh-analytics/details/certifications/1750708039171/single-media-viewer/?profileId=ACoAAEamlyABDk_G7aLuwqmnQBmZM-vzr1jBoHc", image: `${import.meta.env.BASE_URL}images/certification/Google%20AI%20Assential.png` },
   ];
   return (
-    <div className="max-w-4xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {certs.map((cert, i) => (
-        <motion.div key={i} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.15 }} whileHover={{ y: -6 }} className="glass rounded-xl overflow-hidden group cursor-pointer">
-          <div className="relative">
-            <img src={cert.image} alt={cert.title} className="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-500" />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-          </div>
-          <div className="p-4">
-            <h3 className="font-bold text-sm mb-1 group-hover:text-gradient transition-all">{cert.title}</h3>
-            <p className="text-xs text-secondary-foreground">{cert.issuer}</p>
-            <p className="text-xs text-muted-foreground mt-1">{cert.date}</p>
-            <p className="text-xs font-mono text-muted-foreground mt-1">ID: {cert.id}</p>
-          </div>
+    <>
+      <div className="max-w-4xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {certs.map((cert, i) => (
+          <HoverCard openDelay={200} closeDelay={100} key={i}>
+            <HoverCardTrigger asChild>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: i * 0.15 }}
+                whileHover={cert.link || cert.image ? { y: -6 } : {}}
+                className={`glass rounded-xl overflow-hidden group cursor-pointer block${cert.link || cert.image ? ' border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.8)] hover:border-white hover:bg-primary/10 hover:scale-[1.5] hover:z-50' : ''} transition-all duration-300`}
+                onClick={() => {
+                  if (cert.link) {
+                    window.open(cert.link, "_blank");
+                  } else if (cert.image) {
+                    setSelectedImage(cert.image);
+                  }
+                }}
+              >
+                <div className="relative h-44 overflow-hidden">
+                  <img src={cert.image} alt={cert.title} className="w-full h-full object-cover" />
+                </div>
+                <div className="p-4">
+                  <h3 className="font-bold text-sm mb-1 group-hover:text-gradient transition-all">{cert.title}</h3>
+                  <p className="text-xs text-secondary-foreground">{cert.issuer}</p>
+                  <p className="text-xs text-primary mt-1">Issued {cert.date}</p>
+                  {cert.id !== "—" && <p className="text-xs font-mono text-muted-foreground mt-1">ID: {cert.id}</p>}
+                </div>
+              </motion.div>
+            </HoverCardTrigger>
+            <HoverCardContent 
+              side="right" 
+              align="center" 
+              sideOffset={10}
+              className="w-[400px] p-2 bg-background/95 backdrop-blur-md border border-primary/20"
+            >
+              <img
+                src={cert.image}
+                alt={cert.title}
+                className="w-full h-auto object-contain rounded-lg"
+              />
+              <p className="text-center text-sm font-medium mt-2 text-foreground">{cert.title}</p>
+            </HoverCardContent>
+          </HoverCard>
+        ))}
+      </div>
+      {selectedImage && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="relative max-w-4xl max-h-[90vh]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute -top-10 right-0 text-white hover:text-primary transition-colors"
+            >
+              <X className="w-8 h-8" />
+            </button>
+            <img
+              src={selectedImage}
+              alt="Certificate"
+              className="max-w-full max-h-[85vh] object-contain rounded-lg"
+            />
+          </motion.div>
         </motion.div>
-      ))}
-    </div>
+      )}
+    </>
   );
 };
 
@@ -477,7 +539,7 @@ const ProjectsContent = () => {
   return (
     <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
       {projects.map((p, i) => (
-        <motion.div key={i} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.12 }} whileHover={{ y: -6 }} className="glass rounded-xl p-6 group">
+        <motion.div key={i} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.12 }} whileHover={{ y: -6 }} className="glass rounded-xl p-6 group border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.8)] hover:border-white hover:bg-primary/10 hover:scale-[1.1] hover:z-50 transition-all duration-300">
           <div className="flex justify-between items-start mb-4">
             <h3 className="text-lg font-bold group-hover:text-gradient transition-all">{p.title}</h3>
             <span className="text-xs font-mono px-3 py-1 rounded-full bg-primary/10 text-primary">{p.metric}</span>
@@ -529,7 +591,7 @@ const VolunteeringContent = () => {
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       {items.map((item, i) => (
-        <motion.div key={i} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.2 }} className="glass rounded-xl overflow-hidden">
+        <motion.div key={i} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.2 }} className="glass rounded-xl overflow-hidden border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.8)] hover:border-white hover:bg-primary/10 hover:scale-[1.1] hover:z-50 transition-all duration-300">
           {item.image && <img src={item.image} alt={item.title} className="w-full h-48 object-cover" />}
           <div className="p-6">
             <h3 className="text-xl font-bold mb-1">{item.title}</h3>
@@ -554,7 +616,7 @@ const SkillsContent = () => {
   return (
     <div className="max-w-4xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       {categories.map((cat, ci) => (
-        <motion.div key={ci} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: ci * 0.15 }} className="glass rounded-xl p-6">
+        <motion.div key={ci} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: ci * 0.15 }} className="glass rounded-xl p-6 border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.8)] hover:border-white hover:bg-primary/10 hover:scale-[1.1] hover:z-50 transition-all duration-300">
           <h3 className="font-bold text-lg mb-4 text-gradient">{cat.category}</h3>
           <div className="space-y-3">
             {cat.skills.map((s, si) => (
@@ -584,7 +646,7 @@ const RecommendationsContent = () => {
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       {recs.map((rec, i) => (
-        <motion.div key={i} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.15 }} className="glass rounded-xl p-6 relative">
+        <motion.div key={i} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.15 }} className="glass rounded-xl p-6 relative border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.8)] hover:border-white hover:bg-primary/10 hover:scale-[1.1] hover:z-50 transition-all duration-300">
           <span className="text-6xl text-primary/15 font-serif absolute top-2 left-4">"</span>
           <p className="text-muted-foreground italic pl-6 pt-4 mb-4 leading-relaxed">{rec.text}</p>
           <div className="flex items-center gap-3 pl-6">
@@ -614,7 +676,7 @@ const HonorsContent = () => {
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       {awards.map((award, i) => (
-        <motion.div key={i} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.15 }} className="glass rounded-xl overflow-hidden group">
+        <motion.div key={i} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.15 }} className="glass rounded-xl overflow-hidden group border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.8)] hover:border-white hover:bg-primary/10 hover:scale-[1.1] hover:z-50 transition-all duration-300">
           {award.image && (
             <div className="relative h-48 overflow-hidden">
               <img src={award.image} alt={award.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />

@@ -58,7 +58,7 @@ const ProjectsSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.15 }}
               whileHover={{ y: -6 }}
-              className="glass rounded-xl p-6 group cursor-default relative overflow-hidden"
+              className="glass rounded-xl p-6 group cursor-default relative overflow-hidden border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.8)] hover:border-white hover:bg-primary/10 hover:scale-[1.15] hover:z-50 transition-all duration-300"
             >
               {/* Glow effect on hover */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-brand" style={{ opacity: 0, mixBlendMode: "overlay" }} />

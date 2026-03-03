@@ -40,6 +40,18 @@ const mentorsData = [
     image: `${import.meta.env.BASE_URL}images/Robin%20Sir.png`,
     linkedin: "https://www.linkedin.com/in/robin-kumar-67b2a4162/",
   },
+  {
+    name: "Dr. Aman Kumar",
+    designation: "Associate Professor, Department Of Chemical Engineering, Chaudhary Charan Singh University Meerut",
+    image: `${import.meta.env.BASE_URL}images/Aman%20Sir.jpeg`,
+    linkedin: "#",
+  },
+  {
+    name: "Dr. Gaurav Singh Pundir",
+    designation: "Head of Department, Department of Chemical Engineering, Chaudhary Charan Singh University Meerut",
+    image: `${import.meta.env.BASE_URL}images/Gaurav%20Sir.jpeg`,
+    linkedin: "#",
+  },
 ];
 
 const MentorsSection = () => {
@@ -88,9 +100,9 @@ const MentorsSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="glass rounded-xl overflow-hidden group animate-float-card"
-              style={{ animationDelay: `${index * 0.5}s` }}
+              whileHover={mentor.linkedin && mentor.linkedin !== '#' ? { y: -8, scale: 1.02 } : {}}
+              className={`glass rounded-xl overflow-hidden group animate-float-card border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.3)]${mentor.linkedin && mentor.linkedin !== '#' ? ' hover:shadow-[0_0_40px_rgba(139,92,246,0.8)] hover:border-white hover:bg-primary/10 hover:scale-[1.5] hover:z-50' : ''} transition-all duration-300`}
+              {...(mentor.linkedin && mentor.linkedin !== '#' ? { onClick: () => window.open(mentor.linkedin, '_blank'), role: 'button', tabIndex: 0 } : {})}
             >
               <a
                 href={mentor.linkedin}
@@ -110,7 +122,7 @@ const MentorsSection = () => {
                 </div>
                 <div className="p-4 text-center border-t border-primary/20">
                   <h3 className="text-base md:text-lg font-semibold text-foreground">{mentor.name}</h3>
-                  <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{mentor.designation}</p>
+                  <p className="text-sm text-muted-foreground mt-1">{mentor.designation}</p>
                 </div>
               </a>
             </motion.div>
