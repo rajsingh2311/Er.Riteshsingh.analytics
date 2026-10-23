@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Theme 1: Cyber Neon */
+  :root, .theme-cyber {
+    --background: 220 20% 4%;
+    --foreground: 180 100% 95%;
+    --card: 220 20% 7%;
+    --card-foreground: 180 100% 95%;
+    --popover: 220 20% 7%;
+    --popover-foreground: 180 100% 95%;
+    --primary: 174 100% 50%;
+    --primary-foreground: 220 20% 4%;
+    --secondary: 220 20% 12%;
+    --secondary-foreground: 174 80% 70%;
+    --muted: 220 15% 12%;
+    --muted-foreground: 220 10% 55%;
+    --accent: 280 100% 65%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 20% 14%;
+    --input: 220 20% 14%;
+    --ring: 174 100% 50%;
+    --radius: 0.75rem;
+    --glow: 174 100% 50%;
+    --gradient-from: 174 100% 50%;
+    --gradient-to: 280 100% 65%;
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --sidebar-background: 220 20% 6%;
+    --sidebar-foreground: 180 100% 95%;
+    --sidebar-primary: 174 100% 50%;
+    --sidebar-primary-foreground: 220 20% 4%;
+    --sidebar-accent: 220 20% 12%;
+    --sidebar-accent-foreground: 174 80% 70%;
+    --sidebar-border: 220 20% 14%;
+    --sidebar-ring: 174 100% 50%;
+  }
+
+  /* Theme 2: Prism Light (Innovative High-Contrast Precision Light Mode) */
+  .theme-light {
+    --background: 215 30% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 175 84% 33%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 214 32% 93%;
+    --secondary-foreground: 222 47% 18%;
+    --muted: 214 32% 93%;
+    --muted-foreground: 215 16% 45%;
+    --accent: 262 83% 58%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 86%;
+    --input: 214 32% 86%;
+    --ring: 175 84% 33%;
+    --radius: 0.75rem;
+    --glow: 175 84% 33%;
+    --gradient-from: 175 84% 33%;
+    --gradient-to: 262 83% 55%;
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 175 84% 33%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 214 32% 93%;
+    --sidebar-accent-foreground: 222 47% 18%;
+    --sidebar-border: 214 32% 86%;
+    --sidebar-ring: 175 84% 33%;
+  }
+}
+
+.theme-light .glass {
+  background: hsl(0 0% 100% / 0.88);
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+}
+
+.theme-light .grid-bg {
+  background-image: 
+    linear-gradient(hsl(var(--border) / 0.6) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--border) / 0.6) 1px, transparent 1px);
+}
+
+.theme-light .glow-primary {
+  box-shadow: 0 4px 20px hsl(var(--glow) / 0.25), 0 2px 8px hsl(var(--glow) / 0.15);
+}
+
+.theme-light .glow-text {
+  text-shadow: 0 2px 12px hsl(var(--glow) / 0.3);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+    min-width: 0;
+  }
+  html {
+    scroll-behavior: smooth;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-heading);
+    max-width: 100vw;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+    word-break: normal;
+  }
+  #root {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    overflow-wrap: break-word;
+  }
+  p, span, a, button, li {
+    overflow-wrap: break-word;
+  }
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
+  }
+  section[id] {
+    scroll-margin-top: 5rem;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    max-width: 100%;
+    overflow-x: clip;
+  }
+  section[id]:target {
+    box-shadow: 0 0 35px hsl(var(--glow) / 0.25);
+    border-color: hsl(var(--primary) / 0.5);
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--gradient-from)), hsl(var(--gradient-to)));
+  }
+  .bg-gradient-brand {
+    background-image: linear-gradient(135deg, hsl(var(--gradient-from)), hsl(var(--gradient-to)));
+  }
+  .glow-primary {
+    box-shadow: 0 0 20px hsl(var(--glow) / 0.3), 0 0 60px hsl(var(--glow) / 0.1);
+  }
+  .glow-text {
+    text-shadow: 0 0 20px hsl(var(--glow) / 0.5), 0 0 40px hsl(var(--glow) / 0.2);
+  }
+  .glass {
+    @apply backdrop-blur-xl border;
+    background: hsl(var(--card) / 0.6);
+  }
+  .grid-bg {
+    background-image: 
+      linear-gradient(hsl(var(--border) / 0.3) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.3) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Floating atom animation for cards */
+  .animate-float-slow {
+    animation: float-slow 6s ease-in-out infinite;
+  }
+  .animate-float-slower {
+    animation: float-slow 8s ease-in-out infinite;
+  }
+  .animate-float-card {
+    animation: float-card 4s ease-in-out infinite;
+  }
+  
+  /* Orbiting atoms */
+  .atom-orbit {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid hsl(var(--primary) / 0.3);
+    animation: orbit 10s linear infinite;
+  }
+  .atom-particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: hsl(var(--primary));
+    border-radius: 50%;
+    box-shadow: 0 0 10px hsl(var(--primary) / 0.8), 0 0 20px hsl(var(--primary) / 0.4);
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  25% { transform: translateY(-8px) translateX(4px); }
+  50% { transform: translateY(-4px) translateX(-4px); }
+  75% { transform: translateY(-12px) translateX(2px); }
+}
+
+@keyframes float-card {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes orbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Hide scrollbars across all modern browsers */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
