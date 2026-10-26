@@ -449,48 +449,60 @@ const EducationContent = () => {
     <div className="max-w-4xl mx-auto space-y-8">
       {/* Education Cards */}
       <div className="space-y-6">
-        {edu.map((e, i) => (
-        <motion.div 
-          key={i} 
-          initial={{ opacity: 0, y: 30 }} 
-          animate={{ opacity: 1, y: 0 }} 
-          transition={{ delay: i * 0.2 }} 
-          onClick={() => {
-            if (e.school === "Jaipuria School of Business") {
-              navigate("/pgdm");
-            }
-          }}
-          className={`glass rounded-xl p-4 sm:p-6 min-w-0${e.school === "Jaipuria School of Business" ? ' border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.2)] hover:shadow-[0_0_30px_rgba(139,92,246,0.6)] hover:border-white hover:bg-primary/10 cursor-pointer' : ''} transition-all duration-300`}
-          whileHover={e.school === "Jaipuria School of Business" ? { y: -3 } : {}}
-        >
-          <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 mb-3 sm:mb-4">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-brand flex items-center justify-center shrink-0">
-              <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-primary-foreground" />
-            </div>
-            <div className="min-w-0 flex-1">
-              <h3 className="text-lg sm:text-xl font-bold break-words leading-tight">{e.degree}</h3>
-              <span className="text-secondary-foreground block text-xs sm:text-sm font-medium mt-0.5 break-words">
-                {e.school === "Jaipuria School of Business" ? (
-                  <LinkPreview
-                    href="https://jsb.jaipuria.edu.in/overview-jsbpgdm/"
-                    imgSrc="/images/JSB.png"
-                    label="Jaipuria School of Business"
-                    sizeClass="w-44 sm:w-52 max-w-[80vw]"
-                  />
-                ) : (
-                  e.school
-                )}
-              </span>
-              <p className="text-xs font-mono text-primary mt-1">{e.period}</p>
-            </div>
-          </div>
-          <p className="text-xs sm:text-sm text-muted-foreground mb-3 leading-relaxed break-words">{e.desc}</p>
-          <div className="space-y-1">
-            <p className="text-xs font-semibold text-foreground">Activities & Societies:</p>
-            {e.activities.map(a => <p key={a} className="text-xs text-muted-foreground break-words">• {a}</p>)}
-          </div>
-        </motion.div>
-      ))}
+        {edu.map((e, i) => {
+          const getTargetRoute = () => {
+            if (e.degree.includes("PGDM")) return "/pgdm";
+            if (e.degree.includes("B.Tech")) return "/btech";
+            if (e.degree.includes("12th")) return "/twelfth";
+            if (e.degree.includes("10th")) return "/tenth";
+            return "/section/education";
+          };
+          const targetRoute = getTargetRoute();
+
+          return (
+            <motion.div 
+              key={i} 
+              initial={{ opacity: 0, y: 30 }} 
+              animate={{ opacity: 1, y: 0 }} 
+              transition={{ delay: i * 0.15 }} 
+              onClick={() => navigate(targetRoute)}
+              className="glass rounded-xl p-4 sm:p-6 min-w-0 border-2 border-primary/40 shadow-[0_0_15px_rgba(139,92,246,0.18)] hover:shadow-[0_0_30px_rgba(139,92,246,0.55)] hover:border-primary hover:bg-primary/10 cursor-pointer transition-all duration-300 group"
+              whileHover={{ y: -4 }}
+              role="button"
+              tabIndex={0}
+            >
+              <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 mb-3 sm:mb-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-brand flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                  <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-primary-foreground" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                    <h3 className="text-lg sm:text-xl font-bold break-words leading-tight group-hover:text-primary transition-colors">
+                      {e.degree}
+                    </h3>
+                    <span className="text-xs font-mono text-primary font-semibold shrink-0">{e.period}</span>
+                  </div>
+                  <span className="text-secondary-foreground block text-xs sm:text-sm font-medium mt-0.5 break-words">
+                    {e.school}
+                  </span>
+                </div>
+              </div>
+              <p className="text-xs sm:text-sm text-muted-foreground mb-3 leading-relaxed break-words">{e.desc}</p>
+              <div className="space-y-1 mb-4">
+                <p className="text-xs font-semibold text-foreground">Activities & Societies:</p>
+                {e.activities.map(a => <p key={a} className="text-xs text-muted-foreground break-words">• {a}</p>)}
+              </div>
+              
+              <div className="pt-3 border-t border-border/50 flex items-center justify-between text-xs text-primary font-semibold group-hover:text-primary-foreground">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                  View Detailed Journey & Gallery
+                </span>
+                <span className="group-hover:translate-x-1.5 transition-transform text-sm font-bold">→</span>
+              </div>
+            </motion.div>
+          );
+        })}
       </div>
     </div>
   );

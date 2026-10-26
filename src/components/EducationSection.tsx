@@ -83,7 +83,14 @@ const EducationSection = () => {
                   <span className="text-xs font-mono text-primary shrink-0">{item.period}</span>
                 </div>
                 <p className="text-xs sm:text-sm text-secondary-foreground mb-1 font-medium break-words">{item.school}</p>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed break-words">{item.desc}</p>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed break-words mb-2.5">{item.desc}</p>
+                <div className="pt-2 border-t border-border/40 flex items-center justify-between text-xs text-primary font-semibold">
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                    View Detailed Journey & Highlights
+                  </span>
+                  <span className="transition-transform group-hover:translate-x-1 text-sm font-bold">→</span>
+                </div>
               </div>
             </motion.div>
           ))}
