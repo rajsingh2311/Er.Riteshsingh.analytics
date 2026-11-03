@@ -421,13 +421,17 @@ const EducationContent = () => {
       period: "2024 — 2026 · CGPA: 7.03",
       desc: "Focus: Business Analytics, CRISP‑DM methodology, high-dimensional data visualization, predictive analytics.",
       activities: ["Student Co-Ordinator Business Analytics Club", "Organized Power BI workshops & hackathons", "Mentored students on analytics projects & dashboard design", "Winner Talent Hunt 2024 (Poetry Competition)"],
+      link: "https://jaipuriaschoolofbusiness.com/",
+      previewImg: `${import.meta.env.BASE_URL}images/JSB.png`,
     },
     {
       degree: "B.Tech (Chemical Engineering)",
-      school: "SCRIET, CCSU Meerut",
+      school: "(SCRIET) Chaudhary Charan Singh University, Meerut",
       period: "2019 — 2023 · CGPA: 6.74",
       desc: "Exposure to SAP ERP systems, data processing (structured & semi‑structured), and applied research.",
       activities: ["Student Coordinator — IWRS (Organized seminars & awareness activities)", "Student Coordinator — Unnat Bharat Abhiyan (Organized awareness programs)"],
+      link: "https://www.ccsuniversity.ac.in/",
+      previewImg: `${import.meta.env.BASE_URL}images/CCSU.png`,
     },
     {
       degree: "12th (Physics, Chemistry, Math)",
@@ -483,7 +487,16 @@ const EducationContent = () => {
                     <span className="text-xs font-mono text-primary font-semibold shrink-0">{e.period}</span>
                   </div>
                   <span className="text-secondary-foreground block text-xs sm:text-sm font-medium mt-0.5 break-words">
-                    {e.school}
+                    {e.link ? (
+                      <LinkPreview
+                        href={e.link}
+                        imgSrc={e.previewImg!}
+                        label={e.school}
+                        sizeClass="w-60 sm:w-72 max-w-[85vw]"
+                      />
+                    ) : (
+                      e.school
+                    )}
                   </span>
                 </div>
               </div>

@@ -1,19 +1,26 @@
 import { motion } from "framer-motion";
 import { GraduationCap } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import LinkPreview from "./ui/link-preview";
 
 const education = [
   {
     degree: "PGDM (Business Analytics & Operation)",
-    school: "Jaipuria School of Business · CGPA: 7.03",
+    school: "Jaipuria School of Business",
+    cgpa: "CGPA: 7.03",
     period: "2024 — 2026",
     desc: "Focus on Business Analytics, CRISP‑DM methodology, high-dimensional data visualization, and predictive analytics.",
+    link: "https://jaipuriaschoolofbusiness.com/",
+    previewImg: `${import.meta.env.BASE_URL}images/JSB.png`,
   },
   {
     degree: "B.Tech (Chemical Engineering)",
-    school: "SCRIET, CCSU Meerut · CGPA: 6.74",
+    school: "(SCRIET) Chaudhary Charan Singh University, Meerut",
+    cgpa: "CGPA: 6.74",
     period: "2019 — 2023",
     desc: "Exposure to SAP ERP systems, data processing for structured & semi‑structured data, and applied research projects.",
+    link: "https://www.ccsuniversity.ac.in/",
+    previewImg: `${import.meta.env.BASE_URL}images/CCSU.png`,
   },
   {
     degree: "12th (Physics, Chemistry, Math)",
@@ -82,7 +89,23 @@ const EducationSection = () => {
                   <h3 className="font-bold text-base sm:text-lg break-words leading-snug">{item.degree}</h3>
                   <span className="text-xs font-mono text-primary shrink-0">{item.period}</span>
                 </div>
-                <p className="text-xs sm:text-sm text-secondary-foreground mb-1 font-medium break-words">{item.school}</p>
+                <div className="text-xs sm:text-sm text-secondary-foreground mb-1 font-medium break-words flex items-center flex-wrap gap-1.5">
+                  {item.link ? (
+                    <LinkPreview
+                      href={item.link}
+                      imgSrc={item.previewImg!}
+                      label={item.school}
+                      sizeClass="w-60 sm:w-72 max-w-[85vw]"
+                    />
+                  ) : (
+                    <span>{item.school}</span>
+                  )}
+                  {item.cgpa && (
+                    <span className="text-muted-foreground font-mono text-xs">
+                      · {item.cgpa}
+                    </span>
+                  )}
+                </div>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed break-words mb-2.5">{item.desc}</p>
                 <div className="pt-2 border-t border-border/40 flex items-center justify-between text-xs text-primary font-semibold">
                   <span className="flex items-center gap-1.5">

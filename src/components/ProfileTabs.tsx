@@ -88,7 +88,7 @@ const tabs: TabItem[] = [
       type: "timeline",
       items: [
         { title: "PGDM (Business Analytics & Operation)", sub: "Jaipuria School of Business", year: "2024–2026" },
-        { title: "B.Tech (Chemical Engineering)", sub: "SCRIET, CCSU Meerut", year: "2019–2023" },
+        { title: "B.Tech (Chemical Engineering)", sub: "(SCRIET) Chaudhary Charan Singh University, Meerut", year: "2019–2023" },
       ],
     },
   },

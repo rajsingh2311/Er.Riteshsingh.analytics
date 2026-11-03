@@ -18,6 +18,7 @@ import { useEffect, useState } from "react";
 import ParticleField from "@/components/ParticleField";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import SectionNavigator from "@/components/SectionNavigator";
+import LinkPreview from "@/components/ui/link-preview";
 
 interface GalleryItem {
   src: string;
@@ -42,7 +43,7 @@ const btechGallery: GalleryItem[] = [
   {
     src: `${import.meta.env.BASE_URL}images/Education/B..Tech%20Volunteer%203.png`,
     title: "Student Leadership & Technical Workshop",
-    subtitle: "SCRIET CCSU Meerut Department Initiative",
+    subtitle: "(SCRIET) Chaudhary Charan Singh University, Meerut Initiative",
     description: "Collaborating with student delegates, organizing technical workshops, and driving student engagement initiatives across the engineering campus."
   }
 ];
@@ -104,9 +105,14 @@ const BTechPage = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-base xs:text-lg md:text-2xl text-secondary-foreground font-mono mb-2 font-medium break-words"
+            className="text-base xs:text-lg md:text-2xl text-secondary-foreground font-mono mb-2 font-medium break-words flex items-center justify-center flex-wrap gap-2"
           >
-            Sir Chhotu Ram Institute of Engineering & Technology (SCRIET), CCSU Meerut
+            <LinkPreview
+              href="https://www.ccsuniversity.ac.in/"
+              imgSrc={`${import.meta.env.BASE_URL}images/CCSU.png`}
+              label="(SCRIET) Chaudhary Charan Singh University, Meerut"
+              sizeClass="w-64 sm:w-80 max-w-[88vw]"
+            />
           </motion.h2>
 
           <motion.div
@@ -122,7 +128,12 @@ const BTechPage = () => {
               CGPA: 6.74
             </span>
             <span className="px-3 py-1 rounded-full bg-accent/10 border border-accent/30 text-accent font-semibold">
-              4-Year Degree (Dr. A.P.J. Abdul Kalam Technical University Affiliate)
+              <LinkPreview
+                href="https://www.ccsuniversity.ac.in/"
+                imgSrc={`${import.meta.env.BASE_URL}images/CCSU.png`}
+                label="4-Year Degree · (SCRIET) Chaudhary Charan Singh University, Meerut"
+                sizeClass="w-64 sm:w-80 max-w-[88vw]"
+              />
             </span>
           </motion.div>
 
@@ -230,7 +241,7 @@ const BTechPage = () => {
                   <span>First-Principles Engineering Mindset</span>
                 </h4>
                 <p className="text-secondary-foreground text-xs sm:text-sm leading-relaxed">
-                  Chemical Engineering is the science of transforming raw materials into finished products through rigorous mass and energy balances. At SCRIET Meerut, I mastered the art of breaking complex, non-linear problems into solvable mathematical components — a mental framework that now powers my approach to business modeling.
+                  Chemical Engineering is the science of transforming raw materials into finished products through rigorous mass and energy balances. At (SCRIET) Chaudhary Charan Singh University, Meerut, I mastered the art of breaking complex, non-linear problems into solvable mathematical components — a mental framework that now powers my approach to business modeling.
                 </p>
               </div>
 
