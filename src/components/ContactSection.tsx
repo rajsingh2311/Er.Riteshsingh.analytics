@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Send, Linkedin, Github } from "lucide-react";
+import ContactModal from "./ContactModal";
 
 const ContactSection = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <section id="contact" className="pt-12 pb-16 md:pt-14 md:pb-24 relative overflow-hidden">
       <div className="container mx-auto px-3 sm:px-6">
@@ -53,21 +57,23 @@ const ContactSection = () => {
               <p className="text-muted-foreground mb-5 sm:mb-6 text-xs sm:text-sm leading-relaxed">
                 Have a question or want to work together? Fill out the form below!
               </p>
-              <motion.a
-                href="https://forms.gle/syRejRzWydawhLbs9"
-                target="_blank"
-                rel="noopener noreferrer"
+              <motion.button
+                type="button"
+                onClick={() => setIsModalOpen(true)}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center justify-center gap-2 w-full py-2.5 sm:py-3 rounded-lg bg-gradient-brand text-primary-foreground font-semibold text-xs sm:text-sm md:text-base glow-primary transition-all"
+                className="inline-flex items-center justify-center gap-2 w-full py-2.5 sm:py-3 rounded-lg bg-gradient-brand text-primary-foreground font-semibold text-xs sm:text-sm md:text-base glow-primary transition-all cursor-pointer shadow-lg hover:shadow-primary/30"
               >
                 <Send className="w-4 h-4 shrink-0" />
                 <span>Send Message</span>
-              </motion.a>
+              </motion.button>
             </div>
           </motion.div>
         </div>
       </div>
+
+      {/* In-app Contact Form Modal */}
+      <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
       {/* Footer */}
       <div className="container mx-auto px-6 mt-20">
