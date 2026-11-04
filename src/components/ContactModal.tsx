@@ -40,21 +40,24 @@ const INITIAL_FORM: FormData = {
 };
 
 const DEFAULT_WEBHOOK_KEY = "ritesh_sheet_webhook_url";
+const DEFAULT_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwSUEECJKJOIT6k8b_WS310DYg1TXM5UMCtzlnJff8iciWevUAPcyVWGlqWOU4H1d2c/exec";
 
 export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState<FormData>(INITIAL_FORM);
-  const [webhookUrl, setWebhookUrl] = useState<string>("");
+  const [webhookUrl, setWebhookUrl] = useState<string>(DEFAULT_WEBHOOK_URL);
   const [showConfig, setShowConfig] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string>("");
   const [copiedScript, setCopiedScript] = useState<boolean>(false);
 
-  // Load configured Google Apps Script Webhook from localStorage
+  // Load configured Google Apps Script Webhook from localStorage or use default
   useEffect(() => {
     const saved = localStorage.getItem(DEFAULT_WEBHOOK_KEY);
-    if (saved) {
-      setWebhookUrl(saved);
+    if (saved && saved.trim()) {
+      setWebhookUrl(saved.trim());
+    } else {
+      setWebhookUrl(DEFAULT_WEBHOOK_URL);
     }
   }, []);
 
@@ -147,10 +150,11 @@ function doPost(e) {
         console.error("Local storage error:", err);
       }
 
-      // If webhookUrl is configured, POST to Google Apps Script
-      if (webhookUrl && webhookUrl.startsWith("http")) {
+      // Post to Google Apps Script Webhook
+      const targetUrl = (webhookUrl || DEFAULT_WEBHOOK_URL).trim();
+      if (targetUrl && targetUrl.startsWith("http")) {
         // We use mode: "no-cors" with text/plain to prevent CORS preflight restrictions from Google Script
-        await fetch(webhookUrl, {
+        await fetch(targetUrl, {
           method: "POST",
           mode: "no-cors",
           headers: {
