@@ -18,7 +18,7 @@ const education = [
     school: "(SCRIET) Chaudhary Charan Singh University, Meerut",
     cgpa: "CGPA: 6.74",
     period: "2019 — 2023",
-    desc: "Exposure to SAP ERP systems, data processing for structured & semi‑structured data, and applied research projects.",
+    desc: "Exposure to SAP ERP systems, thermodynamic modeling, guest lecture sessions from IIT Roorkee, and departmental student leadership.",
     link: "https://www.ccsuniversity.ac.in/",
     previewImg: `${import.meta.env.BASE_URL}images/CCSU.png`,
   },

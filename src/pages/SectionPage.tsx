@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import React from "react";
 import { motion } from "framer-motion";
-import { Star, Briefcase, GraduationCap, Award, FolderOpen, Heart, Zap, MessageSquare, Trophy, MapPin, Calendar, User, ChevronRight, X, Terminal, BarChart3, Layers } from "lucide-react";
+import { Star, Briefcase, GraduationCap, Award, FolderOpen, Heart, Zap, MessageSquare, Trophy, MapPin, Calendar, User, ChevronRight, X, Terminal, BarChart3, Layers, Camera } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import SectionNavigator from "@/components/SectionNavigator";
 import ParticleField from "@/components/ParticleField";
@@ -357,8 +357,12 @@ const ExperienceContent = () => {
       location: "Jamnagar, Gujarat",
       type: "Full-time",
       period: "Jan 2023 — Jul 2023",
-      desc: "Monitored refinery operations and plant telemetry; built Pareto charts and trend analysis dashboards to isolate process bottlenecks.",
+      desc: "Monitored refinery operations and plant telemetry at the world's largest refining complex; built Pareto charts and trend analysis dashboards to isolate process bottlenecks and improve operational stability.",
       skills: ["Industrial Data", "Process Analytics", "Pareto Analysis", "Safety Metrics"],
+      photo: {
+        src: `${import.meta.env.BASE_URL}images/Professional%20Experience/reliance_refinery_site_inspection.jpg`,
+        caption: "On-site industrial plant inspection and engineering safety operations at Reliance Industries Limited (Jamnagar, Gujarat)",
+      },
     },
   ];
   return (
@@ -405,6 +409,26 @@ const ExperienceContent = () => {
           <div className="flex flex-wrap gap-2">
             {exp.skills.map(s => <span key={s} className="text-xs font-mono px-2.5 py-1 rounded-lg bg-secondary text-secondary-foreground border border-border/50">{s}</span>)}
           </div>
+
+          {exp.photo && (
+            <div className="mt-4 pt-3.5 border-t border-border/50">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 p-3 rounded-xl bg-card/60 border border-primary/25">
+                <img
+                  src={exp.photo.src}
+                  alt={exp.photo.caption}
+                  className="w-full sm:w-24 h-24 rounded-lg object-cover border border-border shrink-0 shadow-sm"
+                />
+                <div className="min-w-0 flex-1">
+                  <span className="text-xs font-mono text-primary font-bold flex items-center gap-1.5 mb-1">
+                    <Camera className="w-3.5 h-3.5" /> On-Site Engineering Operations
+                  </span>
+                  <p className="text-xs text-foreground/90 font-medium leading-relaxed">
+                    {exp.photo.caption}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
         </motion.div>
       ))}
     </div>
@@ -428,8 +452,14 @@ const EducationContent = () => {
       degree: "B.Tech (Chemical Engineering)",
       school: "(SCRIET) Chaudhary Charan Singh University, Meerut",
       period: "2019 — 2023 · CGPA: 6.74",
-      desc: "Exposure to SAP ERP systems, data processing (structured & semi‑structured), and applied research.",
-      activities: ["Student Coordinator — IWRS (Organized seminars & awareness activities)", "Student Coordinator — Unnat Bharat Abhiyan (Organized awareness programs)"],
+      desc: "Mastered chemical engineering first-principles, thermodynamic modeling, and SAP ERP systems. Engaged in advanced guest lectures with IIT Roorkee and led student initiatives.",
+      activities: [
+        "Advanced Guest Lecture session with Dr. C. Balomajumder (IIT Roorkee)",
+        "Student Coordinator — Unnat Bharat Abhiyan (IIT Delhi rural baseline surveys)",
+        "Student Coordinator — IWRS (Organized seminars & conservation awareness)",
+        "World Environment Day Seminar Organizing Committee & Stage Felicitation",
+        "Plant Flowsheet Review & Capstone research with HoD Dr. Aman Kumar & Dr. Pratyush Upadhyay"
+      ],
       link: "https://www.ccsuniversity.ac.in/",
       previewImg: `${import.meta.env.BASE_URL}images/CCSU.png`,
     },
