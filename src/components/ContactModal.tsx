@@ -1,17 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   X, 
   Send, 
-  RotateCcw, 
   CheckCircle2, 
-  Sparkles, 
-  Settings2, 
-  Copy, 
-  Check, 
   ExternalLink, 
-  HelpCircle,
-  FileSpreadsheet,
   MailCheck,
   AlertCircle
 } from "lucide-react";
@@ -39,33 +32,14 @@ const INITIAL_FORM: FormData = {
   socialProfile: "",
 };
 
-const DEFAULT_WEBHOOK_KEY = "ritesh_sheet_webhook_url";
-const DEFAULT_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwSUEECJKJOIT6k8b_WS310DYg1TXM5UMCtzlnJff8iciWevUAPcyVWGlqWOU4H1d2c/exec";
+// Connected to Ritesh's active Google Sheet & Email Apps Script Webhook
+const GOOGLE_SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwSUEECJKJOIT6k8b_WS310DYg1TXM5UMCtzlnJff8iciWevUAPcyVWGlqWOU4H1d2c/exec";
 
 export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState<FormData>(INITIAL_FORM);
-  const [webhookUrl, setWebhookUrl] = useState<string>(DEFAULT_WEBHOOK_URL);
-  const [showConfig, setShowConfig] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string>("");
-  const [copiedScript, setCopiedScript] = useState<boolean>(false);
-
-  // Load configured Google Apps Script Webhook from localStorage or use default
-  useEffect(() => {
-    const saved = localStorage.getItem(DEFAULT_WEBHOOK_KEY);
-    if (saved && saved.trim()) {
-      setWebhookUrl(saved.trim());
-    } else {
-      setWebhookUrl(DEFAULT_WEBHOOK_URL);
-    }
-  }, []);
-
-  const handleWebhookSave = (val: string) => {
-    const trimmed = val.trim();
-    setWebhookUrl(trimmed);
-    localStorage.setItem(DEFAULT_WEBHOOK_KEY, trimmed);
-  };
 
   const handleInputChange = (field: keyof FormData, val: string) => {
     setFormData((prev) => ({ ...prev, [field]: val }));
@@ -75,35 +49,6 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
   const handleClear = () => {
     setFormData(INITIAL_FORM);
     setErrorMsg("");
-  };
-
-  const copyAppsScript = async () => {
-    try {
-      const resp = await fetch(`${import.meta.env.BASE_URL}google-apps-script.js`);
-      if (resp.ok) {
-        const text = await resp.text();
-        await navigator.clipboard.writeText(text);
-        setCopiedScript(true);
-        setTimeout(() => setCopiedScript(false), 2500);
-      }
-    } catch {
-      // Fallback
-      const scriptCode = `// Google Apps Script for Ritesh's Portfolio
-function doPost(e) {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  var data = JSON.parse(e.postData.contents);
-  sheet.appendRow([new Date(), data.name, data.designation, data.contactNo, data.email, data.socialProfile, data.message]);
-  MailApp.sendEmail({
-    to: "singhritesh8236@gmail.com, riteshsingh.analytics@gmail.com",
-    subject: "🚀 New Portfolio Inquiry: " + data.name + " (" + data.designation + ")",
-    body: "Name: " + data.name + "\\nDesignation: " + data.designation + "\\nContact No: " + data.contactNo + "\\nEmail: " + data.email + "\\nSocial: " + data.socialProfile + "\\nMessage:\\n" + data.message
-  });
-  return ContentService.createTextOutput(JSON.stringify({status: "success"})).setMimeType(ContentService.MimeType.JSON);
-}`;
-      await navigator.clipboard.writeText(scriptCode);
-      setCopiedScript(true);
-      setTimeout(() => setCopiedScript(false), 2500);
-    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -141,33 +86,29 @@ function doPost(e) {
         socialProfile: formData.socialProfile.trim(),
       };
 
-      // Always backup to local inquiries queue so no lead is lost
+      // Store in local backup so inquiry is never lost
       try {
         const stored = JSON.parse(localStorage.getItem("ritesh_portfolio_inquiries") || "[]");
         stored.unshift(payload);
         localStorage.setItem("ritesh_portfolio_inquiries", JSON.stringify(stored.slice(0, 50)));
       } catch (err) {
-        console.error("Local storage error:", err);
+        console.error("Local backup error:", err);
       }
 
-      // Post to Google Apps Script Webhook
-      const targetUrl = (webhookUrl || DEFAULT_WEBHOOK_URL).trim();
-      if (targetUrl && targetUrl.startsWith("http")) {
-        // We use mode: "no-cors" with text/plain to prevent CORS preflight restrictions from Google Script
-        await fetch(targetUrl, {
-          method: "POST",
-          mode: "no-cors",
-          headers: {
-            "Content-Type": "text/plain;charset=utf-8",
-          },
-          body: JSON.stringify(payload),
-        });
-      }
+      // POST directly to Google Apps Script Web App
+      await fetch(GOOGLE_SHEET_WEBHOOK_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
+        },
+        body: JSON.stringify(payload),
+      });
 
       setIsSubmitted(true);
     } catch (err) {
       console.error("Submission error:", err);
-      // Even if network fails, we recorded locally and can show success or mailto fallback
+      // Still show success since backup is captured locally
       setIsSubmitted(true);
     } finally {
       setIsSubmitting(false);
@@ -189,104 +130,31 @@ function doPost(e) {
           {/* Top Decorative Header Accent Bar */}
           <div className="h-2.5 w-full bg-gradient-to-r from-primary via-indigo-500 to-cyan-400 shrink-0" />
 
-          {/* Modal Header */}
+          {/* Modal Header (Matching Google Form screenshot) */}
           <div className="p-4 sm:p-6 border-b border-border bg-card/90 backdrop-blur flex items-start justify-between gap-4 shrink-0">
             <div>
-              <div className="flex items-center gap-2">
-                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
-                  Connect with @Ritesh
-                </h2>
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-primary/10 text-primary border border-primary/20">
-                  <Sparkles className="w-3 h-3" /> Direct Form
-                </span>
-              </div>
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
+                Connect with @Ritesh
+              </h2>
               <p className="text-xs text-muted-foreground mt-1">
-                Fill in the details below. Responses land directly in Google Sheets and notify Ritesh instantly.
+                Fill out the form below. Your response will be recorded in Google Sheets and sent directly to Ritesh.
               </p>
-              <p className="text-[11px] text-destructive font-medium mt-1">
+              <p className="text-[11px] text-destructive font-medium mt-1.5">
                 * Indicates required question
               </p>
             </div>
 
-            <div className="flex items-center gap-1.5 shrink-0">
-              <button
-                type="button"
-                onClick={() => setShowConfig(!showConfig)}
-                title="Google Sheet Integration Settings"
-                className={`p-2 rounded-lg border transition-colors ${
-                  showConfig 
-                    ? "bg-primary text-primary-foreground border-primary" 
-                    : "bg-secondary text-muted-foreground hover:text-foreground border-border hover:bg-muted"
-                }`}
-              >
-                <Settings2 className="w-4 h-4" />
-              </button>
-              <button
-                type="button"
-                onClick={onClose}
-                className="p-2 rounded-lg bg-secondary text-muted-foreground hover:text-foreground border border-border hover:bg-muted transition-colors"
-                aria-label="Close form"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={onClose}
+              className="p-2 rounded-lg bg-secondary text-muted-foreground hover:text-foreground border border-border hover:bg-muted transition-colors shrink-0"
+              aria-label="Close form"
+            >
+              <X className="w-4 h-4" />
+            </button>
           </div>
 
-          {/* Config / Google Sheet Webhook Drawer */}
-          {showConfig && (
-            <div className="p-4 bg-muted/60 border-b border-border text-xs space-y-3 shrink-0">
-              <div className="flex items-center justify-between">
-                <span className="font-semibold text-foreground flex items-center gap-1.5">
-                  <FileSpreadsheet className="w-4 h-4 text-emerald-500" />
-                  Google Sheet & Instant Email Setup
-                </span>
-                <button
-                  type="button"
-                  onClick={copyAppsScript}
-                  className="flex items-center gap-1 text-[11px] font-medium text-primary hover:underline"
-                >
-                  {copiedScript ? (
-                    <>
-                      <Check className="w-3.5 h-3.5 text-emerald-500" /> Copied Code!
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-3.5 h-3.5" /> Copy 1-Click Apps Script
-                    </>
-                  )}
-                </button>
-              </div>
-
-              <div>
-                <label className="block text-[11px] font-medium text-muted-foreground mb-1">
-                  Google Apps Script Web App URL (optional — leave empty or paste your deployed URL):
-                </label>
-                <input
-                  type="url"
-                  placeholder="https://script.google.com/macros/s/AKfycb.../exec"
-                  value={webhookUrl}
-                  onChange={(e) => handleWebhookSave(e.target.value)}
-                  className="w-full px-3 py-1.5 text-xs rounded-md bg-background border border-border focus:outline-none focus:ring-1 focus:ring-primary"
-                />
-              </div>
-
-              <div className="text-[11px] text-muted-foreground bg-card/60 p-2.5 rounded-lg border border-border space-y-1">
-                <p className="font-medium text-foreground">💡 How to connect your own Google Sheet in 60 seconds:</p>
-                <ol className="list-decimal list-inside space-y-0.5 ml-1">
-                  <li>Create a new Google Sheet.</li>
-                  <li>Click <strong>Extensions &gt; Apps Script</strong> and paste the copied script.</li>
-                  <li>Click <strong>Deploy &gt; New deployment &gt; Web app</strong>.</li>
-                  <li>Set <strong>Execute as: Me</strong> and <strong>Who has access: Anyone</strong>.</li>
-                  <li>Copy the resulting Web App URL and paste it in the box above!</li>
-                </ol>
-                <p className="text-[10px] text-emerald-600 dark:text-emerald-400 mt-1">
-                  ✓ Automatically appends rows to your Sheet and shoots emails to <strong>singhritesh8236@gmail.com</strong>!
-                </p>
-              </div>
-            </div>
-          )}
-
-          {/* Form Body or Success State */}
+          {/* Form Content / Success State */}
           <div className="p-4 sm:p-6 overflow-y-auto flex-1 space-y-4">
             {isSubmitted ? (
               <motion.div
@@ -302,7 +170,7 @@ function doPost(e) {
                     Response Recorded!
                   </h3>
                   <p className="text-sm text-muted-foreground max-w-md mx-auto mt-2 leading-relaxed">
-                    Thank you, <span className="font-semibold text-foreground">{formData.name}</span>. Your details have been successfully captured and an instant alert has been dispatched to Ritesh's inbox.
+                    Thank you, <span className="font-semibold text-foreground">{formData.name}</span>. Your details have landed in Ritesh's Google Sheet and an email alert has been sent to him.
                   </p>
                 </div>
 
@@ -329,13 +197,6 @@ function doPost(e) {
                   >
                     Submit another response
                   </button>
-                  <a
-                    href={`mailto:singhritesh8236@gmail.com?subject=Inquiry from ${encodeURIComponent(formData.name)}&body=Name: ${encodeURIComponent(formData.name)}%0D%0ADesignation: ${encodeURIComponent(formData.designation)}%0D%0AContact: ${encodeURIComponent(formData.contactNo)}%0D%0AEmail: ${encodeURIComponent(formData.email)}%0D%0AMessage:%0D%0A${encodeURIComponent(formData.message)}`}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-xs sm:text-sm font-medium hover:opacity-90 transition-opacity"
-                  >
-                    <span>Open in Email App</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
                   <button
                     type="button"
                     onClick={onClose}
@@ -355,7 +216,7 @@ function doPost(e) {
                   </div>
                 )}
 
-                {/* Question 1: Name * */}
+                {/* Card 1: Name * */}
                 <div className="p-4 sm:p-5 rounded-xl bg-card border border-border hover:border-primary/40 transition-colors shadow-sm space-y-2">
                   <label className="block text-sm sm:text-base font-semibold text-foreground">
                     Name <span className="text-destructive">*</span>
@@ -370,7 +231,7 @@ function doPost(e) {
                   />
                 </div>
 
-                {/* Question 2: Designation * */}
+                {/* Card 2: Designation * */}
                 <div className="p-4 sm:p-5 rounded-xl bg-card border border-border hover:border-primary/40 transition-colors shadow-sm space-y-2">
                   <label className="block text-sm sm:text-base font-semibold text-foreground">
                     Designation <span className="text-destructive">*</span>
@@ -385,7 +246,7 @@ function doPost(e) {
                   />
                 </div>
 
-                {/* Question 3: Contact No. * */}
+                {/* Card 3: Contact No. * */}
                 <div className="p-4 sm:p-5 rounded-xl bg-card border border-border hover:border-primary/40 transition-colors shadow-sm space-y-2">
                   <label className="block text-sm sm:text-base font-semibold text-foreground">
                     Contact No. <span className="text-destructive">*</span>
@@ -400,7 +261,7 @@ function doPost(e) {
                   />
                 </div>
 
-                {/* Question 4: Email Address * */}
+                {/* Card 4: Email Address * */}
                 <div className="p-4 sm:p-5 rounded-xl bg-card border border-border hover:border-primary/40 transition-colors shadow-sm space-y-2">
                   <label className="block text-sm sm:text-base font-semibold text-foreground">
                     Email Address <span className="text-destructive">*</span>
@@ -415,7 +276,7 @@ function doPost(e) {
                   />
                 </div>
 
-                {/* Question 5: Your Message */}
+                {/* Card 5: Your Message */}
                 <div className="p-4 sm:p-5 rounded-xl bg-card border border-border hover:border-primary/40 transition-colors shadow-sm space-y-2">
                   <label className="block text-sm sm:text-base font-semibold text-foreground">
                     Your Message
@@ -429,7 +290,7 @@ function doPost(e) {
                   />
                 </div>
 
-                {/* Question 6: Social Media Profiles (e.g., LinkedIn) */}
+                {/* Card 6: Social Media Profiles (e.g., LinkedIn) */}
                 <div className="p-4 sm:p-5 rounded-xl bg-card border border-border hover:border-primary/40 transition-colors shadow-sm space-y-2">
                   <label className="block text-sm sm:text-base font-semibold text-foreground">
                     Social Media Profiles (e.g., LinkedIn)
@@ -448,7 +309,7 @@ function doPost(e) {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg bg-[#673ab7] hover:bg-[#5e35b1] text-white font-medium text-sm sm:text-base transition-all shadow-md hover:shadow-lg disabled:opacity-60"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg bg-[#673ab7] hover:bg-[#5e35b1] text-white font-medium text-sm sm:text-base transition-all shadow-md hover:shadow-lg disabled:opacity-60 cursor-pointer"
                   >
                     {isSubmitting ? (
                       <>
@@ -467,14 +328,14 @@ function doPost(e) {
                     type="button"
                     onClick={handleClear}
                     disabled={isSubmitting}
-                    className="text-primary hover:text-primary/80 font-medium text-sm transition-colors px-2 py-1"
+                    className="text-primary hover:text-primary/80 font-medium text-sm transition-colors px-2 py-1 cursor-pointer"
                   >
                     Clear form
                   </button>
                 </div>
 
                 <div className="pt-2 text-center text-[11px] text-muted-foreground">
-                  Responses are securely synced to Ritesh Singh's inquiry registry. Never submit sensitive passwords.
+                  Never submit passwords through Google Forms or web inquiries.
                 </div>
               </form>
             )}
