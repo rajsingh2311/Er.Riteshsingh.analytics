@@ -87,15 +87,8 @@ const MyMentorsPage = () => {
         />
       </div>
 
-      <section className="relative pt-24 md:pt-28 pb-12 md:pb-16 overflow-hidden">
+      <section className="relative pt-[6.5rem] sm:pt-[7rem] md:pt-[7.5rem] pb-12 md:pb-16 overflow-hidden">
         <div className="container mx-auto px-3 sm:px-6">
-          <button
-            onClick={() => navigate("/", { state: { scrollTo: "about-detailed" } })}
-            className="inline-flex items-center gap-2 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors mb-5 sm:mb-6"
-          >
-            <ArrowLeft className="w-4 h-4 shrink-0" />
-            <span>Back to About</span>
-          </button>
 
           <div className="text-center mb-8 sm:mb-12">
             <span className="text-primary font-mono text-xs sm:text-sm tracking-wider uppercase">Gratitude</span>

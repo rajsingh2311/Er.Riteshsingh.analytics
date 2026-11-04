@@ -147,19 +147,11 @@ const WordsThatMatterPage = () => {
         />
       </div>
 
-      <section className="relative pt-[7rem] md:pt-[7.5rem] pb-12 md:pb-16">
-        <div className="container mx-auto px-4 md:px-6">
-          <button
-            onClick={() => navigate("/", { state: { scrollTo: "about-detailed" } })}
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-3"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to About
-          </button>
-
+      <section className="relative pt-[6.5rem] sm:pt-[7rem] md:pt-[7.5rem] pb-12 md:pb-16">
+        <div className="container mx-auto px-3 sm:px-4 md:px-6">
           <div className="text-center mb-3 md:mb-4">
-            <span className="text-primary font-mono text-sm tracking-wider uppercase">Testimonials</span>
-            <h1 className="text-3xl md:text-5xl font-bold mt-3">
+            <span className="text-primary font-mono text-xs sm:text-sm tracking-wider uppercase">Testimonials</span>
+            <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mt-2 sm:mt-3">
               Words That <span className="text-gradient">Matter</span>
             </h1>
           </div>

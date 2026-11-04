@@ -122,14 +122,15 @@ export const SectionNavigator: React.FC<SectionNavigatorProps> = ({
   ];
 
   // For Inline Mode (top of sections in Index.tsx or inside components)
+  // For Inline Mode (top of sections in Index.tsx or inside components)
   if (mode === "inline") {
     return (
       <nav 
         aria-label={`Navigation for ${currentPage} section`}
-        className={`w-full py-2 px-2.5 sm:px-4 mb-5 sm:mb-6 rounded-xl border border-primary/20 bg-card/60 backdrop-blur-md shadow-sm flex flex-wrap items-center justify-between gap-2 text-xs md:text-sm ${className}`}
+        className={`w-full py-2 px-2.5 sm:px-4 mb-5 sm:mb-6 rounded-xl border border-primary/20 bg-card/60 backdrop-blur-md shadow-sm flex items-center justify-between gap-2 text-xs md:text-sm ${className}`}
       >
         {/* Left: Go Back / Back to Top button + Breadcrumbs */}
-        <div className="flex items-center flex-wrap gap-2 min-w-0">
+        <div className="flex items-center gap-1.5 sm:gap-2 min-w-0 flex-1">
           <motion.button
             type="button"
             onClick={handleBack}
@@ -139,11 +140,16 @@ export const SectionNavigator: React.FC<SectionNavigatorProps> = ({
             title={backLabel || (prevSection ? `Back to ${prevSection.label}` : "Back to Top")}
           >
             {prevSection ? <ArrowLeft className="w-3.5 h-3.5 shrink-0" /> : <ArrowUp className="w-3.5 h-3.5 shrink-0" />}
-            <span className="font-semibold text-xs sm:text-sm">{backLabel || (prevSection ? `← ${prevSection.label}` : "Top ↑")}</span>
+            <span className="font-semibold text-xs sm:text-sm hidden sm:inline">
+              {backLabel || (prevSection ? `← ${prevSection.label}` : "Top ↑")}
+            </span>
+            <span className="font-semibold text-xs inline sm:hidden">
+              {prevSection ? prevSection.label : "Top"}
+            </span>
           </motion.button>
 
-          {/* Breadcrumbs trail */}
-          <div className="flex items-center flex-wrap gap-1 text-muted-foreground min-w-0">
+          {/* Desktop Breadcrumbs trail */}
+          <div className="hidden sm:flex items-center flex-wrap gap-1 text-muted-foreground min-w-0">
             {computedBreadcrumbs.map((crumb, idx) => {
               const isLast = idx === computedBreadcrumbs.length - 1;
               return (
@@ -175,6 +181,14 @@ export const SectionNavigator: React.FC<SectionNavigatorProps> = ({
               );
             })}
           </div>
+
+          {/* Mobile Current Page indicator */}
+          <div className="flex sm:hidden items-center gap-1 text-xs min-w-0 overflow-hidden flex-1">
+            <ChevronRight className="w-3 h-3 text-muted-foreground/60 shrink-0" />
+            <span className="font-bold text-primary truncate max-w-[140px] xs:max-w-[190px]">
+              {currentPage}
+            </span>
+          </div>
         </div>
 
         {/* Right: Quick Jump Menu & Next Section button */}
@@ -183,11 +197,13 @@ export const SectionNavigator: React.FC<SectionNavigatorProps> = ({
             <button
               type="button"
               onClick={() => setMenuOpen(!menuOpen)}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-border bg-background/80 hover:bg-muted text-muted-foreground hover:text-foreground transition-all text-xs"
+              className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1.5 rounded-lg border border-border bg-background/80 hover:bg-muted text-muted-foreground hover:text-foreground transition-all text-xs"
+              title="Jump to section"
+              aria-label="Jump to section"
             >
               <Compass className="w-3.5 h-3.5 text-primary shrink-0" />
-              <span className="hidden xs:inline">Jump</span>
-              <ChevronDown className={`w-3 h-3 transition-transform ${menuOpen ? "rotate-180" : ""}`} />
+              <span className="hidden sm:inline">Jump</span>
+              <ChevronDown className={`w-3 h-3 transition-transform hidden sm:inline ${menuOpen ? "rotate-180" : ""}`} />
             </button>
 
             <AnimatePresence>
@@ -259,33 +275,37 @@ export const SectionNavigator: React.FC<SectionNavigatorProps> = ({
   return (
     <nav 
       aria-label={`Page navigation for ${currentPage}`}
-      className={`sticky top-0 z-40 w-full border-b border-border/80 bg-background/80 backdrop-blur-xl transition-all shadow-sm ${className}`}
+      className={`sticky top-0 z-40 w-full border-b border-border/80 bg-background/85 backdrop-blur-xl transition-all shadow-sm ${className}`}
     >
-      <div className="container mx-auto px-3 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between gap-2">
-        {/* Left: Go Back Button & Breadcrumb */}
-        <div className="flex items-center gap-2 min-w-0">
+      <div className="container mx-auto px-2.5 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between gap-1.5 sm:gap-2 min-w-0">
+        {/* Left: Go Back Button & Breadcrumbs / Location */}
+        <div className="flex items-center gap-1.5 sm:gap-2 min-w-0 flex-1">
           <motion.button
             type="button"
             onClick={handleBack}
             whileHover={{ scale: 1.02, x: -1 }}
             whileTap={{ scale: 0.98 }}
             className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-primary/15 hover:bg-primary/25 border border-primary/30 text-primary text-xs sm:text-sm font-semibold transition-all shrink-0"
+            title={backLabel || "Back"}
           >
             <ArrowLeft className="w-3.5 h-3.5 shrink-0" />
-            <span>{backLabel || "Back"}</span>
+            <span className="hidden sm:inline">{backLabel || "Back"}</span>
+            <span className="inline sm:hidden font-medium">
+              {parentPage?.label ? parentPage.label : (backLabel?.replace(/^Back to\s+/i, "") || "Back")}
+            </span>
           </motion.button>
 
-          <div className="h-4 w-px bg-border/80 hidden xs:block shrink-0" />
+          <div className="h-4 w-px bg-border/80 shrink-0 opacity-60" />
 
-          {/* Breadcrumb Hierarchy */}
-          <div className="flex items-center gap-1 text-xs sm:text-sm text-muted-foreground min-w-0 overflow-hidden">
+          {/* Desktop Breadcrumbs Hierarchy */}
+          <div className="hidden sm:flex items-center gap-1 text-xs sm:text-sm text-muted-foreground min-w-0 overflow-hidden">
             {computedBreadcrumbs.map((crumb, idx) => {
               const isLast = idx === computedBreadcrumbs.length - 1;
               return (
                 <React.Fragment key={crumb.label + idx}>
                   {idx > 0 && <ChevronRight className="w-3 h-3 text-muted-foreground/60 shrink-0" />}
                   {isLast ? (
-                    <span className="font-semibold text-primary truncate max-w-[100px] xs:max-w-[160px] md:max-w-none">
+                    <span className="font-semibold text-primary truncate max-w-[120px] xs:max-w-[180px] md:max-w-none">
                       {crumb.label}
                     </span>
                   ) : (
@@ -295,7 +315,7 @@ export const SectionNavigator: React.FC<SectionNavigatorProps> = ({
                         if (crumb.onClick) crumb.onClick();
                         else if (crumb.to) navigate(crumb.to);
                       }}
-                      className="hover:text-foreground hover:underline transition-colors truncate font-medium max-w-[80px] xs:max-w-[130px] md:max-w-none"
+                      className="hover:text-foreground hover:underline transition-colors truncate font-medium max-w-[90px] xs:max-w-[140px] md:max-w-none"
                     >
                       {crumb.label}
                     </button>
@@ -304,10 +324,17 @@ export const SectionNavigator: React.FC<SectionNavigatorProps> = ({
               );
             })}
           </div>
+
+          {/* Mobile Current Page Indicator (Clean & legible, no squishing) */}
+          <div className="flex sm:hidden items-center gap-1 text-xs min-w-0 overflow-hidden flex-1">
+            <span className="font-bold text-primary truncate block w-full">
+              {subPage || currentPage}
+            </span>
+          </div>
         </div>
 
         {/* Right: Current Page Badge & Quick Jump */}
-        <div className="flex items-center gap-2 shrink-0">
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/10 border border-primary/20 text-[11px] font-mono text-primary">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             <span>Viewing: {currentPage}</span>
@@ -317,11 +344,13 @@ export const SectionNavigator: React.FC<SectionNavigatorProps> = ({
             <button
               type="button"
               onClick={() => setMenuOpen(!menuOpen)}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-border bg-card/60 hover:bg-muted text-foreground text-xs font-medium transition-all"
+              className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1.5 rounded-lg border border-border bg-card/60 hover:bg-muted text-foreground text-xs font-medium transition-all"
+              title="Jump to section"
+              aria-label="Jump to section"
             >
               <Compass className="w-3.5 h-3.5 text-primary shrink-0" />
               <span className="hidden sm:inline">Sections</span>
-              <ChevronDown className={`w-3 h-3 transition-transform ${menuOpen ? "rotate-180" : ""}`} />
+              <ChevronDown className={`w-3 h-3 transition-transform hidden sm:inline ${menuOpen ? "rotate-180" : ""}`} />
             </button>
 
             <AnimatePresence>
@@ -333,7 +362,7 @@ export const SectionNavigator: React.FC<SectionNavigatorProps> = ({
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.95 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute right-0 top-full mt-2 w-48 sm:w-56 max-w-[calc(100vw-32px)] p-1.5 rounded-xl border border-border/80 bg-background/95 backdrop-blur-xl shadow-xl z-50 divide-y divide-border/40"
+                    className="absolute right-0 top-full mt-2 w-48 sm:w-56 max-w-[calc(100vw-24px)] p-1.5 rounded-xl border border-border/80 bg-background/95 backdrop-blur-xl shadow-xl z-50 divide-y divide-border/40"
                   >
                     <div className="px-2 py-1 text-[10px] font-semibold text-muted-foreground uppercase tracking-wider">
                       Explore Portfolio
