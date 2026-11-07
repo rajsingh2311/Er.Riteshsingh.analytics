@@ -11,14 +11,14 @@ const timeline = [
     location: "Ghaziabad",
     type: "Full-time",
     period: "Dec 2025 — Present",
-    desc: "Connected, trained, and collaborated with 30+ MIS Executives across Seth Anandram Jaipuria Schools to establish a robust data bridge between individual schools and the corporate office. Transformed complex datasets — including exam results, academic audit reports, financial audit data, and operational metrics — into clear, actionable insights using Excel, Power BI, and advanced analytical techniques. Enabled key stakeholders including the VP Corporate, School Principals, and Promoters to make informed, data-driven decisions through intuitive dashboards and automated reporting systems.",
+    desc: "Connected, trained, and collaborated with 30+ MIS Executives across Seth Anandram Jaipuria Schools to establish a robust data bridge between individual schools and the corporate office. Transformed complex datasets — including exam results, academic audit reports, financial audit data, and operational metrics — into clear, actionable insights using Excel, Power BI, and advanced analytical techniques. Enabled key stakeholders including the Sr. VP Sir (Corporate), School Principals, and Promoters to make informed, data-driven decisions through intuitive dashboards and automated reporting systems.",
     memories: {
       highlights: [
         "Organized and executed event operations & data tracking for #Athletica_2026 Annual Sports Day (543 student athletes & 58 sporting events)",
         "Welcomed Chief Guest Mr. Praveen Kumar (Former Indian International Cricketer) & Guest of Honour Taarun Chawlla Sir",
         "Trained 30+ MIS Executives across multiple schools",
         "Established data communication bridge between schools & corporate",
-        "Presented analytical insights to VP, Principals & Promoters",
+        "Presented analytical insights to Sr. VP Sir, Principals & Promoters",
         "Transformed raw data into executive-ready dashboards",
       ],
       achievements: [
