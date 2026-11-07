@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   X, 
@@ -27,33 +28,42 @@ export const ResumePreviewModal: React.FC<ResumePreviewModalProps> = ({ isOpen, 
   const [viewMode, setViewMode] = useState<"pdf" | "digital">("pdf");
   const resumePdfUrl = `${import.meta.env.BASE_URL}Ritesh_Singh_Resume.pdf`;
 
-  // Close on Escape key
+  // Close on Escape key and lock body scroll
   useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isOpen) {
         onClose();
       }
     };
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = "auto";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
-  return (
+  const modalContent = (
     <AnimatePresence>
       <div 
-        className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 overflow-y-auto bg-black/80 backdrop-blur-md"
+        className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4 md:p-6 overflow-y-auto bg-black/85 backdrop-blur-md"
         onClick={(e) => {
           if (e.target === e.currentTarget) onClose();
         }}
       >
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          initial={{ opacity: 0, scale: 0.95, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 20 }}
+          exit={{ opacity: 0, scale: 0.95, y: 15 }}
           transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-5xl bg-card border-2 border-primary/50 shadow-[0_0_35px_rgba(139,92,246,0.35)] rounded-2xl md:rounded-3xl overflow-hidden my-auto max-h-[94vh] flex flex-col backdrop-blur-xl"
+          className="relative w-full max-w-5xl bg-card border-2 border-primary/50 shadow-[0_0_40px_rgba(139,92,246,0.4)] rounded-2xl md:rounded-3xl overflow-hidden my-auto max-h-[calc(100vh-5.5rem)] flex flex-col backdrop-blur-xl"
         >
           {/* Top Gradient Themed Accent Line */}
           <div className="h-2 w-full bg-gradient-to-r from-primary via-indigo-500 to-cyan-400 shrink-0" />
@@ -166,7 +176,7 @@ export const ResumePreviewModal: React.FC<ResumePreviewModalProps> = ({ isOpen, 
                   <iframe
                     src={`${resumePdfUrl}#toolbar=1&navpanes=0`}
                     title="Ritesh Singh Data Analyst Resume"
-                    className="w-full h-[65vh] sm:h-[72vh] md:h-[76vh] border-0 bg-white"
+                    className="w-full h-[52vh] sm:h-[58vh] md:h-[62vh] border-0 bg-white"
                   />
                 </div>
               </div>
@@ -452,6 +462,8 @@ export const ResumePreviewModal: React.FC<ResumePreviewModalProps> = ({ isOpen, 
       </div>
     </AnimatePresence>
   );
+
+  return typeof document !== "undefined" ? createPortal(modalContent, document.body) : null;
 };
 
 export default ResumePreviewModal;
