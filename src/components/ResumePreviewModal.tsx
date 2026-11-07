@@ -199,6 +199,8 @@ export const ResumePreviewModal: React.FC<ResumePreviewModalProps> = ({ isOpen, 
                     <a href="mailto:riteshsingh.raj.23@gmail.com" className="hover:text-primary hover:underline">riteshsingh.raj.23@gmail.com</a>
                     <span>•</span>
                     <a href="https://linkedin.com/in/riteshsingh-analytics" target="_blank" rel="noreferrer" className="hover:text-primary hover:underline">linkedin.com/in/riteshsingh-analytics</a>
+                    <span>•</span>
+                    <a href="https://rajsingh2311.github.io/Er.Riteshsingh.analytics" target="_blank" rel="noreferrer" className="hover:text-primary hover:underline">Portfolio</a>
                   </p>
                 </div>
 
@@ -209,7 +211,7 @@ export const ResumePreviewModal: React.FC<ResumePreviewModalProps> = ({ isOpen, 
                     Professional Summary
                   </h3>
                   <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed text-justify">
-                    Data Analyst with a PGDM in Business Analytics and hands-on experience building Power BI, Excel and automated reporting solutions. Currently delivering 30+ school-level dashboards and a Head Office audit dashboard that give leadership a single view of fee collections, admissions, enrollment and compliance across a 30-school group. Skilled in SQL, Python, DAX, statistical analysis (SPSS) and the CRISP-DM methodology, with a track record of automating manual workflows (12+ hours/week saved) and turning raw data into decisions.
+                    Data &amp; Business Analyst with 2+ years of experience turning operational data into decisions for leadership in education, fitness and market research. Own Power BI MIS reporting for a 30+ school group, cutting data turnaround by 60%, and have led a 20-member research team. Skilled in SQL, Power BI (DAX), Advanced Excel (MOS Expert) and Python, with a record of automating workflows (12+ hrs/week saved; lead response cut from 30 to under 10 min). PGDM in Business Analytics; Lean Six Sigma Green Belt.
                   </p>
                 </div>
 
@@ -221,27 +223,27 @@ export const ResumePreviewModal: React.FC<ResumePreviewModalProps> = ({ isOpen, 
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
                     <div className="p-3 rounded-xl bg-secondary/50 border border-border/80">
-                      <span className="font-semibold text-foreground block mb-1">BI &amp; Visualization</span>
+                      <span className="font-semibold text-foreground block mb-1">BI &amp; Reporting</span>
                       <p className="text-muted-foreground leading-relaxed">
-                        Power BI (DAX, Power Query), Tableau, Advanced Excel (PivotTables, Slicers, Power Query), Dashboard Design, KPI Reporting
+                        Power BI (DAX, Power Query, Data Modeling), Advanced Excel (PivotTables, Power Query), Tableau, KPI Dashboards
                       </p>
                     </div>
                     <div className="p-3 rounded-xl bg-secondary/50 border border-border/80">
-                      <span className="font-semibold text-foreground block mb-1">Programming &amp; Data</span>
+                      <span className="font-semibold text-foreground block mb-1">Data &amp; Programming</span>
                       <p className="text-muted-foreground leading-relaxed">
-                        SQL (Queries, Joins), Python (Pandas, NumPy, Matplotlib, Seaborn), Data Cleaning, Data Pipelines, Structured / Semi-Structured / Unstructured Data
+                        SQL (Joins, Aggregations), Python (Pandas, NumPy, Scikit-learn, Matplotlib), Data Cleaning, ETL Pipelines
                       </p>
                     </div>
                     <div className="p-3 rounded-xl bg-secondary/50 border border-border/80">
-                      <span className="font-semibold text-foreground block mb-1">Statistics &amp; Methods</span>
+                      <span className="font-semibold text-foreground block mb-1">Analytics &amp; Methods</span>
                       <p className="text-muted-foreground leading-relaxed">
-                        SPSS, Hypothesis Testing (Chi-Square, T-Test, ANOVA), RFM Segmentation, Pareto Analysis, Forecasting, CRISP-DM
+                        Hypothesis Testing (Chi-Square, T-Test, ANOVA – SPSS), RFM, Funnel &amp; Pareto Analysis, Forecasting, CRISP-DM
                       </p>
                     </div>
                     <div className="p-3 rounded-xl bg-secondary/50 border border-border/80">
-                      <span className="font-semibold text-foreground block mb-1">Business &amp; Platforms</span>
+                      <span className="font-semibold text-foreground block mb-1">Business &amp; Automation</span>
                       <p className="text-muted-foreground leading-relaxed">
-                        SAP ERP, Workflow Automation (Google Sheets, WATI), GDPR-Compliant Data Handling, AWS (Fundamentals), Generative AI &amp; Prompt Engineering
+                        KPI Definition, Stakeholder Reporting, Lean Six Sigma, Make.com, n8n, Apps Script, WATI, CRM, SAP ERP
                       </p>
                     </div>
                   </div>
@@ -259,15 +261,16 @@ export const ResumePreviewModal: React.FC<ResumePreviewModalProps> = ({ isOpen, 
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                       <div>
                         <h4 className="font-bold text-sm sm:text-base text-foreground">Data Analyst</h4>
-                        <p className="text-xs font-medium text-secondary-foreground">SRJ Edu Services Pvt. Ltd. (Jaipuria Edu Services Pvt. Ltd.), Noida, UP</p>
+                        <p className="text-xs font-medium text-secondary-foreground">Seth Anandram Jaipuria Group of Educational Institutions (SRJ Edu Services Pvt. Ltd.), Ghaziabad, UP</p>
                       </div>
                       <span className="text-xs font-mono text-primary font-semibold">Dec 2025 – Present</span>
                     </div>
-                    <ul className="list-disc list-inside text-xs text-muted-foreground space-y-1 leading-relaxed">
-                      <li>Built 30+ customized school dashboards giving promoters a single point of truth for real-time fee collections, student strength and admission tracking.</li>
-                      <li>Developed a centralized Head Office Audit Dashboard to monitor academic and financial compliance across 30 schools through one unified data interface.</li>
-                      <li>Engineered a master data pipeline that aggregates group-wide student enrollment and financial health metrics for Head Office review at a glance.</li>
-                      <li>Streamlined multi-school reporting by consolidating fragmented metrics into standardized visual dashboards for both school leadership and corporate oversight.</li>
+                    <ul className="list-disc list-inside text-xs text-muted-foreground space-y-1.5 leading-relaxed">
+                      <li>Built a unified Power BI MIS system (SQL, star schema, multi-level DAX) linking 30+ school campuses to Head Office, cutting data turnaround by 60%.</li>
+                      <li>Trained and coordinated 30+ MIS Executives across schools, creating a standardized data bridge between schools and corporate.</li>
+                      <li>Built 30+ customized school dashboards and automated exam-result analysis, giving promoters real-time visibility into fees, admissions and results.</li>
+                      <li>Standardized academic and financial audit reporting via a Head Office Audit Dashboard; presented insights to the Sr. VP, Principals and Promoters.</li>
+                      <li>Led event operations and data tracking for Athletica 2026, the group's annual sports day (543 athletes, 58 events).</li>
                     </ul>
                   </div>
 
@@ -280,11 +283,11 @@ export const ResumePreviewModal: React.FC<ResumePreviewModalProps> = ({ isOpen, 
                       </div>
                       <span className="text-xs font-mono text-primary font-semibold">May 2025 – Jul 2025</span>
                     </div>
-                    <ul className="list-disc list-inside text-xs text-muted-foreground space-y-1 leading-relaxed">
-                      <li>Built Power BI dashboards (DAX) for lead-funnel tracking, agent productivity and multi-location performance analysis.</li>
-                      <li>Automated lead capture and routing with a data pipeline (Meta Ads → Google Sheets → WhatsApp/WATI), removing manual lead handling.</li>
-                      <li>Developed a real-time interview tracking system integrated with WATI and ERP-based HR workflows for scheduling and candidate notifications.</li>
-                      <li>Designed GDPR-compliant automated reporting, reducing manual effort by 12+ hours per week.</li>
+                    <ul className="list-disc list-inside text-xs text-muted-foreground space-y-1.5 leading-relaxed">
+                      <li>Automated lead capture for 14K+ leads (Meta Ads → Google Sheets → WhatsApp via Make.com &amp; WATI) with routing by source, priority and status, cutting first-response time from 30 min to under 10 min.</li>
+                      <li>Built 5+ production Power BI dashboards (DAX) for lead-funnel conversion, agent productivity and gym-wise performance.</li>
+                      <li>Automated daily manager reporting (12+ hours/week saved) and a single-click offer-letter generator for HR (Make.com).</li>
+                      <li>Built a QR-based interview tracking system (Google Form → auto WATI alerts to HR and candidates), working with HR, Operations and Marketing.</li>
                     </ul>
                   </div>
 
@@ -292,13 +295,15 @@ export const ResumePreviewModal: React.FC<ResumePreviewModalProps> = ({ isOpen, 
                   <div className="border-l-2 border-primary/50 pl-4 py-1 space-y-2">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                       <div>
-                        <h4 className="font-bold text-sm sm:text-base text-foreground">Engineering Intern</h4>
-                        <p className="text-xs font-medium text-secondary-foreground">Kribhco Fertilizers Ltd., Shahjahanpur, UP</p>
+                        <h4 className="font-bold text-sm sm:text-base text-foreground">Team Leader</h4>
+                        <p className="text-xs font-medium text-secondary-foreground">Stagnet Research Pvt. Ltd., Noida, UP</p>
                       </div>
-                      <span className="text-xs font-mono text-primary font-semibold">Jun 2022 – Jul 2022</span>
+                      <span className="text-xs font-mono text-primary font-semibold">Jul 2023 – Jul 2024</span>
                     </div>
-                    <ul className="list-disc list-inside text-xs text-muted-foreground space-y-1 leading-relaxed">
-                      <li>Worked with SAP ERP for workforce operations and reporting; supported process data collection within industrial teams.</li>
+                    <ul className="list-disc list-inside text-xs text-muted-foreground space-y-1.5 leading-relaxed">
+                      <li>Led a 20-member research team delivering market and qualitative survey projects for clients.</li>
+                      <li>Built Power BI dashboards, Excel trackers and automated data-cleaning processes, cutting project turnaround by 25% and improving reporting accuracy.</li>
+                      <li>Analyzed survey data and produced client-ready reports and visualizations.</li>
                     </ul>
                   </div>
                 </div>
@@ -309,44 +314,34 @@ export const ResumePreviewModal: React.FC<ResumePreviewModalProps> = ({ isOpen, 
                     <FolderGit2 className="w-4 h-4" />
                     Key Projects
                   </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
                     <div className="p-3.5 rounded-xl bg-secondary/40 border border-border/80 space-y-1.5">
                       <div className="flex justify-between items-start">
-                        <span className="font-bold text-foreground">Customer Segmentation &amp; Marketing Analytics (RFM)</span>
-                        <span className="text-[10px] font-mono text-primary">Aug 2025</span>
+                        <span className="font-bold text-foreground">HR Attrition Flight-Risk Predictor</span>
                       </div>
+                      <span className="text-[10px] font-mono text-primary block">Python, Scikit-learn</span>
                       <p className="text-muted-foreground leading-relaxed">
-                        Processed 100,000+ customer transactions with an RFM model; built an interactive Excel dashboard identifying top 3 segments generating ~82% of revenue.
+                        Built a classification model (CRISP-DM) predicting 90-day attrition risk from commute, overtime and satisfaction data, with prescriptive retention actions.
                       </p>
                     </div>
 
                     <div className="p-3.5 rounded-xl bg-secondary/40 border border-border/80 space-y-1.5">
                       <div className="flex justify-between items-start">
-                        <span className="font-bold text-foreground">Employee Attrition &amp; Retention Analysis</span>
-                        <span className="text-[10px] font-mono text-primary">May–Jul 2025</span>
+                        <span className="font-bold text-foreground">Customer Segmentation – RFM</span>
                       </div>
+                      <span className="text-[10px] font-mono text-primary block">Python, Excel</span>
                       <p className="text-muted-foreground leading-relaxed">
-                        Analyzed HR data using CRISP-DM and built an Attrition Dashboard tracking monthly churn; delivered location-based retention strategies to HR leadership.
+                        Segmented 100K+ transactions; found the top 3 tiers drive ~82% of revenue (Pareto) and designed retention strategies.
                       </p>
                     </div>
 
                     <div className="p-3.5 rounded-xl bg-secondary/40 border border-border/80 space-y-1.5">
                       <div className="flex justify-between items-start">
-                        <span className="font-bold text-foreground">Customer Satisfaction in E-Banking</span>
-                        <span className="text-[10px] font-mono text-primary">Feb–Apr 2025</span>
+                        <span className="font-bold text-foreground">E-Banking Customer Satisfaction</span>
                       </div>
+                      <span className="text-[10px] font-mono text-primary block">SPSS</span>
                       <p className="text-muted-foreground leading-relaxed">
-                        Surveyed 226 respondents and applied Chi-Square, T-Test and ANOVA; recommended UX improvements and digital-literacy programs for e-banking adoption.
-                      </p>
-                    </div>
-
-                    <div className="p-3.5 rounded-xl bg-secondary/40 border border-border/80 space-y-1.5">
-                      <div className="flex justify-between items-start">
-                        <span className="font-bold text-foreground">National Logistics Policy Prospects</span>
-                        <span className="text-[10px] font-mono text-primary">Dec 2024–Apr 2025</span>
-                      </div>
-                      <p className="text-muted-foreground leading-relaxed">
-                        Applied policy analysis and forecasting to assess infrastructure and cost gaps; proposed ERP-integrated data-driven supply-chain recommendations.
+                        Analyzed 226 survey responses with Chi-Square, T-Test and ANOVA; identified statistically significant drivers of satisfaction (p = 0.0085).
                       </p>
                     </div>
                   </div>
@@ -360,34 +355,20 @@ export const ResumePreviewModal: React.FC<ResumePreviewModalProps> = ({ isOpen, 
                       <GraduationCap className="w-4 h-4" />
                       Education
                     </h3>
-                    <div className="space-y-2 text-xs">
+                    <div className="space-y-3 text-xs">
                       <div>
                         <div className="flex justify-between font-semibold text-foreground">
-                          <span>PGDM (Business Analytics)</span>
+                          <span>PGDM (Business Analytics &amp; Operations)</span>
                           <span className="font-mono text-primary">2024 – 2026</span>
                         </div>
-                        <p className="text-muted-foreground">Jaipuria School of Business, Ghaziabad | CGPA: 7.06</p>
+                        <p className="text-muted-foreground">Jaipuria School of Business, Ghaziabad | CGPA 7.03</p>
                       </div>
                       <div>
                         <div className="flex justify-between font-semibold text-foreground">
                           <span>B.Tech (Chemical Engineering)</span>
                           <span className="font-mono text-primary">2019 – 2023</span>
                         </div>
-                        <p className="text-muted-foreground">SCRIET, CCSU Meerut | CGPA: 6.74</p>
-                      </div>
-                      <div>
-                        <div className="flex justify-between font-semibold text-foreground">
-                          <span>Class XII (PCM)</span>
-                          <span className="font-mono text-primary">2019</span>
-                        </div>
-                        <p className="text-muted-foreground">S Devi Inter College, Madhuban, Mau | 61%</p>
-                      </div>
-                      <div>
-                        <div className="flex justify-between font-semibold text-foreground">
-                          <span>Class X (Science)</span>
-                          <span className="font-mono text-primary">2017</span>
-                        </div>
-                        <p className="text-muted-foreground">S Devi Inter College, Madhuban, Mau | 81.33%</p>
+                        <p className="text-muted-foreground">SCRIET, Chaudhary Charan Singh University, Meerut | CGPA 6.74</p>
                       </div>
                     </div>
                   </div>
@@ -401,33 +382,45 @@ export const ResumePreviewModal: React.FC<ResumePreviewModalProps> = ({ isOpen, 
                     <ul className="space-y-1.5 text-xs text-muted-foreground">
                       <li className="flex items-start gap-1.5">
                         <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 mt-0.5 shrink-0" />
-                        <span><strong>MOS: Excel Associate</strong> – Microsoft (2019)</span>
+                        <span><strong>Lean Six Sigma Green Belt</strong> – Grant Thornton Bharat (2025)</span>
                       </li>
                       <li className="flex items-start gap-1.5">
                         <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 mt-0.5 shrink-0" />
-                        <span><strong>Google AI Essentials</strong> – Google, Coursera</span>
+                        <span><strong>Microsoft Office Specialist: Excel Expert</strong> – Microsoft (2025)</span>
                       </li>
                       <li className="flex items-start gap-1.5">
                         <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 mt-0.5 shrink-0" />
-                        <span><strong>AI Chat Prompts for Business Analysis</strong> – LinkedIn</span>
+                        <span><strong>Strategic Management</strong> – IIM Bangalore (2026)</span>
                       </li>
                       <li className="flex items-start gap-1.5">
                         <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 mt-0.5 shrink-0" />
-                        <span><strong>What Is Generative AI?</strong> – LinkedIn Learning</span>
+                        <span><strong>Google AI Essentials</strong> – Google (2025)</span>
                       </li>
                       <li className="flex items-start gap-1.5">
                         <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 mt-0.5 shrink-0" />
-                        <span><strong>International Business Analytics</strong> – MDIS Singapore (Mar 2025)</span>
-                      </li>
-                      <li className="flex items-start gap-1.5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-primary mt-0.5 shrink-0" />
-                        <span><strong>Data Analytics (Python, SQL, Power BI)</strong> – PW Skills</span>
-                      </li>
-                      <li className="flex items-start gap-1.5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-primary mt-0.5 shrink-0" />
-                        <span><strong>Strategic Management</strong> – SWAYAM, IIM Bangalore</span>
+                        <span><strong>International Business</strong> – MDIS Singapore (2025)</span>
                       </li>
                     </ul>
+                  </div>
+                </div>
+
+                {/* Leadership */}
+                <div className="p-5 rounded-2xl bg-card border border-border hover:border-primary/40 transition-colors shadow-sm space-y-2.5">
+                  <h3 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-primary font-mono flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-primary" />
+                    Leadership
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-muted-foreground">
+                    <div className="p-3 rounded-xl bg-secondary/40 border border-border/80">
+                      <p className="font-semibold text-foreground mb-0.5">Student Co-ordinator, Business Analytics Club</p>
+                      <p className="text-[11px] font-mono text-primary mb-1">Jaipuria School of Business (2024 – 26)</p>
+                      <p>Grew membership 50%; mentored 20+ students.</p>
+                    </div>
+                    <div className="p-3 rounded-xl bg-secondary/40 border border-border/80">
+                      <p className="font-semibold text-foreground mb-0.5">Finalist, Trading Simulation Challenge</p>
+                      <p className="text-[11px] font-mono text-primary mb-1">Jaipuria School of Business (2024)</p>
+                      <p>Recognized for strategic analysis and execution in algorithmic trading simulation.</p>
+                    </div>
                   </div>
                 </div>
               </div>
