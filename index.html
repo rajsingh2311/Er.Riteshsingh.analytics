@@ -18,6 +18,28 @@
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@riteshsingh" />
+    <script>
+      // 1. If any visitor has a query param like ?v=2, strip it cleanly from the address bar
+      if (window.location.search && (window.location.search.includes('v=') || window.location.search.includes('cache'))) {
+        var cleanUrl = window.location.origin + window.location.pathname + window.location.hash;
+        window.history.replaceState({}, document.title, cleanUrl);
+      }
+      // 2. Unregister any lingering service workers and purge old browser cache storage
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for (var i = 0; i < registrations.length; i++) {
+            registrations[i].unregister();
+          }
+        });
+      }
+      if ('caches' in window) {
+        caches.keys().then(function(names) {
+          for (var j = 0; j < names.length; j++) {
+            caches.delete(names[j]);
+          }
+        });
+      }
+    </script>
     <script type="module" crossorigin src="./assets/index-DljMgbYJ.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vendor-radix-f3_iNKhc.js">
     <link rel="modulepreload" crossorigin href="./assets/vendor-utils-CbK4XRml.js">
