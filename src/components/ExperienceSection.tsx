@@ -14,12 +14,15 @@ const timeline = [
     desc: "Connected, trained, and collaborated with 30+ MIS Executives across Seth Anandram Jaipuria Schools to establish a robust data bridge between individual schools and the corporate office. Transformed complex datasets — including exam results, academic audit reports, financial audit data, and operational metrics — into clear, actionable insights using Excel, Power BI, and advanced analytical techniques. Enabled key stakeholders including the VP Corporate, School Principals, and Promoters to make informed, data-driven decisions through intuitive dashboards and automated reporting systems.",
     memories: {
       highlights: [
+        "Organized and executed event operations & data tracking for #Athletica_2026 Annual Sports Day (543 student athletes & 58 sporting events)",
+        "Welcomed Chief Guest Mr. Praveen Kumar (Former Indian International Cricketer) & Guest of Honour Taarun Chawlla Sir",
         "Trained 30+ MIS Executives across multiple schools",
         "Established data communication bridge between schools & corporate",
         "Presented analytical insights to VP, Principals & Promoters",
         "Transformed raw data into executive-ready dashboards",
       ],
       achievements: [
+        "Successfully tracked & coordinated logistics for Athletica 2026 with 543 student participants",
         "Built unified reporting system for 30+ schools",
         "Reduced data turnaround time by 60%",
         "Created automated exam result analysis dashboards",
@@ -27,10 +30,38 @@ const timeline = [
         "Enabled real-time data visibility for leadership team",
       ],
       photos: [
-        { src: `${import.meta.env.BASE_URL}images/DA%20SAJS%20%20(1).png`, caption: "9th Leadership Conclave" },
-        { src: `${import.meta.env.BASE_URL}images/DA%20SAJS%20%20(2).png`, caption: "With The Mr. Taarun Chawlla Sir (Sr. VP Franchises) , Ms Kirti Srivastava Ma'am (GM Academics), Mr. Debashish Majumder Sir (DGM Operations )" },
+        { 
+          src: `${import.meta.env.BASE_URL}images/Professional%20Experience/athletica_2026_praveen_kumar.png`, 
+          caption: "Athletica 2026: With Chief Guest Mr. Praveen Kumar, Former Indian International Cricketer",
+          tag: "Athletica 2026"
+        },
+        { 
+          src: `${import.meta.env.BASE_URL}images/Professional%20Experience/athletica_2026_taarun_chawlla.png`, 
+          caption: "Athletica 2026: With Guest of Honour Mr. Taarun Chawlla Sir, Sr. VP – Partner Schools, Seth Anandram Jaipuria Group of Schools",
+          tag: "Athletica 2026"
+        },
+        { 
+          src: `${import.meta.env.BASE_URL}images/Professional%20Experience/athletica_2026_group_dignitaries.png`, 
+          caption: "Athletica 2026: Group Photo with Chief Guest Mr. Praveen Kumar, Mr. Taarun Chawlla Sir, and the Jaipuria Team",
+          tag: "Athletica 2026"
+        },
+        { 
+          src: `${import.meta.env.BASE_URL}images/Professional%20Experience/athletica_2026_team_field.png`, 
+          caption: "Athletica 2026: On-field celebration with Chief Guest Mr. Praveen Kumar, Mr. Taarun Chawlla Sir, Ms. Kirti Srivastava Ma'am, and Organizing Team",
+          tag: "Athletica 2026"
+        },
+        { 
+          src: `${import.meta.env.BASE_URL}images/DA%20SAJS%20%20(1).png`, 
+          caption: "9th Leadership Conclave — Strategic Analytics Presentation",
+          tag: "Conclave"
+        },
+        { 
+          src: `${import.meta.env.BASE_URL}images/DA%20SAJS%20%20(2).png`, 
+          caption: "With Mr. Taarun Chawlla Sir (Sr. VP Franchises), Ms. Kirti Srivastava Ma'am (GM Academics), and Mr. Debashish Majumder Sir (DGM Operations)",
+          tag: "Leadership"
+        },
       ],
-      note: "This role has been transformational — taking raw, scattered data from 30+ schools and turning it into a unified story that empowers decision-makers. Every dashboard I build, every training session I conduct, bridges the gap between numbers and understanding. Grateful to work where data truly drives educational excellence.",
+      note: "This role has been transformational — taking raw, scattered data from 30+ schools and turning it into a unified story that empowers decision-makers. Every dashboard I build, every training session I conduct, bridges the gap between numbers and understanding. From corporate MIS pipelines to coordinating high-energy events like Athletica 2026 alongside dignitaries like Mr. Praveen Kumar and Taarun Chawlla Sir, I am deeply grateful to work where data truly drives educational and institutional excellence.",
     },
   },
   {
@@ -158,6 +189,7 @@ const timeline = [
 
 const ExperienceSection = () => {
   const [selectedJob, setSelectedJob] = useState<number | null>(null);
+  const [activePhoto, setActivePhoto] = useState<{ src: string; caption: string } | null>(null);
 
   const scrollToExperience = (index: number) => {
     const element = document.getElementById(`experience-${index}`);
@@ -480,6 +512,66 @@ const ExperienceSection = () => {
                 </div>
               </div>
 
+              {/* Athletica 2026 Spotlight - Only for Jaipuria */}
+              {selectedJob === 0 && (
+                <div className="px-6 pb-2">
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.38 }}
+                    className="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-amber-500/10 via-primary/10 to-emerald-500/10 border-2 border-primary/30 shadow-lg space-y-4"
+                  >
+                    <div className="flex items-start justify-between gap-3 flex-wrap">
+                      <div>
+                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-amber-500/20 text-amber-500 border border-amber-500/30">
+                          <Trophy className="w-3.5 h-3.5" />
+                          <span>Annual Sports Extravaganza</span>
+                        </div>
+                        <h4 className="text-lg sm:text-xl font-bold text-foreground mt-2">
+                          #Athletica_2026: A Celebration of Sportsmanship 🏅
+                        </h4>
+                        <p className="text-xs text-muted-foreground mt-0.5">
+                          Hosted on 31st October at Seth Anandram Jaipuria School
+                        </p>
+                      </div>
+
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-card/80 border border-border text-foreground font-medium">
+                          Chief Guest: Mr. Praveen Kumar (Former Indian Cricketer)
+                        </span>
+                        <span className="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-card/80 border border-border text-foreground font-medium">
+                          Guest of Honour: Taarun Chawlla Sir (Sr. VP)
+                        </span>
+                      </div>
+                    </div>
+
+                    <p className="text-xs sm:text-sm text-foreground/90 leading-relaxed text-justify">
+                      From the first sprint to the final cheer, <strong>Athletica 2026</strong> was nothing short of spectacular! We were honoured to welcome former Indian cricketer <strong>Mr. Praveen Kumar</strong> as our Chief Guest, and <strong>Taarun Chawlla Sir</strong> (Sr. VP – Partner Schools, Seth Anandram Jaipuria Group of Schools) as Guest of Honour, whose presence and words inspired our students to play with passion and purpose. A big thank you to <strong>Ms. Kirti Srivastava Ma'am</strong> for her constant guidance and support, and to the entire team whose planning and hard work made the day run seamlessly.
+                    </p>
+
+                    {/* Athletica 2026 Metrics */}
+                    <div className="grid grid-cols-1 xs:grid-cols-3 gap-3 pt-2">
+                      <div className="p-3 rounded-xl bg-card/70 border border-border/80 text-center">
+                        <span className="block text-xl sm:text-2xl font-bold text-primary font-mono">543</span>
+                        <span className="text-[11px] sm:text-xs text-muted-foreground font-medium">Students Participated</span>
+                      </div>
+                      <div className="p-3 rounded-xl bg-card/70 border border-border/80 text-center">
+                        <span className="block text-xl sm:text-2xl font-bold text-emerald-500 font-mono">58</span>
+                        <span className="text-[11px] sm:text-xs text-muted-foreground font-medium">Sports Events</span>
+                      </div>
+                      <div className="p-3 rounded-xl bg-card/70 border border-border/80 text-center">
+                        <span className="block text-xl sm:text-2xl font-bold text-amber-500 font-mono">1</span>
+                        <span className="text-[11px] sm:text-xs text-muted-foreground font-medium">Spirit of Fair Play</span>
+                      </div>
+                    </div>
+
+                    <div className="text-[11px] font-mono text-primary/80 italic pt-1">
+                      #Athletica2026 #JaipuriaSchool #AnnualSportsDay #SportsAndSportsmanship #Teamwork #StudentLife #Jaipurians
+                    </div>
+                  </motion.div>
+                </div>
+              )}
+
               {/* Photos - Full Width Section */}
               {timeline[selectedJob].memories.photos.length > 0 && (
                 <div className="px-6 pb-6">
@@ -489,10 +581,14 @@ const ExperienceSection = () => {
                     transition={{ delay: 0.4 }}
                     className="bg-card/50 rounded-xl p-6 border border-border"
                   >
-                    <h3 className="text-sm font-semibold text-primary mb-5 flex items-center gap-2">
-                      <Camera className="w-4 h-4" />
-                      Photo Memories
-                    </h3>
+                    <div className="flex items-center justify-between mb-5 flex-wrap gap-2">
+                      <h3 className="text-sm font-semibold text-primary flex items-center gap-2">
+                        <Camera className="w-4 h-4" />
+                        Photo Memories ({timeline[selectedJob].memories.photos.length} Photos)
+                      </h3>
+                      <span className="text-[11px] text-muted-foreground font-mono">Click any photo to expand</span>
+                    </div>
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {timeline[selectedJob].memories.photos.map((photo, idx) => {
                         const photoSrc = typeof photo === 'string' ? photo : photo.src;
@@ -502,19 +598,24 @@ const ExperienceSection = () => {
                             key={idx}
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.45 + idx * 0.1 }}
-                            className="rounded-xl overflow-hidden bg-muted/50 shadow-lg flex flex-col items-center p-3 border-2 border-primary/30 hover:border-primary/60 transition-colors"
+                            transition={{ delay: 0.45 + idx * 0.08 }}
+                            className="rounded-xl overflow-hidden bg-muted/50 shadow-lg flex flex-col items-center p-3 border-2 border-primary/30 hover:border-primary/70 transition-all group/photo cursor-pointer"
+                            onClick={() => setActivePhoto({ src: photoSrc, caption: photoCaption })}
                           >
-                            <img
-                              src={photoSrc}
-                              alt={photoCaption || `Memory ${idx + 1}`}
-                              className="w-full h-auto object-contain rounded-lg hover:scale-[1.02] transition-transform duration-500 cursor-pointer border border-border"
-                              onError={(e) => {
-                                (e.target as HTMLImageElement).style.display = 'none';
-                              }}
-                            />
+                            <div className="relative w-full overflow-hidden rounded-lg">
+                              <img
+                                src={photoSrc}
+                                alt={photoCaption || `Memory ${idx + 1}`}
+                                className="w-full h-auto object-contain rounded-lg group-hover/photo:scale-[1.02] transition-transform duration-500 border border-border"
+                                onError={(e) => {
+                                  (e.target as HTMLImageElement).style.display = 'none';
+                                }}
+                              />
+                            </div>
                             {photoCaption && (
-                              <p className="mt-3 text-base text-center text-foreground font-semibold">{photoCaption}</p>
+                              <p className="mt-3 text-xs sm:text-sm text-center text-foreground font-semibold leading-snug">
+                                {photoCaption}
+                              </p>
                             )}
                           </motion.div>
                         );
@@ -524,6 +625,42 @@ const ExperienceSection = () => {
                 </div>
               )}
             </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* High-Resolution Photo Lightbox Modal */}
+      <AnimatePresence>
+        {activePhoto && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md"
+            onClick={() => setActivePhoto(null)}
+          >
+            <div 
+              className="relative max-w-4xl max-h-[92vh] flex flex-col items-center p-2"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setActivePhoto(null)}
+                className="self-end mb-2 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+                aria-label="Close photo preview"
+              >
+                <X className="w-6 h-6" />
+              </button>
+              <img
+                src={activePhoto.src}
+                alt={activePhoto.caption}
+                className="max-h-[75vh] w-auto max-w-full object-contain rounded-2xl shadow-2xl border border-white/20"
+              />
+              {activePhoto.caption && (
+                <p className="mt-3 text-center text-xs sm:text-sm text-white font-medium max-w-2xl px-4 py-2 rounded-xl bg-black/70 backdrop-blur border border-white/10">
+                  {activePhoto.caption}
+                </p>
+              )}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

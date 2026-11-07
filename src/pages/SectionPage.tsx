@@ -308,8 +308,24 @@ const FeaturedContent = () => (
   </div>
 );
 
+interface ExperienceItem {
+  title: string;
+  company: string;
+  logo: string;
+  location: string;
+  type: string;
+  period: string;
+  desc: string;
+  skills: string[];
+  photo?: {
+    src: string;
+    caption: string;
+    badge?: string;
+  };
+}
+
 const ExperienceContent = () => {
-  const experiences = [
+  const experiences: ExperienceItem[] = [
     {
       title: "Data Analyst",
       company: "Seth Anandram Jaipuria Group of Educational Institutions",
@@ -317,8 +333,13 @@ const ExperienceContent = () => {
       location: "Ghaziabad",
       type: "Full-time",
       period: "Dec 2025 — Present",
-      desc: "Connected, trained, and collaborated with 30+ MIS Executives across schools to build automated dashboards and executive reports in Power BI & Excel for senior leadership.",
-      skills: ["Power BI", "Excel", "MIS Automation", "Data Modeling", "Executive Reporting"],
+      desc: "Connected, trained, and collaborated with 30+ MIS Executives across schools to build automated dashboards and executive reports in Power BI & Excel for senior leadership. Coordinated event logistics & data tracking for Athletica 2026 (543 student participants, 58 sports events).",
+      skills: ["Power BI", "Excel", "MIS Automation", "Data Modeling", "Executive Reporting", "Event Operations"],
+      photo: {
+        src: `${import.meta.env.BASE_URL}images/Professional%20Experience/athletica_2026_praveen_kumar.png`,
+        caption: "Athletica 2026: With Chief Guest Mr. Praveen Kumar (Former Indian International Cricketer) & Taarun Chawlla Sir (Sr. VP) — Annual Sports Event tracking 543 participants across 58 sports events.",
+        badge: "#Athletica_2026 Annual Sports Day",
+      },
     },
     {
       title: "Data Analyst Intern",
@@ -420,7 +441,7 @@ const ExperienceContent = () => {
                 />
                 <div className="min-w-0 flex-1">
                   <span className="text-xs font-mono text-primary font-bold flex items-center gap-1.5 mb-1">
-                    <Camera className="w-3.5 h-3.5" /> On-Site Engineering Operations
+                    <Camera className="w-3.5 h-3.5" /> {exp.photo.badge || "On-Site Operations"}
                   </span>
                   <p className="text-xs text-foreground/90 font-medium leading-relaxed">
                     {exp.photo.caption}
