@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import ParticleField from "./ParticleField";
 import LinkPreview from "./ui/link-preview";
-import { ArrowDown, Download, MapPin } from "lucide-react";
+import { ArrowDown, Download, MapPin, Eye, FileText } from "lucide-react";
+import ResumePreviewModal from "./ResumePreviewModal";
 
 const HeroSection = () => {
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden grid-bg pt-20">
       <ParticleField />
@@ -102,19 +105,38 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="flex flex-wrap justify-center gap-3 md:gap-4 mb-8 sm:mb-12 md:mb-16"
+            className="flex flex-wrap justify-center items-center gap-3 md:gap-4 mb-8 sm:mb-12 md:mb-16"
           >
-            <motion.a
-              href="/Ritesh_Singh_Resume.pdf"
+            {/* Primary Action: Preview Resume in our Theme Border */}
+            <motion.button
+              type="button"
+              onClick={() => setIsResumeOpen(true)}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="px-5 sm:px-8 py-2 sm:py-3 rounded-lg glass text-foreground font-semibold text-xs sm:text-sm md:text-base flex items-center gap-2 border border-primary/30 hover:border-primary/60 transition-all shadow-sm"
-              download
+              className="px-5 sm:px-7 py-2.5 sm:py-3 rounded-xl bg-gradient-brand text-primary-foreground font-semibold text-xs sm:text-sm md:text-base flex items-center gap-2 glow-primary shadow-lg hover:shadow-primary/40 transition-all cursor-pointer"
+            >
+              <Eye className="w-4 h-4 shrink-0" />
+              <span>Preview Resume</span>
+            </motion.button>
+
+            {/* Secondary Action: Direct Download */}
+            <motion.a
+              href={`${import.meta.env.BASE_URL}Ritesh_Singh_Resume.pdf`}
+              download="Ritesh_Singh_Data_Analyst_Resume.pdf"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="px-5 sm:px-7 py-2.5 sm:py-3 rounded-xl glass text-foreground font-semibold text-xs sm:text-sm md:text-base flex items-center gap-2 border border-primary/40 hover:border-primary hover:bg-primary/10 transition-all shadow-sm"
             >
               <Download className="w-4 h-4 shrink-0 text-primary" />
-              <span>Download Resume</span>
+              <span>Download CV</span>
             </motion.a>
           </motion.div>
+
+          {/* Themed Resume Preview Modal */}
+          <ResumePreviewModal
+            isOpen={isResumeOpen}
+            onClose={() => setIsResumeOpen(false)}
+          />
 
           <motion.a
             href="#about-detailed"
