@@ -7,6 +7,15 @@ import SectionNavigator from "@/components/SectionNavigator";
 
 const testimonials = [
   {
+    name: "Dr. Swadha Bharttia",
+    designation: "Assistant Professor | PhD in Text Organisation | Indian Institute of Management Ranchi – NFLP | Life Skills Educator",
+    focus: ["Data Analytics", "Statistical Modeling", "Strategic Mindset"],
+    quote:
+      "I am pleased to recommend Ritesh Singh for opportunities in data analytics. As a life skills trainer at Jaipuria School of Business, I have mentored Ritesh over the past year in our Management Development Programs (MDPs) and employability skill workshops. His analytical prowess and strategic mindset make him an exceptional candidate.\n\nRitesh excels at transforming complex data into actionable insights. He led a team project analyzing market trends using Excel, Tableau, and Python, identifying key customer segments that improved simulated revenue forecasts by 25%. His proficiency with statistical models—like regression analysis and predictive modeling—ensures robust data integrity and precise forecasting.\n\nRitesh is proactive, detail-oriented, and thrives in high-stakes analytical environments. He consistently delivers results that align business strategy with data evidence. I endorse him wholeheartedly for any data analytics role.",
+    image: `${import.meta.env.BASE_URL}assets/aistudio/image_bd60b762.png`,
+    linkedin: "https://www.linkedin.com/in/swadhabharttia/",
+  },
+  {
     name: "Anita Nigam",
     designation: "Co-founder at WTF Gyms and Fitness",
     focus: ["Reporting Quality", "Turnaround", "Stakeholder Trust"],
@@ -186,7 +195,7 @@ const WordsThatMatterPage = () => {
                       <Quote className="w-3.5 h-3.5 shrink-0" />
                       <span>Spotlight Feedback</span>
                     </div>
-                    <p className="text-sm sm:text-base md:text-xl leading-relaxed text-foreground/95 text-left sm:text-justify break-words">"{activeItem.quote}"</p>
+                    <p className="text-sm sm:text-base md:text-xl leading-relaxed text-foreground/95 text-left sm:text-justify break-words whitespace-pre-line">"{activeItem.quote}"</p>
 
                     <div className="mt-4 flex flex-wrap gap-1.5 sm:gap-2">
                       {activeItem.focus.map((topic) => (
@@ -296,7 +305,7 @@ const WordsThatMatterPage = () => {
                           <Quote className="w-3.5 h-3.5 shrink-0" />
                           <span>Testimonial</span>
                         </div>
-                        <p className="text-sm sm:text-base md:text-lg leading-relaxed text-foreground/95 italic text-left sm:text-justify break-words">
+                        <p className="text-sm sm:text-base md:text-lg leading-relaxed text-foreground/95 italic text-left sm:text-justify break-words whitespace-pre-line">
                           "{item.quote}"
                         </p>
                         <div className="mt-4 flex flex-wrap gap-1.5 sm:gap-2">

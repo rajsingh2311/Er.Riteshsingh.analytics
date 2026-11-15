@@ -4,6 +4,12 @@ import { ArrowRight, Linkedin } from "lucide-react";
 
 const testimonials = [
   {
+    name: "Dr. Swadha Bharttia",
+    designation: "Assistant Professor | PhD in Text Organisation | Indian Institute of Management Ranchi – NFLP | Life Skills Educator",
+    image: `${import.meta.env.BASE_URL}assets/aistudio/image_bd60b762.png`,
+    linkedin: "https://www.linkedin.com/in/swadhabharttia/",
+  },
+  {
     name: "Anita Nigam",
     designation: "Co-founder at WTF Gyms and Fitness",
     image: `${import.meta.env.BASE_URL}images/Anita%20nigam.png`,
@@ -57,7 +63,7 @@ const WordsThatMatterSection = () => {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto min-w-0">
+        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-5 md:gap-6 max-w-5xl mx-auto min-w-0">
           {testimonials.map((item, index) => (
             <motion.div
               key={item.name}
