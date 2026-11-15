@@ -12,7 +12,7 @@ const testimonials = [
   {
     name: "Dr. Shraddha Srivastava",
     designation: "Ph.D., FDP-IIMA, Faculty (Finance & Accounting) at Jaipuria School of Business, Ghaziabad",
-    image: `${import.meta.env.BASE_URL}images/Shraddha_Srivastava.png`,
+    image: `${import.meta.env.BASE_URL}assets/aistudio/image_933f94fc.png`,
     linkedin: "https://www.linkedin.com/in/dr-shraddha-srivastava-ab86b2105/",
   },
   {

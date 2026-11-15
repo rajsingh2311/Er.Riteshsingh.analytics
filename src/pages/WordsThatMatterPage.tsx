@@ -21,7 +21,7 @@ const testimonials = [
     focus: ["Analytical Problem-Solving", "Collaboration", "Professionalism"],
     quote:
       "I highly recommend Ritesh, whom I had the opportunity to mentor at Jaipuria School of Business. He is a sincere and hardworking student with a strong commitment to learning and personal growth.\n\nWhat impressed me most about Ritesh was his analytical approach to problem-solving and his ability to collaborate effectively with peers. He consistently displayed professionalism, curiosity, and a positive attitude toward challenges.\n\nI am confident that Ritesh has the potential to grow into an excellent professional and make meaningful contributions to any team or organization.",
-    image: `${import.meta.env.BASE_URL}images/Shraddha_Srivastava.png`,
+    image: `${import.meta.env.BASE_URL}assets/aistudio/image_933f94fc.png`,
     linkedin: "https://www.linkedin.com/in/dr-shraddha-srivastava-ab86b2105/",
   },
   {
