@@ -140,7 +140,7 @@ const Navbar = () => {
           <ThemeSwitcher />
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden text-foreground p-1.5 rounded-lg hover:bg-muted/50 transition-colors"
+            className="md:hidden text-foreground p-1.5 rounded-lg hover:bg-muted/50 transition-colors shrink-0"
             aria-label="Toggle Navigation Menu"
           >
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -155,7 +155,7 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden glass border-t max-h-[calc(100vh-4rem)] overflow-y-auto"
+            className="md:hidden glass border-t max-h-[calc(100vh-4rem)] overflow-y-auto"
           >
             <div className="container mx-auto px-4 py-4 flex flex-col gap-1.5">
               <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider px-3 mb-1">

@@ -267,22 +267,22 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
                       {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </span>
                   </div>
-                  <div className="grid grid-cols-2 gap-2">
-                    <div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <div className="min-w-0">
                       <span className="text-muted-foreground block text-[11px]">Name:</span>
-                      <span className="font-medium text-foreground">{formData.name}</span>
+                      <span className="font-medium text-foreground break-words">{formData.name}</span>
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <span className="text-muted-foreground block text-[11px]">Designation:</span>
-                      <span className="font-medium text-foreground">{formData.designation}</span>
+                      <span className="font-medium text-foreground break-words">{formData.designation}</span>
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <span className="text-muted-foreground block text-[11px]">Contact No:</span>
-                      <span className="font-medium text-foreground">{formData.contactNo}</span>
+                      <span className="font-medium text-foreground break-all">{formData.contactNo}</span>
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <span className="text-muted-foreground block text-[11px]">Email:</span>
-                      <span className="font-medium text-foreground">{formData.email}</span>
+                      <span className="font-medium text-foreground break-all">{formData.email}</span>
                     </div>
                   </div>
                   {formData.message && (
@@ -532,13 +532,13 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
                     {/* Preferred Response Mode */}
                     <div className="flex items-center justify-between p-3 rounded-xl bg-secondary/30 border border-border text-xs flex-wrap gap-2">
                       <span className="text-muted-foreground font-medium">Preferred Reply Via:</span>
-                      <div className="flex items-center gap-1.5">
+                      <div className="flex flex-wrap items-center gap-1.5">
                         {(["Email", "WhatsApp", "Call"] as const).map((mode) => (
                           <button
                             key={mode}
                             type="button"
                             onClick={() => handleInputChange("preferredContact", mode)}
-                            className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${
+                            className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all whitespace-nowrap shrink-0 ${
                               formData.preferredContact === mode
                                 ? "bg-primary text-primary-foreground shadow-sm"
                                 : "bg-card text-muted-foreground hover:text-foreground border border-border"

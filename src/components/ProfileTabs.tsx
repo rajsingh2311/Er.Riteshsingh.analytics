@@ -262,8 +262,8 @@ const PreviewContent = ({ preview }: { preview: Preview }) => {
       <div className="space-y-3">
         {preview.items.map((item) => (
           <div key={item.title} className="flex items-start gap-3">
-            <div className="w-2 h-2 rounded-full bg-primary mt-1.5 glow-primary" />
-            <div>
+            <div className="w-2 h-2 rounded-full bg-primary mt-1.5 glow-primary shrink-0" />
+            <div className="min-w-0">
               <p className="text-sm font-medium">{item.title}</p>
               <p className="text-xs text-muted-foreground">{item.sub} · {item.year}</p>
             </div>
@@ -293,9 +293,9 @@ const PreviewContent = ({ preview }: { preview: Preview }) => {
     return (
       <div className="space-y-2">
         {preview.items.map((item) => (
-          <div key={item.label} className="flex justify-between items-center">
-            <span className="text-xs text-muted-foreground">{item.label}</span>
-            <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-primary/10 text-primary">{item.metric}</span>
+          <div key={item.label} className="flex justify-between items-center gap-2">
+            <span className="text-xs text-muted-foreground min-w-0">{item.label}</span>
+            <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-primary/10 text-primary whitespace-nowrap shrink-0">{item.metric}</span>
           </div>
         ))}
       </div>

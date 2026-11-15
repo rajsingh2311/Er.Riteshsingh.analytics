@@ -247,7 +247,7 @@ export const ResumePreviewModal: React.FC<ResumePreviewModalProps> = ({ isOpen, 
                     <FileText className="w-4 h-4" />
                     Professional Summary
                   </h3>
-                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed text-justify">
+                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed text-left sm:text-justify">
                     Data &amp; Business Analyst with 2+ years of experience turning operational data into decisions for leadership in education, fitness and market research. Own Power BI MIS reporting for a 30+ school group, cutting data turnaround by 60%, and have led a 20-member research team. Skilled in SQL, Power BI (DAX), Advanced Excel (MOS Expert) and Python, with a record of automating workflows (12+ hrs/week saved; lead response cut from 30 to under 10 min). PGDM in Business Analytics; Lean Six Sigma Green Belt.
                   </p>
                 </div>

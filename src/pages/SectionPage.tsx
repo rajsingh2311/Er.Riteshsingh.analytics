@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import React from "react";
+import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import { Star, Briefcase, GraduationCap, Award, FolderOpen, Heart, Zap, MessageSquare, Trophy, MapPin, Calendar, User, ChevronRight, X, Terminal, BarChart3, Layers, Camera } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -158,27 +159,27 @@ const AboutContent = () => (
       </div>
 
       {/* Content */}
-      <div className="relative z-10 rounded-2xl p-6 md:p-12 bg-background/50 backdrop-blur-sm">
+      <div className="relative z-10 rounded-2xl p-4 sm:p-6 md:p-12 bg-background/50 backdrop-blur-sm">
         {/* Title */}
-        <h3 className="text-xl md:text-3xl font-bold text-gradient mb-6 md:mb-8">
+        <h3 className="text-lg sm:text-xl md:text-3xl font-bold text-gradient mb-4 sm:mb-6 md:mb-8 break-words">
           Data Analyst | Business Intelligence Specialist
         </h3>
 
-        {/* Main Content - Justified Text */}
+        {/* Main Content - Responsive Text */}
         <div className="space-y-4 md:space-y-6 mb-6 md:mb-8">
-          <p className="text-sm md:text-base lg:text-lg text-foreground leading-relaxed text-justify">
+          <p className="text-sm md:text-base lg:text-lg text-foreground leading-relaxed text-left sm:text-justify">
             I am a Data Analyst at Seth Anandram Jaipuria Group of Educational Institutions, where I leverage SQL, 
             Predictive Analytics, and Power BI to transform raw institutional data into strategic insights. My focus is on 
             driving operational efficiency and supporting evidence-based decision-making within the education sector.
           </p>
 
-          <p className="text-sm md:text-base lg:text-lg text-foreground leading-relaxed text-justify">
+          <p className="text-sm md:text-base lg:text-lg text-foreground leading-relaxed text-left sm:text-justify">
             Previously, I honed my ability to merge technical analysis with business impact at WTF Gyms. There, I engineered 
             automation workflows (Make.com & WATI) that reduced lead response times by 65% and developed comprehensive Power BI 
             dashboards to track agent performance and funnel conversion.
           </p>
 
-          <p className="text-sm md:text-base lg:text-lg text-foreground leading-relaxed text-justify">
+          <p className="text-sm md:text-base lg:text-lg text-foreground leading-relaxed text-left sm:text-justify">
             I am passionate about #BuildingInPublic and sharing workflows that help businesses make smarter, faster decisions. 
             Let's connect to discuss data strategy and automation.
           </p>
@@ -394,10 +395,10 @@ const ExperienceContent = () => {
           initial={{ opacity: 0, x: -30 }} 
           animate={{ opacity: 1, x: 0 }} 
           transition={{ delay: i * 0.12 }} 
-          className="glass rounded-2xl p-6 md:p-8 relative overflow-hidden group border border-border/80 hover:border-primary/50 shadow-sm hover:shadow-[0_0_30px_rgba(var(--glow)/0.25)] hover:-translate-y-1 transition-all duration-300"
+          className="glass rounded-2xl p-4 sm:p-6 md:p-8 relative overflow-hidden group border border-border/80 hover:border-primary/50 shadow-sm hover:shadow-[0_0_30px_rgba(var(--glow)/0.25)] hover:-translate-y-1 transition-all duration-300"
         >
-          <div className="flex items-start gap-4 mb-4">
-            <div className="w-14 h-14 rounded-xl bg-white p-2 flex items-center justify-center flex-shrink-0 shadow-md border border-white/20">
+          <div className="flex flex-col xs:flex-row items-start gap-3 sm:gap-4 mb-4">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white p-1.5 sm:p-2 flex items-center justify-center shrink-0 shadow-md border border-white/20">
               <img 
                 src={exp.logo} 
                 alt={`${exp.company} logo`}
@@ -574,6 +575,15 @@ const EducationContent = () => {
 
 const CertificationsContent = () => {
   const [selectedImage, setSelectedImage] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    if (!selectedImage) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [selectedImage]);
   const certs = [
     { title: "Strategic Management", issuer: "Indian Institute of Management Bangalore", date: "Jan 2026", id: "—", link: "", image: `${import.meta.env.BASE_URL}images/certification/Strategic%20Management.png` },
     { title: "Lean Six Sigma Green Belt Certification", issuer: "Grant Thornton Bharat LLP", date: "Nov 2025", id: "8cc214ce5219", link: "https://leansixsigma.gtbharat.in/verify/8cc214ce5219?s=true", image: `${import.meta.env.BASE_URL}images/certification/Six%20Sigma.png` },
@@ -630,34 +640,39 @@ const CertificationsContent = () => {
           </HoverCard>
         ))}
       </div>
-      {selectedImage && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
-          onClick={() => setSelectedImage(null)}
-        >
+      {selectedImage &&
+        typeof document !== "undefined" &&
+        createPortal(
           <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="relative max-w-4xl max-h-[90vh]"
-            onClick={(e) => e.stopPropagation()}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-hidden"
+            onClick={() => setSelectedImage(null)}
           >
-            <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute -top-10 right-0 text-white hover:text-primary transition-colors"
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="relative max-w-4xl w-full max-h-[90dvh] flex flex-col items-center justify-center"
+              onClick={(e) => e.stopPropagation()}
             >
-              <X className="w-8 h-8" />
-            </button>
-            <img
-              src={selectedImage}
-              alt="Certificate"
-              className="max-w-full max-h-[85vh] object-contain rounded-lg"
-            />
-          </motion.div>
-        </motion.div>
-      )}
+              <button
+                type="button"
+                onClick={() => setSelectedImage(null)}
+                className="self-end mb-2.5 p-2 rounded-full bg-background/80 border border-border text-foreground hover:text-primary transition-colors shadow-lg shrink-0"
+                aria-label="Close certificate preview"
+              >
+                <X className="w-5 h-5" />
+              </button>
+              <img
+                src={selectedImage}
+                alt="Certificate"
+                className="max-w-full max-h-[78dvh] object-contain rounded-xl shadow-2xl border border-white/15"
+              />
+            </motion.div>
+          </motion.div>,
+          document.body
+        )}
     </>
   );
 };
@@ -717,45 +732,45 @@ const ProjectsContent: React.FC<ProjectsContentProps> = ({ activeTab, setActiveT
   return (
     <div className="space-y-8">
       {/* Mode Navigation Pills */}
-      <div className="flex flex-wrap items-center justify-center gap-3 p-1.5 rounded-2xl bg-card/60 backdrop-blur-md border border-border/60 max-w-2xl mx-auto shadow-sm">
+      <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5 p-1.5 rounded-2xl bg-card/60 backdrop-blur-md border border-border/60 w-full max-w-2xl mx-auto shadow-sm">
         <button
           onClick={() => setActiveTab("all")}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
+          className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap shrink-0 transition-all duration-200 ${
             activeTab === "all"
               ? "bg-primary text-primary-foreground shadow-md shadow-primary/25"
               : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
           }`}
         >
-          <Layers className="w-4 h-4" />
+          <Layers className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
           <span>All Projects ({projects.length})</span>
         </button>
 
         <button
           onClick={() => setActiveTab("python")}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
+          className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap shrink-0 transition-all duration-200 ${
             activeTab === "python"
               ? "bg-emerald-600 text-white shadow-md shadow-emerald-500/25"
               : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
           }`}
         >
-          <Terminal className="w-4 h-4 text-emerald-400" />
+          <Terminal className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 shrink-0" />
           <span>Python Live Simulator</span>
-          <span className="px-1.5 py-0.5 text-[10px] uppercase tracking-wider rounded-md bg-emerald-500/20 text-emerald-300 font-mono">
+          <span className="px-1.5 py-0.5 text-[10px] uppercase tracking-wider rounded-md bg-emerald-500/20 text-emerald-300 font-mono shrink-0">
             Interactive
           </span>
         </button>
 
         <button
           onClick={() => setActiveTab("powerbi")}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
+          className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap shrink-0 transition-all duration-200 ${
             activeTab === "powerbi"
               ? "bg-amber-600 text-white shadow-md shadow-amber-500/25"
               : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
           }`}
         >
-          <BarChart3 className="w-4 h-4 text-amber-300" />
+          <BarChart3 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-300 shrink-0" />
           <span>Power BI Hub & .PBIX</span>
-          <span className="px-1.5 py-0.5 text-[10px] uppercase tracking-wider rounded-md bg-amber-500/20 text-amber-200 font-mono">
+          <span className="px-1.5 py-0.5 text-[10px] uppercase tracking-wider rounded-md bg-amber-500/20 text-amber-200 font-mono shrink-0">
             Viewer
           </span>
         </button>

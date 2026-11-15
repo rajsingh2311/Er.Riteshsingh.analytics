@@ -20,6 +20,7 @@ import {
   ChevronRight
 } from "lucide-react";
 import { useEffect, useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import ParticleField from "@/components/ParticleField";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import SectionNavigator from "@/components/SectionNavigator";
@@ -216,6 +217,17 @@ const BTechPage = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleKeyDown]);
 
+  useEffect(() => {
+    if (activeModalIndex !== null) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [activeModalIndex]);
+
   const currentModalItem = activeModalIndex !== null ? filteredImages[activeModalIndex] : null;
 
   return (
@@ -322,7 +334,7 @@ const BTechPage = () => {
             className="glass rounded-2xl p-5 sm:p-7 md:p-9 border border-primary/30 shadow-[0_0_25px_rgba(139,92,246,0.15)] min-w-0"
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-gradient-brand flex items-center justify-center text-primary-foreground">
+              <div className="w-10 h-10 rounded-xl bg-gradient-brand flex items-center justify-center text-primary-foreground shrink-0">
                 <Compass className="w-5 h-5" />
               </div>
               <div>
@@ -392,7 +404,7 @@ const BTechPage = () => {
             className="glass rounded-2xl p-5 sm:p-7 md:p-9 border border-primary/30 shadow-[0_0_25px_rgba(139,92,246,0.15)] min-w-0"
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-gradient-brand flex items-center justify-center text-primary-foreground">
+              <div className="w-10 h-10 rounded-xl bg-gradient-brand flex items-center justify-center text-primary-foreground shrink-0">
                 <School className="w-5 h-5" />
               </div>
               <div>
@@ -402,10 +414,10 @@ const BTechPage = () => {
             </div>
 
             <div className="grid md:grid-cols-2 gap-4 sm:gap-5">
-              <div className="p-5 rounded-xl bg-card/50 border border-border/80 hover:border-primary/40 transition-colors">
-                <div className="flex items-start justify-between mb-2">
+              <div className="p-4 sm:p-5 rounded-xl bg-card/50 border border-border/80 hover:border-primary/40 transition-colors min-w-0">
+                <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
                   <span className="text-xs font-mono uppercase tracking-wider text-primary font-bold">Guest Lecturer</span>
-                  <span className="text-[11px] font-mono text-muted-foreground">IIT Roorkee</span>
+                  <span className="text-[11px] font-mono text-muted-foreground shrink-0">IIT Roorkee</span>
                 </div>
                 <h4 className="text-base font-bold text-foreground mb-1">
                   Dr. C. Balomajumder
@@ -418,10 +430,10 @@ const BTechPage = () => {
                 </p>
               </div>
 
-              <div className="p-5 rounded-xl bg-card/50 border border-border/80 hover:border-primary/40 transition-colors">
-                <div className="flex items-start justify-between mb-2">
+              <div className="p-4 sm:p-5 rounded-xl bg-card/50 border border-border/80 hover:border-primary/40 transition-colors min-w-0">
+                <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
                   <span className="text-xs font-mono uppercase tracking-wider text-primary font-bold">Institutional Leader</span>
-                  <span className="text-[11px] font-mono text-muted-foreground">SCRIET Meerut</span>
+                  <span className="text-[11px] font-mono text-muted-foreground shrink-0">SCRIET Meerut</span>
                 </div>
                 <h4 className="text-base font-bold text-foreground mb-1">
                   Director of Engineering
@@ -434,10 +446,10 @@ const BTechPage = () => {
                 </p>
               </div>
 
-              <div className="p-5 rounded-xl bg-card/50 border border-border/80 hover:border-primary/40 transition-colors">
-                <div className="flex items-start justify-between mb-2">
+              <div className="p-4 sm:p-5 rounded-xl bg-card/50 border border-border/80 hover:border-primary/40 transition-colors min-w-0">
+                <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
                   <span className="text-xs font-mono uppercase tracking-wider text-primary font-bold">Head of Department</span>
-                  <span className="text-[11px] font-mono text-muted-foreground">Chemical Engg.</span>
+                  <span className="text-[11px] font-mono text-muted-foreground shrink-0">Chemical Engg.</span>
                 </div>
                 <h4 className="text-base font-bold text-foreground mb-1">
                   Dr. Aman Kumar
@@ -450,10 +462,10 @@ const BTechPage = () => {
                 </p>
               </div>
 
-              <div className="p-5 rounded-xl bg-card/50 border border-border/80 hover:border-primary/40 transition-colors">
-                <div className="flex items-start justify-between mb-2">
+              <div className="p-4 sm:p-5 rounded-xl bg-card/50 border border-border/80 hover:border-primary/40 transition-colors min-w-0">
+                <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
                   <span className="text-xs font-mono uppercase tracking-wider text-primary font-bold">Faculty & Guide</span>
-                  <span className="text-[11px] font-mono text-muted-foreground">Chemical Engg.</span>
+                  <span className="text-[11px] font-mono text-muted-foreground shrink-0">Chemical Engg.</span>
                 </div>
                 <h4 className="text-base font-bold text-foreground mb-1">
                   Dr. Pratyush Upadhyay
@@ -476,7 +488,7 @@ const BTechPage = () => {
             className="glass rounded-2xl p-5 sm:p-7 md:p-9 border border-primary/30 shadow-[0_0_25px_rgba(139,92,246,0.15)] min-w-0"
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-gradient-brand flex items-center justify-center text-primary-foreground">
+              <div className="w-10 h-10 rounded-xl bg-gradient-brand flex items-center justify-center text-primary-foreground shrink-0">
                 <Users className="w-5 h-5" />
               </div>
               <div>
@@ -486,11 +498,11 @@ const BTechPage = () => {
             </div>
 
             <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
-              <div className="p-5 rounded-xl bg-card/60 border border-border/80 hover:border-primary/40 transition-colors flex flex-col justify-between">
+              <div className="p-4 sm:p-5 rounded-xl bg-card/60 border border-border/80 hover:border-primary/40 transition-colors flex flex-col justify-between min-w-0">
                 <div>
-                  <div className="flex items-center justify-between mb-2">
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                     <span className="text-xs font-mono uppercase tracking-wider text-primary font-bold">National Society</span>
-                    <span className="text-[11px] font-mono text-muted-foreground">Coordinator</span>
+                    <span className="text-[11px] font-mono text-muted-foreground shrink-0">Coordinator</span>
                   </div>
                   <h4 className="text-base font-bold text-foreground mb-1.5">
                     Indian Water Resources Society (IWRS)
@@ -505,15 +517,15 @@ const BTechPage = () => {
                   rel="noopener noreferrer" 
                   className="inline-flex items-center gap-1.5 text-xs text-primary hover:underline font-semibold"
                 >
-                  Visit IWRS Official Portal <Globe className="w-3.5 h-3.5" />
+                  Visit IWRS Official Portal <Globe className="w-3.5 h-3.5 shrink-0" />
                 </a>
               </div>
 
-              <div className="p-5 rounded-xl bg-card/60 border border-border/80 hover:border-primary/40 transition-colors flex flex-col justify-between">
+              <div className="p-4 sm:p-5 rounded-xl bg-card/60 border border-border/80 hover:border-primary/40 transition-colors flex flex-col justify-between min-w-0">
                 <div>
-                  <div className="flex items-center justify-between mb-2">
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                     <span className="text-xs font-mono uppercase tracking-wider text-primary font-bold">Government of India Mission</span>
-                    <span className="text-[11px] font-mono text-muted-foreground">Coordinator</span>
+                    <span className="text-[11px] font-mono text-muted-foreground shrink-0">Coordinator</span>
                   </div>
                   <h4 className="text-base font-bold text-foreground mb-1.5">
                     Unnat Bharat Abhiyan (IIT Delhi)
@@ -544,9 +556,9 @@ const BTechPage = () => {
           >
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
               <div>
-                <div className="flex items-center gap-2 mb-1">
+                <div className="flex flex-wrap items-center gap-2 mb-1">
                   <h3 className="text-xl sm:text-2xl font-bold text-gradient">Campus & Academic Moments</h3>
-                  <span className="px-2.5 py-0.5 rounded-full bg-primary/20 text-primary text-xs font-mono font-semibold border border-primary/30">
+                  <span className="px-2.5 py-0.5 rounded-full bg-primary/20 text-primary text-xs font-mono font-semibold border border-primary/30 whitespace-nowrap shrink-0">
                     {filteredImages.length} {filteredImages.length === 1 ? "Photo" : "Photos"}
                   </span>
                 </div>
@@ -671,7 +683,7 @@ const BTechPage = () => {
               onClick={() => navigate("/twelfth")}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl glass border border-border hover:border-primary text-xs sm:text-sm font-semibold transition-all hover:bg-primary/10"
             >
-              <ArrowLeft className="w-4 h-4 text-primary" />
+              <ArrowLeft className="w-4 h-4 text-primary shrink-0" />
               <span>Previous: 12th Grade (PCM)</span>
             </button>
 
@@ -687,7 +699,7 @@ const BTechPage = () => {
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl glass border border-border hover:border-primary text-xs sm:text-sm font-semibold transition-all hover:bg-primary/10"
             >
               <span>Next: PGDM (Business Analytics)</span>
-              <ArrowRight className="w-4 h-4 text-primary" />
+              <ArrowRight className="w-4 h-4 text-primary shrink-0" />
             </button>
           </div>
 
@@ -695,92 +707,96 @@ const BTechPage = () => {
       </div>
 
       {/* Enlarged Photo Lightbox Modal with Next / Prev */}
-      <AnimatePresence>
-        {activeModalIndex !== null && currentModalItem && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 md:p-6"
-            onClick={() => setActiveModalIndex(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.92, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.92, opacity: 0 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative max-w-4xl w-full max-h-[92vh] glass rounded-2xl overflow-hidden border border-primary/40 shadow-2xl flex flex-col bg-card/95"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Close Button */}
-              <button
+      {typeof document !== "undefined" &&
+        createPortal(
+          <AnimatePresence>
+            {activeModalIndex !== null && currentModalItem && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 md:p-6"
                 onClick={() => setActiveModalIndex(null)}
-                className="absolute top-3 right-3 z-30 p-2 rounded-full bg-black/70 text-white hover:text-primary hover:bg-black/90 transition-colors shadow-lg"
-                aria-label="Close modal"
               >
-                <X className="w-5 h-5" />
-              </button>
+                <motion.div
+                  initial={{ scale: 0.92, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.92, opacity: 0 }}
+                  transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                  className="relative max-w-4xl w-full max-h-[92dvh] glass rounded-2xl overflow-hidden border border-primary/40 shadow-2xl flex flex-col bg-card/95"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {/* Close Button */}
+                  <button
+                    onClick={() => setActiveModalIndex(null)}
+                    className="absolute top-3 right-3 z-30 p-2 rounded-full bg-black/70 text-white hover:text-primary hover:bg-black/90 transition-colors shadow-lg shrink-0"
+                    aria-label="Close modal"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
 
-              {/* Prev / Next Buttons */}
-              <button
-                onClick={handlePrev}
-                className="absolute left-3 top-1/2 -translate-y-1/2 z-30 p-2.5 rounded-full bg-black/60 hover:bg-black/90 text-white hover:text-primary border border-white/10 transition-colors shadow-lg"
-                aria-label="Previous photo"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button
-                onClick={handleNext}
-                className="absolute right-3 top-1/2 -translate-y-1/2 z-30 p-2.5 rounded-full bg-black/60 hover:bg-black/90 text-white hover:text-primary border border-white/10 transition-colors shadow-lg"
-                aria-label="Next photo"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
+                  {/* Prev / Next Buttons */}
+                  <button
+                    onClick={handlePrev}
+                    className="absolute left-2 sm:left-3 top-[27dvh] sm:top-1/2 -translate-y-1/2 z-30 p-2 sm:p-2.5 rounded-full bg-black/60 hover:bg-black/90 text-white hover:text-primary border border-white/10 transition-colors shadow-lg shrink-0"
+                    aria-label="Previous photo"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={handleNext}
+                    className="absolute right-2 sm:right-3 top-[27dvh] sm:top-1/2 -translate-y-1/2 z-30 p-2 sm:p-2.5 rounded-full bg-black/60 hover:bg-black/90 text-white hover:text-primary border border-white/10 transition-colors shadow-lg shrink-0"
+                    aria-label="Next photo"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
 
-              {/* Counter Badge */}
-              <div className="absolute top-3 left-3 z-30 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-xs font-mono text-primary font-semibold">
-                Photo {activeModalIndex + 1} of {filteredImages.length}
-              </div>
+                  {/* Counter Badge */}
+                  <div className="absolute top-3 left-3 z-30 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-xs font-mono text-primary font-semibold whitespace-nowrap shrink-0">
+                    Photo {activeModalIndex + 1} of {filteredImages.length}
+                  </div>
 
-              {/* Image Container */}
-              <div className="relative max-h-[62vh] sm:max-h-[66vh] flex items-center justify-center bg-black/70 overflow-hidden">
-                <img
-                  src={currentModalItem.src}
-                  alt={currentModalItem.title}
-                  className="max-h-[62vh] sm:max-h-[66vh] w-auto max-w-full object-contain"
-                />
-              </div>
+                  {/* Image Container */}
+                  <div className="relative max-h-[54dvh] sm:max-h-[64dvh] flex items-center justify-center bg-black/70 overflow-hidden shrink-0">
+                    <img
+                      src={currentModalItem.src}
+                      alt={currentModalItem.title}
+                      className="max-h-[54dvh] sm:max-h-[64dvh] w-auto max-w-full object-contain"
+                    />
+                  </div>
 
-              {/* Details & Caption */}
-              <div className="p-4 sm:p-5 bg-card/95 border-t border-border overflow-y-auto max-h-[25vh]">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1.5">
-                  <h4 className="font-bold text-base sm:text-lg text-foreground">{currentModalItem.title}</h4>
-                  <span className="text-xs font-mono text-primary font-semibold shrink-0">{currentModalItem.tag}</span>
-                </div>
-                <p className="text-xs text-primary/90 font-mono mb-2">{currentModalItem.subtitle}</p>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  {currentModalItem.description}
-                </p>
+                  {/* Details & Caption */}
+                  <div className="p-3.5 sm:p-5 bg-card/95 border-t border-border overflow-y-auto max-h-[30dvh]">
+                    <div className="flex flex-wrap items-center justify-between gap-1.5 mb-1.5">
+                      <h4 className="font-bold text-sm sm:text-lg text-foreground break-words">{currentModalItem.title}</h4>
+                      <span className="text-xs font-mono text-primary font-semibold whitespace-nowrap shrink-0">{currentModalItem.tag}</span>
+                    </div>
+                    <p className="text-xs text-primary/90 font-mono mb-2 break-words">{currentModalItem.subtitle}</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed break-words">
+                      {currentModalItem.description}
+                    </p>
 
-                {/* Thumbnails Strip */}
-                <div className="mt-3.5 pt-3 border-t border-border/50 flex items-center gap-2 overflow-x-auto pb-1">
-                  {filteredImages.map((img, i) => (
-                    <button
-                      key={img.id}
-                      onClick={() => setActiveModalIndex(i)}
-                      className={`relative w-12 h-10 sm:w-14 sm:h-11 rounded-lg overflow-hidden shrink-0 border-2 transition-all ${
-                        i === activeModalIndex ? "border-primary scale-105 shadow-md shadow-primary/30" : "border-border/60 opacity-60 hover:opacity-100"
-                      }`}
-                    >
-                      <img src={img.src} alt={img.title} className="w-full h-full object-cover" />
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
+                    {/* Thumbnails Strip */}
+                    <div className="mt-3.5 pt-3 border-t border-border/50 flex items-center gap-2 overflow-x-auto pb-1">
+                      {filteredImages.map((img, i) => (
+                        <button
+                          key={img.id}
+                          onClick={() => setActiveModalIndex(i)}
+                          className={`relative w-12 h-10 sm:w-14 sm:h-11 rounded-lg overflow-hidden shrink-0 border-2 transition-all ${
+                            i === activeModalIndex ? "border-primary scale-105 shadow-md shadow-primary/30" : "border-border/60 opacity-60 hover:opacity-100"
+                          }`}
+                        >
+                          <img src={img.src} alt={img.title} className="w-full h-full object-cover" />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
     </div>
   );
 };

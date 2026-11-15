@@ -128,7 +128,7 @@ const WordsThatMatterPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <ParticleField />
       <Navbar />
 
@@ -181,18 +181,18 @@ const WordsThatMatterPage = () => {
                 </a>
 
                 <div className="rounded-xl border border-primary/20 bg-gradient-to-r from-primary/10 to-transparent p-4 md:p-5 flex">
-                  <div className="my-auto w-full">
+                  <div className="my-auto w-full min-w-0">
                     <div className="inline-flex items-center gap-2 text-xs font-mono px-2.5 py-1 rounded-full bg-primary/15 text-primary mb-3">
-                      <Quote className="w-3.5 h-3.5" />
-                      Spotlight Feedback
+                      <Quote className="w-3.5 h-3.5 shrink-0" />
+                      <span>Spotlight Feedback</span>
                     </div>
-                    <p className="text-base md:text-xl leading-relaxed text-foreground/95 text-justify">"{activeItem.quote}"</p>
+                    <p className="text-sm sm:text-base md:text-xl leading-relaxed text-foreground/95 text-left sm:text-justify break-words">"{activeItem.quote}"</p>
 
-                    <div className="mt-4 flex flex-wrap gap-2">
+                    <div className="mt-4 flex flex-wrap gap-1.5 sm:gap-2">
                       {activeItem.focus.map((topic) => (
                         <span
                           key={topic}
-                          className="text-[11px] md:text-xs font-mono px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground"
+                          className="text-[11px] md:text-xs font-mono px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground whitespace-nowrap shrink-0"
                         >
                           {topic}
                         </span>
@@ -202,30 +202,32 @@ const WordsThatMatterPage = () => {
                 </div>
               </div>
 
-              <div className="relative z-10 mt-4 md:mt-5 flex flex-wrap items-center justify-between gap-3">
-                <div className="flex items-center gap-2">
+              <div className="relative z-10 mt-4 md:mt-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <div className="flex items-center gap-2 shrink-0">
                   <button
                     type="button"
                     onClick={goPrev}
-                    className="w-9 h-9 rounded-full border border-primary/30 bg-background/60 flex items-center justify-center text-primary"
+                    className="w-9 h-9 rounded-full border border-primary/30 bg-background/60 flex items-center justify-center text-primary shrink-0 hover:bg-primary/10 transition-colors"
+                    aria-label="Previous testimonial"
                   >
-                    <ArrowLeft className="w-4 h-4" />
+                    <ArrowLeft className="w-4 h-4 shrink-0" />
                   </button>
 
                   <button
                     type="button"
                     onClick={goNext}
-                    className="w-9 h-9 rounded-full border border-primary/30 bg-background/60 flex items-center justify-center text-primary"
+                    className="w-9 h-9 rounded-full border border-primary/30 bg-background/60 flex items-center justify-center text-primary shrink-0 hover:bg-primary/10 transition-colors"
+                    aria-label="Next testimonial"
                   >
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-4 h-4 shrink-0" />
                   </button>
                 </div>
 
-                <div className="flex-1 min-w-[220px] text-center px-2">
+                <div className="w-full sm:w-auto sm:flex-1 text-center px-1 sm:px-2 min-w-0">
                   <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
                     A live testimonial spotlight from people who have worked closely with me.
                   </p>
-                  <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
+                  <div className="mt-2 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
                     {[
                       "Trusted by Mentors",
                       "Leadership Feedback",
@@ -233,7 +235,7 @@ const WordsThatMatterPage = () => {
                     ].map((item) => (
                       <span
                         key={item}
-                        className="text-[10px] md:text-xs font-mono px-2 py-1 rounded-full bg-secondary text-secondary-foreground"
+                        className="text-[10px] md:text-xs font-mono px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground whitespace-nowrap shrink-0"
                       >
                         {item}
                       </span>
@@ -241,7 +243,7 @@ const WordsThatMatterPage = () => {
                   </div>
                 </div>
 
-                <div className="w-[74px]" />
+                <div className="hidden sm:block w-[74px] shrink-0" />
               </div>
             </div>
           </div>

@@ -16,6 +16,7 @@ import {
   Rocket
 } from "lucide-react";
 import { useEffect, useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import ParticleField from "@/components/ParticleField";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import SectionNavigator from "@/components/SectionNavigator";
@@ -251,6 +252,17 @@ const PGDMPage = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleKeyDown]);
 
+  useEffect(() => {
+    if (activeModalIndex !== null) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [activeModalIndex]);
+
   const currentModalItem = activeModalIndex !== null ? filteredImages[activeModalIndex] : null;
 
   return (
@@ -366,7 +378,7 @@ const PGDMPage = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="glass rounded-2xl p-6 md:p-8 mb-12 border border-primary/30 shadow-[0_0_25px_rgba(var(--glow)/0.15)]"
+            className="glass rounded-2xl p-4 sm:p-6 md:p-8 mb-10 sm:mb-12 border border-primary/30 shadow-[0_0_25px_rgba(var(--glow)/0.15)] min-w-0"
           >
             <h3 className="text-xl md:text-2xl font-bold mb-6 text-gradient">My PGDM Journey</h3>
             
@@ -710,102 +722,112 @@ const PGDMPage = () => {
       {/* ============================================================ */}
       {/* LIGHTBOX MODAL WITH NAVIGATION & METADATA */}
       {/* ============================================================ */}
-      <AnimatePresence>
-        {currentModalItem && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-6"
-            onClick={() => setActiveModalIndex(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.92, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.92, opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="relative max-w-5xl w-full max-h-[95vh] flex flex-col rounded-2xl overflow-hidden glass border border-primary/40 shadow-[0_0_50px_rgba(var(--glow)/0.4)]"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Modal Top Bar */}
-              <div className="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-border bg-card/80">
-                <div className="flex items-center gap-2">
-                  <span className="px-2 py-0.5 rounded text-[11px] font-mono bg-primary/15 text-primary border border-primary/30">
-                    {currentModalItem.tag}
-                  </span>
-                  <span className="text-xs text-muted-foreground font-mono">
-                    {activeModalIndex! + 1} of {filteredImages.length}
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => setActiveModalIndex(null)}
-                    className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/40 transition-colors"
-                    title="Close (Esc)"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
+      {typeof document !== "undefined" &&
+        createPortal(
+          <AnimatePresence>
+            {currentModalItem && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md flex items-center justify-center p-2.5 sm:p-6 overflow-hidden"
+                onClick={() => setActiveModalIndex(null)}
+              >
+                <motion.div
+                  initial={{ scale: 0.92, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.92, opacity: 0 }}
+                  transition={{ duration: 0.25 }}
+                  className="relative max-w-5xl w-full max-h-[92dvh] flex flex-col rounded-2xl overflow-hidden glass border border-primary/40 shadow-[0_0_50px_rgba(var(--glow)/0.4)]"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {/* Modal Top Bar */}
+                  <div className="flex items-center justify-between px-3.5 sm:px-6 py-2.5 sm:py-3 border-b border-border bg-card/80 shrink-0 gap-2">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <span className="px-2 py-0.5 rounded text-[11px] font-mono bg-primary/15 text-primary border border-primary/30 whitespace-nowrap shrink-0">
+                        {currentModalItem.tag}
+                      </span>
+                      <span className="text-xs text-muted-foreground font-mono whitespace-nowrap shrink-0">
+                        {activeModalIndex! + 1} of {filteredImages.length}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2 shrink-0">
+                      <button
+                        type="button"
+                        onClick={() => setActiveModalIndex(null)}
+                        className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/40 transition-colors shrink-0"
+                        title="Close (Esc)"
+                        aria-label="Close modal"
+                      >
+                        <X className="w-5 h-5" />
+                      </button>
+                    </div>
+                  </div>
 
-              {/* Main Image Display */}
-              <div className="relative flex-1 bg-black/90 flex items-center justify-center min-h-[300px] max-h-[65vh] p-2 sm:p-4 overflow-hidden select-none">
-                <img
-                  src={currentModalItem.src}
-                  alt={currentModalItem.title}
-                  className="max-h-[62vh] max-w-full object-contain rounded-lg"
-                />
+                  {/* Main Image Display */}
+                  <div className="relative flex-1 bg-black/90 flex items-center justify-center min-h-[200px] sm:min-h-[300px] max-h-[56dvh] sm:max-h-[64dvh] p-2 sm:p-4 overflow-hidden select-none">
+                    <img
+                      src={currentModalItem.src}
+                      alt={currentModalItem.title}
+                      className="max-h-[52dvh] sm:max-h-[60dvh] max-w-full object-contain rounded-lg"
+                    />
 
-                {/* Left Navigation Arrow */}
-                {filteredImages.length > 1 && (
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handlePrev();
-                    }}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 p-2 sm:p-3 rounded-full bg-black/60 hover:bg-primary text-white hover:text-primary-foreground border border-white/20 transition-all backdrop-blur-sm"
-                    title="Previous (Left Arrow)"
-                  >
-                    <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
-                  </button>
-                )}
+                    {/* Left Navigation Arrow */}
+                    {filteredImages.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handlePrev();
+                        }}
+                        className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 p-2 sm:p-3 rounded-full bg-black/60 hover:bg-primary text-white hover:text-primary-foreground border border-white/20 transition-all backdrop-blur-sm shrink-0"
+                        title="Previous (Left Arrow)"
+                        aria-label="Previous image"
+                      >
+                        <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+                      </button>
+                    )}
 
-                {/* Right Navigation Arrow */}
-                {filteredImages.length > 1 && (
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleNext();
-                    }}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 p-2 sm:p-3 rounded-full bg-black/60 hover:bg-primary text-white hover:text-primary-foreground border border-white/20 transition-all backdrop-blur-sm"
-                    title="Next (Right Arrow)"
-                  >
-                    <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
-                  </button>
-                )}
-              </div>
+                    {/* Right Navigation Arrow */}
+                    {filteredImages.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleNext();
+                        }}
+                        className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 p-2 sm:p-3 rounded-full bg-black/60 hover:bg-primary text-white hover:text-primary-foreground border border-white/20 transition-all backdrop-blur-sm shrink-0"
+                        title="Next (Right Arrow)"
+                        aria-label="Next image"
+                      >
+                        <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+                      </button>
+                    )}
+                  </div>
 
-              {/* Modal Bottom Metadata Card */}
-              <div className="p-4 sm:p-6 bg-card/90 border-t border-border">
-                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
-                  <h3 className="text-base sm:text-lg font-bold text-foreground">
-                    {currentModalItem.title}
-                  </h3>
-                  <span className="text-xs font-mono text-primary font-medium">
-                    {currentModalItem.categoryLabel}
-                  </span>
-                </div>
-                <p className="text-xs sm:text-sm text-secondary-foreground font-medium mb-1">
-                  {currentModalItem.role}
-                </p>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  {currentModalItem.description}
-                </p>
-              </div>
-            </motion.div>
-          </motion.div>
+                  {/* Modal Bottom Metadata Card */}
+                  <div className="p-3.5 sm:p-6 bg-card/90 border-t border-border overflow-y-auto max-h-[28dvh] shrink-0">
+                    <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
+                      <h3 className="text-sm sm:text-lg font-bold text-foreground break-words">
+                        {currentModalItem.title}
+                      </h3>
+                      <span className="text-xs font-mono text-primary font-medium shrink-0">
+                        {currentModalItem.categoryLabel}
+                      </span>
+                    </div>
+                    <p className="text-xs sm:text-sm text-secondary-foreground font-medium mb-1 break-words">
+                      {currentModalItem.role}
+                    </p>
+                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed break-words">
+                      {currentModalItem.description}
+                    </p>
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
     </div>
   );
 };

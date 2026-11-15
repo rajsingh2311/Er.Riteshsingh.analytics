@@ -121,7 +121,7 @@ const ProjectsSection = () => {
 
         {/* Navigation Mode Pill Switcher */}
         <div className="flex justify-center mb-8 max-w-full">
-          <div className="flex items-center gap-1.5 p-1.5 rounded-2xl glass border border-primary/30 shadow-md bg-card/60 backdrop-blur-md max-w-full overflow-x-auto scrollbar-hide">
+          <div className="flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-2xl glass border border-primary/30 shadow-md bg-card/60 backdrop-blur-md w-full sm:w-auto max-w-full">
             <button
               onClick={() => setActiveTab("overview")}
               className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-medium whitespace-nowrap transition-all shrink-0 ${
@@ -132,7 +132,7 @@ const ProjectsSection = () => {
             >
               <FolderGit2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
               <span>All Projects</span>
-              <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
+              <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono shrink-0 ${
                 activeTab === "overview" ? "bg-black/20 text-white" : "bg-muted text-muted-foreground"
               }`}>
                 {projects.length}
@@ -149,7 +149,7 @@ const ProjectsSection = () => {
             >
               <Terminal className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 shrink-0" />
               <span>Python Studio</span>
-              <span className="text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-mono font-bold uppercase">
+              <span className="text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-mono font-bold uppercase shrink-0">
                 Interactive
               </span>
             </button>
@@ -164,7 +164,7 @@ const ProjectsSection = () => {
             >
               <BarChart3 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 shrink-0" />
               <span>Power BI Hub</span>
-              <span className="text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 font-mono font-bold uppercase">
+              <span className="text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 font-mono font-bold uppercase shrink-0">
                 Viewer
               </span>
             </button>

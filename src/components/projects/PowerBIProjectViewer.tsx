@@ -331,7 +331,7 @@ export const PowerBIProjectViewer: React.FC = () => {
     : currentDataset.chartData.filter(d => d.label === selectedSlicer);
 
   return (
-    <div className={`glass rounded-2xl border border-primary/30 p-3 sm:p-6 md:p-8 shadow-[0_0_30px_rgba(var(--glow)/0.15)] space-y-6 min-w-0 max-w-full ${isFullscreen ? "fixed inset-0 z-50 overflow-y-auto bg-background/95 p-4 sm:p-6" : ""}`}>
+    <div className={`glass rounded-2xl border border-primary/30 p-3 sm:p-6 md:p-8 shadow-[0_0_30px_rgba(var(--glow)/0.15)] space-y-6 min-w-0 max-w-full ${isFullscreen ? "fixed inset-0 z-[100] overflow-y-auto bg-background/95 p-3 sm:p-6" : ""}`}>
       {/* ------------------------------------------------------------- */}
       {/* 1. TOP SECTION HEADER & MODE SELECTOR                         */}
       {/* ------------------------------------------------------------- */}
@@ -411,13 +411,13 @@ export const PowerBIProjectViewer: React.FC = () => {
               setSelectedSlicer("All");
               setMainTab("canvas");
             }}
-            className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all flex items-center gap-1.5 ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium whitespace-nowrap shrink-0 transition-all flex items-center gap-1.5 ${
               currentDataset.id === "jaipuria"
                 ? "bg-primary text-primary-foreground font-bold shadow-xs border border-primary"
                 : "bg-muted/70 text-muted-foreground hover:text-foreground hover:bg-muted border border-border/60"
             }`}
           >
-            <School className="w-3.5 h-3.5 text-amber-400" />
+            <School className="w-3.5 h-3.5 text-amber-400 shrink-0" />
             <span>Jaipuria MIS (.pbix)</span>
           </button>
 
@@ -427,13 +427,13 @@ export const PowerBIProjectViewer: React.FC = () => {
               setSelectedSlicer("All");
               setMainTab("canvas");
             }}
-            className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all flex items-center gap-1.5 ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium whitespace-nowrap shrink-0 transition-all flex items-center gap-1.5 ${
               currentDataset.id === "wtf"
                 ? "bg-primary text-primary-foreground font-bold shadow-xs border border-primary"
                 : "bg-muted/70 text-muted-foreground hover:text-foreground hover:bg-muted border border-border/60"
             }`}
           >
-            <Dumbbell className="w-3.5 h-3.5 text-emerald-400" />
+            <Dumbbell className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
             <span>WTF Gyms Funnel (.pbix)</span>
           </button>
 
@@ -443,13 +443,13 @@ export const PowerBIProjectViewer: React.FC = () => {
               setSelectedSlicer("All");
               setMainTab("canvas");
             }}
-            className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all flex items-center gap-1.5 ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium whitespace-nowrap shrink-0 transition-all flex items-center gap-1.5 ${
               currentDataset.id === "rfm"
                 ? "bg-primary text-primary-foreground font-bold shadow-xs border border-primary"
                 : "bg-muted/70 text-muted-foreground hover:text-foreground hover:bg-muted border border-border/60"
             }`}
           >
-            <ShoppingBag className="w-3.5 h-3.5 text-cyan-400" />
+            <ShoppingBag className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
             <span>Retail RFM (.csv)</span>
           </button>
         </div>
@@ -604,7 +604,7 @@ export const PowerBIProjectViewer: React.FC = () => {
                 <div className="flex items-center gap-1.5 flex-wrap">
                   <button
                     onClick={() => setSelectedSlicer("All")}
-                    className={`px-2.5 py-1 rounded-md text-xs font-mono font-medium transition-colors ${
+                    className={`px-2.5 py-1 rounded-md text-xs font-mono font-medium whitespace-nowrap shrink-0 transition-colors ${
                       selectedSlicer === "All"
                         ? "bg-primary/20 text-primary border border-primary/40 font-bold"
                         : "bg-muted text-muted-foreground hover:text-foreground"
@@ -616,7 +616,7 @@ export const PowerBIProjectViewer: React.FC = () => {
                     <button
                       key={c.label}
                       onClick={() => setSelectedSlicer(c.label)}
-                      className={`px-2.5 py-1 rounded-md text-xs font-mono font-medium transition-colors ${
+                      className={`px-2.5 py-1 rounded-md text-xs font-mono font-medium whitespace-nowrap shrink-0 transition-colors ${
                         selectedSlicer === c.label
                           ? "bg-primary/20 text-primary border border-primary/40 font-bold"
                           : "bg-muted text-muted-foreground hover:text-foreground"
@@ -664,18 +664,18 @@ export const PowerBIProjectViewer: React.FC = () => {
           {viewMode === "dashboard" && (
             <div className="space-y-6">
               {/* 4 Executive KPI Cards */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+              <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
                 {currentDataset.kpiMetrics.map((kpi, idx) => (
-                  <div key={idx} className="p-4 rounded-xl glass border border-border/80 flex flex-col justify-between hover:border-primary/40 transition-colors">
-                    <span className="text-[11px] font-mono text-muted-foreground uppercase tracking-wider block mb-1">
+                  <div key={idx} className="p-3.5 sm:p-4 rounded-xl glass border border-border/80 flex flex-col justify-between hover:border-primary/40 transition-colors min-w-0">
+                    <span className="text-[11px] font-mono text-muted-foreground uppercase tracking-wider block mb-1 truncate">
                       {kpi.label}
                     </span>
-                    <div className="flex items-baseline justify-between mt-1">
-                      <span className="text-xl sm:text-2xl font-bold font-mono text-foreground">
+                    <div className="flex flex-wrap items-baseline justify-between gap-1 mt-1">
+                      <span className="text-lg sm:text-2xl font-bold font-mono text-foreground">
                         {kpi.value}
                       </span>
                       <span className="text-[11px] font-mono font-semibold text-emerald-400 flex items-center gap-0.5 shrink-0">
-                        <ArrowUpRight className="w-3 h-3" />
+                        <ArrowUpRight className="w-3 h-3 shrink-0" />
                         {kpi.delta}
                       </span>
                     </div>
@@ -684,9 +684,9 @@ export const PowerBIProjectViewer: React.FC = () => {
               </div>
 
               {/* Visual Charts Grid */}
-              <div className="grid md:grid-cols-12 gap-6">
+              <div className="grid md:grid-cols-12 gap-4 sm:gap-6">
                 {/* Primary Bar Chart */}
-                <div className="md:col-span-8 p-5 rounded-2xl glass border border-border space-y-3">
+                <div className="md:col-span-8 p-3.5 sm:p-5 rounded-2xl glass border border-border space-y-3 min-w-0 overflow-hidden">
                   <div className="flex items-center justify-between">
                     <h4 className="text-xs font-mono uppercase text-primary font-bold flex items-center gap-1.5">
                       <BarChart3 className="w-3.5 h-3.5" />
@@ -721,7 +721,7 @@ export const PowerBIProjectViewer: React.FC = () => {
                 </div>
 
                 {/* Donut Distribution Breakdown */}
-                <div className="md:col-span-4 p-5 rounded-2xl glass border border-border space-y-3 flex flex-col justify-between">
+                <div className="md:col-span-4 p-3.5 sm:p-5 rounded-2xl glass border border-border space-y-3 flex flex-col justify-between min-w-0 overflow-hidden">
                   <div>
                     <h4 className="text-xs font-mono uppercase text-primary font-bold flex items-center gap-1.5 mb-2">
                       <Layers className="w-3.5 h-3.5" />
@@ -791,7 +791,7 @@ export const PowerBIProjectViewer: React.FC = () => {
           {/* VIEW OPTION 2: DATA TABLE GRID VIEW                         */}
           {/* ----------------------------------------------------------- */}
           {viewMode === "table" && (
-            <div className="p-5 rounded-2xl glass border border-border space-y-4">
+            <div className="p-3.5 sm:p-5 rounded-2xl glass border border-border space-y-4 min-w-0 overflow-hidden">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-border">
                 <div className="flex items-center gap-2">
                   <Table2 className="w-4 h-4 text-primary" />
@@ -847,11 +847,11 @@ export const PowerBIProjectViewer: React.FC = () => {
           {/* VIEW OPTION 3: DAX MEASURES & DATA MODEL VIEW               */}
           {/* ----------------------------------------------------------- */}
           {viewMode === "model" && (
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
               {/* DAX Measures */}
-              <div className="p-5 rounded-2xl glass border border-border space-y-4">
+              <div className="p-3.5 sm:p-5 rounded-2xl glass border border-border space-y-4 min-w-0 overflow-hidden">
                 <div className="flex items-center gap-2 pb-2 border-b border-border">
-                  <Sigma className="w-4 h-4 text-primary" />
+                  <Sigma className="w-4 h-4 text-primary shrink-0" />
                   <h4 className="text-sm font-bold text-foreground">
                     DAX Calculated Measures ({currentDataset.measures.length})
                   </h4>
@@ -859,14 +859,14 @@ export const PowerBIProjectViewer: React.FC = () => {
 
                 <div className="space-y-3">
                   {currentDataset.measures.map((m, idx) => (
-                    <div key={idx} className="p-3 rounded-xl bg-card border border-border space-y-1.5">
-                      <span className="text-xs font-mono font-bold text-primary block">
+                    <div key={idx} className="p-3 rounded-xl bg-card border border-border space-y-1.5 min-w-0">
+                      <span className="text-xs font-mono font-bold text-primary block break-words">
                         {m.name}
                       </span>
-                      <div className="p-2 rounded bg-black/60 text-emerald-400 font-mono text-[11px] overflow-x-auto">
+                      <div className="p-2 rounded bg-black/60 text-emerald-400 font-mono text-[11px] overflow-x-auto max-w-full">
                         <code>{m.formula}</code>
                       </div>
-                      <p className="text-[11px] text-muted-foreground leading-relaxed">
+                      <p className="text-[11px] text-muted-foreground leading-relaxed break-words">
                         {m.desc}
                       </p>
                     </div>
@@ -875,9 +875,9 @@ export const PowerBIProjectViewer: React.FC = () => {
               </div>
 
               {/* Data Model Entities */}
-              <div className="p-5 rounded-2xl glass border border-border space-y-4">
+              <div className="p-3.5 sm:p-5 rounded-2xl glass border border-border space-y-4 min-w-0 overflow-hidden">
                 <div className="flex items-center gap-2 pb-2 border-b border-border">
-                  <Database className="w-4 h-4 text-primary" />
+                  <Database className="w-4 h-4 text-primary shrink-0" />
                   <h4 className="text-sm font-bold text-foreground">
                     Data Model Entities ({currentDataset.tables.length})
                   </h4>
@@ -885,12 +885,12 @@ export const PowerBIProjectViewer: React.FC = () => {
 
                 <div className="space-y-2.5">
                   {currentDataset.tables.map((table, idx) => (
-                    <div key={idx} className="p-3 rounded-xl bg-card border border-border flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                        <span className="text-xs font-mono font-bold text-foreground">{table}</span>
+                    <div key={idx} className="p-3 rounded-xl bg-card border border-border flex flex-wrap items-center justify-between gap-2 min-w-0">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0" />
+                        <span className="text-xs font-mono font-bold text-foreground truncate">{table}</span>
                       </div>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-muted text-muted-foreground">
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-muted text-muted-foreground whitespace-nowrap shrink-0">
                         {table.startsWith("Fact") ? "Fact Table (1:*)" : "Dimension (*:1)"}
                       </span>
                     </div>

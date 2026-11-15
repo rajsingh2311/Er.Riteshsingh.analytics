@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Award, ExternalLink, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 
 const certifications = [
@@ -61,6 +62,16 @@ const certifications = [
 
 const CertificationsSection = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!selectedImage) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [selectedImage]);
+
   return (
     <section id="certifications" className="pt-12 pb-10 md:pt-14 md:pb-12 relative overflow-hidden">
       {/* Floating atoms background */}
@@ -146,37 +157,43 @@ const CertificationsSection = () => {
       </div>
 
       {/* Image Modal */}
-      <AnimatePresence>
-        {selectedImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
-            onClick={() => setSelectedImage(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              className="relative max-w-4xl max-h-[90vh]"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
+      {typeof document !== "undefined" &&
+        createPortal(
+          <AnimatePresence>
+            {selectedImage && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-[100] bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-hidden"
                 onClick={() => setSelectedImage(null)}
-                className="absolute -top-10 right-0 text-white hover:text-primary transition-colors"
               >
-                <X className="w-8 h-8" />
-              </button>
-              <img
-                src={selectedImage}
-                alt="Certificate"
-                className="max-w-full max-h-[85vh] object-contain rounded-lg"
-              />
-            </motion.div>
-          </motion.div>
+                <motion.div
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.9, opacity: 0 }}
+                  className="relative max-w-4xl w-full max-h-[90dvh] flex flex-col items-center justify-center"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setSelectedImage(null)}
+                    className="self-end mb-2.5 p-2 rounded-full bg-background/80 border border-border text-foreground hover:text-primary transition-colors shadow-lg shrink-0"
+                    aria-label="Close certificate preview"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                  <img
+                    src={selectedImage}
+                    alt="Certificate"
+                    className="max-w-full max-h-[78dvh] object-contain rounded-xl shadow-2xl border border-white/15"
+                  />
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
     </section>
   );
 };

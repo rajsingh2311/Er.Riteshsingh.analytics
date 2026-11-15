@@ -621,25 +621,25 @@ export const PythonProjectSimulator = () => {
         </div>
 
         {/* Quick Scenario Fill Buttons & Run Script Button */}
-        <div className="flex flex-wrap items-center gap-2.5">
-          <span className="text-[11px] font-mono text-muted-foreground hidden sm:inline">Scenarios:</span>
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-[11px] font-mono text-muted-foreground hidden sm:inline shrink-0">Scenarios:</span>
           {activeModel === "attrition" && (
             <div className="flex flex-wrap items-center gap-1.5">
               <button
                 onClick={() => { applyAttritionPreset("risk"); runModelSimulation("attrition"); }}
-                className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium whitespace-nowrap bg-red-500/15 text-red-400 border border-red-500/30 hover:bg-red-500/25 transition-all cursor-pointer"
+                className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium whitespace-nowrap shrink-0 bg-red-500/15 text-red-400 border border-red-500/30 hover:bg-red-500/25 transition-all cursor-pointer"
               >
                 High Flight Risk
               </button>
               <button
                 onClick={() => { applyAttritionPreset("stable"); runModelSimulation("attrition"); }}
-                className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium whitespace-nowrap bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/25 transition-all cursor-pointer"
+                className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium whitespace-nowrap shrink-0 bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/25 transition-all cursor-pointer"
               >
                 Stable Retained
               </button>
               <button
                 onClick={() => { applyAttritionPreset("star"); runModelSimulation("attrition"); }}
-                className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium whitespace-nowrap bg-primary/15 text-primary border border-primary/30 hover:bg-primary/25 transition-all cursor-pointer"
+                className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium whitespace-nowrap shrink-0 bg-primary/15 text-primary border border-primary/30 hover:bg-primary/25 transition-all cursor-pointer"
               >
                 Top Performer
               </button>
@@ -650,19 +650,19 @@ export const PythonProjectSimulator = () => {
             <div className="flex flex-wrap items-center gap-1.5">
               <button
                 onClick={() => { applyRfmPreset("champions"); runModelSimulation("rfm"); }}
-                className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium whitespace-nowrap bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/25 transition-all cursor-pointer"
+                className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium whitespace-nowrap shrink-0 bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/25 transition-all cursor-pointer"
               >
                 Champions
               </button>
               <button
                 onClick={() => { applyRfmPreset("atrisk"); runModelSimulation("rfm"); }}
-                className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium whitespace-nowrap bg-amber-500/15 text-amber-400 border border-amber-500/30 hover:bg-amber-500/25 transition-all cursor-pointer"
+                className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium whitespace-nowrap shrink-0 bg-amber-500/15 text-amber-400 border border-amber-500/30 hover:bg-amber-500/25 transition-all cursor-pointer"
               >
                 At-Risk
               </button>
               <button
                 onClick={() => { applyRfmPreset("new"); runModelSimulation("rfm"); }}
-                className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium whitespace-nowrap bg-primary/15 text-primary border border-primary/30 hover:bg-primary/25 transition-all cursor-pointer"
+                className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium whitespace-nowrap shrink-0 bg-primary/15 text-primary border border-primary/30 hover:bg-primary/25 transition-all cursor-pointer"
               >
                 Trial Cohort
               </button>
@@ -673,19 +673,19 @@ export const PythonProjectSimulator = () => {
             <div className="flex flex-wrap items-center gap-1.5">
               <button
                 onClick={() => { applyEbankingPreset("power"); runModelSimulation("ebanking"); }}
-                className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium whitespace-nowrap bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/25 transition-all cursor-pointer"
+                className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium whitespace-nowrap shrink-0 bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/25 transition-all cursor-pointer"
               >
                 High Adoption
               </button>
               <button
                 onClick={() => { applyEbankingPreset("hesitant"); runModelSimulation("ebanking"); }}
-                className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium whitespace-nowrap bg-amber-500/15 text-amber-400 border border-amber-500/30 hover:bg-amber-500/25 transition-all cursor-pointer"
+                className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium whitespace-nowrap shrink-0 bg-amber-500/15 text-amber-400 border border-amber-500/30 hover:bg-amber-500/25 transition-all cursor-pointer"
               >
                 Skeptic
               </button>
               <button
                 onClick={() => { applyEbankingPreset("standard"); runModelSimulation("ebanking"); }}
-                className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium whitespace-nowrap bg-primary/15 text-primary border border-primary/30 hover:bg-primary/25 transition-all cursor-pointer"
+                className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium whitespace-nowrap shrink-0 bg-primary/15 text-primary border border-primary/30 hover:bg-primary/25 transition-all cursor-pointer"
               >
                 Standard
               </button>
@@ -699,9 +699,9 @@ export const PythonProjectSimulator = () => {
               runModelSimulation(activeModel);
             }}
             disabled={isExecuting}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-mono font-bold bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-500/25 transition-all active:scale-95 disabled:opacity-50 cursor-pointer whitespace-nowrap"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-mono font-bold bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-500/25 transition-all active:scale-95 disabled:opacity-50 cursor-pointer whitespace-nowrap shrink-0"
           >
-            <Play className={`w-3.5 h-3.5 ${isExecuting ? "animate-spin" : "fill-current"}`} />
+            <Play className={`w-3.5 h-3.5 shrink-0 ${isExecuting ? "animate-spin" : "fill-current"}`} />
             <span>{isExecuting ? "Executing..." : "Run Python Code"}</span>
           </button>
         </div>
@@ -771,16 +771,16 @@ export const PythonProjectSimulator = () => {
                     </div>
 
                     {/* Overtime Toggle */}
-                    <div className="flex items-center justify-between p-2 rounded-lg bg-muted/40 border border-border">
+                    <div className="flex flex-wrap items-center justify-between gap-2 p-2.5 rounded-lg bg-muted/40 border border-border">
                       <span className="text-xs text-secondary-foreground font-medium">Frequent Overtime Demand</span>
-                      <div className="flex items-center gap-1">
+                      <div className="flex items-center gap-1 shrink-0">
                         <button
                           onClick={() => {
                             const updated = { ...attritionInputs, overtime: false };
                             setAttritionInputs(updated);
                             setEditableCode(getAttritionPythonCode(updated));
                           }}
-                          className={`px-3 py-1 rounded-md text-xs font-mono transition-all ${
+                          className={`px-2.5 sm:px-3 py-1 rounded-md text-xs font-mono whitespace-nowrap shrink-0 transition-all ${
                             !attritionInputs.overtime ? "bg-primary text-primary-foreground font-bold" : "text-muted-foreground"
                           }`}
                         >
@@ -792,7 +792,7 @@ export const PythonProjectSimulator = () => {
                             setAttritionInputs(updated);
                             setEditableCode(getAttritionPythonCode(updated));
                           }}
-                          className={`px-3 py-1 rounded-md text-xs font-mono transition-all ${
+                          className={`px-2.5 sm:px-3 py-1 rounded-md text-xs font-mono whitespace-nowrap shrink-0 transition-all ${
                             attritionInputs.overtime ? "bg-red-500 text-white font-bold" : "text-muted-foreground"
                           }`}
                         >
@@ -894,7 +894,7 @@ export const PythonProjectSimulator = () => {
 
                 {activeModel === "ebanking" && (
                   <div className="space-y-3">
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="grid grid-cols-1 xs:grid-cols-2 gap-2">
                       <div>
                         <span className="text-[11px] text-muted-foreground block mb-1">Gender:</span>
                         <select
@@ -957,35 +957,37 @@ export const PythonProjectSimulator = () => {
             {/* LIVE PYTHON CODE EDITOR TEXTAREA */}
             <div className="rounded-xl border border-border overflow-hidden bg-[#0d1117] text-gray-200 font-mono text-xs shadow-inner">
               {/* Code Editor Titlebar */}
-              <div className="flex items-center justify-between px-4 py-2.5 bg-[#161b22] border-b border-[#30363d]">
-                <div className="flex items-center gap-2">
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                    <div className="w-3 h-3 rounded-full bg-amber-500/80" />
-                    <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
+              <div className="flex flex-wrap items-center justify-between gap-2 px-3 sm:px-4 py-2.5 bg-[#161b22] border-b border-[#30363d]">
+                <div className="flex items-center gap-2 min-w-0 flex-1">
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500/80" />
+                    <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-500/80" />
+                    <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-emerald-500/80" />
                   </div>
-                  <span className="text-gray-400 text-xs ml-2 flex items-center gap-1">
-                    <FileCode className="w-3.5 h-3.5 text-emerald-400" />
-                    {activeModel === "attrition" ? "attrition_predictor.py" : activeModel === "rfm" ? "rfm_segmentation.py" : "spss_ebanking_stats.py"}
+                  <span className="text-gray-400 text-xs ml-1 sm:ml-2 flex items-center gap-1 min-w-0 truncate">
+                    <FileCode className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                    <span className="truncate">
+                      {activeModel === "attrition" ? "attrition_predictor.py" : activeModel === "rfm" ? "rfm_segmentation.py" : "spss_ebanking_stats.py"}
+                    </span>
                   </span>
-                  <span className="px-1.5 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                  <span className="px-1.5 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 whitespace-nowrap shrink-0 hidden xs:inline-block">
                     Live Editable
                   </span>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 shrink-0">
                   <button
                     onClick={copyCodeToClipboard}
-                    className="flex items-center gap-1 px-2 py-1 rounded bg-[#21262d] hover:bg-[#30363d] text-gray-300 transition-colors text-[11px]"
+                    className="flex items-center gap-1 px-2 py-1 rounded bg-[#21262d] hover:bg-[#30363d] text-gray-300 transition-colors text-[11px] whitespace-nowrap shrink-0"
                   >
-                    {copied ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                    {copied ? <Check className="w-3 h-3 text-emerald-400 shrink-0" /> : <Copy className="w-3 h-3 shrink-0" />}
                     <span>{copied ? "Copied" : "Copy"}</span>
                   </button>
 
                   <button
                     onClick={() => syncCodeFromInputs(activeModel)}
                     title="Reset to default script"
-                    className="p-1 rounded bg-[#21262d] hover:bg-[#30363d] text-gray-300 transition-colors"
+                    className="p-1.5 rounded bg-[#21262d] hover:bg-[#30363d] text-gray-300 transition-colors shrink-0"
                   >
                     <RotateCcw className="w-3 h-3" />
                   </button>
@@ -1009,16 +1011,16 @@ export const PythonProjectSimulator = () => {
               </div>
 
               {/* Footer bar with Run trigger hint */}
-              <div className="flex items-center justify-between px-3 py-1.5 bg-[#161b22] border-t border-[#30363d] text-[11px] text-gray-400">
-                <span>Tip: You can edit variable values directly in the code window above</span>
+              <div className="flex flex-wrap items-center justify-between gap-2 px-3 py-1.5 bg-[#161b22] border-t border-[#30363d] text-[11px] text-gray-400">
+                <span className="min-w-0">Tip: You can edit variable values directly in the code window above</span>
                 <button
                   onClick={() => {
                     parseCodeAndUpdateInputs(editableCode, activeModel);
                     runModelSimulation(activeModel);
                   }}
-                  className="text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1"
+                  className="text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1 whitespace-nowrap shrink-0"
                 >
-                  <Play className="w-3 h-3 fill-current" /> Run Script
+                  <Play className="w-3 h-3 fill-current shrink-0" /> Run Script
                 </button>
               </div>
             </div>
@@ -1066,19 +1068,19 @@ export const PythonProjectSimulator = () => {
             {activeModel === "attrition" && (
               <div className="space-y-6">
                 {/* Result Hero Card */}
-                <div className="p-6 rounded-2xl glass border border-primary/40 relative overflow-hidden">
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
+                <div className="p-4 sm:p-6 rounded-2xl glass border border-primary/40 relative overflow-hidden">
+                  <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
+                    <div className="min-w-0">
                       <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground block">
                         Calculated Churn Probability
                       </span>
-                      <div className="flex items-baseline gap-3 mt-1">
-                        <span className={`text-4xl md:text-5xl font-black font-mono ${
+                      <div className="flex flex-wrap items-baseline gap-2.5 sm:gap-3 mt-1">
+                        <span className={`text-3xl sm:text-4xl md:text-5xl font-black font-mono ${
                           attritionResult.riskTier === "High" ? "text-red-500" : attritionResult.riskTier === "Medium" ? "text-amber-500" : "text-emerald-500"
                         }`}>
                           {attritionResult.prob}%
                         </span>
-                        <span className={`px-3 py-1 rounded-full text-xs font-mono font-bold uppercase ${
+                        <span className={`px-3 py-1 rounded-full text-xs font-mono font-bold uppercase whitespace-nowrap shrink-0 ${
                           attritionResult.riskTier === "High"
                             ? "bg-red-500/20 text-red-400 border border-red-500/40"
                             : attritionResult.riskTier === "Medium"
@@ -1090,7 +1092,7 @@ export const PythonProjectSimulator = () => {
                       </div>
                     </div>
 
-                    <div className="text-right">
+                    <div className="text-left sm:text-right shrink-0">
                       <span className="text-[11px] font-mono text-muted-foreground block">Model Benchmark</span>
                       <span className="text-xs font-mono font-bold text-primary">ROC-AUC: 0.89</span>
                     </div>
@@ -1122,21 +1124,21 @@ export const PythonProjectSimulator = () => {
                 </div>
 
                 {/* Feature Importance Bar Chart */}
-                <div className="p-5 rounded-2xl glass border border-border">
-                  <div className="flex items-center justify-between mb-3">
+                <div className="p-4 sm:p-5 rounded-2xl glass border border-border min-w-0 overflow-hidden">
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
                     <h4 className="text-xs font-mono uppercase text-primary font-bold flex items-center gap-1.5">
-                      <BarChart2 className="w-3.5 h-3.5" />
-                      Shapley Feature Importance (Risk Drivers)
+                      <BarChart2 className="w-3.5 h-3.5 shrink-0" />
+                      <span>Shapley Feature Importance (Risk Drivers)</span>
                     </h4>
-                    <span className="text-[11px] font-mono text-muted-foreground">Scikit-Learn Weights</span>
+                    <span className="text-[11px] font-mono text-muted-foreground shrink-0">Scikit-Learn Weights</span>
                   </div>
 
                   <div className="h-52 w-full">
                     <ResponsiveContainer width="100%" height="100%">
-                      <BarChart data={attritionResult.featureImportance} layout="vertical" margin={{ top: 5, right: 30, left: 70, bottom: 5 }}>
+                      <BarChart data={attritionResult.featureImportance} layout="vertical" margin={{ top: 5, right: 16, left: 0, bottom: 5 }}>
                         <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border) / 0.5)" />
                         <XAxis type="number" tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }} />
-                        <YAxis dataKey="feature" type="category" width={110} tick={{ fontSize: 11, fill: "hsl(var(--foreground))" }} />
+                        <YAxis dataKey="feature" type="category" width={92} tick={{ fontSize: 10, fill: "hsl(var(--foreground))" }} />
                         <Tooltip
                           contentStyle={{
                             backgroundColor: "hsl(var(--card))",
@@ -1191,21 +1193,21 @@ export const PythonProjectSimulator = () => {
             {/* MODEL 2 RESULTS: RFM CUSTOMER SEGMENTATION */}
             {activeModel === "rfm" && (
               <div className="space-y-6">
-                <div className="p-6 rounded-2xl glass border border-primary/40">
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
+                <div className="p-4 sm:p-6 rounded-2xl glass border border-primary/40">
+                  <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
+                    <div className="min-w-0">
                       <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground block">
                         Assigned Customer Cohort
                       </span>
-                      <h4 className="text-2xl md:text-3xl font-extrabold text-foreground mt-1">
+                      <h4 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-foreground mt-1 break-words">
                         {rfmResult.segment}
                       </h4>
-                      <span className="text-xs font-mono text-primary mt-1 inline-block">
+                      <span className="text-xs font-mono text-primary mt-1 inline-block break-all">
                         Composite RFM Vector: {rfmResult.rfmCode}
                       </span>
                     </div>
 
-                    <div className="text-right">
+                    <div className="text-left sm:text-right shrink-0">
                       <span className="text-[11px] font-mono text-muted-foreground block">Projected 1-Yr CLV</span>
                       <span className="text-xl md:text-2xl font-black font-mono text-emerald-400">
                         ₹{rfmResult.estimatedClv.toLocaleString()}
@@ -1213,24 +1215,24 @@ export const PythonProjectSimulator = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-3 gap-3 pt-3 border-t border-border">
-                    <div className="p-2.5 rounded-lg bg-card/60 border border-border text-center">
+                  <div className="grid grid-cols-3 gap-2 sm:gap-3 pt-3 border-t border-border">
+                    <div className="p-2 sm:p-2.5 rounded-lg bg-card/60 border border-border text-center">
                       <span className="text-[10px] font-mono text-muted-foreground block">Recency Score</span>
-                      <span className="text-lg font-bold font-mono text-primary">{rfmResult.scores.rScore} / 5</span>
+                      <span className="text-base sm:text-lg font-bold font-mono text-primary">{rfmResult.scores.rScore} / 5</span>
                     </div>
-                    <div className="p-2.5 rounded-lg bg-card/60 border border-border text-center">
+                    <div className="p-2 sm:p-2.5 rounded-lg bg-card/60 border border-border text-center">
                       <span className="text-[10px] font-mono text-muted-foreground block">Frequency Score</span>
-                      <span className="text-lg font-bold font-mono text-primary">{rfmResult.scores.fScore} / 5</span>
+                      <span className="text-base sm:text-lg font-bold font-mono text-primary">{rfmResult.scores.fScore} / 5</span>
                     </div>
-                    <div className="p-2.5 rounded-lg bg-card/60 border border-border text-center">
+                    <div className="p-2 sm:p-2.5 rounded-lg bg-card/60 border border-border text-center">
                       <span className="text-[10px] font-mono text-muted-foreground block">Monetary Score</span>
-                      <span className="text-lg font-bold font-mono text-primary">{rfmResult.scores.mScore} / 5</span>
+                      <span className="text-base sm:text-lg font-bold font-mono text-primary">{rfmResult.scores.mScore} / 5</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Radar Chart */}
-                <div className="p-5 rounded-2xl glass border border-border">
+                <div className="p-3.5 sm:p-5 rounded-2xl glass border border-border min-w-0 overflow-hidden">
                   <span className="text-xs font-mono uppercase text-primary font-bold block mb-3">
                     Multi-Dimensional RFM Profile Radar
                   </span>
@@ -1251,31 +1253,31 @@ export const PythonProjectSimulator = () => {
             {/* MODEL 3 RESULTS: SPSS E-BANKING HYPOTHESIS TEST */}
             {activeModel === "ebanking" && (
               <div className="space-y-6">
-                <div className="p-6 rounded-2xl glass border border-primary/40">
+                <div className="p-4 sm:p-6 rounded-2xl glass border border-primary/40">
                   <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground block">
                     Calculated Satisfaction Index
                   </span>
-                  <div className="flex items-baseline gap-3 mt-1 mb-4">
-                    <span className="text-4xl md:text-5xl font-black font-mono text-primary">
+                  <div className="flex flex-wrap items-baseline gap-2.5 sm:gap-3 mt-1 mb-4">
+                    <span className="text-3xl sm:text-4xl md:text-5xl font-black font-mono text-primary">
                       {eBankingResult.satisfactionScore} / 10
                     </span>
-                    <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
+                    <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 whitespace-nowrap shrink-0">
                       p &lt; 0.05 (Statistically Significant)
                     </span>
                   </div>
 
                   <div className="p-3 rounded-lg bg-card/80 border border-border space-y-2 text-xs">
-                    <div className="flex justify-between">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
                       <span className="text-muted-foreground">Chi-Square Statistic (χ²):</span>
-                      <span className="font-mono font-bold text-foreground">{eBankingResult.chiSquare}</span>
+                      <span className="font-mono font-bold text-foreground shrink-0">{eBankingResult.chiSquare}</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
                       <span className="text-muted-foreground">Calculated p-value:</span>
-                      <span className="font-mono font-bold text-emerald-400">{eBankingResult.pVal}</span>
+                      <span className="font-mono font-bold text-emerald-400 shrink-0">{eBankingResult.pVal}</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
                       <span className="text-muted-foreground">Sample Size:</span>
-                      <span className="font-mono font-bold text-foreground">226 respondents</span>
+                      <span className="font-mono font-bold text-foreground shrink-0">226 respondents</span>
                     </div>
                   </div>
                 </div>

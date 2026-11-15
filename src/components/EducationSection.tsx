@@ -107,12 +107,12 @@ const EducationSection = () => {
                   )}
                 </div>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed break-words mb-2.5">{item.desc}</p>
-                <div className="pt-2 border-t border-border/40 flex items-center justify-between text-xs text-primary font-semibold">
-                  <span className="flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                    View Detailed Journey & Highlights
+                <div className="pt-2 border-t border-border/40 flex items-center justify-between gap-2 text-xs text-primary font-semibold">
+                  <span className="flex items-center gap-1.5 min-w-0">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse shrink-0" />
+                    <span className="truncate">View Detailed Journey & Highlights</span>
                   </span>
-                  <span className="transition-transform group-hover:translate-x-1 text-sm font-bold">→</span>
+                  <span className="transition-transform group-hover:translate-x-1 text-sm font-bold shrink-0">→</span>
                 </div>
               </div>
             </motion.div>
