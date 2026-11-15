@@ -2,11 +2,13 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import ParticleField from "./ParticleField";
 import LinkPreview from "./ui/link-preview";
-import { ArrowDown, Download, MapPin, Eye, FileText } from "lucide-react";
+import { ArrowDown, Download, MapPin, Eye } from "lucide-react";
 import ResumePreviewModal from "./ResumePreviewModal";
+import ContactModal from "./ContactModal";
 
 const HeroSection = () => {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden grid-bg pt-20">
       <ParticleField />
@@ -23,10 +25,17 @@ const HeroSection = () => {
             transition={{ duration: 0.8 }}
             className="mb-3 sm:mb-5"
           >
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-[11px] sm:text-xs md:text-sm text-primary font-mono border border-primary/30">
+            <motion.button
+              type="button"
+              onClick={() => setIsContactOpen(true)}
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-[11px] sm:text-xs md:text-sm text-primary font-mono border border-primary/30 hover:border-primary/70 hover:bg-primary/10 transition-all cursor-pointer shadow-sm hover:shadow-primary/20"
+              title="Click to connect & collaborate"
+            >
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse-glow shrink-0" />
               <span>Open to collaborate</span>
-            </span>
+            </motion.button>
           </motion.div>
 
           <motion.div
@@ -136,6 +145,12 @@ const HeroSection = () => {
           <ResumePreviewModal
             isOpen={isResumeOpen}
             onClose={() => setIsResumeOpen(false)}
+          />
+
+          {/* Direct Collaboration Contact Modal */}
+          <ContactModal
+            isOpen={isContactOpen}
+            onClose={() => setIsContactOpen(false)}
           />
 
           <motion.a

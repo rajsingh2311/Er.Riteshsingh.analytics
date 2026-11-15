@@ -64,15 +64,24 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
   const [errorMsg, setErrorMsg] = useState<string>("");
   const [receiptId, setReceiptId] = useState<string>("");
 
-  // Close on Escape key press
+  // Close on Escape key press and lock body scroll
   useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isOpen) {
         onClose();
       }
     };
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = "auto";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, [isOpen, onClose]);
 
   const handleInputChange = (field: keyof FormData, val: string) => {
