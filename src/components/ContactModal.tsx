@@ -176,7 +176,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
   const modalContent = (
     <AnimatePresence>
       <div 
-        className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-5 md:p-6 overflow-y-auto bg-black/85 backdrop-blur-md"
+        className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-5 md:p-6 overflow-hidden bg-black/85 backdrop-blur-md"
         onClick={(e) => {
           if (e.target === e.currentTarget) onClose();
         }}
@@ -186,36 +186,36 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
           transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-4xl bg-card/95 border border-primary/20 shadow-2xl rounded-2xl md:rounded-3xl overflow-hidden my-auto max-h-[92vh] flex flex-col backdrop-blur-xl"
+          className="relative w-full max-w-4xl bg-card/95 border border-primary/20 shadow-2xl rounded-2xl md:rounded-3xl overflow-hidden max-h-[90dvh] sm:max-h-[92vh] flex flex-col backdrop-blur-xl"
         >
           {/* Top Interactive Gradient Line */}
           <div className="h-1.5 w-full bg-gradient-to-r from-primary via-indigo-500 to-cyan-400 shrink-0" />
 
           {/* Modal Header */}
-          <div className="px-5 py-4 border-b border-border bg-card/50 flex items-center justify-between gap-4 shrink-0">
-            <div className="flex items-center gap-3">
-              <div className="relative">
-                <div className="w-10 h-10 rounded-full bg-gradient-brand p-[2px]">
+          <div className="px-4 sm:px-5 py-3.5 sm:py-4 border-b border-border bg-card/50 flex items-center justify-between gap-3 shrink-0">
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="relative shrink-0">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-brand p-[2px]">
                   <img
                     src={`${import.meta.env.BASE_URL}images/Ritesh%20image.JPG`}
                     alt="Er. Ritesh Singh"
                     className="w-full h-full rounded-full object-cover bg-background"
                   />
                 </div>
-                <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-background rounded-full" />
+                <span className="absolute bottom-0 right-0 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-emerald-500 border-2 border-background rounded-full" />
               </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <h2 className="text-base sm:text-lg font-bold text-foreground">
+              <div className="min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h2 className="text-sm sm:text-lg font-bold text-foreground truncate">
                     Connect with @Ritesh
                   </h2>
-                  <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">
+                  <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 shrink-0">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                     Available for Analytics
                   </span>
                 </div>
-                <p className="text-xs text-muted-foreground">
-                  Er. Ritesh Singh • Data & Business Analyst • Six Sigma Green Belt
+                <p className="text-[11px] sm:text-xs text-muted-foreground truncate">
+                  Er. Ritesh Singh • Data &amp; Business Analyst • Six Sigma Green Belt
                 </p>
               </div>
             </div>
@@ -223,7 +223,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
             <button
               type="button"
               onClick={onClose}
-              className="p-2 rounded-xl bg-secondary text-muted-foreground hover:text-foreground border border-border hover:bg-muted transition-colors"
+              className="p-2 rounded-xl bg-secondary text-muted-foreground hover:text-foreground border border-border hover:bg-muted transition-colors shrink-0"
               aria-label="Close dialog"
             >
               <X className="w-4 h-4" />
@@ -551,22 +551,22 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
                     </div>
 
                     {/* Submit Actions */}
-                    <div className="pt-2 flex items-center justify-between gap-3">
+                    <div className="pt-2 flex flex-wrap items-center justify-between gap-3">
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-brand text-primary-foreground font-semibold text-xs sm:text-sm shadow-lg hover:shadow-primary/30 transition-all cursor-pointer disabled:opacity-60 active:scale-95"
+                        className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 rounded-xl bg-gradient-brand text-primary-foreground font-semibold text-xs sm:text-sm shadow-lg hover:shadow-primary/30 transition-all cursor-pointer disabled:opacity-60 active:scale-95 whitespace-nowrap shrink-0"
                       >
                         {isSubmitting ? (
                           <>
-                            <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                            <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin shrink-0" />
                             <span>Sending to Sheet...</span>
                           </>
                         ) : (
                           <>
                             <Send className="w-4 h-4 shrink-0" />
                             <span>Send Message &amp; Sync</span>
-                            <ArrowRight className="w-3.5 h-3.5 opacity-80" />
+                            <ArrowRight className="w-3.5 h-3.5 opacity-80 shrink-0" />
                           </>
                         )}
                       </button>
@@ -575,7 +575,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
                         type="button"
                         onClick={handleClear}
                         disabled={isSubmitting}
-                        className="text-xs text-muted-foreground hover:text-foreground font-medium px-2 py-1 transition-colors cursor-pointer"
+                        className="text-xs text-muted-foreground hover:text-foreground font-medium px-2 py-1 transition-colors cursor-pointer whitespace-nowrap shrink-0"
                       >
                         Clear Form
                       </button>
