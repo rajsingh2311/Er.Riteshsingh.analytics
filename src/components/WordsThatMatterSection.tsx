@@ -10,6 +10,12 @@ const testimonials = [
     linkedin: "https://www.linkedin.com/in/swadhabharttia/",
   },
   {
+    name: "Dr. Shraddha Srivastava",
+    designation: "Ph.D., FDP-IIMA, Faculty (Finance & Accounting) at Jaipuria School of Business, Ghaziabad",
+    image: `${import.meta.env.BASE_URL}images/Shraddha_Srivastava.png`,
+    linkedin: "https://www.linkedin.com/in/dr-shraddha-srivastava-ab86b2105/",
+  },
+  {
     name: "Anita Nigam",
     designation: "Co-founder at WTF Gyms and Fitness",
     image: `${import.meta.env.BASE_URL}images/Anita%20nigam.png`,
@@ -63,7 +69,7 @@ const WordsThatMatterSection = () => {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-5 md:gap-6 max-w-5xl mx-auto min-w-0">
+        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-7 max-w-4xl mx-auto min-w-0">
           {testimonials.map((item, index) => (
             <motion.div
               key={item.name}
