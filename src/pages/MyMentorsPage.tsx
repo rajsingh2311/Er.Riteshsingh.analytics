@@ -1,6 +1,5 @@
-import { ArrowLeft, ChevronRight } from "lucide-react";
+import { Linkedin } from "lucide-react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import ParticleField from "@/components/ParticleField";
@@ -8,9 +7,22 @@ import SectionNavigator from "@/components/SectionNavigator";
 
 const mentorsData = [
   {
+    name: "Dr. Swadha Bharttia",
+    designation: "Assistant Professor | PhD in Text Organisation | Indian Institute of Management Ranchi – NFLP | Life Skills Educator",
+    image: `${import.meta.env.BASE_URL}assets/aistudio/image_bd60b762.png`,
+    linkedin: "https://www.linkedin.com/in/swadhabharttia/",
+  },
+  {
+    name: "Dr. Shraddha Srivastava",
+    designation: "Ph.D., FDP-IIMA, Faculty (Finance & Accounting) at Jaipuria School of Business, Ghaziabad",
+    image: `${import.meta.env.BASE_URL}assets/aistudio/image_933f94fc.png`,
+    linkedin: "https://www.linkedin.com/in/dr-shraddha-srivastava-ab86b2105/",
+  },
+  {
     name: "Anita Nigam",
     designation: "Co-founder at WTF Gyms and Fitness",
     image: `${import.meta.env.BASE_URL}images/Anita%20nigam.png`,
+    linkedin: "https://www.linkedin.com/in/anita-nigam-b686944b/",
   },
   {
     name: "Ashu Arora Jha",
@@ -50,7 +62,6 @@ const mentorsData = [
 ];
 
 const MyMentorsPage = () => {
-  const navigate = useNavigate();
 
   // Shuffle mentors once on mount
   const [mentors] = useState(() => {
@@ -110,17 +121,32 @@ const MyMentorsPage = () => {
                 whileHover={{ y: -4 }}
                 className="glass rounded-xl overflow-hidden group border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.2)] hover:shadow-[0_0_30px_rgba(139,92,246,0.6)] hover:border-white hover:bg-primary/10 transition-all duration-300 min-w-0 flex flex-col justify-between"
               >
-                <div className="aspect-square overflow-hidden bg-muted/40">
-                  <img
-                    src={mentor.image}
-                    alt={mentor.name}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-                <div className="p-3 text-center border-t border-primary/20 flex-1 flex flex-col justify-center">
-                  <h3 className="text-xs sm:text-sm md:text-base font-semibold text-foreground break-words leading-snug">{mentor.name}</h3>
-                  <p className="text-[11px] sm:text-xs text-muted-foreground mt-1 break-words line-clamp-3">{mentor.designation}</p>
-                </div>
+                <a
+                  href={mentor.linkedin || undefined}
+                  target={mentor.linkedin ? "_blank" : undefined}
+                  rel={mentor.linkedin ? "noopener noreferrer" : undefined}
+                  onClick={(e) => {
+                    if (!mentor.linkedin) e.preventDefault();
+                  }}
+                  className={`flex flex-col flex-1 justify-between ${mentor.linkedin ? "cursor-pointer" : "cursor-default"}`}
+                >
+                  <div className="aspect-square overflow-hidden bg-muted/40 relative">
+                    <img
+                      src={mentor.image}
+                      alt={mentor.name}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                    {mentor.linkedin && (
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                        <Linkedin className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-3 text-center border-t border-primary/20 flex-1 flex flex-col justify-center">
+                    <h3 className="text-xs sm:text-sm md:text-base font-semibold text-foreground break-words leading-snug">{mentor.name}</h3>
+                    <p className="text-[11px] sm:text-xs text-muted-foreground mt-1 break-words line-clamp-3">{mentor.designation}</p>
+                  </div>
+                </a>
               </motion.div>
             ))}
           </div>

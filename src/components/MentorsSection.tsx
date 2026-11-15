@@ -5,6 +5,18 @@ import { useState } from "react";
 
 const mentorsData = [
   {
+    name: "Dr. Swadha Bharttia",
+    designation: "Assistant Professor | PhD in Text Organisation | Indian Institute of Management Ranchi – NFLP | Life Skills Educator",
+    image: `${import.meta.env.BASE_URL}assets/aistudio/image_bd60b762.png`,
+    linkedin: "https://www.linkedin.com/in/swadhabharttia/",
+  },
+  {
+    name: "Dr. Shraddha Srivastava",
+    designation: "Ph.D., FDP-IIMA, Faculty (Finance & Accounting) at Jaipuria School of Business, Ghaziabad",
+    image: `${import.meta.env.BASE_URL}assets/aistudio/image_933f94fc.png`,
+    linkedin: "https://www.linkedin.com/in/dr-shraddha-srivastava-ab86b2105/",
+  },
+  {
     name: "Anita Nigam",
     designation: "Co-founder at WTF Gyms and Fitness",
     image: `${import.meta.env.BASE_URL}images/Anita%20nigam.png`,
@@ -92,23 +104,25 @@ const MentorsSection = () => {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto min-w-0">
+        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-5 md:gap-6 max-w-5xl mx-auto min-w-0">
           {mentors.map((mentor, index) => (
             <motion.div
               key={mentor.name}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
               whileHover={mentor.linkedin && mentor.linkedin !== '#' ? { y: -4 } : {}}
               className={`glass rounded-xl overflow-hidden group animate-float-card border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.3)] min-w-0 ${mentor.linkedin && mentor.linkedin !== '#' ? ' hover:shadow-[0_0_30px_rgba(139,92,246,0.7)] hover:border-white hover:bg-primary/10' : ''} transition-all duration-300`}
-              {...(mentor.linkedin && mentor.linkedin !== '#' ? { onClick: () => window.open(mentor.linkedin, '_blank'), role: 'button', tabIndex: 0 } : {})}
             >
               <a
-                href={mentor.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
+                href={mentor.linkedin && mentor.linkedin !== '#' ? mentor.linkedin : undefined}
+                target={mentor.linkedin && mentor.linkedin !== '#' ? "_blank" : undefined}
+                rel={mentor.linkedin && mentor.linkedin !== '#' ? "noopener noreferrer" : undefined}
+                onClick={(e) => {
+                  if (!mentor.linkedin || mentor.linkedin === '#') e.preventDefault();
+                }}
+                className="block h-full"
               >
                 <div className="aspect-square overflow-hidden relative">
                   <img
@@ -116,13 +130,15 @@ const MentorsSection = () => {
                     alt={mentor.name}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
-                    <Linkedin className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </div>
+                  {mentor.linkedin && mentor.linkedin !== '#' && (
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                      <Linkedin className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                  )}
                 </div>
-                <div className="p-4 text-center border-t border-primary/20">
-                  <h3 className="text-base md:text-lg font-semibold text-foreground">{mentor.name}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{mentor.designation}</p>
+                <div className="p-3.5 sm:p-4 text-center border-t border-primary/20">
+                  <h3 className="text-sm sm:text-base font-semibold text-foreground break-words leading-snug">{mentor.name}</h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-1 break-words line-clamp-3">{mentor.designation}</p>
                 </div>
               </a>
             </motion.div>
