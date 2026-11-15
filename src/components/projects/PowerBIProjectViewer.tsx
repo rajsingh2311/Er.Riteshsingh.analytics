@@ -358,37 +358,37 @@ export const PowerBIProjectViewer: React.FC = () => {
         <div className="flex flex-wrap sm:flex-nowrap items-center gap-1.5 p-1 rounded-xl bg-card border border-border self-start lg:self-auto scrollbar-hide max-w-full shrink-0">
           <button
             onClick={() => setMainTab("canvas")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap shrink-0 ${
               mainTab === "canvas"
                 ? "bg-primary text-primary-foreground shadow-sm"
                 : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
             }`}
           >
-            <LayoutDashboard className="w-3.5 h-3.5" />
+            <LayoutDashboard className="w-3.5 h-3.5 shrink-0" />
             <span>Interactive Canvas</span>
           </button>
 
           <button
             onClick={() => setShowUploadModal(!showUploadModal)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap shrink-0 ${
               showUploadModal
                 ? "bg-amber-500 text-black shadow-sm font-bold"
                 : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
             }`}
           >
-            <FileUp className="w-3.5 h-3.5" />
+            <FileUp className="w-3.5 h-3.5 shrink-0" />
             <span>Upload Dataset</span>
           </button>
 
           <button
             onClick={() => setMainTab("embed")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap shrink-0 ${
               mainTab === "embed"
                 ? "bg-primary text-primary-foreground shadow-sm"
                 : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
             }`}
           >
-            <ExternalLink className="w-3.5 h-3.5" />
+            <ExternalLink className="w-3.5 h-3.5 shrink-0" />
             <span>Power BI Web Embed</span>
           </button>
         </div>
@@ -546,39 +546,39 @@ export const PowerBIProjectViewer: React.FC = () => {
               </div>
 
               {/* View Mode Buttons (Contained within container, shrink-0) */}
-              <div className="flex items-center gap-2 shrink-0 self-start lg:self-auto flex-wrap sm:flex-nowrap">
-                <div className="flex items-center p-1 rounded-xl bg-muted/80 border border-border shrink-0">
+              <div className="flex items-center gap-2 shrink-0 self-start lg:self-auto flex-wrap max-w-full">
+                <div className="flex flex-wrap items-center gap-1 p-1 rounded-xl bg-muted/80 border border-border max-w-full">
                   <button
                     onClick={() => setViewMode("dashboard")}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap ${
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap shrink-0 ${
                       viewMode === "dashboard"
                         ? "bg-primary text-primary-foreground shadow-xs font-bold"
                         : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
-                    <Eye className="w-3.5 h-3.5" />
+                    <Eye className="w-3.5 h-3.5 shrink-0" />
                     <span>View Dashboard</span>
                   </button>
                   <button
                     onClick={() => setViewMode("table")}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap ${
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap shrink-0 ${
                       viewMode === "table"
                         ? "bg-primary text-primary-foreground shadow-xs font-bold"
                         : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
-                    <Table2 className="w-3.5 h-3.5" />
+                    <Table2 className="w-3.5 h-3.5 shrink-0" />
                     <span>Data Table</span>
                   </button>
                   <button
                     onClick={() => setViewMode("model")}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap ${
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap shrink-0 ${
                       viewMode === "model"
                         ? "bg-primary text-primary-foreground shadow-xs font-bold"
                         : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
-                    <Sigma className="w-3.5 h-3.5" />
+                    <Sigma className="w-3.5 h-3.5 shrink-0" />
                     <span>DAX Metrics</span>
                   </button>
                 </div>

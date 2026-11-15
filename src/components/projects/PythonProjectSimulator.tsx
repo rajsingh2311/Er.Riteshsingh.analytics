@@ -589,32 +589,32 @@ export const PythonProjectSimulator = () => {
             <Sliders className="w-3.5 h-3.5 text-primary" />
             Editor View:
           </span>
-          <div className="flex items-center gap-1 bg-muted/60 p-1 rounded-lg border border-border">
+          <div className="flex flex-wrap items-center gap-1 bg-muted/60 p-1 rounded-lg border border-border max-w-full">
             <button
               onClick={() => setActiveTab("split")}
-              className={`px-2.5 py-1 rounded-md text-xs font-mono whitespace-nowrap transition-all flex items-center gap-1.5 ${
+              className={`px-2.5 py-1 rounded-md text-xs font-mono whitespace-nowrap shrink-0 transition-all flex items-center gap-1.5 ${
                 activeTab === "split" ? "bg-primary text-primary-foreground font-bold shadow-xs" : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              <FileCode className="w-3.5 h-3.5" />
+              <FileCode className="w-3.5 h-3.5 shrink-0" />
               <span>Split (Code + Results)</span>
             </button>
             <button
               onClick={() => setActiveTab("code")}
-              className={`px-2.5 py-1 rounded-md text-xs font-mono whitespace-nowrap transition-all flex items-center gap-1.5 ${
+              className={`px-2.5 py-1 rounded-md text-xs font-mono whitespace-nowrap shrink-0 transition-all flex items-center gap-1.5 ${
                 activeTab === "code" ? "bg-primary text-primary-foreground font-bold shadow-xs" : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              <Code2 className="w-3.5 h-3.5" />
+              <Code2 className="w-3.5 h-3.5 shrink-0" />
               <span>Full Code Editor</span>
             </button>
             <button
               onClick={() => setActiveTab("inputs")}
-              className={`px-2.5 py-1 rounded-md text-xs font-mono whitespace-nowrap transition-all flex items-center gap-1.5 ${
+              className={`px-2.5 py-1 rounded-md text-xs font-mono whitespace-nowrap shrink-0 transition-all flex items-center gap-1.5 ${
                 activeTab === "inputs" ? "bg-primary text-primary-foreground font-bold shadow-xs" : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              <Sliders className="w-3.5 h-3.5" />
+              <Sliders className="w-3.5 h-3.5 shrink-0" />
               <span>Form Controls</span>
             </button>
           </div>

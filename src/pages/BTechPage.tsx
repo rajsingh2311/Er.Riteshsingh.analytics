@@ -562,7 +562,7 @@ const BTechPage = () => {
             {/* Filter Pills & Search Bar */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-6">
               {/* Category Pills */}
-              <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                 {categoryTabs.map((tab) => {
                   const TabIcon = tab.icon;
                   const isActive = selectedCategory === tab.id;
@@ -570,13 +570,13 @@ const BTechPage = () => {
                     <button
                       key={tab.id}
                       onClick={() => setSelectedCategory(tab.id)}
-                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono whitespace-nowrap transition-all ${
+                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono whitespace-nowrap shrink-0 transition-all ${
                         isActive
                           ? "bg-primary text-primary-foreground font-bold shadow-md shadow-primary/20"
                           : "bg-card/60 hover:bg-card border border-border/70 text-muted-foreground hover:text-foreground"
                       }`}
                     >
-                      <TabIcon className="w-3.5 h-3.5" />
+                      <TabIcon className="w-3.5 h-3.5 shrink-0" />
                       <span>{tab.label}</span>
                     </button>
                   );

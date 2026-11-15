@@ -458,7 +458,7 @@ const PGDMPage = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="glass rounded-2xl p-6 md:p-8 border border-primary/40 shadow-[0_0_30px_rgba(var(--glow)/0.2)] scroll-mt-24"
+            className="glass rounded-2xl p-4 sm:p-6 md:p-8 border border-primary/40 shadow-[0_0_30px_rgba(var(--glow)/0.2)] scroll-mt-24"
           >
             {/* Gallery Header */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
@@ -478,29 +478,29 @@ const PGDMPage = () => {
               </div>
 
               {/* View Switcher Controls */}
-              <div className="flex items-center gap-2 self-start md:self-auto bg-card/60 p-1 rounded-xl border border-border">
+              <div className="flex items-center gap-1.5 sm:gap-2 self-start md:self-auto bg-card/60 p-1 rounded-xl border border-border shrink-0">
                 <button
                   onClick={() => setViewMode("grid")}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap shrink-0 transition-all ${
                     viewMode === "grid"
                       ? "bg-primary text-primary-foreground shadow-sm font-semibold"
                       : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
                   }`}
                   title="Uniform Grid View"
                 >
-                  <Grid3X3 className="w-3.5 h-3.5" />
+                  <Grid3X3 className="w-3.5 h-3.5 shrink-0" />
                   <span>Card Grid</span>
                 </button>
                 <button
                   onClick={() => setViewMode("masonry")}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap shrink-0 transition-all ${
                     viewMode === "masonry"
                       ? "bg-primary text-primary-foreground shadow-sm font-semibold"
                       : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
                   }`}
                   title="Dynamic Masonry View"
                 >
-                  <Columns className="w-3.5 h-3.5" />
+                  <Columns className="w-3.5 h-3.5 shrink-0" />
                   <span>Masonry</span>
                 </button>
               </div>
@@ -509,7 +509,7 @@ const PGDMPage = () => {
             {/* Filter Tabs & Search Bar */}
             <div className="space-y-4 mb-8">
               {/* Category Pills */}
-              <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide text-xs">
+              <div className="flex flex-wrap items-center gap-2 text-xs">
                 {categoryTabs.map((tab) => {
                   const Icon = tab.icon;
                   const count =
@@ -522,16 +522,16 @@ const PGDMPage = () => {
                     <button
                       key={tab.id}
                       onClick={() => setSelectedCategory(tab.id)}
-                      className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl whitespace-nowrap transition-all font-medium border ${
+                      className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-xl whitespace-nowrap shrink-0 transition-all font-medium border ${
                         isActive
                           ? "bg-primary/15 text-primary border-primary shadow-[0_0_12px_rgba(var(--glow)/0.25)] font-semibold"
                           : "bg-card/40 text-muted-foreground border-border/80 hover:text-foreground hover:border-primary/40 hover:bg-card/80"
                       }`}
                     >
-                      <Icon className="w-3.5 h-3.5" />
+                      <Icon className="w-3.5 h-3.5 shrink-0" />
                       <span>{tab.label}</span>
                       <span
-                        className={`ml-1 text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
+                        className={`ml-0.5 text-[10px] px-1.5 py-0.5 rounded-full font-mono shrink-0 ${
                           isActive
                             ? "bg-primary text-primary-foreground"
                             : "bg-muted text-muted-foreground"
