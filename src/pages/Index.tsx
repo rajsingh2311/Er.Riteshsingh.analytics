@@ -20,18 +20,21 @@ const Index = () => {
       return;
     }
 
-    requestAnimationFrame(() => {
+    const timer = window.setTimeout(() => {
       const element = document.getElementById(scrollTo);
       if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+        const navOffset = 72;
+        const top = Math.max(0, element.getBoundingClientRect().top + window.scrollY - navOffset);
+        window.scrollTo({ top, behavior: "smooth" });
       }
-    });
+      navigate("/", { replace: true, state: null });
+    }, 120);
 
-    navigate("/", { replace: true, state: null });
+    return () => window.clearTimeout(timer);
   }, [location.state, navigate]);
 
   return (
-    <div className="min-h-screen overflow-x-hidden scroll-smooth">
+    <div className="min-h-screen overflow-x-clip scroll-smooth">
       <Navbar />
       <HeroSection />
       <AboutSection />

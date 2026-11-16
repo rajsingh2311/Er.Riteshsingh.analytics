@@ -161,7 +161,11 @@ const HeroSection = () => {
             className="inline-block animate-float"
             onClick={(e) => {
               e.preventDefault();
-              document.getElementById('about-detailed')?.scrollIntoView({ behavior: 'smooth' });
+              const el = document.getElementById("about-detailed");
+              if (el) {
+                const top = Math.max(0, el.getBoundingClientRect().top + window.scrollY - 72);
+                window.scrollTo({ top, behavior: "smooth" });
+              }
             }}
           >
             <ArrowDown className="w-6 h-6 text-muted-foreground" />

@@ -266,7 +266,7 @@ const PGDMPage = () => {
   const currentModalItem = activeModalIndex !== null ? filteredImages[activeModalIndex] : null;
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-background text-foreground">
+    <div className="min-h-screen relative overflow-x-clip bg-background text-foreground">
       <ParticleField />
       
       {/* Top Navigator */}
