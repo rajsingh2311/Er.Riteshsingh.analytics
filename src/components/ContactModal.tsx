@@ -196,11 +196,18 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
             <div className="flex items-center gap-3 min-w-0">
               <div className="relative shrink-0">
                 <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-brand p-[2px]">
-                  <img
-                    src={`${import.meta.env.BASE_URL}images/Ritesh%20image.JPG`}
-                    alt="Er. Ritesh Singh"
-                    className="w-full h-full rounded-full object-cover bg-background"
-                  />
+                  <picture className="block w-full h-full rounded-full overflow-hidden bg-background">
+                    <source srcSet={`${import.meta.env.BASE_URL}images/ritesh-hero.webp`} type="image/webp" />
+                    <img
+                      src={`${import.meta.env.BASE_URL}images/ritesh-hero.jpg`}
+                      alt="Er. Ritesh Singh"
+                      width={512}
+                      height={512}
+                      loading="eager"
+                      decoding="async"
+                      className="w-full h-full rounded-full object-cover bg-background"
+                    />
+                  </picture>
                 </div>
                 <span className="absolute bottom-0 right-0 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-emerald-500 border-2 border-background rounded-full" />
               </div>

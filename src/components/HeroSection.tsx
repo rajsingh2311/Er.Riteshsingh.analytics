@@ -39,17 +39,25 @@ const HeroSection = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0.9, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
+            transition={{ duration: 0.25 }}
             className="mb-4 sm:mb-6"
           >
             <div className="w-32 h-32 xs:w-40 xs:h-40 sm:w-52 sm:h-52 md:w-64 md:h-64 mx-auto rounded-full bg-gradient-brand p-[3px] glow-primary">
-              <img
-                src={`${import.meta.env.BASE_URL}images/Ritesh%20image.JPG`}
-                alt="Ritesh Singh"
-                className="w-full h-full rounded-full object-cover bg-background"
-              />
+              <picture className="block w-full h-full rounded-full overflow-hidden bg-muted">
+                <source srcSet={`${import.meta.env.BASE_URL}images/ritesh-hero.webp`} type="image/webp" />
+                <img
+                  src={`${import.meta.env.BASE_URL}images/ritesh-hero.jpg`}
+                  alt="Ritesh Singh"
+                  width={512}
+                  height={512}
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                  className="w-full h-full rounded-full object-cover bg-background"
+                />
+              </picture>
             </div>
           </motion.div>
 
