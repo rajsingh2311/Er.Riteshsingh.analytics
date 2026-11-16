@@ -398,7 +398,17 @@ export const ResumePreviewModal: React.FC<ResumePreviewModalProps> = ({ isOpen, 
                           <span>PGDM (Business Analytics &amp; Operations)</span>
                           <span className="font-mono text-primary">2024 – 2026</span>
                         </div>
-                        <p className="text-muted-foreground">Jaipuria School of Business, Ghaziabad | CGPA 7.03</p>
+                        <p className="text-muted-foreground">
+                          <a
+                            href="https://jsb.jaipuria.edu.in/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-primary hover:underline underline-offset-2 decoration-primary/40 transition-colors"
+                          >
+                            Jaipuria School of Business
+                          </a>
+                          , Ghaziabad | CGPA 7.03
+                        </p>
                       </div>
                       <div>
                         <div className="flex justify-between font-semibold text-foreground">
@@ -450,12 +460,32 @@ export const ResumePreviewModal: React.FC<ResumePreviewModalProps> = ({ isOpen, 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-muted-foreground">
                     <div className="p-3 rounded-xl bg-secondary/40 border border-border/80">
                       <p className="font-semibold text-foreground mb-0.5">Student Co-ordinator, Business Analytics Club</p>
-                      <p className="text-[11px] font-mono text-primary mb-1">Jaipuria School of Business (2024 – 26)</p>
+                      <p className="text-[11px] font-mono text-primary mb-1">
+                        <a
+                          href="https://jsb.jaipuria.edu.in/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:underline underline-offset-2 decoration-primary/40 transition-colors"
+                        >
+                          Jaipuria School of Business
+                        </a>{" "}
+                        (2024 – 26)
+                      </p>
                       <p>Grew membership 50%; mentored 20+ students.</p>
                     </div>
                     <div className="p-3 rounded-xl bg-secondary/40 border border-border/80">
                       <p className="font-semibold text-foreground mb-0.5">Finalist, Trading Simulation Challenge</p>
-                      <p className="text-[11px] font-mono text-primary mb-1">Jaipuria School of Business (2024)</p>
+                      <p className="text-[11px] font-mono text-primary mb-1">
+                        <a
+                          href="https://jsb.jaipuria.edu.in/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:underline underline-offset-2 decoration-primary/40 transition-colors"
+                        >
+                          Jaipuria School of Business
+                        </a>{" "}
+                        (2024)
+                      </p>
                       <p>Recognized for strategic analysis and execution in algorithmic trading simulation.</p>
                     </div>
                   </div>

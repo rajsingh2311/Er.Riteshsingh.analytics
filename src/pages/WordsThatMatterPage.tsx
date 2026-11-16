@@ -109,6 +109,33 @@ const testimonials = [
   */
 ];
 
+const JSB_URL = "https://jsb.jaipuria.edu.in/";
+const JSB_NAME = "Jaipuria School of Business";
+
+const renderQuoteWithJaipuriaLink = (quote: string) => {
+  if (!quote.includes(JSB_NAME)) return quote;
+  const parts = quote.split(JSB_NAME);
+  return (
+    <>
+      {parts.map((part, idx) => (
+        <span key={idx}>
+          {part}
+          {idx < parts.length - 1 && (
+            <a
+              href={JSB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline underline-offset-2 decoration-primary/40 font-medium transition-colors"
+            >
+              {JSB_NAME}
+            </a>
+          )}
+        </span>
+      ))}
+    </>
+  );
+};
+
 const WordsThatMatterPage = () => {
   const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(0);
@@ -204,7 +231,7 @@ const WordsThatMatterPage = () => {
                       <Quote className="w-3.5 h-3.5 shrink-0" />
                       <span>Spotlight Feedback</span>
                     </div>
-                    <p className="text-sm sm:text-base md:text-xl leading-relaxed text-foreground/95 text-left sm:text-justify break-words whitespace-pre-line">"{activeItem.quote}"</p>
+                    <p className="text-sm sm:text-base md:text-xl leading-relaxed text-foreground/95 text-left sm:text-justify break-words whitespace-pre-line">"{renderQuoteWithJaipuriaLink(activeItem.quote)}"</p>
 
                     <div className="mt-4 flex flex-wrap gap-1.5 sm:gap-2">
                       {activeItem.focus.map((topic) => (
@@ -315,7 +342,7 @@ const WordsThatMatterPage = () => {
                           <span>Testimonial</span>
                         </div>
                         <p className="text-sm sm:text-base md:text-lg leading-relaxed text-foreground/95 italic text-left sm:text-justify break-words whitespace-pre-line">
-                          "{item.quote}"
+                          "{renderQuoteWithJaipuriaLink(item.quote)}"
                         </p>
                         <div className="mt-4 flex flex-wrap gap-1.5 sm:gap-2">
                           {item.focus.map((topic) => (

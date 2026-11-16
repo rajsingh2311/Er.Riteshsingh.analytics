@@ -291,7 +291,19 @@ const ExperienceSection = () => {
                         {item.title}
                       </h3>
                       <p className="text-xs sm:text-sm md:text-base text-secondary-foreground font-semibold mt-1 break-words">
-                        {item.company}
+                        {item.company === "Jaipuria School of Business" ? (
+                          <a
+                            href="https://jsb.jaipuria.edu.in/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="text-primary hover:underline underline-offset-2 decoration-primary/40 transition-colors"
+                          >
+                            {item.company}
+                          </a>
+                        ) : (
+                          item.company
+                        )}
                       </p>
                       <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mt-2 text-[11px] sm:text-xs">
                         <span className="inline-flex items-center gap-1 font-mono text-primary font-medium bg-primary/10 px-2 py-0.5 rounded-md border border-primary/25">
@@ -403,7 +415,18 @@ const ExperienceSection = () => {
                               {timeline[selectedJob].title}
                             </motion.h2>
                             <p className="font-semibold text-xs sm:text-base md:text-lg text-foreground mt-1 break-words">
-                              {timeline[selectedJob].company}
+                              {timeline[selectedJob].company === "Jaipuria School of Business" ? (
+                                <a
+                                  href="https://jsb.jaipuria.edu.in/"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-primary hover:underline underline-offset-2 decoration-primary/40 transition-colors"
+                                >
+                                  {timeline[selectedJob].company}
+                                </a>
+                              ) : (
+                                timeline[selectedJob].company
+                              )}
                             </p>
                             <div className="flex flex-wrap items-center gap-1.5 sm:gap-2.5 mt-2 text-[11px] sm:text-xs md:text-sm">
                               <span className="inline-flex items-center gap-1 sm:gap-1.5 font-mono text-primary font-medium bg-primary/10 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md border border-primary/25 shrink-0">

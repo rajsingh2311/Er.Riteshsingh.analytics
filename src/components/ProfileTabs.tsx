@@ -265,7 +265,22 @@ const PreviewContent = ({ preview }: { preview: Preview }) => {
             <div className="w-2 h-2 rounded-full bg-primary mt-1.5 glow-primary shrink-0" />
             <div className="min-w-0">
               <p className="text-sm font-medium">{item.title}</p>
-              <p className="text-xs text-muted-foreground">{item.sub} · {item.year}</p>
+              <p className="text-xs text-muted-foreground">
+                {item.sub === "Jaipuria School of Business" ? (
+                  <a
+                    href="https://jsb.jaipuria.edu.in/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="text-primary hover:underline underline-offset-2 decoration-primary/40 transition-colors"
+                  >
+                    {item.sub}
+                  </a>
+                ) : (
+                  item.sub
+                )}{" "}
+                · {item.year}
+              </p>
             </div>
           </div>
         ))}

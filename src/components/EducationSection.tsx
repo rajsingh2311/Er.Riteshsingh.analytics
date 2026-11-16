@@ -10,7 +10,7 @@ const education = [
     cgpa: "CGPA: 7.03",
     period: "2024 — 2026",
     desc: "Focus on Business Analytics, CRISP‑DM methodology, high-dimensional data visualization, and predictive analytics.",
-    link: "https://jaipuriaschoolofbusiness.com/",
+    link: "https://jsb.jaipuria.edu.in/",
     previewImg: `${import.meta.env.BASE_URL}images/JSB.png`,
   },
   {

@@ -410,7 +410,18 @@ const ExperienceContent = () => {
                 {exp.title}
               </h3>
               <p className="text-sm md:text-base text-secondary-foreground font-semibold mt-1">
-                {exp.company}
+                {exp.company === "Jaipuria School of Business" ? (
+                  <a
+                    href="https://jsb.jaipuria.edu.in/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline underline-offset-2 decoration-primary/40 transition-colors"
+                  >
+                    {exp.company}
+                  </a>
+                ) : (
+                  exp.company
+                )}
               </p>
               <div className="flex flex-wrap items-center gap-2.5 mt-2.5 text-xs">
                 <span className="inline-flex items-center gap-1.5 font-mono text-primary font-medium bg-primary/10 px-2.5 py-1 rounded-md border border-primary/25">
@@ -467,7 +478,7 @@ const EducationContent = () => {
       period: "2024 — 2026 · CGPA: 7.03",
       desc: "Focus: Business Analytics, CRISP‑DM methodology, high-dimensional data visualization, predictive analytics.",
       activities: ["Student Co-Ordinator Business Analytics Club", "Organized Power BI workshops & hackathons", "Mentored students on analytics projects & dashboard design", "Winner Talent Hunt 2024 (Poetry Competition)"],
-      link: "https://jaipuriaschoolofbusiness.com/",
+      link: "https://jsb.jaipuria.edu.in/",
       previewImg: `${import.meta.env.BASE_URL}images/JSB.png`,
     },
     {
@@ -888,7 +899,20 @@ const VolunteeringContent = () => {
           {item.image && <img src={item.image} alt={item.title} className="w-full h-44 sm:h-48 object-cover" />}
           <div className="p-4 sm:p-6">
             <h3 className="text-lg sm:text-xl font-bold mb-1 break-words">{item.title}</h3>
-            <p className="text-secondary-foreground text-xs sm:text-sm font-medium">{item.org}</p>
+            <p className="text-secondary-foreground text-xs sm:text-sm font-medium">
+              {item.org === "Jaipuria School of Business" ? (
+                <a
+                  href="https://jsb.jaipuria.edu.in/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline underline-offset-2 decoration-primary/40 transition-colors"
+                >
+                  {item.org}
+                </a>
+              ) : (
+                item.org
+              )}
+            </p>
             <p className="text-xs font-mono text-primary mb-2 sm:mb-3">{item.period}</p>
             <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed break-words">{item.desc}</p>
           </div>
@@ -982,7 +1006,20 @@ const HonorsContent = () => {
               <span className="text-xs font-mono text-primary font-medium">{award.year}</span>
             </div>
             <h3 className="text-base sm:text-xl font-bold mb-1 break-words">{award.title}</h3>
-            <p className="text-xs sm:text-sm text-secondary-foreground font-medium mb-2">{award.org}</p>
+            <p className="text-xs sm:text-sm text-secondary-foreground font-medium mb-2">
+              {award.org === "Jaipuria School of Business" ? (
+                <a
+                  href="https://jsb.jaipuria.edu.in/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline underline-offset-2 decoration-primary/40 transition-colors"
+                >
+                  {award.org}
+                </a>
+              ) : (
+                award.org
+              )}
+            </p>
           </div>
         </motion.div>
       ))}

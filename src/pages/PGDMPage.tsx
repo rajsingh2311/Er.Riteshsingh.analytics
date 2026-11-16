@@ -20,6 +20,35 @@ import { createPortal } from "react-dom";
 import ParticleField from "@/components/ParticleField";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import SectionNavigator from "@/components/SectionNavigator";
+import LinkPreview from "@/components/ui/link-preview";
+
+const JSB_URL = "https://jsb.jaipuria.edu.in/";
+const JSB_NAME = "Jaipuria School of Business";
+
+const renderTextWithJaipuriaLink = (text: string, stopProp = false) => {
+  if (!text.includes(JSB_NAME)) return text;
+  const parts = text.split(JSB_NAME);
+  return (
+    <>
+      {parts.map((part, idx) => (
+        <span key={idx}>
+          {part}
+          {idx < parts.length - 1 && (
+            <a
+              href={JSB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={stopProp ? (e) => e.stopPropagation() : undefined}
+              className="text-primary hover:underline underline-offset-2 decoration-primary/40 font-semibold transition-colors"
+            >
+              {JSB_NAME}
+            </a>
+          )}
+        </span>
+      ))}
+    </>
+  );
+};
 
 interface GalleryItem {
   id: string;
@@ -316,7 +345,12 @@ const PGDMPage = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-base xs:text-lg md:text-2xl text-secondary-foreground font-mono mb-2 font-medium break-words"
           >
-            Jaipuria School of Business
+            <LinkPreview
+              href={JSB_URL}
+              imgSrc={`${import.meta.env.BASE_URL}images/JSB.png`}
+              label={JSB_NAME}
+              sizeClass="w-60 sm:w-72 max-w-[85vw]"
+            />
           </motion.h2>
 
           <motion.p
@@ -389,7 +423,16 @@ const PGDMPage = () => {
                   <span>Before PGDM</span>
                 </h4>
                 <p className="text-secondary-foreground text-sm leading-relaxed">
-                  Before stepping into Jaipuria School of Business, I brought <span className="text-primary font-semibold">1.5 years of industry experience</span> — 
+                  Before stepping into{" "}
+                  <a
+                    href={JSB_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary font-semibold hover:underline underline-offset-2 decoration-primary/40 transition-colors"
+                  >
+                    {JSB_NAME}
+                  </a>
+                  , I brought <span className="text-primary font-semibold">1.5 years of industry experience</span> — 
                   1 year as a <span className="text-primary font-medium">Research Analyst</span> and 6 months as a <span className="text-primary font-medium">Chemical Engineer</span>. 
                   These roles taught me discipline and analytical thinking, but motivated me to master the art of turning raw data into strategic decision-making.
                 </p>
@@ -400,7 +443,16 @@ const PGDMPage = () => {
                   <span>The Transformation</span>
                 </h4>
                 <p className="text-secondary-foreground text-sm leading-relaxed">
-                  Joining <span className="text-primary font-semibold">Jaipuria School of Business</span> in 
+                  Joining{" "}
+                  <a
+                    href={JSB_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary font-semibold hover:underline underline-offset-2 decoration-primary/40 transition-colors"
+                  >
+                    {JSB_NAME}
+                  </a>{" "}
+                  in 
                   <span className="text-primary font-medium"> Business Analytics & Operations</span> revolutionized my perspective. 
                   I discovered how quantitative models tell deep stories, empower C-suite leaders, and optimize cross-functional operations with measurable outcomes.
                 </p>
@@ -648,7 +700,7 @@ const PGDMPage = () => {
                           {item.title}
                         </h4>
                         <p className="text-xs font-medium text-secondary-foreground mt-1 line-clamp-1">
-                          {item.role}
+                          {renderTextWithJaipuriaLink(item.role, true)}
                         </p>
                         <p className="text-xs text-muted-foreground mt-2 line-clamp-2 leading-relaxed">
                           {item.description}
@@ -705,7 +757,7 @@ const PGDMPage = () => {
                         {item.title}
                       </h4>
                       <p className="text-xs font-medium text-secondary-foreground mt-1">
-                        {item.role}
+                        {renderTextWithJaipuriaLink(item.role, true)}
                       </p>
                       <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
                         {item.description}
@@ -816,7 +868,7 @@ const PGDMPage = () => {
                       </span>
                     </div>
                     <p className="text-xs sm:text-sm text-secondary-foreground font-medium mb-1 break-words">
-                      {currentModalItem.role}
+                      {renderTextWithJaipuriaLink(currentModalItem.role)}
                     </p>
                     <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed break-words">
                       {currentModalItem.description}
