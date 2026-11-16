@@ -480,6 +480,7 @@ const EducationContent = () => {
       activities: ["Student Co-Ordinator Business Analytics Club", "Organized Power BI workshops & hackathons", "Mentored students on analytics projects & dashboard design", "Winner Talent Hunt 2024 (Poetry Competition)"],
       link: "https://jsb.jaipuria.edu.in/",
       previewImg: `${import.meta.env.BASE_URL}images/JSB.png`,
+      logo: `${import.meta.env.BASE_URL}assets/aistudio/Water_mark_5eeaecf9.png`,
     },
     {
       degree: "B.Tech (Chemical Engineering)",
@@ -539,9 +540,19 @@ const EducationContent = () => {
               tabIndex={0}
             >
               <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 mb-3 sm:mb-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-brand flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                  <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-primary-foreground" />
-                </div>
+                {e.logo ? (
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-white p-1 flex items-center justify-center shrink-0 shadow-md border border-white/20 overflow-hidden group-hover:scale-105 transition-transform">
+                    <img
+                      src={e.logo}
+                      alt={`${e.school} logo`}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                ) : (
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-brand flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                    <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-primary-foreground" />
+                  </div>
+                )}
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
                     <h3 className="text-lg sm:text-xl font-bold break-words leading-tight group-hover:text-primary transition-colors">

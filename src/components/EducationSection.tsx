@@ -12,6 +12,7 @@ const education = [
     desc: "Focus on Business Analytics, CRISP‑DM methodology, high-dimensional data visualization, and predictive analytics.",
     link: "https://jsb.jaipuria.edu.in/",
     previewImg: `${import.meta.env.BASE_URL}images/JSB.png`,
+    logo: `${import.meta.env.BASE_URL}assets/aistudio/Water_mark_5eeaecf9.png`,
   },
   {
     degree: "B.Tech (Chemical Engineering)",
@@ -81,9 +82,19 @@ const EducationSection = () => {
               role="button"
               tabIndex={0}
             >
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-brand flex items-center justify-center shrink-0">
-                <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-primary-foreground" />
-              </div>
+              {item.logo ? (
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-white p-1 flex items-center justify-center shrink-0 shadow-md border border-white/20 overflow-hidden">
+                  <img
+                    src={item.logo}
+                    alt={`${item.school} logo`}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              ) : (
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-brand flex items-center justify-center shrink-0">
+                  <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-primary-foreground" />
+                </div>
+              )}
               <div className="min-w-0 flex-1">
                 <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1.5 sm:mb-2">
                   <h3 className="font-bold text-base sm:text-lg break-words leading-snug">{item.degree}</h3>
