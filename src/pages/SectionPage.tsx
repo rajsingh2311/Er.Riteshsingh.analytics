@@ -504,6 +504,7 @@ const EducationContent = () => {
       period: "2019 · 61%",
       desc: "PCM curriculum with quantitative foundation.",
       activities: ["Academic coursework"],
+      logo: `${import.meta.env.BASE_URL}assets/aistudio/image_1787efbd.png`,
     },
     {
       degree: "10th (Science)",
@@ -511,6 +512,7 @@ const EducationContent = () => {
       period: "2019 · 81.33%",
       desc: "Science curriculum.",
       activities: ["Academic coursework"],
+      logo: `${import.meta.env.BASE_URL}assets/aistudio/image_1787efbd.png`,
     },
   ];
 

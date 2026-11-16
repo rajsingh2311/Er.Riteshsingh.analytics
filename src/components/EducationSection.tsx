@@ -29,12 +29,14 @@ const education = [
     school: "S Devi Inter College, Madhuban, Mau (UP Board)",
     period: "2019 · 61%",
     desc: "PCM curriculum with strong quantitative foundation.",
+    logo: `${import.meta.env.BASE_URL}assets/aistudio/image_1787efbd.png`,
   },
   {
     degree: "10th (Science)",
     school: "S Devi Inter College, Madhuban, Mau (UP Board)",
     period: "2019 · 81.33%",
     desc: "Science curriculum with focus on core subjects.",
+    logo: `${import.meta.env.BASE_URL}assets/aistudio/image_1787efbd.png`,
   },
 ];
 
