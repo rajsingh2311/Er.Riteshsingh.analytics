@@ -29,6 +29,8 @@ const education = [
     school: "S Devi Inter College, Madhuban, Mau (UP Board)",
     period: "2019 · 61%",
     desc: "PCM curriculum with strong quantitative foundation.",
+    link: "https://www.subhagideviintercollege.com/",
+    previewImg: `${import.meta.env.BASE_URL}assets/aistudio/image_1787efbd.png`,
     logo: `${import.meta.env.BASE_URL}assets/aistudio/image_1787efbd.png`,
   },
   {
@@ -36,6 +38,8 @@ const education = [
     school: "S Devi Inter College, Madhuban, Mau (UP Board)",
     period: "2019 · 81.33%",
     desc: "Science curriculum with focus on core subjects.",
+    link: "https://www.subhagideviintercollege.com/",
+    previewImg: `${import.meta.env.BASE_URL}assets/aistudio/image_1787efbd.png`,
     logo: `${import.meta.env.BASE_URL}assets/aistudio/image_1787efbd.png`,
   },
 ];

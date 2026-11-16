@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import ParticleField from "@/components/ParticleField";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import SectionNavigator from "@/components/SectionNavigator";
+import LinkPreview from "@/components/ui/link-preview";
 
 const TwelfthPage = () => {
   const navigate = useNavigate();
@@ -74,9 +75,14 @@ const TwelfthPage = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-base xs:text-lg md:text-2xl text-secondary-foreground font-mono mb-2 font-medium break-words"
+            className="text-base xs:text-lg md:text-2xl text-secondary-foreground font-mono mb-2 font-medium break-words flex items-center justify-center flex-wrap gap-2"
           >
-            S Devi Inter College, Madhuban, Mau (UP Board)
+            <LinkPreview
+              href="https://www.subhagideviintercollege.com/"
+              imgSrc={`${import.meta.env.BASE_URL}assets/aistudio/image_1787efbd.png`}
+              label="S Devi Inter College, Madhuban, Mau (UP Board)"
+              sizeClass="w-52 sm:w-64 max-w-[85vw]"
+            />
           </motion.h2>
 
           <motion.div

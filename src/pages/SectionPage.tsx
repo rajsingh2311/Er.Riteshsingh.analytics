@@ -504,6 +504,8 @@ const EducationContent = () => {
       period: "2019 · 61%",
       desc: "PCM curriculum with quantitative foundation.",
       activities: ["Academic coursework"],
+      link: "https://www.subhagideviintercollege.com/",
+      previewImg: `${import.meta.env.BASE_URL}assets/aistudio/image_1787efbd.png`,
       logo: `${import.meta.env.BASE_URL}assets/aistudio/image_1787efbd.png`,
     },
     {
@@ -512,6 +514,8 @@ const EducationContent = () => {
       period: "2019 · 81.33%",
       desc: "Science curriculum.",
       activities: ["Academic coursework"],
+      link: "https://www.subhagideviintercollege.com/",
+      previewImg: `${import.meta.env.BASE_URL}assets/aistudio/image_1787efbd.png`,
       logo: `${import.meta.env.BASE_URL}assets/aistudio/image_1787efbd.png`,
     },
   ];
