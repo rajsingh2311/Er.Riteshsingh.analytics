@@ -8,6 +8,8 @@ type LinkPreviewProps = {
 };
 
 const LinkPreview: React.FC<LinkPreviewProps> = ({ href, imgSrc, label = "View", sizeClass = "w-56" }) => {
+  const [isOpen, setIsOpen] = React.useState(false);
+
   const fallbackSvg =
     'data:image/svg+xml;utf8,' +
     encodeURIComponent(
@@ -35,12 +37,21 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({ href, imgSrc, label = "View",
   }
 
   return (
-    <span className="relative inline-block group">
+    <span
+      className="relative inline-block"
+      onPointerEnter={(e) => {
+        if (e.pointerType !== "touch") setIsOpen(true);
+      }}
+      onPointerLeave={() => setIsOpen(false)}
+    >
       <a
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsOpen(false);
+        }}
         className="preview-trigger inline-flex items-center gap-1 text-primary hover:text-accent underline underline-offset-2 decoration-primary/40 hover:decoration-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/30"
         style={{ fontSize: 'inherit', fontWeight: 'inherit' }}
       >
@@ -48,15 +59,20 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({ href, imgSrc, label = "View",
       </a>
 
       <span
-        className={`preview pointer-events-none group-hover:pointer-events-auto group-focus-within:pointer-events-auto absolute bottom-full left-1/2 -translate-x-1/2 mb-3.5 ${sizeClass} max-h-72 rounded-xl overflow-visible opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:translate-y-0 transition-all duration-300 ease-out z-50 shadow-2xl`}
-        aria-hidden="true"
+        className={`preview absolute bottom-full left-0 sm:left-1/2 sm:-translate-x-1/2 pb-3 ${sizeClass} max-h-80 rounded-xl overflow-visible transition-all duration-300 ease-out z-50 ${
+          isOpen
+            ? "pointer-events-auto opacity-100 translate-y-0"
+            : "pointer-events-none opacity-0 translate-y-2"
+        }`}
+        aria-hidden={!isOpen}
         onClick={(e) => e.stopPropagation()}
       >
         <a
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="block cursor-pointer"
+          tabIndex={isOpen ? 0 : -1}
+          className="block cursor-pointer shadow-2xl rounded-xl"
           aria-label={`Open ${href} in new tab`}
         >
           <span className="block p-1 rounded-xl bg-gradient-to-r from-primary via-accent to-cyan-400 shadow-[0_10px_35px_rgba(0,0,0,0.5)]">
