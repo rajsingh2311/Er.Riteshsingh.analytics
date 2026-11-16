@@ -22,6 +22,7 @@ const education = [
     desc: "Exposure to SAP ERP systems, thermodynamic modeling, guest lecture sessions from IIT Roorkee, and departmental student leadership.",
     link: "https://www.ccsuniversity.ac.in/",
     previewImg: `${import.meta.env.BASE_URL}images/CCSU.png`,
+    logo: `${import.meta.env.BASE_URL}assets/aistudio/CCSU-Logo_39050d02.jpg`,
   },
   {
     degree: "12th (Physics, Chemistry, Math)",

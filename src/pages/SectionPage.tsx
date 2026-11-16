@@ -496,6 +496,7 @@ const EducationContent = () => {
       ],
       link: "https://www.ccsuniversity.ac.in/",
       previewImg: `${import.meta.env.BASE_URL}images/CCSU.png`,
+      logo: `${import.meta.env.BASE_URL}assets/aistudio/CCSU-Logo_39050d02.jpg`,
     },
     {
       degree: "12th (Physics, Chemistry, Math)",
