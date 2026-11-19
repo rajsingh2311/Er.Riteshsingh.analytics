@@ -1,0 +1,51 @@
+name: Build and deploy portfolio
+
+# Builds on every push to main or 3d-update.
+# Only pushes to main publish the site (gh-pages -> riteshsingh.is-a.dev).
+on:
+  push:
+    branches: [main, 3d-update]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Build
+        run: npm run build
+
+      - name: Check SEO and domain files survived the build
+        run: |
+          test -f dist/CNAME && grep -qx 'riteshsingh.is-a.dev' dist/CNAME
+          test -f dist/robots.txt
+          test -f dist/sitemap.xml
+          test -f dist/a22aab7b988a3783ebbf5359398b95ea.txt
+          grep -q 'https://riteshsingh.is-a.dev/' dist/index.html
+          grep -q '"@type": "Person"' dist/index.html
+          grep -q 'seo-snap' dist/index.html
+          echo "All SEO and domain files present."
+
+      - name: Publish to gh-pages
+        if: github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          cname: riteshsingh.is-a.dev

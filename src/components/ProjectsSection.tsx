@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   TrendingUp, 
@@ -8,15 +8,14 @@ import {
   Terminal, 
   Sparkles, 
   Play, 
-  FileUp, 
-  Layers, 
   FolderGit2, 
-  ChevronRight,
-  Sliders,
-  ExternalLink
+  ChevronRight
 } from "lucide-react";
 import { PythonProjectSimulator } from "./projects/PythonProjectSimulator";
 import { PowerBIProjectViewer } from "./projects/PowerBIProjectViewer";
+import { useShouldRender3D } from "@/hooks/useShouldRender3D";
+
+const Section3DStage = lazy(() => import("./three/Section3DStage"));
 
 type SectionTab = "overview" | "python" | "powerbi";
 
@@ -95,6 +94,7 @@ const projects: ProjectItem[] = [
 
 const ProjectsSection = () => {
   const [activeTab, setActiveTab] = useState<SectionTab>("overview");
+  const shouldRender3D = useShouldRender3D();
 
   return (
     <section id="projects" className="pt-12 pb-12 md:pt-16 md:pb-16 relative overflow-hidden">
@@ -118,6 +118,36 @@ const ProjectsSection = () => {
             From predictive Python algorithms and SPSS hypothesis testing to executive Power BI dashboards with real-time file upload inspection.
           </p>
         </motion.div>
+
+        {/* Interactive 3D Analytical Terrain & Pipeline Studio (desktop + motion-enabled only) */}
+        {shouldRender3D && (
+          <div className="max-w-6xl mx-auto mb-8">
+            <Suspense
+              fallback={
+                <div className="h-[320px] sm:h-[360px] rounded-2xl border border-primary/20 bg-card/40 flex items-center justify-center text-xs font-mono text-muted-foreground">
+                  Initializing 3D Analytical Topology...
+                </div>
+              }
+            >
+              <Section3DStage
+                variant="projects-topology"
+                badge="3D Analytical Terrain · Live Mode Sync"
+                heightClass="h-[320px] sm:h-[360px]"
+                activeHotspotId={activeTab}
+                onHotspotSelect={(id) => {
+                  if (id === "overview" || id === "python" || id === "powerbi") {
+                    setActiveTab(id);
+                  }
+                }}
+                onHotspotAction={(id) => {
+                  if (id === "overview" || id === "python" || id === "powerbi") {
+                    setActiveTab(id);
+                  }
+                }}
+              />
+            </Suspense>
+          </div>
+        )}
 
         {/* Navigation Mode Pill Switcher */}
         <div className="flex justify-center mb-8 max-w-full">

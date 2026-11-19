@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Send, Linkedin, Github } from "lucide-react";
 import ContactModal from "./ContactModal";
+import { useShouldRender3D } from "@/hooks/useShouldRender3D";
+
+const Section3DStage = lazy(() => import("./three/Section3DStage"));
 
 const ContactSection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const shouldRender3D = useShouldRender3D();
 
   return (
     <section id="contact" className="pt-12 pb-16 md:pt-14 md:pb-24 relative overflow-hidden">
@@ -14,7 +18,7 @@ const ContactSection = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-10 sm:mb-16"
+          className="text-center mb-10 sm:mb-14"
         >
           <span className="text-primary font-mono text-xs sm:text-sm tracking-wider uppercase">Get In Touch</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-2 sm:mt-3">
@@ -22,12 +26,34 @@ const ContactSection = () => {
           </h2>
         </motion.div>
 
-        <div className="max-w-2xl mx-auto">
+        <div
+          className={`mx-auto grid grid-cols-1 gap-6 lg:gap-8 items-stretch ${
+            shouldRender3D ? "max-w-5xl lg:grid-cols-2" : "max-w-2xl"
+          }`}
+        >
+          {/* Interactive 3D Orbital Signal Globe (desktop + motion-enabled only) */}
+          {shouldRender3D && (
+            <Suspense
+              fallback={
+                <div className="h-[340px] sm:h-[380px] rounded-2xl border border-primary/20 bg-card/40 flex items-center justify-center text-xs font-mono text-muted-foreground">
+                  Initializing 3D Signal Globe...
+                </div>
+              }
+            >
+              <Section3DStage
+                variant="contact-globe"
+                badge="3D Orbital Signal Globe · Noida Hub"
+                heightClass="h-[340px] sm:h-[380px] lg:h-full lg:min-h-[380px]"
+                onHotspotAction={() => setIsModalOpen(true)}
+              />
+            </Suspense>
+          )}
+
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="glass rounded-2xl p-5 sm:p-8 border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.2)] hover:shadow-[0_0_30px_rgba(139,92,246,0.6)] hover:border-white hover:bg-primary/10 transition-all duration-300"
+            className="glass rounded-2xl p-5 sm:p-8 border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.2)] hover:shadow-[0_0_30px_rgba(139,92,246,0.6)] hover:border-white hover:bg-primary/10 transition-all duration-300 flex flex-col justify-center"
           >
             <div className="flex justify-center gap-3 sm:gap-4 mb-6 sm:mb-8">
               {[
@@ -38,6 +64,8 @@ const ContactSection = () => {
                 <motion.a
                   key={social.label}
                   href={social.href}
+                  target={social.href.startsWith("http") ? "_blank" : undefined}
+                  rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-secondary flex items-center justify-center text-secondary-foreground hover:bg-gradient-brand hover:text-primary-foreground transition-colors shrink-0"

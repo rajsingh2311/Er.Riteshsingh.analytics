@@ -1,11 +1,15 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Award, ExternalLink, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import { lazy, Suspense, useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import { useShouldRender3D } from "@/hooks/useShouldRender3D";
+
+const Section3DStage = lazy(() => import("./three/Section3DStage"));
 
 const certifications = [
   {
+    id: "iimb",
     title: "Strategic Management",
     issuer: "Indian Institute of Management Bangalore",
     date: "Jan 2026",
@@ -13,6 +17,7 @@ const certifications = [
     image: `${import.meta.env.BASE_URL}images/certification/Strategic%20Management.png`,
   },
   {
+    id: "sixsigma",
     title: "Lean Six Sigma Green Belt Certification",
     issuer: "Grant Thornton Bharat LLP",
     date: "Nov 2025",
@@ -21,6 +26,7 @@ const certifications = [
     image: `${import.meta.env.BASE_URL}images/certification/Six%20Sigma.png`,
   },
   {
+    id: "aiprompts",
     title: "AI Chat Prompts for Business Analysis",
     issuer: "LinkedIn Learning",
     date: "Oct 2025",
@@ -28,6 +34,7 @@ const certifications = [
     image: `${import.meta.env.BASE_URL}images/certification/AI%20Chat%20Prompt%20For%20Business%20Analysis.png`,
   },
   {
+    id: "genai",
     title: "What Is Generative AI?",
     issuer: "LinkedIn Learning",
     date: "Sep 2025",
@@ -36,6 +43,7 @@ const certifications = [
     image: `${import.meta.env.BASE_URL}images/certification/What%20Is%20Generative%20AI.png`,
   },
   {
+    id: "mdis",
     title: "The Development and Implementation of International Business",
     issuer: "Management Development Institute of Singapore",
     date: "Mar 2025",
@@ -43,6 +51,7 @@ const certifications = [
     image: `${import.meta.env.BASE_URL}images/certification/MDIS%20Singapur.png`,
   },
   {
+    id: "mos",
     title: "Microsoft Office Specialist: Microsoft Excel Expert",
     issuer: "Microsoft",
     date: "Mar 2025",
@@ -51,6 +60,7 @@ const certifications = [
     image: `${import.meta.env.BASE_URL}images/certification/Excel%202019%20Associate.png`,
   },
   {
+    id: "googleai",
     title: "Google AI Essentials",
     issuer: "Google",
     date: "Jan 2025",
@@ -62,6 +72,8 @@ const certifications = [
 
 const CertificationsSection = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [activeCertId, setActiveCertId] = useState<string>("iimb");
+  const shouldRender3D = useShouldRender3D();
 
   useEffect(() => {
     if (!selectedImage) return;
@@ -90,13 +102,40 @@ const CertificationsSection = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12 sm:mb-16"
+          className="text-center mb-8 sm:mb-10"
         >
           <span className="text-primary font-mono text-xs sm:text-sm tracking-wider uppercase">Credentials</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-2 sm:mt-3">
             <span className="text-gradient">Certifications</span>
           </h2>
         </motion.div>
+
+        {/* Interactive 3D Credential Medallion Vault (desktop + motion-enabled only) */}
+        {shouldRender3D && (
+          <div className="max-w-5xl mx-auto mb-8 sm:mb-10">
+            <Suspense
+              fallback={
+                <div className="h-[340px] sm:h-[380px] rounded-2xl border border-primary/20 bg-card/40 flex items-center justify-center text-xs font-mono text-muted-foreground">
+                  Initializing 3D Credential Vault...
+                </div>
+              }
+            >
+              <Section3DStage
+                variant="certifications-vault"
+                badge="3D Holographic Credential Vault · 7 Seals"
+                heightClass="h-[340px] sm:h-[380px]"
+                activeHotspotId={activeCertId}
+                onHotspotSelect={(id) => setActiveCertId(id)}
+                onHotspotAction={(id) => {
+                  const found = certifications.find((c) => c.id === id);
+                  if (found?.image) {
+                    setSelectedImage(found.image);
+                  }
+                }}
+              />
+            </Suspense>
+          </div>
+        )}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
           {certifications.map((cert, index) => (
@@ -108,6 +147,7 @@ const CertificationsSection = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.12 }}
                   whileHover={cert.link || cert.image ? { y: -4 } : {}}
+                  onMouseEnter={() => setActiveCertId(cert.id)}
                   className={`glass rounded-xl overflow-hidden animate-float-card block min-w-0${cert.link || cert.image ? ' cursor-pointer border-2 border-primary/50 shadow-[0_0_15px_rgba(139,92,246,0.2)] hover:shadow-[0_0_30px_rgba(139,92,246,0.6)] hover:border-white hover:bg-primary/10' : ''} transition-all duration-300`}
                   style={{ animationDelay: `${index * 0.5}s` }}
                   onClick={() => {

@@ -1,14 +1,19 @@
+import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Handshake, Quote } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useShouldRender3D } from "@/hooks/useShouldRender3D";
+
+const Section3DStage = lazy(() => import("./three/Section3DStage"));
 
 const AboutSection = () => {
   const navigate = useNavigate();
+  const shouldRender3D = useShouldRender3D();
 
   return (
     <section id="about-detailed" className="relative pt-8 pb-8 md:pt-12 md:pb-10 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           {/* Section Title */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -79,24 +84,46 @@ const AboutSection = () => {
                 Data Analyst | Business Intelligence Specialist
               </h3>
 
-              {/* Main Content - Justified Text */}
-              <div id="about-overview" className="scroll-mt-36 space-y-3 sm:space-y-4 md:space-y-6 mb-6 md:mb-8 text-xs sm:text-sm md:text-base leading-relaxed text-left sm:text-justify text-foreground">
-                <p>
-                  I am a Data Analyst at Seth Anandram Jaipuria Group of Educational Institutions, where I leverage SQL, 
-                  Predictive Analytics, and Power BI to transform raw institutional data into strategic insights. My focus is on 
-                  driving operational efficiency and supporting evidence-based decision-making within the education sector.
-                </p>
+              {/* Narrative + Interactive 3D Data Bridge Prism (desktop + motion-enabled only) */}
+              <div
+                className={`grid grid-cols-1 gap-6 lg:gap-8 items-center mb-6 md:mb-8 ${
+                  shouldRender3D ? "lg:grid-cols-[1.08fr_0.92fr]" : ""
+                }`}
+              >
+                <div id="about-overview" className="scroll-mt-36 space-y-3 sm:space-y-4 md:space-y-5 text-xs sm:text-sm md:text-base leading-relaxed text-left sm:text-justify text-foreground">
+                  <p>
+                    I am a Data Analyst at Seth Anandram Jaipuria Group of Educational Institutions, where I leverage SQL,
+                    Predictive Analytics, and Power BI to transform raw institutional data into strategic insights. My focus is on
+                    driving operational efficiency and supporting evidence-based decision-making within the education sector.
+                  </p>
 
-                <p>
-                  Previously, I honed my ability to merge technical analysis with business impact at WTF Gyms. There, I engineered 
-                  automation workflows (Make.com & WATI) that reduced lead response times by 65% and developed comprehensive Power BI 
-                  dashboards to track agent performance and funnel conversion.
-                </p>
+                  <p>
+                    Previously, I honed my ability to merge technical analysis with business impact at WTF Gyms. There, I engineered
+                    automation workflows (Make.com & WATI) that reduced lead response times by 65% and developed comprehensive Power BI
+                    dashboards to track agent performance and funnel conversion.
+                  </p>
 
-                <p>
-                  I am passionate about #BuildingInPublic and sharing workflows that help businesses make smarter, faster decisions. 
-                  Let's connect to discuss data strategy and automation.
-                </p>
+                  <p>
+                    I am passionate about #BuildingInPublic and sharing workflows that help businesses make smarter, faster decisions.
+                    Let's connect to discuss data strategy and automation.
+                  </p>
+                </div>
+
+                {shouldRender3D && (
+                  <Suspense
+                    fallback={
+                      <div className="h-[320px] sm:h-[360px] rounded-2xl border border-primary/20 bg-card/40 flex items-center justify-center text-xs font-mono text-muted-foreground">
+                        Initializing 3D Data Prism...
+                      </div>
+                    }
+                  >
+                    <Section3DStage
+                      variant="about-bridge"
+                      badge="3D Data Transformation Prism"
+                      heightClass="h-[320px] sm:h-[360px]"
+                    />
+                  </Suspense>
+                )}
               </div>
 
               {/* Core Competencies */}

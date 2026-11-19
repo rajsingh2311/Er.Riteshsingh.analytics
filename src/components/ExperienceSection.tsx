@@ -1,7 +1,10 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Briefcase, ChevronRight, ChevronUp, ChevronDown, Camera, Trophy, Heart, X, Sparkles, Calendar, MapPin } from "lucide-react";
-import { useState, useEffect } from "react";
+import { lazy, Suspense, useState, useEffect } from "react";
 import { createPortal } from "react-dom";
+import { useShouldRender3D } from "@/hooks/useShouldRender3D";
+
+const Section3DStage = lazy(() => import("./three/Section3DStage"));
 
 const timeline = [
   {
@@ -191,6 +194,7 @@ const timeline = [
 const ExperienceSection = () => {
   const [selectedJob, setSelectedJob] = useState<number | null>(null);
   const [activePhoto, setActivePhoto] = useState<{ src: string; caption: string } | null>(null);
+  const shouldRender3D = useShouldRender3D();
 
   const scrollToExperience = (index: number) => {
     const element = document.getElementById(`experience-${index}`);
@@ -231,13 +235,38 @@ const ExperienceSection = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12 sm:mb-16"
+          className="text-center mb-8 sm:mb-10"
         >
           <span className="text-primary font-mono text-xs sm:text-sm tracking-wider uppercase">Journey</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-2 sm:mt-3">
             Professional <span className="text-gradient">Experience</span>
           </h2>
         </motion.div>
+
+        {/* Interactive 3D Career Trajectory Helix (desktop + motion-enabled only) */}
+        {shouldRender3D && (
+          <div className="max-w-4xl mx-auto mb-10 sm:mb-12">
+            <Suspense
+              fallback={
+                <div className="h-[340px] sm:h-[380px] rounded-2xl border border-primary/20 bg-card/40 flex items-center justify-center text-xs font-mono text-muted-foreground">
+                  Initializing 3D Career Helix...
+                </div>
+              }
+            >
+              <Section3DStage
+                variant="experience-helix"
+                badge="3D Career Trajectory Helix · 2023—2026"
+                heightClass="h-[340px] sm:h-[380px]"
+                onHotspotAction={(id) => {
+                  const idx = Number(id);
+                  if (!Number.isNaN(idx) && idx >= 0 && idx < timeline.length) {
+                    openMemories(idx);
+                  }
+                }}
+              />
+            </Suspense>
+          </div>
+        )}
 
         <div className="max-w-3xl mx-auto relative">
           {/* Timeline line */}
