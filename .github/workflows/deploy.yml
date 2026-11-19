@@ -41,6 +41,14 @@ jobs:
           grep -q 'seo-snap' dist/index.html
           echo "All SEO and domain files present."
 
+      - name: Publish preview build (3d-update only, not live)
+        if: github.ref == 'refs/heads/3d-update'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: preview-3d
+
       - name: Publish to gh-pages
         if: github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v4
