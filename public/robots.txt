@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://riteshsingh.is-a.dev/sitemap.xml
