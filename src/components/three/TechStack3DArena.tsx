@@ -126,7 +126,7 @@ const TECH_SPHERES: TechSphereItem[] = [
     name: "SAP / ERP",
     shortLabel: "SAP ERP",
     category: "Enterprise Operations",
-    level: 72,
+    level: 70,
     summary: "Industrial plant telemetry, inventory metrics & cross-functional ops reporting.",
     color: "#2563eb",
     accentHex: "#dbeafe",

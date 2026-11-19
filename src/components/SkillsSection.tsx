@@ -10,8 +10,8 @@ const skills = [
   { icon: PieChart, name: "MS Excel (MOS Expert)", level: 92, desc: "PivotTables, Power Query, dynamic models" },
   { icon: Table2, name: "SQL", level: 85, desc: "Queries, joins, CTEs & data preparation" },
   { icon: Code2, name: "Python", level: 80, desc: "Pandas, NumPy, ML & workflow automation" },
-  { icon: Layers, name: "SPSS & Six Sigma", level: 82, desc: "Chi-Square, T-Test, ANOVA & DMAIC rigor" },
-  { icon: BarChart3, name: "Make.com · N8N · SAP", level: 84, desc: "CRM/WATI pipelines & ERP operations telemetry" },
+  { icon: Layers, name: "SPSS", level: 78, desc: "Chi-Square, T-Test, ANOVA" },
+  { icon: BarChart3, name: "SAP / ERP", level: 70, desc: "Ops reporting & workflow exposure" },
 ];
 
 const SkillsSection = () => {
@@ -31,7 +31,7 @@ const SkillsSection = () => {
           <div>
             <p className="text-primary font-mono text-xs sm:text-sm tracking-wider">Expertise</p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-1.5 leading-tight text-balance">
-              Interactive <span className="text-gradient">Tech Stack</span>
+              Technical <span className="text-gradient">Skills</span>
             </h2>
           </div>
 
@@ -48,7 +48,7 @@ const SkillsSection = () => {
                 }`}
               >
                 <Box className="w-3.5 h-3.5 shrink-0" />
-                <span>3D Physics Arena</span>
+                <span>Show 3D</span>
               </button>
               <button
                 type="button"
@@ -60,13 +60,15 @@ const SkillsSection = () => {
                 }`}
               >
                 <Grid2X2 className="w-3.5 h-3.5 shrink-0" />
-                <span>Skill Matrix</span>
+                <span>Hide 3D</span>
               </button>
             </div>
           )}
         </motion.div>
 
-        {show3DArena ? (
+        {/* 3D arena is an optional extra; the readable skill cards below are always shown */}
+        {show3DArena && (
+          <div className="mb-8 sm:mb-10">
           <Suspense
             fallback={
               <div className="w-full h-[380px] sm:h-[440px] md:h-[480px] rounded-2xl border border-border/80 bg-card/40 flex items-center justify-center">
@@ -78,7 +80,10 @@ const SkillsSection = () => {
           >
             <TechStack3DArena />
           </Suspense>
-        ) : (
+          </div>
+        )}
+
+        {(
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {skills.map((skill, i) => (
               <motion.div
