@@ -362,46 +362,45 @@ const Section3DStage = ({
   return (
     <div
       ref={outerRef}
-      className={`relative w-full ${heightClass} rounded-2xl border border-primary/25 bg-card/45 overflow-hidden select-none ${className}`}
+      className={`relative w-full flex flex-col rounded-2xl border border-primary/25 bg-card/45 overflow-hidden select-none ${className}`}
     >
-      {/* Subtle studio floor vignette */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.10)_0%,transparent_68%)]"
-      />
-
-      {/* Dedicated isolated WebGL canvas mount */}
-      <div ref={canvasHostRef} className="absolute inset-0 w-full h-full" />
-
-      {/* Graceful fallback if WebGL unavailable */}
-      {!webglReady && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-          <Sparkles className="w-7 h-7 text-primary mb-2" />
-          <p className="text-sm font-semibold text-foreground">{badge}</p>
-          <p className="text-xs text-muted-foreground mt-1 max-w-xs">
-            Interactive 3D view requires WebGL support in your browser.
-          </p>
-        </div>
-      )}
-
-      {/* Minimal top-left studio label (zero backdrop-blur over WebGL, zero pulsing dots) */}
-      <div className="pointer-events-none absolute top-3 left-3 z-10 flex items-center gap-2">
-        <span className="inline-flex items-center gap-1.5 rounded-lg border border-border/80 bg-card/95 px-2.5 py-1 text-[11px] font-mono text-primary">
-          <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-          {badge}
+      {/* Title row ABOVE the 3D area, so it never covers the model */}
+      <div className="flex items-center justify-between gap-2 px-3 pt-3 pb-1">
+        <span className="inline-flex min-w-0 items-center gap-1.5 rounded-lg border border-border/80 bg-card/95 px-2.5 py-1 text-[11px] font-mono text-primary">
+          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+          <span className="truncate">{badge}</span>
         </span>
-      </div>
-
-      {/* Top-right compact interaction hint */}
-      <div className="pointer-events-none absolute top-3 right-3 z-10 hidden sm:flex items-center">
-        <span className="rounded-lg border border-border/70 bg-card/90 px-2.5 py-1 text-[10px] font-mono text-muted-foreground">
+        <span className="hidden sm:inline-flex shrink-0 rounded-lg border border-border/70 bg-card/90 px-2.5 py-1 text-[10px] font-mono text-muted-foreground">
           Drag to orbit · Click nodes
         </span>
       </div>
 
-      {/* Collapsible Bottom Control Dock (solid card surface — no backdrop-blur over WebGL) */}
+      {/* 3D area: only the canvas lives here, nothing is drawn on top of it */}
+      <div className={`relative w-full ${heightClass}`}>
+        {/* Subtle studio floor vignette */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.10)_0%,transparent_68%)]"
+        />
+
+        {/* Dedicated isolated WebGL canvas mount */}
+        <div ref={canvasHostRef} className="absolute inset-0 w-full h-full" />
+
+        {/* Graceful fallback if WebGL unavailable */}
+        {!webglReady && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
+            <Sparkles className="w-7 h-7 text-primary mb-2" />
+            <p className="text-sm font-semibold text-foreground">{badge}</p>
+            <p className="text-xs text-muted-foreground mt-1 max-w-xs">
+              Interactive 3D view requires WebGL support in your browser.
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* Control panel BELOW the 3D area (no longer overlaid on the model) */}
       {hotspots.length > 0 && (
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 w-[calc(100%-1.5rem)] max-w-2xl flex flex-col items-center">
+        <div className="relative w-full px-3 pb-3 pt-1 mx-auto max-w-2xl flex flex-col items-center">
           <button
             type="button"
             onClick={() => setHudOpen((v) => !v)}

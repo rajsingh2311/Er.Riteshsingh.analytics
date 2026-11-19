@@ -777,7 +777,7 @@ const AnalyticsCoreScene = () => {
   const activePillar = ANALYTICS_PILLARS[selectedIdx];
 
   return (
-    <div className="relative w-full h-[360px] xs:h-[400px] sm:h-[460px] lg:h-[540px] rounded-2xl overflow-hidden border border-border/80 bg-card/40 select-none">
+    <div className="relative w-full flex flex-col rounded-2xl overflow-hidden border border-border/80 bg-card/40 select-none">
       {/* Subtle radial atmospheric stage glow behind canvas */}
       <div
         className="pointer-events-none absolute inset-0"
@@ -788,7 +788,7 @@ const AnalyticsCoreScene = () => {
       />
 
       {/* Minimal top-left specification header (unobtrusive, no backdrop-blur over WebGL) */}
-      <div className="pointer-events-none absolute top-3.5 left-4 right-4 z-10 flex items-center justify-between gap-2">
+      <div className="pointer-events-none relative z-10 px-4 pt-3.5 pb-1 flex items-center justify-between gap-2">
         <div className="flex items-center gap-2 text-[11px] font-mono text-muted-foreground">
           <span
             className="w-2 h-2 rounded-full shrink-0"
@@ -805,9 +805,9 @@ const AnalyticsCoreScene = () => {
 
       {/* Dedicated isolated WebGL canvas mount */}
       {webglReady && !contextLost ? (
-        <div ref={containerRef} className="w-full h-full cursor-grab active:cursor-grabbing" />
+        <div ref={containerRef} className="relative w-full h-[320px] xs:h-[360px] sm:h-[420px] lg:h-[480px] cursor-grab active:cursor-grabbing" />
       ) : (
-        <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-card">
+        <div className="w-full h-[320px] sm:h-[420px] flex flex-col items-center justify-center p-6 text-center bg-card">
           <Sparkles className="w-8 h-8 text-primary mb-3" />
           <p className="text-sm font-semibold text-foreground">Interactive Analytics Engine</p>
           <p className="text-xs text-muted-foreground mt-1 max-w-xs">
@@ -817,7 +817,7 @@ const AnalyticsCoreScene = () => {
       )}
 
       {/* Unified Collapsible Bottom Control Dock (Zero backdrop-blur over WebGL) */}
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 w-[calc(100%-24px)] max-w-[490px] flex flex-col items-center">
+      <div className="relative z-10 mx-auto mb-3 w-[calc(100%-24px)] max-w-[490px] flex flex-col items-center">
         <button
           type="button"
           onClick={() => setDockExpanded((v) => !v)}

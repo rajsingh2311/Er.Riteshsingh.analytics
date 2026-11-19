@@ -638,7 +638,7 @@ const TechStack3DArena = () => {
   const activeItem = TECH_SPHERES[selectedIdx];
 
   return (
-    <div className="relative w-full h-[380px] sm:h-[440px] md:h-[480px] rounded-2xl overflow-hidden border border-border/80 bg-card/40 select-none">
+    <div className="relative w-full flex flex-col rounded-2xl overflow-hidden border border-border/80 bg-card/40 select-none">
       {/* Subtle stage lighting backdrop */}
       <div
         className="pointer-events-none absolute inset-0"
@@ -649,7 +649,7 @@ const TechStack3DArena = () => {
       />
 
       {/* Minimal Top Spec Line */}
-      <div className="pointer-events-none absolute top-3.5 left-4 right-4 z-10 flex items-center justify-between gap-2 text-[11px] font-mono text-muted-foreground">
+      <div className="pointer-events-none relative z-10 px-4 pt-3.5 pb-1 flex items-center justify-between gap-2 text-[11px] font-mono text-muted-foreground">
         <div className="flex items-center gap-2 min-w-0">
           <span
             className="w-2.5 h-2.5 rounded-full shrink-0"
@@ -664,9 +664,9 @@ const TechStack3DArena = () => {
 
       {/* Isolated WebGL Canvas Container */}
       {webglReady && !contextLost ? (
-        <div ref={containerRef} className="w-full h-full" />
+        <div ref={containerRef} className="relative w-full h-[340px] sm:h-[400px] md:h-[440px]" />
       ) : (
-        <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-card">
+        <div className="w-full h-[340px] sm:h-[400px] flex flex-col items-center justify-center p-6 text-center bg-card">
           <Sparkles className="w-8 h-8 text-primary mb-2" />
           <p className="text-sm font-semibold text-foreground">Interactive 3D Tech Stack</p>
           <p className="text-xs text-muted-foreground mt-1">Switch to Skill Matrix view to browse all tools.</p>
@@ -674,7 +674,7 @@ const TechStack3DArena = () => {
       )}
 
       {/* Collapsible Bottom Inspector Dock (solid surface, zero backdrop-blur over WebGL) */}
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 w-[calc(100%-24px)] max-w-[680px] flex flex-col items-center">
+      <div className="relative z-10 mx-auto mb-3 w-[calc(100%-24px)] max-w-[680px] flex flex-col items-center">
         <button
           type="button"
           onClick={() => setDockExpanded((v) => !v)}
