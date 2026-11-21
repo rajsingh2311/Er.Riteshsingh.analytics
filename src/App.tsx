@@ -13,6 +13,7 @@ import TenthPage from "./pages/TenthPage";
 import WordsThatMatterPage from "./pages/WordsThatMatterPage";
 import MyMentorsPage from "./pages/MyMentorsPage";
 import NotFound from "./pages/NotFound";
+import LiveGitPreviewFrame from "./components/LiveGitPreviewFrame";
 
 const queryClient = new QueryClient();
 
@@ -22,19 +23,21 @@ const App = () => (
       <ThemeProvider>
         <Toaster />
         <Sonner />
-        <HashRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/pgdm" element={<PGDMPage />} />
-            <Route path="/btech" element={<BTechPage />} />
-            <Route path="/twelfth" element={<TwelfthPage />} />
-            <Route path="/tenth" element={<TenthPage />} />
-            <Route path="/words-that-matter" element={<WordsThatMatterPage />} />
-            <Route path="/my-mentors" element={<MyMentorsPage />} />
-            <Route path="/section/:sectionId" element={<SectionPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </HashRouter>
+        <LiveGitPreviewFrame>
+          <HashRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/pgdm" element={<PGDMPage />} />
+              <Route path="/btech" element={<BTechPage />} />
+              <Route path="/twelfth" element={<TwelfthPage />} />
+              <Route path="/tenth" element={<TenthPage />} />
+              <Route path="/words-that-matter" element={<WordsThatMatterPage />} />
+              <Route path="/my-mentors" element={<MyMentorsPage />} />
+              <Route path="/section/:sectionId" element={<SectionPage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </HashRouter>
+        </LiveGitPreviewFrame>
       </ThemeProvider>
     </TooltipProvider>
   </QueryClientProvider>

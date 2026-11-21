@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { ChevronDown, ChevronUp, Layers, RotateCcw, Sparkles } from "lucide-react";
+import { ChevronDown, ChevronUp, Layers, RotateCcw, Sparkles, ZoomIn, ZoomOut } from "lucide-react";
 import {
   createContactShadowTexture,
   createStudioEnvironment,
@@ -78,10 +78,14 @@ const ANALYTICS_PILLARS: AnalyticsPillar[] = [
   },
 ];
 
+const MIN_ZOOM = 0.75;
+const MAX_ZOOM = 2.8;
+
 // Reusable math helpers allocated once outside render loop (zero GC)
 const _raycaster = new THREE.Raycaster();
 const _pointer = new THREE.Vector2();
 const _dummy = new THREE.Object3D();
+const _camOffset = new THREE.Vector3();
 
 function createBeveledOctagonShape(radius: number): THREE.Shape {
   const shape = new THREE.Shape();
@@ -99,10 +103,11 @@ function createBeveledOctagonShape(radius: number): THREE.Shape {
 
 function createDialTexture(isLight: boolean): THREE.CanvasTexture {
   const canvas = document.createElement("canvas");
-  canvas.width = 512;
-  canvas.height = 512;
+  canvas.width = 1024;
+  canvas.height = 1024;
   const ctx = canvas.getContext("2d");
   if (ctx) {
+    ctx.scale(2, 2);
     ctx.clearRect(0, 0, 512, 512);
     const cx = 256;
     const cy = 256;
@@ -150,10 +155,15 @@ const AnalyticsCoreScene = () => {
   const [dockExpanded, setDockExpanded] = useState<boolean>(true);
   const [webglReady, setWebglReady] = useState<boolean>(true);
   const [contextLost, setContextLost] = useState<boolean>(false);
+  const [zoom, setZoom] = useState<number>(1);
+  const [wheelActive, setWheelActive] = useState<boolean>(false);
 
   const explodedRef = useRef(exploded);
   const autoOrbitRef = useRef(autoOrbit);
   const selectedIdxRef = useRef(selectedIdx);
+  const zoomRef = useRef<number>(1);
+  const wheelActiveRef = useRef<boolean>(false);
+  const applyZoomFnRef = useRef<((z: number) => void) | null>(null);
   const resetCameraFnRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
@@ -167,6 +177,33 @@ const AnalyticsCoreScene = () => {
   useEffect(() => {
     selectedIdxRef.current = selectedIdx;
   }, [selectedIdx]);
+
+  useEffect(() => {
+    wheelActiveRef.current = wheelActive;
+  }, [wheelActive]);
+
+  const broadcastZoom = useCallback((nextZoom: number) => {
+    if (typeof window === "undefined") return;
+    window.dispatchEvent(
+      new CustomEvent("three-viewport-update", {
+        detail: { zoom: nextZoom, mode: "core" },
+      })
+    );
+  }, []);
+
+  const updateZoom = useCallback(
+    (next: number | ((prev: number) => number)) => {
+      setZoom((prev) => {
+        const raw = typeof next === "function" ? next(prev) : next;
+        const clamped = Math.round(THREE.MathUtils.clamp(raw, MIN_ZOOM, MAX_ZOOM) * 100) / 100;
+        zoomRef.current = clamped;
+        applyZoomFnRef.current?.(clamped);
+        broadcastZoom(clamped);
+        return clamped;
+      });
+    },
+    [broadcastZoom]
+  );
 
   useEffect(() => {
     const mount = containerRef.current;
@@ -207,7 +244,13 @@ const AnalyticsCoreScene = () => {
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.12;
-    renderer.setPixelRatio(isSoftwareGl ? 1 : Math.min(window.devicePixelRatio, window.innerWidth < 768 ? 1.5 : 2));
+    const isSmall = window.innerWidth < 768;
+    const basePixelRatio = isSoftwareGl ? 1 : Math.min(window.devicePixelRatio, isSmall ? 1.5 : 2);
+    const hdPixelRatio = isSoftwareGl
+      ? 1
+      : Math.min(Math.max(window.devicePixelRatio, 1.5) * (isSmall ? 1.25 : 1.55), 3);
+    let currentPixelRatio = basePixelRatio;
+    renderer.setPixelRatio(currentPixelRatio);
     renderer.setSize(width, height);
     renderer.shadowMap.enabled = !isSoftwareGl;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -534,14 +577,35 @@ const AnalyticsCoreScene = () => {
     controls.target.set(0, 0.15, 0);
     controls.update();
 
+    const baseCamDist = defaultCamPos.distanceTo(controls.target);
     let resettingCamera = false;
+    let zoomDamping = false;
     const cancelCameraReset = () => {
       resettingCamera = false;
     };
     controls.addEventListener("start", cancelCameraReset);
 
+    const syncHdDpr = (z: number) => {
+      const nextDpr = z > 1.14 ? hdPixelRatio : basePixelRatio;
+      if (Math.abs(nextDpr - currentPixelRatio) > 0.05) {
+        currentPixelRatio = nextDpr;
+        renderer.setPixelRatio(currentPixelRatio);
+      }
+    };
+
+    applyZoomFnRef.current = (nextZ: number) => {
+      zoomDamping = true;
+      resettingCamera = false;
+      syncHdDpr(nextZ);
+    };
+
     resetCameraFnRef.current = () => {
+      zoomRef.current = 1;
+      setZoom(1);
+      syncHdDpr(1);
       resettingCamera = true;
+      zoomDamping = true;
+      broadcastZoom(1);
     };
 
     // Raycasting setup (dedicated layer 1)
@@ -574,6 +638,7 @@ const AnalyticsCoreScene = () => {
     };
 
     const onPointerDown = (event: PointerEvent) => {
+      setWheelActive(true);
       updatePointerCoords(event);
       _raycaster.setFromCamera(_pointer, camera);
       const hits = _raycaster.intersectObjects([...pillarMeshes, ...pillarCaps], false);
@@ -583,8 +648,29 @@ const AnalyticsCoreScene = () => {
       }
     };
 
+    const onDocPointerDown = (event: PointerEvent) => {
+      if (!mount.contains(event.target as Node)) {
+        setWheelActive(false);
+      }
+    };
+
+    const onWheel = (event: WheelEvent) => {
+      const allow = event.ctrlKey || event.metaKey || event.shiftKey || wheelActiveRef.current;
+      if (!allow) return;
+      event.preventDefault();
+      const delta = -Math.sign(event.deltaY) * (Math.abs(event.deltaY) > 40 ? 0.22 : 0.12);
+      updateZoom((prev) => prev + delta);
+    };
+
+    const onDoubleClick = () => {
+      updateZoom((prev) => (prev > 1.35 ? 1 : 2.0));
+    };
+
     renderer.domElement.addEventListener("pointermove", onPointerMove);
     renderer.domElement.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("pointerdown", onDocPointerDown);
+    mount.addEventListener("wheel", onWheel, { passive: false });
+    mount.addEventListener("dblclick", onDoubleClick);
 
     // WebGL context loss/restore safety
     const onContextLost = (e: Event) => {
@@ -664,7 +750,8 @@ const AnalyticsCoreScene = () => {
         const targetExplode = explodedRef.current ? 1 : 0;
         explodeFactor = THREE.MathUtils.damp(explodeFactor, targetExplode, 5.5, delta);
 
-        // Smooth camera reset transition if requested
+        // Smooth camera reset or HD zoom distance transition
+        const targetDist = baseCamDist / zoomRef.current;
         if (resettingCamera) {
           camera.position.x = THREE.MathUtils.damp(camera.position.x, defaultCamPos.x, 5, delta);
           camera.position.y = THREE.MathUtils.damp(camera.position.y, defaultCamPos.y, 5, delta);
@@ -672,6 +759,16 @@ const AnalyticsCoreScene = () => {
           if (camera.position.distanceTo(defaultCamPos) < 0.03) {
             camera.position.copy(defaultCamPos);
             resettingCamera = false;
+            zoomDamping = false;
+          }
+        } else if (zoomDamping) {
+          _camOffset.subVectors(camera.position, controls.target);
+          const curDist = Math.max(0.4, _camOffset.length());
+          const nextDist = THREE.MathUtils.damp(curDist, targetDist, 7.5, delta);
+          _camOffset.normalize().multiplyScalar(nextDist);
+          camera.position.copy(controls.target).add(_camOffset);
+          if (Math.abs(nextDist - targetDist) < 0.01) {
+            zoomDamping = false;
           }
         }
 
@@ -762,8 +859,12 @@ const AnalyticsCoreScene = () => {
       intersectionObserver.disconnect();
       controls.removeEventListener("start", cancelCameraReset);
       controls.dispose();
+      applyZoomFnRef.current = null;
       renderer.domElement.removeEventListener("pointermove", onPointerMove);
       renderer.domElement.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("pointerdown", onDocPointerDown);
+      mount.removeEventListener("wheel", onWheel);
+      mount.removeEventListener("dblclick", onDoubleClick);
       renderer.domElement.removeEventListener("webglcontextlost", onContextLost);
       renderer.domElement.removeEventListener("webglcontextrestored", onContextRestored);
       geometries.forEach((g) => g.dispose());
@@ -772,7 +873,7 @@ const AnalyticsCoreScene = () => {
       dialTex.dispose();
       renderer.dispose();
     };
-  }, []);
+  }, [broadcastZoom, updateZoom]);
 
   const activePillar = ANALYTICS_PILLARS[selectedIdx];
 
@@ -787,8 +888,8 @@ const AnalyticsCoreScene = () => {
         }}
       />
 
-      {/* Minimal top-left specification header (unobtrusive, no backdrop-blur over WebGL) */}
-      <div className="pointer-events-none relative z-10 px-4 pt-3.5 pb-1 flex items-center justify-between gap-2">
+      {/* Top specification header + HD Zoom controls */}
+      <div className="relative z-10 px-4 pt-3.5 pb-1 flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-2 text-[11px] font-mono text-muted-foreground">
           <span
             className="w-2 h-2 rounded-full shrink-0"
@@ -798,14 +899,41 @@ const AnalyticsCoreScene = () => {
           <span aria-hidden="true">·</span>
           <span className="tabular-nums text-primary font-semibold">{activePillar.metric}</span>
         </div>
-        <span className="hidden sm:inline text-[11px] font-mono text-muted-foreground">
-          Drag to orbit · Click pillars
-        </span>
+        <div className="inline-flex items-center gap-0.5 rounded-lg border border-border/80 bg-card/95 p-0.5">
+          <button
+            type="button"
+            onClick={() => updateZoom((z) => z - 0.35)}
+            disabled={zoom <= MIN_ZOOM}
+            className="p-1 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/70 disabled:opacity-40 transition-colors cursor-pointer"
+            aria-label="Zoom out analytics core"
+          >
+            <ZoomOut className="w-3.5 h-3.5" />
+          </button>
+          <span className="min-w-[48px] text-center text-[10px] font-mono tabular-nums text-foreground">
+            {Math.round(zoom * 100)}%
+            {zoom > 1.14 && <span className="ml-0.5 text-[9px] font-bold text-primary">HD</span>}
+          </span>
+          <button
+            type="button"
+            onClick={() => updateZoom((z) => z + 0.35)}
+            disabled={zoom >= MAX_ZOOM}
+            className="p-1 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/70 disabled:opacity-40 transition-colors cursor-pointer"
+            aria-label="Zoom in analytics core HD"
+          >
+            <ZoomIn className="w-3.5 h-3.5" />
+          </button>
+        </div>
       </div>
 
       {/* Dedicated isolated WebGL canvas mount */}
       {webglReady && !contextLost ? (
-        <div ref={containerRef} className="relative w-full h-[320px] xs:h-[360px] sm:h-[420px] lg:h-[480px] cursor-grab active:cursor-grabbing" />
+        <div
+          ref={containerRef}
+          data-3d-viewport="true"
+          data-three-zoom={zoom.toFixed(2)}
+          data-three-mode="core"
+          className="relative w-full h-[320px] xs:h-[360px] sm:h-[420px] lg:h-[480px] cursor-grab active:cursor-grabbing"
+        />
       ) : (
         <div className="w-full h-[320px] sm:h-[420px] flex flex-col items-center justify-center p-6 text-center bg-card">
           <Sparkles className="w-8 h-8 text-primary mb-3" />

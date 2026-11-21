@@ -60,11 +60,12 @@ function createDialCanvasTexture(
   maxAniso: number
 ): THREE.CanvasTexture {
   const canvas = document.createElement("canvas");
-  canvas.width = 512;
-  canvas.height = 512;
+  canvas.width = 1024;
+  canvas.height = 1024;
   const ctx = canvas.getContext("2d");
 
   if (ctx) {
+    ctx.scale(2, 2);
     ctx.clearRect(0, 0, 512, 512);
     const cx = 256;
     const cy = 256;
@@ -115,7 +116,9 @@ function createDialCanvasTexture(
 
   const tex = new THREE.CanvasTexture(canvas);
   tex.colorSpace = THREE.SRGBColorSpace;
-  tex.anisotropy = Math.min(maxAniso, 8);
+  tex.minFilter = THREE.LinearMipmapLinearFilter;
+  tex.magFilter = THREE.LinearFilter;
+  tex.anisotropy = Math.min(maxAniso, 16);
   tex.needsUpdate = true;
   return tex;
 }
@@ -128,11 +131,12 @@ function createMedallionTexture(
   maxAniso: number
 ): THREE.CanvasTexture {
   const canvas = document.createElement("canvas");
-  canvas.width = 512;
-  canvas.height = 512;
+  canvas.width = 1024;
+  canvas.height = 1024;
   const ctx = canvas.getContext("2d");
 
   if (ctx) {
+    ctx.scale(2, 2);
     const grad = ctx.createRadialGradient(256, 180, 24, 256, 256, 256);
     grad.addColorStop(0, "#1e293b");
     grad.addColorStop(1, "#0b1120");
@@ -191,7 +195,9 @@ function createMedallionTexture(
 
   const tex = new THREE.CanvasTexture(canvas);
   tex.colorSpace = THREE.SRGBColorSpace;
-  tex.anisotropy = Math.min(maxAniso, 8);
+  tex.minFilter = THREE.LinearMipmapLinearFilter;
+  tex.magFilter = THREE.LinearFilter;
+  tex.anisotropy = Math.min(maxAniso, 16);
   tex.needsUpdate = true;
   return tex;
 }

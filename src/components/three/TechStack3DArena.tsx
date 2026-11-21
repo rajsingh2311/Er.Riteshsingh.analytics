@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import { ChevronDown, ChevronUp, Sparkles, Zap } from "lucide-react";
+import { ChevronDown, ChevronUp, RotateCcw, Sparkles, Zap, ZoomIn, ZoomOut } from "lucide-react";
 import {
   createStudioEnvironment,
   detectSoftwareWebGL,
@@ -19,6 +19,9 @@ export interface TechSphereItem {
   color: string;
   accentHex: string;
 }
+
+const MIN_ZOOM = 0.75;
+const MAX_ZOOM = 2.6;
 
 const TECH_SPHERES: TechSphereItem[] = [
   {
@@ -161,11 +164,12 @@ const _plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
 
 function createTechSphereTexture(item: TechSphereItem): THREE.CanvasTexture {
   const canvas = document.createElement("canvas");
-  canvas.width = 512;
-  canvas.height = 512;
+  canvas.width = 1024;
+  canvas.height = 1024;
   const ctx = canvas.getContext("2d");
 
   if (ctx) {
+    ctx.scale(2, 2);
     // Rich dark-tinted studio ceramic base with brand color band
     const bgGrad = ctx.createLinearGradient(0, 0, 512, 512);
     bgGrad.addColorStop(0, "#0f172a");
@@ -213,6 +217,8 @@ function createTechSphereTexture(item: TechSphereItem): THREE.CanvasTexture {
   const tex = new THREE.CanvasTexture(canvas);
   tex.colorSpace = THREE.SRGBColorSpace;
   tex.wrapS = THREE.RepeatWrapping;
+  tex.minFilter = THREE.LinearMipmapLinearFilter;
+  tex.magFilter = THREE.LinearFilter;
   tex.needsUpdate = true;
   return tex;
 }
@@ -223,7 +229,40 @@ const TechStack3DArena = () => {
   const [dockExpanded, setDockExpanded] = useState<boolean>(true);
   const [webglReady, setWebglReady] = useState<boolean>(true);
   const [contextLost, setContextLost] = useState<boolean>(false);
+  const [zoom, setZoom] = useState<number>(1);
+  const [wheelActive, setWheelActive] = useState<boolean>(false);
+
+  const zoomRef = useRef<number>(1);
+  const wheelActiveRef = useRef<boolean>(false);
+  const applyZoomFnRef = useRef<((z: number) => void) | null>(null);
   const scatterFnRef = useRef<(() => void) | null>(null);
+
+  useEffect(() => {
+    wheelActiveRef.current = wheelActive;
+  }, [wheelActive]);
+
+  const broadcastZoom = useCallback((nextZoom: number) => {
+    if (typeof window === "undefined") return;
+    window.dispatchEvent(
+      new CustomEvent("three-viewport-update", {
+        detail: { zoom: nextZoom, mode: "arena" },
+      })
+    );
+  }, []);
+
+  const updateZoom = useCallback(
+    (next: number | ((prev: number) => number)) => {
+      setZoom((prev) => {
+        const raw = typeof next === "function" ? next(prev) : next;
+        const clamped = Math.round(THREE.MathUtils.clamp(raw, MIN_ZOOM, MAX_ZOOM) * 100) / 100;
+        zoomRef.current = clamped;
+        applyZoomFnRef.current?.(clamped);
+        broadcastZoom(clamped);
+        return clamped;
+      });
+    },
+    [broadcastZoom]
+  );
 
   useEffect(() => {
     const mount = containerRef.current;
@@ -239,14 +278,16 @@ const TechStack3DArena = () => {
     }
 
     const isSoftwareGl = detectSoftwareWebGL();
+    const isSmall = window.innerWidth < 768;
     let isLight = isLightThemeActive();
 
     const scene = new THREE.Scene();
     const width = mount.clientWidth || 840;
     const height = mount.clientHeight || 420;
 
+    let baseCamZ = width < 520 ? 14.5 : width < 780 ? 12.6 : 11.4;
     const camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 100);
-    camera.position.set(0, 0.25, 11.4);
+    camera.position.set(0, 0.25, baseCamZ);
 
     let renderer: THREE.WebGLRenderer;
     try {
@@ -263,7 +304,14 @@ const TechStack3DArena = () => {
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.15;
-    renderer.setPixelRatio(isSoftwareGl ? 1 : Math.min(window.devicePixelRatio, window.innerWidth < 768 ? 1.5 : 2));
+
+    const basePixelRatio = isSoftwareGl ? 1 : Math.min(window.devicePixelRatio, isSmall ? 1.5 : 2);
+    const hdPixelRatio = isSoftwareGl
+      ? 1
+      : Math.min(Math.max(window.devicePixelRatio, 1.5) * (isSmall ? 1.25 : 1.55), 3);
+    let currentPixelRatio = basePixelRatio;
+    renderer.setPixelRatio(currentPixelRatio);
+
     renderer.setSize(width, height);
     renderer.shadowMap.enabled = !isSoftwareGl;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -275,9 +323,17 @@ const TechStack3DArena = () => {
     mount.innerHTML = "";
     mount.appendChild(renderer.domElement);
 
+    applyZoomFnRef.current = (nextZ: number) => {
+      const nextDpr = nextZ > 1.14 ? hdPixelRatio : basePixelRatio;
+      if (Math.abs(nextDpr - currentPixelRatio) > 0.05) {
+        currentPixelRatio = nextDpr;
+        renderer.setPixelRatio(currentPixelRatio);
+      }
+    };
+
     const envTexture = createStudioEnvironment(renderer);
     scene.environment = envTexture;
-    const maxAnisotropy = renderer.capabilities.getMaxAnisotropy();
+    const maxAnisotropy = Math.min(renderer.capabilities.getMaxAnisotropy(), 16);
 
     // Lighting
     const hemiLight = new THREE.HemisphereLight(
@@ -299,8 +355,8 @@ const TechStack3DArena = () => {
     const materials: THREE.Material[] = [];
     const textures: THREE.Texture[] = [envTexture];
 
-    // Build 12 Composite 3D PBR Tech Spheres (Core Sphere + Equatorial Trim Ring + Inner Rim)
-    const sphereGeo = new THREE.SphereGeometry(1, 32, 24);
+    // Build 12 Composite 3D PBR Tech Spheres
+    const sphereGeo = new THREE.SphereGeometry(1, 36, 28);
     const ringGeo = new THREE.TorusGeometry(1.03, 0.032, 12, 48);
     geometries.push(sphereGeo, ringGeo);
 
@@ -309,7 +365,7 @@ const TechStack3DArena = () => {
 
     TECH_SPHERES.forEach((item, idx) => {
       const group = new THREE.Group();
-      const radius = 0.72 + (item.level - 70) * 0.0085; // Proficiency-scaled radius (0.72 - 0.91)
+      const radius = 0.72 + (item.level - 70) * 0.0085;
 
       const tex = createTechSphereTexture(item);
       tex.anisotropy = maxAnisotropy;
@@ -330,7 +386,6 @@ const TechStack3DArena = () => {
       sphereMesh.layers.enable(1);
       group.add(sphereMesh);
 
-      // Machined metallic equatorial accent ring
       const ringMat = new THREE.MeshStandardMaterial({
         color: new THREE.Color(item.color),
         metalness: 0.85,
@@ -344,7 +399,6 @@ const TechStack3DArena = () => {
       trimRing.rotation.x = Math.PI / 2;
       group.add(trimRing);
 
-      // Arrange initially in a balanced 3D orbital cluster
       const col = idx % 4;
       const row = Math.floor(idx / 4);
       const startX = (col - 1.5) * 2.1 + (row % 2 === 0 ? -0.35 : 0.35);
@@ -361,9 +415,9 @@ const TechStack3DArena = () => {
         hitMesh: sphereMesh,
         pos: group.position.clone(),
         vel: new THREE.Vector3(
-          (Math.sin(idx * 2.1) * 0.35),
-          (Math.cos(idx * 1.7) * 0.35),
-          (Math.sin(idx * 0.9) * 0.2)
+          Math.sin(idx * 2.1) * 0.35,
+          Math.cos(idx * 1.7) * 0.35,
+          Math.sin(idx * 0.9) * 0.2
         ),
         radius,
         rotSpeed: new THREE.Vector3(
@@ -385,7 +439,7 @@ const TechStack3DArena = () => {
       });
     };
 
-    // Interactive pointer repulsor & click raycasting
+    // Interactive pointer repulsor, click raycasting & HD zoom
     _raycaster.layers.set(1);
     let pointerActive = false;
     const pointerWorld = new THREE.Vector3();
@@ -419,12 +473,12 @@ const TechStack3DArena = () => {
     };
 
     const onPointerDown = (e: PointerEvent) => {
+      setWheelActive(true);
       updatePointer(e);
       const hits = _raycaster.intersectObjects(hitMeshes, false);
       if (hits.length > 0) {
         const hitIdx = hits[0].object.userData.index as number;
         setSelectedIdx(hitIdx);
-        // Apply crisp elastic radial shockwave from clicked sphere
         const clickedBody = bodies[hitIdx];
         clickedBody.vel.z += 2.2;
         bodies.forEach((other) => {
@@ -439,9 +493,54 @@ const TechStack3DArena = () => {
       }
     };
 
+    const onDocPointerDown = (e: PointerEvent) => {
+      if (!mount.contains(e.target as Node)) {
+        setWheelActive(false);
+      }
+    };
+
+    const onWheel = (e: WheelEvent) => {
+      const allowWheel = e.ctrlKey || e.metaKey || e.shiftKey || wheelActiveRef.current;
+      if (!allowWheel) return;
+      e.preventDefault();
+      const delta = -Math.sign(e.deltaY) * (Math.abs(e.deltaY) > 40 ? 0.2 : 0.12);
+      updateZoom((prev) => prev + delta);
+    };
+
+    const onDoubleClick = () => {
+      updateZoom((prev) => (prev > 1.35 ? 1 : 1.9));
+    };
+
+    let pinchDist = 0;
+    let pinchStartZoom = 1;
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length === 2) {
+        pinchDist = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+        pinchStartZoom = zoomRef.current;
+      }
+    };
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length === 2 && pinchDist > 10) {
+        e.preventDefault();
+        const currDist = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+        updateZoom(pinchStartZoom * (currDist / pinchDist));
+      }
+    };
+
     renderer.domElement.addEventListener("pointermove", onPointerMove);
     renderer.domElement.addEventListener("pointerleave", onPointerLeave);
     renderer.domElement.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("pointerdown", onDocPointerDown);
+    mount.addEventListener("wheel", onWheel, { passive: false });
+    mount.addEventListener("dblclick", onDoubleClick);
+    mount.addEventListener("touchstart", onTouchStart, { passive: true });
+    mount.addEventListener("touchmove", onTouchMove, { passive: false });
 
     const onContextLost = (e: Event) => {
       e.preventDefault();
@@ -470,8 +569,7 @@ const TechStack3DArena = () => {
       const w = Math.max(260, Math.floor(entry.contentRect.width));
       const h = Math.max(280, Math.floor(entry.contentRect.height));
       camera.aspect = w / h;
-      // Pull camera slightly further back on narrow mobile viewports so all 12 spheres fit cleanly
-      camera.position.z = w < 520 ? 14.5 : w < 780 ? 12.6 : 11.4;
+      baseCamZ = w < 520 ? 14.5 : w < 780 ? 12.6 : 11.4;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
     });
@@ -499,22 +597,22 @@ const TechStack3DArena = () => {
       const dt = Math.min(clock.getDelta(), 0.04);
 
       if (isVisible) {
+        // Smooth HD camera dolly zoom
+        const targetZ = baseCamZ / zoomRef.current;
+        camera.position.z = THREE.MathUtils.damp(camera.position.z, targetZ, 7, dt);
+
         const aspect = camera.aspect;
         const boundX = Math.max(2.9, Math.min(5.2, aspect * 2.55));
         const boundY = 2.45;
         const boundZ = 2.0;
 
         if (!prefersReducedMotion) {
-          // 1. Center gravity well + pointer repulsor + damping
           for (let i = 0; i < bodies.length; i++) {
             const b = bodies[i];
-
-            // Gentle gravitational pull toward center cluster
             b.vel.x += -b.pos.x * 1.15 * dt;
             b.vel.y += -b.pos.y * 1.25 * dt;
             b.vel.z += -b.pos.z * 1.4 * dt;
 
-            // Pointer magnetic repulsion field
             if (pointerActive) {
               _diff.subVectors(b.pos, pointerWorld);
               const dist = _diff.length();
@@ -526,14 +624,10 @@ const TechStack3DArena = () => {
               }
             }
 
-            // Velocity damping
             const damp = Math.exp(-1.55 * dt);
             b.vel.multiplyScalar(damp);
-
-            // Integrate position
             b.pos.addScaledVector(b.vel, dt);
 
-            // Soft arena walls
             if (b.pos.x > boundX - b.radius) {
               b.pos.x = boundX - b.radius;
               b.vel.x *= -0.7;
@@ -557,7 +651,6 @@ const TechStack3DArena = () => {
             }
           }
 
-          // 2. Pairwise elastic sphere-sphere collisions
           for (let i = 0; i < bodies.length; i++) {
             for (let j = i + 1; j < bodies.length; j++) {
               const a = bodies[i];
@@ -568,11 +661,10 @@ const TechStack3DArena = () => {
 
               if (dist < minDist && dist > 0.0001) {
                 const overlap = (minDist - dist) * 0.5;
-                _diff.divideScalar(dist); // normalized collision normal
+                _diff.divideScalar(dist);
                 a.pos.addScaledVector(_diff, -overlap);
                 b.pos.addScaledVector(_diff, overlap);
 
-                // Relative velocity along normal
                 const rvx = b.vel.x - a.vel.x;
                 const rvy = b.vel.y - a.vel.y;
                 const rvz = b.vel.z - a.vel.z;
@@ -588,7 +680,6 @@ const TechStack3DArena = () => {
             }
           }
 
-          // 3. Apply transforms & gentle spin so labels stay legible
           for (let i = 0; i < bodies.length; i++) {
             const b = bodies[i];
             b.group.position.copy(b.pos);
@@ -620,12 +711,18 @@ const TechStack3DArena = () => {
       disposed = true;
       cancelAnimationFrame(frameId);
       clearTimeout(frameId);
+      applyZoomFnRef.current = null;
       themeObserver.disconnect();
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
       renderer.domElement.removeEventListener("pointermove", onPointerMove);
       renderer.domElement.removeEventListener("pointerleave", onPointerLeave);
       renderer.domElement.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("pointerdown", onDocPointerDown);
+      mount.removeEventListener("wheel", onWheel);
+      mount.removeEventListener("dblclick", onDoubleClick);
+      mount.removeEventListener("touchstart", onTouchStart);
+      mount.removeEventListener("touchmove", onTouchMove);
       renderer.domElement.removeEventListener("webglcontextlost", onContextLost);
       renderer.domElement.removeEventListener("webglcontextrestored", onContextRestored);
       geometries.forEach((g) => g.dispose());
@@ -633,9 +730,10 @@ const TechStack3DArena = () => {
       textures.forEach((t) => t.dispose());
       renderer.dispose();
     };
-  }, []);
+  }, [updateZoom]);
 
   const activeItem = TECH_SPHERES[selectedIdx];
+  const isHdActive = zoom > 1.14;
 
   return (
     <div className="relative w-full flex flex-col rounded-2xl overflow-hidden border border-border/80 bg-card/40 select-none">
@@ -648,8 +746,8 @@ const TechStack3DArena = () => {
         }}
       />
 
-      {/* Minimal Top Spec Line */}
-      <div className="pointer-events-none relative z-10 px-4 pt-3.5 pb-1 flex items-center justify-between gap-2 text-[11px] font-mono text-muted-foreground">
+      {/* Top Spec Line + HD Zoom Controls */}
+      <div className="relative z-10 px-4 pt-3.5 pb-1 flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-muted-foreground">
         <div className="flex items-center gap-2 min-w-0">
           <span
             className="w-2.5 h-2.5 rounded-full shrink-0"
@@ -659,12 +757,58 @@ const TechStack3DArena = () => {
           <span aria-hidden="true">·</span>
           <span className="tabular-nums text-primary font-semibold shrink-0">{activeItem.level}%</span>
         </div>
-        <span className="hidden sm:inline shrink-0">Move cursor to repel · Click spheres to inspect</span>
+
+        <div className="flex items-center gap-2 shrink-0">
+          <span className="hidden lg:inline">
+            {wheelActive ? "Scroll to HD zoom · Click outside for page" : "Move cursor to repel · Click + scroll for HD zoom"}
+          </span>
+          <div className="inline-flex items-center gap-0.5 rounded-lg border border-border/80 bg-card/95 p-0.5">
+            <button
+              type="button"
+              onClick={() => updateZoom((z) => z - 0.3)}
+              disabled={zoom <= MIN_ZOOM}
+              className="p-1 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/70 disabled:opacity-40 transition-colors cursor-pointer"
+              aria-label="Zoom out 3D tech spheres"
+              title="Zoom out"
+            >
+              <ZoomOut className="w-3.5 h-3.5" />
+            </button>
+            <span className="min-w-[48px] text-center text-[10px] font-mono tabular-nums text-foreground">
+              {Math.round(zoom * 100)}%
+              {isHdActive && <span className="ml-0.5 text-[9px] font-bold text-primary">HD</span>}
+            </span>
+            <button
+              type="button"
+              onClick={() => updateZoom((z) => z + 0.3)}
+              disabled={zoom >= MAX_ZOOM}
+              className="p-1 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/70 disabled:opacity-40 transition-colors cursor-pointer"
+              aria-label="Zoom in 3D tech spheres HD"
+              title="HD Zoom in"
+            >
+              <ZoomIn className="w-3.5 h-3.5" />
+            </button>
+            <button
+              type="button"
+              onClick={() => updateZoom(1)}
+              className="p-1 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/70 transition-colors cursor-pointer"
+              aria-label="Reset 3D zoom"
+              title="Reset zoom"
+            >
+              <RotateCcw className="w-3 h-3" />
+            </button>
+          </div>
+        </div>
       </div>
 
-      {/* Isolated WebGL Canvas Container */}
+      {/* Isolated WebGL Canvas Container tagged for 3D-only Circle Scroller */}
       {webglReady && !contextLost ? (
-        <div ref={containerRef} className="relative w-full h-[340px] sm:h-[400px] md:h-[440px]" />
+        <div
+          ref={containerRef}
+          data-3d-viewport="true"
+          data-three-zoom={zoom.toFixed(2)}
+          data-three-mode="arena"
+          className="relative w-full h-[340px] sm:h-[400px] md:h-[440px]"
+        />
       ) : (
         <div className="w-full h-[340px] sm:h-[400px] flex flex-col items-center justify-center p-6 text-center bg-card">
           <Sparkles className="w-8 h-8 text-primary mb-2" />
