@@ -7,7 +7,7 @@ import ResumePreviewModal from "./ResumePreviewModal";
 import ContactModal from "./ContactModal";
 import { useShouldRender3D } from "@/hooks/useShouldRender3D";
 
-const AnalyticsCoreScene = lazy(() => import("./three/AnalyticsCoreScene"));
+const HeroWorkspaceScene = lazy(() => import("./three/HeroWorkspaceScene"));
 
 const HERO_METRICS = [
   { value: "30+", label: "Campuses on Power BI MIS" },
@@ -182,15 +182,9 @@ const HeroSection = () => {
               className="w-full flex items-center"
             >
               <Suspense
-                fallback={
-                  <div className="w-full h-[360px] xs:h-[400px] sm:h-[460px] lg:h-[540px] rounded-2xl border border-border/80 bg-card/40 flex items-center justify-center">
-                    <span className="text-xs font-mono text-muted-foreground">
-                      Initializing 3D Analytics Engine...
-                    </span>
-                  </div>
-                }
+                fallback={<div className="w-full h-[340px] xs:h-[380px] sm:h-[440px] lg:h-[540px]" />}
               >
-                <AnalyticsCoreScene />
+                <HeroWorkspaceScene />
               </Suspense>
             </motion.div>
           )}
