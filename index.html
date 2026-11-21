@@ -79,6 +79,24 @@
       "url": "https://riteshsingh.is-a.dev/"
     }
     </script>
+    <!-- Loading screen while the app starts. The readable .seo-snap copy stays in the
+         page for search engines and screen readers, but is hidden visually; React
+         replaces everything inside #root once the portfolio has loaded. -->
+    <style>
+      html,body{background:#08090c}
+      #root>.seo-snap{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+      .boot-loader{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:#08090c;color:#2dd4bf;font:600 16px/1.4 system-ui,'Segoe UI',Arial,sans-serif;letter-spacing:.02em}
+      .boot-loader .bl-ring{width:42px;height:42px;border-radius:50%;border:3px solid rgba(45,212,191,.18);border-top-color:#2dd4bf;animation:bl-spin .8s linear infinite}
+      .boot-loader .bl-sub{color:#94a3b8;font-weight:400;font-size:13px}
+      @keyframes bl-spin{to{transform:rotate(360deg)}}
+      @media (prefers-reduced-motion:reduce){.boot-loader .bl-ring{animation:none}}
+    </style>
+    <noscript>
+      <style>
+        .boot-loader{display:none!important}
+        #root>.seo-snap{position:static!important;width:auto!important;height:auto!important;margin:0 auto!important;padding:48px 20px!important;overflow:visible!important;clip:auto!important;white-space:normal!important}
+      </style>
+    </noscript>
   <script type="module" crossorigin src="./assets/index-DRv6jL38.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/vendor-radix-2yn0OcRB.js">
   <link rel="modulepreload" crossorigin href="./assets/vendor-utils-CbK4XRml.js">
@@ -88,7 +106,7 @@
 </head>
 
   <body>
-    <div id="root"><main class="seo-snap" style="max-width:820px;margin:0 auto;padding:48px 20px;font:16px/1.65 system-ui,'Segoe UI',Arial,sans-serif;color:#cbd5e1">
+    <div id="root"><div class="boot-loader" aria-hidden="true"><div class="bl-ring"></div><div>Ritesh.Analytics</div><div class="bl-sub">Loading portfolio…</div></div><main class="seo-snap" style="max-width:820px;margin:0 auto;padding:48px 20px;font:16px/1.65 system-ui,'Segoe UI',Arial,sans-serif;color:#cbd5e1">
       <h1 style="color:#fff;font-size:28px;margin:0 0 12px">Ritesh Singh (Er. Ritesh Singh) – Data Analyst &amp; Business Analyst in Noida</h1>
       <p>I'm Ritesh Singh, a Data Analyst and Business Analyst at Seth Anandram Jaipuria Group (SRJ Edu Services Pvt. Ltd.) in Noida, India. I turn messy data into decisions, and repetitive work into automations, using Power BI, SQL, Python and Advanced Excel.</p>
       <h2 style="color:#fff;font-size:20px;margin:28px 0 8px">What I do</h2>
