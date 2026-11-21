@@ -380,7 +380,6 @@ const HeroWorkspaceScene = () => {
     torso.rotation.x = -0.1;
     const shirtV = add(rbox(0.09, 0.18, 0.02, 0.01), shirt, 0, 0.96, 0.627);
     shirtV.rotation.x = -0.1;
-    add(rbox(0.035, 0.14, 0.012, 0.004), mat("#0ea5a4", 0.5), 0, 0.94, 0.616).rotation.x = -0.1; // tie
 
     // Neck & head
     add(new THREE.CylinderGeometry(0.045, 0.05, 0.09, 16), skin, 0, 1.1, 0.7);
@@ -398,6 +397,9 @@ const HeroWorkspaceScene = () => {
       head,
     );
     hair.scale.set(0.96, 1.05, 1.02);
+    // Back of the head: hair down to the nape (sits inside the face at the front, so only shows behind/sides)
+    const backHair = add(new THREE.SphereGeometry(0.106, 28, 20), hairMat, 0, -0.004, 0.02, head);
+    backHair.scale.set(0.95, 1.02, 0.96);
     for (const sx of [-0.098, 0.098]) add(new THREE.SphereGeometry(0.022, 12, 10), skin, sx, -0.005, 0.01, head);
     add(new THREE.SphereGeometry(0.018, 12, 10), skin, 0, -0.01, -0.105, head); // nose
     const frame = mat("#0f172a", 0.3, 0.6);
