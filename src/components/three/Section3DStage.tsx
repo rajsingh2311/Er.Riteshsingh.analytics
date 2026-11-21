@@ -145,12 +145,31 @@ const Section3DStage = ({
     controls.minPolarAngle = Math.PI * 0.16;
     controls.maxPolarAngle = Math.PI * 0.48;
     controls.rotateSpeed = 0.65;
-    controls.update();
+
+    // Auto-framing: fit the whole model inside the card at any size/aspect,
+    // so nothing is too zoomed in or cut off by the borders, at every orbit angle.
+    built.root.updateMatrixWorld(true);
+    const fitBox = new THREE.Box3().setFromObject(built.root);
+    const fitSphere = fitBox.getBoundingSphere(new THREE.Sphere());
+    const viewDir = new THREE.Vector3(...built.cameraPos)
+      .sub(new THREE.Vector3(...built.cameraTarget))
+      .normalize();
+    const fitCamera = () => {
+      const vFov = THREE.MathUtils.degToRad(camera.fov);
+      const hFov = 2 * Math.atan(Math.tan(vFov / 2) * camera.aspect);
+      const limitingFov = Math.min(vFov, hFov);
+      const distance = (fitSphere.radius * 1.06) / Math.sin(limitingFov / 2);
+      controls.target.copy(fitSphere.center);
+      camera.position.copy(fitSphere.center).addScaledVector(viewDir, distance);
+      camera.near = Math.max(0.05, distance - fitSphere.radius * 2);
+      camera.far = distance + fitSphere.radius * 4;
+      camera.updateProjectionMatrix();
+      controls.update();
+    };
+    fitCamera();
 
     resetCameraFnRef.current = () => {
-      camera.position.set(...built.cameraPos);
-      controls.target.set(...built.cameraTarget);
-      controls.update();
+      fitCamera();
       pulseEnergyRef.current = 0.85;
     };
 
@@ -282,8 +301,8 @@ const Section3DStage = ({
       const w = Math.max(Math.floor(entry.contentRect.width), 280);
       const h = Math.max(Math.floor(entry.contentRect.height), 240);
       camera.aspect = w / h;
-      camera.updateProjectionMatrix();
       renderer.setSize(w, h);
+      fitCamera();
     });
     resizeObserver.observe(host);
 
