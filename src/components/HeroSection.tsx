@@ -37,14 +37,14 @@ const HeroSection = () => {
         >
           {/* Left Column: Identity, Typography & Primary Actions */}
           <div className="flex flex-col justify-center text-left min-w-0">
-            {/* Compact Identity Header with Portrait */}
+            {/* Prominent Identity Header with Portrait */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45 }}
-              className="flex items-center gap-4 mb-5"
+              className="flex items-center gap-4 sm:gap-5 mb-6"
             >
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-brand p-[2.5px] shrink-0 glow-primary">
+              <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full bg-gradient-brand p-[3px] shrink-0 glow-primary">
                 <picture className="block w-full h-full rounded-full overflow-hidden bg-muted">
                   <source srcSet={`${import.meta.env.BASE_URL}images/ritesh-hero.webp`} type="image/webp" />
                   <img
@@ -60,12 +60,12 @@ const HeroSection = () => {
                 </picture>
               </div>
               <div className="min-w-0">
-                <p className="text-xs sm:text-sm font-mono text-primary font-semibold">
+                <p className="text-base sm:text-lg md:text-xl font-mono text-primary font-semibold tracking-tight">
                   Business &amp; Data Analyst
                 </p>
-                <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-muted-foreground mt-0.5">
-                  <span className="inline-flex items-center gap-1">
-                    <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />
+                <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-sm sm:text-base text-muted-foreground mt-1.5">
+                  <span className="inline-flex items-center gap-1.5">
+                    <MapPin className="w-4 h-4 sm:w-[18px] sm:h-[18px] text-primary shrink-0" />
                     <a
                       href="https://www.google.com/maps/place/Sector+62,+Noida,+Uttar+Pradesh/@28.6165456,77.3587009,16z/data=!4m6!3m5!1s0x390ce5456ef36d9f:0x3b7191b1286136c8!8m2!3d28.627981!4d77.3648567!16s%2Fm%2F01283ztw?entry=ttu&g_ep=EgoyMDI2MDIxOC4wIKXMDSoASAFQAw%3D%3D"
                       target="_blank"
