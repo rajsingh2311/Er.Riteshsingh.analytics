@@ -150,19 +150,27 @@ const Section3DStage = ({
     // so nothing is too zoomed in or cut off by the borders, at every orbit angle.
     built.root.updateMatrixWorld(true);
     const fitBox = new THREE.Box3().setFromObject(built.root);
-    const fitSphere = fitBox.getBoundingSphere(new THREE.Sphere());
+    const fitCenter = fitBox.getCenter(new THREE.Vector3());
+    const fitSize = fitBox.getSize(new THREE.Vector3());
+    // Horizontal radius covers every azimuth the user can orbit to;
+    // vertical half-height covers the model's height.
+    const halfWidth = Math.hypot(fitSize.x, fitSize.z) / 2;
+    const halfHeight = fitSize.y / 2;
     const viewDir = new THREE.Vector3(...built.cameraPos)
       .sub(new THREE.Vector3(...built.cameraTarget))
       .normalize();
     const fitCamera = () => {
       const vFov = THREE.MathUtils.degToRad(camera.fov);
       const hFov = 2 * Math.atan(Math.tan(vFov / 2) * camera.aspect);
-      const limitingFov = Math.min(vFov, hFov);
-      const distance = (fitSphere.radius * 1.06) / Math.sin(limitingFov / 2);
-      controls.target.copy(fitSphere.center);
-      camera.position.copy(fitSphere.center).addScaledVector(viewDir, distance);
-      camera.near = Math.max(0.05, distance - fitSphere.radius * 2);
-      camera.far = distance + fitSphere.radius * 4;
+      // Distance from the model's front edge so its height and width both fit,
+      // plus half the depth so the nearest parts are not clipped either.
+      const fitH = halfHeight / Math.tan(vFov / 2);
+      const fitW = halfWidth / Math.tan(hFov / 2);
+      const distance = (Math.max(fitH, fitW) + halfWidth * 0.55) * 1.04;
+      controls.target.copy(fitCenter);
+      camera.position.copy(fitCenter).addScaledVector(viewDir, distance);
+      camera.near = 0.05;
+      camera.far = distance + halfWidth * 4 + 10;
       camera.updateProjectionMatrix();
       controls.update();
     };
